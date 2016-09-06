@@ -1,0 +1,52 @@
+/**
+ *  Define scss variables here.
+ *
+ */
+
+$nomosBlue: 					#4A90E2; 
+$nomosGreen: 					#68DA0E;
+$nomosLightGreen: 		#C1E7A4;
+$nomosRed: 						#eb5768;
+$nomosLightRed:				#EDBCC1;
+$nomosYellow: 				lighten(#fecd5f, 10%);
+$nomosYellowStrong:		#FFCA42;
+$nomosOrange: 				#EF7413; 
+
+$nomosGrey: 					#777; 
+$nomosDarkGrey:				#585859;
+$nomosLightGrey:			#ccc;
+$nomosLightLightGrey:	#F4F5F5;
+
+$nomosMidGrey:				#838989;
+$nomosBlack: 					#444545;
+$nomosDarkBlack: 			#231F20;
+$nomosHeader:				 	#616469;
+$nomosHeader: 				#585859;
+$nomosLine: 					#ddd;
+$nomosLine: 					#d6dbe3;
+
+$contentPadding: 			8px;
+$frameBorderRadius: 	6px;
+$internalBorderRadius:2px;
+
+$buttonBorderRadius: 	4px;
+$buttonColour: 				#76b8ea;
+
+
+/**
+ *  Fonts & Typography
+ */
+
+
+$sansSerifFontStack:  'Open Sans', Arial, sans-serif;
+$font-family-sans-serif: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base: 		14px;
+$font-size-small: 	12px;
+$font-size-tiny: 	10px;
+
+$padding:							8px;
+
+/**
+ *  lost Grid system
+ */
+@lost gutter 16px;

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 import { observable, autorun } from 'mobx';
 import { extend, toggle } from '../../utils/decorators';
 // import injectTapEventPlugin from 'react-tap-event-plugin';

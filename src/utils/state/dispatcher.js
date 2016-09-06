@@ -19,7 +19,7 @@ function getRealClassName(ns, store) {
   return $class.constructor.name;
 }
 
-export function dispatch(namespace, ...opt) {
+export default function dispatch(namespace, ...opt) {
   const store = $store.get();
   const fn = access(store, namespace);
   const className = getRealClassName(namespace, store);

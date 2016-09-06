@@ -16,7 +16,7 @@ export function dehydrate() {
 */
 export function rehydrate() {
   // inject initial state into stores
-  return $store.set(window.__STATE);
+  return $store.set(window.__data);
 }
 
 

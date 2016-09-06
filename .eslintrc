@@ -19,6 +19,7 @@
     "import/no-unresolved": 0,
     "import/no-named-as-default": 2,
     "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": 0,
     "linebreak-style": 0,
@@ -35,7 +36,8 @@
     "prefer-template": 0,
     "no-trailing-space": 0,
     "no-return-assign": 0,
-    "no-confusing-arrow": 0
+    "no-confusing-arrow": 0,
+    "arrow-body-style": 0
   },
   "plugins": [
     "react", "import"

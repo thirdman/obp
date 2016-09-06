@@ -22,7 +22,6 @@ export default class Html extends Component {
 	render() {
 		const {assets, component, store} = this.props;
 		const content = component ? ReactDOM.renderToString(component) : '';
-		console.log('inside html');
 		const head = Helmet.rewind();
 	 	return (
 			<html lang="en-us">

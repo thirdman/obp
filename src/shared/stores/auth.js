@@ -24,7 +24,7 @@ export default class AuthStore {
   }
 
   jwtAuth({ token }) {
-    console.log(' jwtAuth to be implemented');
+    console.log(token, ' jwtAuth to be implemented');
     /*
     return app()
       .authenticate({ type: 'token', token })
@@ -38,6 +38,7 @@ export default class AuthStore {
     return !_.isEmpty(this.user);
   }
 
+/*
   @action
   login({ email, password }) {
     console.log(' login to be implemented');
@@ -45,7 +46,7 @@ export default class AuthStore {
     return app()
       .authenticate({ type: 'local', email, password })
       .then((result) => this.updateUser(result.data));
-    */
+    *
   }
 
   @action
@@ -54,9 +55,9 @@ export default class AuthStore {
     /*
     return service('user')
       .create({ email, password, username });
-    */
+    *
   }
-
+*/
   @action
   logout() {
     console.log(' logout to be implemented');

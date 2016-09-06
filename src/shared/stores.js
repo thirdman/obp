@@ -1,6 +1,6 @@
 // This file export a store object with is a collection of smaller stores
-import { store } from '../utils/state';
 import { useStrict } from 'mobx';
+import { store } from '../utils/state';
 
 import UIStore from './stores/ui';
 import AppStore from './stores/app';

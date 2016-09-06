@@ -1,0 +1,53 @@
+@import "_variables.scss";
+
+:global{
+	*, *:before, *:after{
+		-moz-box-sizing: border-box; 
+		-ms-box-sizing: border-box; 
+		box-sizing: border-box !important; 
+	}
+	    
+	body {
+		>div{
+		//	border: 1px solid red;
+		}
+		>div#content{
+		//	border: 1px solid blue;
+		}
+	}
+	h1{}
+	p{	}
+	a{
+		color: $nomosBlue;
+	}
+/*
+	div.container {
+		width: 66em;
+		margin-left: auto;
+		margin-right: auto;
+	}
+*/
+}
+
+/*
+* ANIMATIONS
+*/
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+@keyframes slideUp {
+    from {
+      opacity: 0;
+	    transform: translateY(0px);
+    }
+    to {
+	    opacity: 0;
+	    transform: translateY(-5px);
+    }
+}
