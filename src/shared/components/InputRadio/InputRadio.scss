@@ -1,0 +1,45 @@
+@import "../../globals/styles/_global.scss";
+
+/*
+DropDownAction Menu
+
+Component for selection actions on a page
+
+```
+
+```
+
+*/
+.InputRadio{
+	.radio{	
+		display:none;
+	+ label {
+  	color: $nomosBlack;
+  	display: inline-block;
+		vertical-align: middle;
+		min-width: 30px;
+		min-height: 32px;
+		line-height: 32px;
+ 		outline: none;
+    text-align: left;
+   	cursor: pointer;
+	}
+	&:checked + label {
+		display: inline-block;
+  	text-align: left;
+		outline: none;
+		}
+	}
+	.radioIcon{
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 4px;
+		cursor: pointer;
+	}
+	//modifiers
+	&.block{
+		display: block;
+	}
+}

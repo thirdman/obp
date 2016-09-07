@@ -1,0 +1,78 @@
+@import "../../globals/styles/_global.scss";
+
+.UiBrandLogo {
+  lost-utility: clearfix;
+	height: 66px;
+	padding: 20px 8px 12px;
+	width: 100%;
+	z-index: 999999;
+	position: relative;
+	border-bottom: 1px solid rgba(255,255,255,.075);
+	.brandLink{
+		padding: 8px;
+		padding-left: 0;
+		color: $nomosLightGrey;
+		text-decoration: none;
+		font-size: 24px;
+		line-height: 32px;
+		position: relative;
+		.iconWrap{
+			width: 32px;
+			height: 32px;
+			line-height: 30px;
+			vertical-align: middle;
+			text-align: center;
+			display: inline-block;	
+			margin-right: 4px;		
+			overflow: hidden;
+		}
+		&:hover{
+			.saving{
+				opacity: 1;
+			}
+			.iconWrap{
+				animation: spin 1s linear;
+				animation-fill-mode: forwards;
+				animation-iteration-count: infinite;
+			}
+		}
+		.saving{
+			opacity: 0;
+			position: absolute;
+			left: 34px;
+    	bottom: -8px;
+    	font-size: 10px;
+    	font-weight: normal;
+    	transition: opacity .3s ease;
+    	&:before{
+				content: "saving...";
+			}
+		}
+	}
+	// SMALL VERSION
+	&.isSmall{
+		width: 60px;
+		text-align: center;		
+		padding-top: 12px;
+		.brandLink{
+			padding: 0; 
+			.iconWrap{
+				margin-right: 0;
+			}
+			.saving{
+		    left: 0;
+		    top: 24px;
+			}
+		}
+	}
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+ }
+}
