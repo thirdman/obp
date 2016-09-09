@@ -13,10 +13,10 @@ const InputRadio = ({ isSelected, value }) => (
 		<input
 			value={value}
 			id={'a123'}
-			ref={value}
 			type={'radio'}
 			className={styles.radio}
 			checked={isSelected}
+			onChange={() => { console.log('clicked!'); }}
 		/>
 		<label htmlFor={'a123'}>{value}</label>
 	</span>

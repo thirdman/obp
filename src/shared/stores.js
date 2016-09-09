@@ -5,6 +5,7 @@ import { store } from '../utils/state';
 import UIStore from './stores/ui';
 import AppStore from './stores/app';
 import AuthStore from './stores/auth';
+import RouteStore from './stores/route';
 // import PostStore from './stores/post';
 
 /**
@@ -21,5 +22,6 @@ export default store
 	.setup({
 		ui: UIStore,
 		app: AppStore,
-		auth: AuthStore
+		auth: AuthStore,
+		route: RouteStore
 	});
