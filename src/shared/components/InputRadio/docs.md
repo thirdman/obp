@@ -25,8 +25,8 @@ isSelected			|	`bool`		|	false	|	from the props
 `block`			| makes it display in rows
 
 #### TODO
-- make it so you can group them
-
+- make a container so you can group them
+- @khanh: we need to handle the id's better. A random generator?
 
 *****description*****
 <InputRadio classNameProps={['normal']} value="This is a value"/>

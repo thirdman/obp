@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/interface/search-glass</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons/interface/search-glass" fill="#444444">
+            <path d="M25.1373748,28.5812415 C23.6358926,29.4820763 21.8784301,30 20,30 C14.4771522,30 10,25.5228478 10,20 C10,14.4771522 14.4771522,10 20,10 C25.5228478,10 30,14.4771522 30,20 C30,21.8784301 29.4820763,23.6358926 28.5812415,25.1373748 L33.100721,29.6568542 L29.6568542,33.100721 L25.1373748,28.5812415 Z M14.557971,19.942029 C14.557971,22.9795953 17.0204047,25.442029 20.057971,25.442029 C23.0955373,25.442029 25.557971,22.9795953 25.557971,19.942029 C25.557971,16.9044627 23.0955373,14.442029 20.057971,14.442029 C17.0204047,14.442029 14.557971,16.9044627 14.557971,19.942029 Z" id="search-icon"></path>
+        </g>
+    </g>
+</svg>

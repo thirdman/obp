@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/interface/radio-unselected</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Iconography" transform="translate(-768.000000, -128.000000)" fill="#444444">
+            <g id="icons/interface/radio-unselected" transform="translate(768.000000, 128.000000)">
+                <path d="M0,10 C0,15.5228478 4.47715223,20 10,20 C15.5228478,20 20,15.5228478 20,10 C20,4.47715223 15.5228478,1.01453068e-15 10,0 C4.47715223,-1.01453068e-15 3.55271368e-15,4.47715223 0,10 Z M2.83695652,9.94202899 C2.83695652,13.9300854 6.06991463,17.1630435 10.057971,17.1630435 C14.0460274,17.1630435 17.2789855,13.9300854 17.2789855,9.94202899 C17.2789855,5.95397261 14.0460274,2.72101449 10.057971,2.72101449 C6.06991463,2.72101449 2.83695652,5.95397261 2.83695652,9.94202899 Z" id="search-icon"></path>
+            </g>
+        </g>
+    </g>
+</svg>

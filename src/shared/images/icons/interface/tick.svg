@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="18px" viewBox="0 0 22 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/interface/tick</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Iconography" transform="translate(-337.000000, -131.000000)" fill="#4A4A4A">
+            <g id="icons/interface/tick" transform="translate(336.000000, 128.000000)">
+                <polygon id="icon-check" transform="translate(12.591601, 11.992354) rotate(-5.000000) translate(-12.591601, -11.992354) " points="4.46283149 10.0912691 1.82087219 12.730837 9.13999769 20.0433372 23.3623303 6.58639523 20.7718137 3.94137034 9.16586156 14.7896929"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

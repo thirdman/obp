@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="11px" viewBox="0 0 16 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39 (31667) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/interface/chevron-up</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Iconography" transform="translate(-437.000000, -138.000000)" fill="#4A4A4A">
+            <g id="icons/interface/chevron-up" transform="translate(437.000000, 138.000000)">
+                <path d="M7.8521164,0.309644063 L7.54247233,-3.55271368e-14 L4.21884749e-14,7.54247233 L2.82842712,10.3708995 L7.8521164,5.34721019 L12.8758057,10.3708995 L15.7042328,7.54247233 L8.16176046,-3.73034936e-14 L7.8521164,0.309644063 Z" id="icon-chevron-left"></path>
+            </g>
+        </g>
+    </g>
+</svg>

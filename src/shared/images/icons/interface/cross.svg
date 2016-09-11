@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>icons/interface/cross</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Iconography" transform="translate(-133.000000, -132.000000)" fill="#4A4A4A">
+            <g id="icons/interface/cross" transform="translate(129.000000, 129.000000)">
+                <path d="M9.65685425,11.4735454 L4,5.81669119 L6.82842712,2.98826407 L12.4852814,8.64511832 L18.1421356,2.98826407 L20.9705627,5.81669119 L15.3137085,11.4735454 L20.9705627,17.1303997 L18.1421356,19.9588268 L12.4852814,14.3019726 L6.82842712,19.9588268 L4,17.1303997 L9.65685425,11.4735454 Z" id="icon-plus"></path>
+            </g>
+        </g>
+    </g>
+</svg>
