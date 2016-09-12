@@ -20,7 +20,7 @@
       "env": {
         "MODE": "local",
         "APP_HOST": "http://localhost",
-        "API_HOST": "http://localhost",
+        "API_HOST": "https://test-api.nomosone.com",
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 3000,

@@ -22,12 +22,13 @@ function formatUrl(path) {
 }
 
 /*
- * This silly underscore is here to avoid a mysterious 
+ * This silly underscore is here to avoid a mysterious
  * "ReferenceError: ApiClient is not defined" error
  * Remove it at your own risk.
  */
 class _ApiClient {
 	constructor(req) {
+		console.log('initialising api client');
 		methods.forEach((method) =>
 			this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
 				const request = superagent[method](formatUrl(path));
@@ -49,4 +50,4 @@ class _ApiClient {
 
 const ApiClient = _ApiClient;
 
-export default ApiClient;
+export default new ApiClient();

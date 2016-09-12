@@ -11,7 +11,7 @@ import http from 'http';
 
 import stores from './shared/stores';
 import config from './config';
-import ApiClient from './helpers/ApiClient';
+// import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
 // import getRoutes from './routes';
 
@@ -57,7 +57,7 @@ proxy.on('error', (error, req, res) => {
 
 // serve assets to client, ssr if enabled -------------------------------------------------------------------
 app.use((req, res) => {
-	const client = new ApiClient(req);
+	// const client = new ApiClient(req);
 	const store = stores.inject({
 		app: { ssrLocation: req.url }
 	});

@@ -2,6 +2,8 @@ import { observable, computed, action } from 'mobx';
 import { browserHistory } from 'react-router';
 import _ from 'lodash';
 
+import client from '../../helpers/ApiClient';
+
 export default class AuthStore {
 
 	jwt = null;
@@ -10,6 +12,7 @@ export default class AuthStore {
 
 	init() {
 		// get token from localStorage
+		console.log(client);
 		const user = (typeof window !== 'undefined')
 			? window.localStorage.user
 			: null;
@@ -43,14 +46,24 @@ export default class AuthStore {
 
 	@action
 	login({ username, password, nextPath }) {
+		client.post('/login', {
+			data: {
+				username,
+				password
+			}
+		}).then((res) => {
+			console.log(res);
+		}).catch((err) => {
+			console.log(err);
+		});
+		/*
 		window.localStorage.user = JSON.stringify({ username, password });
 		this.updateUser({ username, password });
+		*/
+
 		if (nextPath) {
 			browserHistory.push(nextPath);
 		}
-		// return app()
-		//   .authenticate({ type: 'local', email, password })
-		//   .then((result) => this.updateUser(result.data));
 	}
 
 /*
