@@ -5,5 +5,6 @@
  *	Please keep alphabetical
  */
 
+export Icon from './icon/Icon';
 export InputRadio from './InputRadio/InputRadio';
 export UiBrandLogo from './UiBrandLogo/UiBrandLogo';

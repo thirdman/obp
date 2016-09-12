@@ -1,0 +1,71 @@
+@import "../../globals/styles/_global.scss";
+
+.Icon{
+	display: block;
+	&.isHovered{
+		
+	}
+	svg{ //targets the svg elemtn inside the markup
+		width: 100%;
+		height: 100%;
+		line-height: 100%;
+	}
+	g{
+		fill: $nomosBlack;			
+	}
+	&.black{
+		g{
+			fill: $nomosBlack;
+		}
+	}
+	&.darkGrey{
+		g{
+			fill: $nomosDarkGrey;
+		}
+	}
+	&.grey{
+		g{
+			fill: $nomosGrey;
+		}
+	}
+	&.lightGrey{
+		g{
+			fill: $nomosLightGrey;
+		}
+	}
+	&.lightLightGrey{
+		g{
+			fill: $nomosLightLightGrey;
+		}
+	}
+	&.white{
+		g, path{
+			fill: #fff;
+		}
+	}
+	&.blue{
+		g{
+			fill: $nomosBlue;
+		}
+	}
+	&.red{
+		g{
+			fill: $nomosRed;
+		}
+	}
+	&.orange{
+		g{
+			fill: $nomosOrange;
+		}
+	}
+	&.green{
+		g{
+			fill: $nomosGreen;
+		}
+	}
+	&.yellow{
+		g{
+			fill: $nomosYellow;
+		}
+	}
+}
