@@ -1,0 +1,52 @@
+@import "../../globals/styles/_global.scss";
+
+.IconButton{
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	cursor: pointer;
+	width: 40px;
+	&.normal{
+		
+	}
+	&.isActive{
+		opacity: .8;
+	}
+	&.isHovered{
+		.iconWrap{
+			transform: scale(0.75);
+		}
+		.btnLabel{
+			transform: perspective(500px)  translateY(- $font-size-small);
+			opacity: 1;
+			label{
+			}
+		}	
+	}
+	
+	// ICON WRAP
+	// overridden if 'iconSize' is set
+	.iconWrap{
+		width: 40px;
+		height: 40px;
+		display: block;
+		transform-origin: top center;
+		transition: transform .3s ease;
+	}
+	
+	// LABEL
+	.btnLabel{
+		position: relative;
+		display: block;
+		line-height: $font-size-small;
+		transition: transform .3s ease,  opacity .3s  ease;
+		transform: perspective(500px) translateY(0px);
+		opacity: 0;
+		.btnLabel{
+			font-size: $font-size-small;
+			color: $nomosGrey;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+	}
+}
