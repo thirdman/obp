@@ -1,0 +1,409 @@
+@import "../../globals/styles/_global.scss";
+
+.Button{
+	border-radius: 3px;
+	font-size: inherit;
+	text-transform: inherit;
+	font-family: $sansSerifFontStack;
+	background: $nomosLightGrey;
+	padding: $padding/2 $padding*2;
+	cursor: pointer;
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: $font-size-small;
+	user-select: none;
+	position: relative;
+  &:hover {
+    color: $nomosBlack;
+    text-decoration: none;
+    background: lighten($nomosLightGrey, 5%);
+  }
+  &:active {
+  }
+  .iconWrap{
+	  height: 20px; 
+	  width: 20px;
+	  display: inline-block;
+	  vertical-align: middle;
+	  margin-right: 4px;
+	  }
+	&.iconPostionRight{
+		.iconWrap{
+			margin-right: inherit;	
+			margin-left: 4px;	
+		}
+	}
+	.btnContent{
+		display: inline-block;
+		vertical-align: middle;
+	}
+  &.btn{
+	  
+  }
+  // colours...
+	&.normal{
+		background: $nomosLightGrey;
+		&:hover{
+    	background: lighten($nomosLightGrey, 5%);
+		}
+	}
+
+	&.grey{
+		background: $nomosGrey;
+		color: #fff;
+		&:hover{
+			color: #fff;
+			background:lighten($nomosGrey, 5%);
+		}
+	}
+	&.highlighted, &.selected, &.blue{
+		background:$nomosBlue; 
+		color: #fff;
+		&:hover{
+			color: #fff;
+			background:lighten($nomosBlue, 5%);
+		}
+	}
+
+	&.disabled{
+		opacity: .3;
+		cursor: default;
+		span{
+			
+		}
+	}
+	&.delete, &.red{
+		background-color: $nomosRed !important;
+		color: #fff;
+		&:hover{
+			color: #fff;
+			background:lighten($nomosRed, 5%);
+		}
+	}
+	&.create, &.green{
+		background-color: $nomosGreen !important;
+		color: #fff;
+		&:hover{
+			color: #fff;
+			background:lighten($nomosGreen, 5%);
+		}
+	}
+	&.orange{
+		background-color: $nomosOrange !important;
+		color: #fff;
+		&:hover{
+			color: #fff;
+			background:lighten($nomosOrange, 5%);
+		}
+	}	
+	&.white{
+		background: white;
+		border: 1px solid $nomosLine;
+		&.hasSelect{
+			.select{ 
+				
+			}
+			&:hover{
+				background: #eee;
+				border: 1px solid $nomosLightGrey;				
+			}
+			&.isOpen{
+				background: #eee;
+				border: 1px solid $nomosLightGrey;
+			}
+		}
+	}
+
+	&.large{
+		width: 100%;
+		max-width: 400px;
+	}
+	&.round{
+		border-radius: 50px;
+	}
+
+	&.outline, &.hollow{
+		background: transparent;
+		border: 1px solid #ddd;
+	}
+	&.expand, &.wide{
+		padding-right: 0;
+    padding-left: 0;
+    width: 100%;
+	}
+	&.right{
+		float: right;
+	}
+	&.wrapper{
+		background-color: transparent;
+		width: 100%;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		.btnContent{
+			display: none;
+		}
+		&:hover{
+			background-color: transparent;
+		}
+	}
+	&.transparent{
+		background-color: transparent;
+		width: 100%;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		color: $nomosGrey;
+		.btnContent{
+			color: $nomosGrey;
+		}
+		&:hover{
+			background-color: transparent;
+		}
+	}
+	&.hasSelect{
+		padding-right: 30px;
+	}
+	.select{ //thre drop down icon bit
+    right: 0;
+    top: 0;
+    line-height: 1.5em;
+		text-align: center;
+		position: absolute;
+		width: 24px;
+		height: 100%;
+		border-left: 1px solid rgba(255, 255, 255, 0.25);
+		background: rgba(0,0,0,.015);
+		background-size: 12px;
+    border-radius: 0 4px 4px 0;
+		display: block;
+		visibility: visible;		
+			.iconWrap{
+				width: 100%;
+				height: 100%;
+				padding: 6px
+			}
+		&.isOpen{
+		}
+	}
+	.isActive{// inline svg way
+			content: "" !important;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 20px;
+			height: 20px;
+			margin-left: -10px;
+			margin-top: -10px;
+			background-size: 20px 20px;
+			animation: spin 1s linear;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;
+    ~ span{
+	    opacity: 0;
+    }
+	}
+	
+	&.isActive{ // css based way
+		//background: lighten( $nomosBlue, 5% );
+		position: relative;
+		overflow: hidden;
+		text-indent: -500px;
+		min-width: 100px;
+/*
+		&:after{
+			content: "" !important;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 20px;
+			height: 20px;
+			margin-left: -10px;
+			margin-top: -10px;
+			background: url(../../images/logo_circle_white.svg) center center no-repeat;
+			background-size: 20px 20px;
+			animation: spin 1s linear;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;
+		}
+*/
+
+		span{  
+			opacity: 0;
+		}
+		
+		&:after{
+		font-weight: normal;
+		content: "\e69a";		
+		opacity: 1;
+		font-family: 'nomos_font_1', sans-serif;
+		color: #fff;
+	  display: block;
+		transform-origin: 52% 50%;
+		position: absolute;
+		left: 50%;
+    top: 50%;
+    width: 1.5em;
+    height: 1.5em; 
+    z-index: 12;
+    margin-top: -.85em;
+    margin-left: -.75em;
+    text-indent: 0;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    text-align: center;
+		}
+	}
+	&.isHidden{
+		display: none;
+		visibility: hidden;
+	}
+	+ .Button{
+		margin-left: 8px;
+	}
+	// SMALL TEXT VERSIONS
+	&.text {
+	  height: inherit;
+	  line-height: inherit;
+	  color: $nomosBlue !important;
+	  height: inherit;
+	  line-height: inherit;
+	  text-decoration: underline;
+	  background: transparent !important;
+	  text-transform: inherit;
+	  font-weight: normal;
+	  padding: 0;
+	  margin: 0;
+		background: transparent;
+		&:before, &:after{
+			display: inline-block;
+			text-decoration: none;
+		}
+	  &:hover{
+		  color: darken($nomosBlue, 10) !important;
+			background: transparent !important;
+	  }
+		+ .Button{
+			margin-left: 8px;
+		}
+
+		&.red, &.delete{
+			color: $nomosRed !important;
+			&:hover{
+			  color: darken($nomosRed, 10%) !important;			
+			}
+		}
+		&.right{
+		  height: 10px;
+		  display: inline-block;
+		  position: absolute;
+		  right: 0;
+		  top: 0;
+		  text-decoration: none;
+			line-height: 22px;
+			&:hover{
+				background: transparent;
+			}
+		}
+		&.plain{
+			text-decoration: none;
+		}
+		&.actionItem{
+			background: transparent;
+			color: $nomosBlack !important;
+			text-align: left;
+			text-decoration: none;
+			padding: 8px;
+			cursor: pointer;
+			width: 100%;
+			&:hover{
+				color: #000 !important;
+				background: #f9f9f9 !important;
+			}
+			+ .Button{
+				margin-left: inherit;
+			}
+		}
+		&.NavSubItem{
+			border-bottom: 1px dashed #ddd; 
+			border-left: 4px solid transparent;
+			padding-left: 4px;
+			border-radius: 0;
+			padding: 4px;	
+			color: $nomosGrey !important;
+			display: block;
+			text-align: left;
+			line-height: $padding*3;
+			cursor: pointer;
+			font-size: $padding*2;
+			text-decoration: none;
+			position: relative;
+			&:after{
+				content: "";
+				//how can we dynamically set the fill
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#777"  viewBox="0 0 32 32"><path d="M20.85 16l.247.248-6.034 6.034L12.8 20.02 16.82 16l-4.02-4.02 2.263-2.262 6.034 6.034-.248.248z"/></svg>') right center no-repeat !important;
+				background-size: 20px 20px !important;
+				position: absolute;
+				opacity: 0;
+				right: 0;
+				top: 0;
+				line-height: 32px;
+				width: 20px;
+				height: 100%;
+				transition: right, opacity .2s ease;
+			}
+			&:hover:after{
+				opacity: 1;
+				right: 10px;
+			}
+
+			&.selected{
+				border-left: 4px solid $nomosBlue;
+				position: relative;
+				color: $nomosBlue !important;
+				&:after{
+					content: "";
+					opacity: 1;
+					//how can we dynamically set the fill
+					background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4A90E2"  viewBox="0 0 32 32"><path d="M20.85 16l.247.248-6.034 6.034L12.8 20.02 16.82 16l-4.02-4.02 2.263-2.262 6.034 6.034-.248.248z"/></svg>') right center no-repeat !important;
+					background-size: 20px 20px !important;
+					position: absolute;
+					right: 0;
+					top: 0;
+					line-height: 32px;
+					width: 20px;
+					height: 100%;
+					transition: right .2s ease;
+				}
+				&:hover:after{
+					right: 10px;
+				}
+/*
+				&:after{
+					content: "\e6bb";
+					font-family: "nomos_font_1";
+					color: $nomosBlue;
+					position: absolute;
+					right: 0;
+					top: 0;
+					line-height: 32px;
+				}
+*/
+			}
+		}
+	}
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+ }
+}
+

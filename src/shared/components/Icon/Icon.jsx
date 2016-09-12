@@ -28,10 +28,12 @@ export default class Icon extends Component {
 	}
 
 	doMouseOver() {
+		console.log('hover');
 		this.setState({isHovered: true});
 	}
 
 	doMouseOut() {
+		console.log('unhover');
 		this.setState({isHovered: false});
 	}
 
