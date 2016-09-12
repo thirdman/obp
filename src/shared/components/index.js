@@ -8,4 +8,5 @@
 export Icon from './icon/Icon';
 export IconButton from './IconButton/IconButton';
 export InputRadio from './InputRadio/InputRadio';
+export QuickView from './QuickView/QuickView';
 export UiBrandLogo from './UiBrandLogo/UiBrandLogo';
