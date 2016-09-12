@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 
 const styles = require('./Icon.scss');
 
@@ -58,13 +59,15 @@ export default class Icon extends Component {
 		}
 
 		newClassNameProps = classNameProps.concat(color);
-		const className = newClassNameProps.map((classV) => styles[classV]).join(' ');
+		const classes = newClassNameProps.map((classV) => styles[classV]).join(' ');
 		let theIcon = require('../../images/' + source + icon + '.svg');
 	return (
 		<span
-			className={
-				styles.Icon + ' ' + className + ' ' + (this.state.isHovered ? styles.isHovered : '')
-				}
+			className={cx(
+					styles.Icon,
+					classes,
+					(this.state.isHovered ? styles.isHovered : '')
+			)}
 			style={tempStyle}
 			dangerouslySetInnerHTML={{__html: theIcon}}
 			onMouseOver={this.doMouseOver}
