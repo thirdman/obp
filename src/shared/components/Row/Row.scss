@@ -1,8 +1,9 @@
 @import "../../globals/styles/_global.scss";
 
 .Row{
+	lost-utility: clearfix;
 	&.isFlex{
-		display: flex;
+		lost-flex-container: row;
 	}
 	&.devMode{
 		background: rgba(255, 0, 0, 0.15);

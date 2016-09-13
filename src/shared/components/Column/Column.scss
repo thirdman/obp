@@ -2,7 +2,7 @@
 
 .Column{
 	&.isFlex{
-		display: flex;
+		lost-flex-container: column;
 	}
 	&.devMode{
 		background: rgba(0, 146, 255, 0.15);
