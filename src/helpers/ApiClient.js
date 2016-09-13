@@ -27,12 +27,19 @@ function formatUrl(path) {
  * Remove it at your own risk.
  */
 class _ApiClient {
+
+	jwt = null;
+
 	constructor(req) {
-		console.log('initialising api client');
 		methods.forEach((method) =>
-			this[method] = (path, { params, data } = {}) => new Promise((resolve, reject) => {
+			this[method] = (path, { params, data, headers } = {}) => new Promise((resolve, reject) => {
 				const request = superagent[method](formatUrl(path));
-				console.log(formatUrl(path));
+				// if header are supplied, set header
+				if (headers && headers.length) {
+					headers.map(({tag, value}) => {
+						request.set(tag, value);
+					});
+				}
 				// if params are supplied, send with params
 				if (params) { request.query(params); }
 				// if data are supplied, send with data
@@ -45,6 +52,10 @@ class _ApiClient {
 				request.end((err, { body } = {}) => err ? reject(body || err) : resolve(body));
 			})
 		);
+	}
+
+	setJwt(token) {
+		this.jwt = token;
 	}
 }
 

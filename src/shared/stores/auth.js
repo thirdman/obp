@@ -3,39 +3,23 @@ import { browserHistory } from 'react-router';
 import _ from 'lodash';
 
 import client from '../../helpers/ApiClient';
+import routeHelper from '../../helpers/RouteHelper';
 
 export default class AuthStore {
 
 	jwt = null;
 
 	@observable user = {};
-
-	init() {
-		// get token from localStorage
-		console.log(client);
-		const user = (typeof window !== 'undefined')
-			? window.localStorage.user
-			: null;
-		if (!_.isEmpty(user)) {
-			this.updateUser(JSON.parse(user));
-		}
-		// auto-login with jwt
-		// if (token) this.jwtAuth({ token });
-	}
-
+	@observable error = '';
 	@action
 	updateUser(data = null) {
 		this.user = data || {};
+		this.error = '';
 	}
 
-	jwtAuth({ token }) {
-		console.log(token, ' jwtAuth to be implemented');
-		/*
-		return app()
-			.authenticate({ type: 'token', token })
-			.then((result) => this.updateUser(result.data))
-			.catch((err) => console.error(err)); // eslint-disable-line no-console
-		*/
+	@action
+	updateError(error = null) {
+		this.error = error;
 	}
 
 	@computed
@@ -45,25 +29,65 @@ export default class AuthStore {
 
 
 	@action
-	login({ username, password, nextPath }) {
+	login({ username, password }) {
 		client.post('/login', {
 			data: {
 				username,
 				password
 			}
 		}).then((res) => {
-			console.log(res);
+			const data = res.data[0];
+			window.localStorage.token = data.authorization;
+			this.updateUser({ username });
+			this.proceedToNextPath();
 		}).catch((err) => {
-			console.log(err);
+			this.updateError(err.errors[0]);
 		});
-		/*
-		window.localStorage.user = JSON.stringify({ username, password });
-		this.updateUser({ username, password });
-		*/
+	}
 
-		if (nextPath) {
-			browserHistory.push(nextPath);
-		}
+	@action
+	logout() {
+		window.localStorage.token = '';
+		this.updateUser({});
+	}
+
+	jwtAuth({ token }) {
+		return new Promise((resolve, reject) => {
+			client.post('/verify', {
+				headers: [
+					{tag: 'authorization', value: token}
+				]
+			}).then((res) => {
+				resolve(res);
+			}).catch((err) => {
+				reject(err);
+			});
+		});
+	}
+
+	checkLoggedIn() {
+		return new Promise((resolve, reject) => {
+			if (!window.localStorage.token) {
+				reject();
+			} else {
+				this.jwtAuth({ token: window.localStorage.token })
+				.then((res) => {
+					const data = res.data[0];
+					window.localStorage.token = data.authorization;
+					this.updateUser({ username: data.username });
+					resolve();
+				}).catch(() => {
+					reject();
+				});
+			}
+		});
+	}
+
+	proceedToNextPath() {
+		const nextPath = routeHelper.nextPath || '/';
+
+		browserHistory.push(nextPath);
+		routeHelper.clear();
 	}
 
 /*
@@ -76,14 +100,4 @@ export default class AuthStore {
 		*
 	}
 */
-	@action
-	logout() {
-		window.localStorage.user = JSON.stringify('');
-		this.updateUser({});
-		/*
-		app()
-			.logout()
-			.then(() => this.updateUser({}));
-		*/
-	}
 }

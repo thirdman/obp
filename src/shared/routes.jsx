@@ -8,18 +8,34 @@ import {
 	NotFound
 } from 'pages';
 
+import routeHelper from '../helpers/RouteHelper';
+
 export default (store) => {
 	const requireLogin = (nextState, replace, cb) => {
-		const { auth, route } = store;
+		const { auth } = store;
 		// Kick you back to login page if have not logged in
-		if (!auth.check) {
-			route.updateNextPath(location.pathname);
-			replace({
-				pathname: '/login'
+		console.log('checking logged in or not.... ');
+		auth.checkLoggedIn()
+			.then(() => {
+				cb();
+			})
+			.catch(() => {
+				routeHelper.updateNextPath(location.pathname);
+				replace({
+					pathname: '/login'
+				});
+
+				cb();
 			});
-		}
-		cb();
 	};
+
+	const onLogin = (nextState, replace, cb) => {
+		const { auth } = store;
+		auth.checkLoggedIn()
+			.then(() => { cb(); })
+			.catch(() => { cb(); });
+	};
+
 	/**
 	 * Please keep routes in alphabetical order
 	 */
@@ -27,7 +43,7 @@ export default (store) => {
 		<Route path="/" component={App}>
 			{ /* Routes - do not require logged in*/ }
 			<IndexRoute component={Home} />
-			<Route path="login" component={Login} />
+			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
 			<Route onEnter={requireLogin}>
 				<Route path="docs" component={ComponentDocs} />

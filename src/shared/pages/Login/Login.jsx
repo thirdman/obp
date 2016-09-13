@@ -12,14 +12,14 @@ export default class Login extends Component {
 
 	handleSubmit = (event) => {
 		if (event) { event.preventDefault(); }
-		const { auth, route } = this.context.store;
+		const { auth } = this.context.store;
 		const username = this.usernameInput.value;
 		const password = this.passwordInput.value;
 
 		if (!this.validateInput(username, password)) {
 			return false;
 		}
-		auth.login({username, password, nextPath: route.nextPath});
+		auth.login({username, password});
 		this.usernameInput.value = '';
 		this.passwordInput.value = '';
 	}
