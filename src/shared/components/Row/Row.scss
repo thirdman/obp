@@ -1,0 +1,13 @@
+@import "../../globals/styles/_global.scss";
+
+.Row{
+	lost-utility: clearfix;
+	&.isFlex{
+		lost-flex-container: row;
+	}
+	&.devMode{
+		background: rgba(255, 0, 0, 0.15);
+		border: 1px solid rgba(255, 0, 0, 0.25);
+	}
+	lost-row: attr(data-rows)/attr(data-maxRows);
+}

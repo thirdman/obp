@@ -1,0 +1,12 @@
+@import "../../globals/styles/_global.scss";
+
+.Column{
+	&.isFlex{
+		lost-flex-container: column;
+	}
+	&.devMode{
+		background: rgba(0, 146, 255, 0.15);
+		border: 1px solid rgba(0, 146, 255, 0.25);
+	}
+	lost-column: attr(data-columns)/attr(data-of);
+}
