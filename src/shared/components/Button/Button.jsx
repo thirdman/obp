@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Icon } from 'components';
+import classSet from 'react-classset';
 import cx from 'classnames';
 
 const styles = require('./Button.scss');
@@ -14,7 +15,6 @@ export default class Button extends Component {
 		iconColor: React.PropTypes.string,
 		iconPosition: React.PropTypes.string,
 		iconSize: React.PropTypes.number,
-		isOpen: React.PropTypes.bool,
 		isActive: React.PropTypes.bool,
 		isHighlighted: React.PropTypes.bool,
 		isDisabled: React.PropTypes.bool,
@@ -26,115 +26,85 @@ export default class Button extends Component {
 		]),
 	};
 
-	static defaultProps = {
-		iconPosition: 'left',
-		isActive: false,
-		isOpen: false,
-		isWrap: false,
-		isDisabled: false,
-		classNameProps: ['normal']
-	};
-
 	render() {
 		const {
-			classNameProps = [],
+			classNameProps = ['normal'],
 			content,
 			type,
 			color,
 			onClickProps,
 			icon,
 			iconColor,
-			iconPosition,
+			iconPosition = 'left',
 			iconSize,
-			isActive,
-			isOpen,
+			isActive = false,
+			isDisabled = false,
+			isHighlighted = false
+		} = this.props;
+
+		let toggleClasses;
+		let classes;
+		let iconWrapStyles;
+		let tempSize = iconSize ? (iconSize + 'px') : null;
+
+		toggleClasses = classSet({
 			isDisabled,
 			isHighlighted
-			} = this.props;
-		let newClassNameProps = classNameProps;
-		let iconWrapStyles;
+		});
+		classes = classNameProps.slice();
+		classes = classes.concat(type || '');
+		classes = classes.concat(color || '');
+		classes = classes.concat(iconPosition ? `icon-${iconPosition}` : '');
+		classes = classes
+			.filter((cName) => { return !!cName; })
+			.map((classV) => styles[classV]).join(' ');
 
-		if (isOpen) {
-			newClassNameProps = newClassNameProps.concat(isOpen ? 'isOpen' : '');
-		}
-		if (type) {
-			newClassNameProps = newClassNameProps.concat(type);
-		}
-		if (color) {
-			newClassNameProps = newClassNameProps.concat(color);
-		}
-		if (isDisabled) {
-			newClassNameProps = newClassNameProps.concat(isDisabled ? 'disabled' : '');
-		}
-		if (isHighlighted) {
-			newClassNameProps = newClassNameProps.concat('highlighted');
-		}
-		if (iconPosition === 'right') {
-			newClassNameProps = newClassNameProps.concat('iconPostionRight');
-		}
-		const classes = newClassNameProps.map((classV) => styles[classV]).join(' ');
-		const arrowColor = (type === 'select' && classes.includes('white')) ? 'blue' : 'white';
-		let tempSize = iconSize ? (iconSize + 'px') : null;
+		// Only applies if we explicitly set icon size
 		if (iconSize) {
 			iconWrapStyles = {
 				width: tempSize,
 				height: tempSize
 			};
 		}
-		const theIcon = props => (
-			<span className={styles.iconWrap} style={iconWrapStyles}>
-					<Icon
-					icon={icon || 'view'}
-					color={iconColor || 'white'}
-					size={props.iconSize}
-					classNameProps={[iconColor || 'white']}
-					/>
-				</span>
-		);
+
 		return (
 			<span
-				className={cx(
-						styles.Button,
-						classes,
-						(type && type === 'select' ? styles.hasSelect : null)
-				)}
 				onClick={onClickProps}
-			>
+				className={cx(styles.Button, classes, toggleClasses)} >
 				{isActive ?
-					(<span className={styles.isActive}>
-						<Icon icon="loading" color="white" source="icons/" classNameProps={['white']} />
-					</span>)
-					:
-					null
+					<span className={styles.isActive}>
+						<Icon
+							icon="loading"
+							color="white"
+							source="icons/"
+							classNameProps={['white']} />
+					</span>
+					: null
 				}
-				{
-					icon && iconPosition === 'left' ?
-					theIcon
-					:
-					null
-					}
+				{icon && iconPosition === 'left' ?
+					<span className={styles.iconWrap} style={iconWrapStyles}>
+						<Icon
+							icon={icon || 'view'}
+							color={iconColor || 'white'}
+							size={iconSize}
+							classNameProps={[iconColor || 'white']} />
+					</span>
+					: null
+				}
 				{this.props.children ?
 					this.props.children
-					:
-					null
+					: null
 				}
-				<span className={styles.btnContent}>{content || 'text of button'}</span>
+				<span className={styles.btnContent}>
+					{content || 'button'}
+				</span>
 				{icon && iconPosition === 'right' ?
 					<span className={styles.iconWrap} style={iconWrapStyles}>
-						theIcon
-					</span>
-					:
-					null
-					}
-				{(type === 'select') ?
-					<span className={styles.select}>
-						<span className={styles.iconWrap}>
-						{ isOpen ?
-							<Icon icon="chevron-up" color={arrowColor} />
-							:
-							<Icon icon="chevron-down" color={arrowColor} />
-						}
-						</span>
+						<Icon
+							icon={icon || 'view'}
+							color={iconColor || 'white'}
+							size={iconSize}
+							classNameProps={[iconColor || 'white']} />
 					</span>
 					: null
 				}

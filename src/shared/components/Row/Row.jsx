@@ -3,23 +3,21 @@ import cx from 'classnames';
 
 const styles = require('./Row.scss');
 
-const Row = ({ isFlex = true, rows = 1, maxRows = 1, devMode = false, children}) => (
+const Row = ({ isFlex = true, occupy = 1, of = 1, devMode = false, children}) => (
 	<div
+		data-occupy={occupy}
+		data-of={of}
 		className={cx(
 			styles.Row,
 			(devMode ? styles.devMode : ''),
-			(isFlex ? styles.isFlex : ''))
-			}
-		data-rows={rows}
-		data-maxRows={maxRows}
-	>
+			(isFlex ? styles.isFlex : ''))} >
 		{children}
 	</div>
 );
 
 Row.propTypes = {
-	rows: React.PropTypes.number,
-	maxRows: React.PropTypes.number,
+	occupy: React.PropTypes.number,
+	of: React.PropTypes.number,
 	isFlex: React.PropTypes.bool,
 	devMode: React.PropTypes.bool,
 	children: React.PropTypes.oneOfType([

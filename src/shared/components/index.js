@@ -7,7 +7,7 @@
 
 export Button from './Button/Button';
 export Column from './Column/Column';
-export Icon from './icon/Icon';
+export Icon from './Icon/Icon';
 export IconButton from './IconButton/IconButton';
 export InputRadio from './InputRadio/InputRadio';
 export QuickView from './QuickView/QuickView';

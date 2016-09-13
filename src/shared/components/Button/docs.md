@@ -14,7 +14,6 @@ icon							|	`string`			|					|	generates an icon for the button. Icon name matc
 iconColor					|	`string`			|	'white' |	(optional) define the colour of the icon, if used
 iconPosition			|	`string`			|	'left' 	|	(optional) use 'right' to put the icon after the content
 iconSize 					|	`number`			|	- 			|	in px,  leave blank for usual size
-isOpen						|	`bool`				|	false		|	returns true for select type, when the the dropdown content exixts (and changes direction of the little arrow)
 isActive					|	`bool`				|	false		|	when true, the button shows the nomos loading icon
 isHighlighted			|	`bool`				|	false		|	when true, the button shows the blue version (same as highlighted class)
 isDisabled				|	`bool`				|	false		|	when true, the button is disabeld
@@ -76,10 +75,6 @@ children					|	`oneOfType...`|	 				|	when button wraps text, the children appea
 <div style={{display: `inline-block`, width: `32px`, height: `32px`}}>
 	<Button content="Transparent" type="wrapper" ><Icon icon="view" color="grey" classNameProps={['grey']}/></Button>
 </div>
-<Button content="Click me!" classNameProps={['normal', 'select']} type="select"/>
-<Button content="Click me!" classNameProps={['normal', 'select', 'isOpen']} type="select" isOpen />
-<Button content="Click me!" classNameProps={['normal', 'select', 'white']} type="select" />
-<Button content="Click me!" classNameProps={['normal', 'select', 'white']} type="select" isOpen />
 *****example*****
 [{
 	"component":"Button",
@@ -134,36 +129,6 @@ children					|	`oneOfType...`|	 				|	when button wraps text, the children appea
 	"props": {
 		"content": "Action Item - found in action drop downs (hover me)",
 		"classNameProps": ["text", "actionItem"]
-	}	
-},{
-	"component":"Button",
-	"props": {
-		"content": "select...",
-		"classNameProps": ["normal"],
-		"type":"select"
-	}	
-},{
-	"component":"Button",
-	"props": {
-		"content": "select...",
-		"classNameProps": ["normal"],
-		"type":"select",
-		"isOpen":true
-	}	
-},{
-	"component":"Button",
-	"props": {
-		"content": "select...",
-		"classNameProps": ["normal", "white"],
-		"type":"select"
-	}	
-},{
-	"component":"Button",
-	"props": {
-		"content": "select...",
-		"classNameProps": ["normal", "white"],
-		"type":"select",
-		"isOpen":true
 	}	
 },{
 	"component":"Button",

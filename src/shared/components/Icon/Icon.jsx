@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
+import { autobind } from 'core-decorators';
 
 const styles = require('./Icon.scss');
 
@@ -27,24 +28,30 @@ export default class Icon extends Component {
 		isHovered: false,
 	}
 
+	@autobind
 	doMouseOver() {
-		console.log('hover');
 		this.setState({isHovered: true});
 	}
 
+	@autobind
 	doMouseOut() {
-		console.log('unhover');
 		this.setState({isHovered: false});
 	}
 
- render() {
-		const { classNameProps = [], borderColor, color, icon, size} = this.props;
-		// colorHtml, hoverColor,
+	render() {
+		const {
+			classNameProps = [],
+			borderColor,
+			color,
+			icon,
+			size
+		} = this.props;
 		let { source } = this.props;
 		let newClassNameProps = [];
 		let tempStyle;
 		let tempSize = size || '100%';
 		let tempOpacity = this.state.isHovered ? 0.8 : 1;
+
 		if (icon === 'loading') {
 			source = 'icons/';
 		}
@@ -63,18 +70,19 @@ export default class Icon extends Component {
 		newClassNameProps = classNameProps.concat(color);
 		const classes = newClassNameProps.map((classV) => styles[classV]).join(' ');
 		let theIcon = require('../../images/' + source + icon + '.svg');
-	return (
-		<span
-			className={cx(
+
+		return (
+			<span
+				style={tempStyle}
+				dangerouslySetInnerHTML={{__html: theIcon}}
+				onMouseOver={this.doMouseOver}
+				onMouseOut={this.doMouseOut}
+				className={cx(
 					styles.Icon,
 					classes,
 					(this.state.isHovered ? styles.isHovered : '')
-			)}
-			style={tempStyle}
-			dangerouslySetInnerHTML={{__html: theIcon}}
-			onMouseOver={this.doMouseOver}
-			onMouseOut={this.doMouseOut}
-		/>
-   );
- }
+				)}
+			/>
+		);
+	}
 }

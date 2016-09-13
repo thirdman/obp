@@ -36,6 +36,7 @@ export default (store) => {
 			.catch(() => { cb(); });
 	};
 
+	console.log(requireLogin);
 	/**
 	 * Please keep routes in alphabetical order
 	 */
@@ -45,9 +46,7 @@ export default (store) => {
 			<IndexRoute component={Home} />
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
-			<Route onEnter={requireLogin}>
-				<Route path="docs" component={ComponentDocs} />
-			</Route>
+			<Route path="docs" component={ComponentDocs} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

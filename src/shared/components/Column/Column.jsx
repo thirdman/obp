@@ -3,22 +3,20 @@ import cx from 'classnames';
 
 const styles = require('./column.scss');
 
-const Column = ({ isFlex = true, columns = 12, of = 12, devMode = false, children}) => (
+const Column = ({ isFlex = true, occupy = 12, of = 12, devMode = false, children}) => (
 	<div
+		data-occupy={occupy}
+		data-of={of}
 		className={cx(
 			styles.Column,
 			(devMode ? styles.devMode : ''),
-			(isFlex ? styles.isFlex : ''))
-			}
-		data-columns={columns}
-		data-of={of}
-	>
+			(isFlex ? styles.isFlex : ''))} >
 		{children}
 	</div>
 );
 
 Column.propTypes = {
-	columns: React.PropTypes.number,
+	occupy: React.PropTypes.number,
 	of: React.PropTypes.number,
 	isFlex: React.PropTypes.bool,
 	devMode: React.PropTypes.bool,
