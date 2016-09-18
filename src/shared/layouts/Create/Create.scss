@@ -1,0 +1,62 @@
+@import "../../globals/styles/_global.scss";
+@import "../../globals/styles/_layouts.scss";
+
+.Create{
+	background: $nomosGreen;
+	// STRUCTURAL DIVS
+	.header{
+		width: 100%;
+	}
+	.content{
+	}
+	.hero{
+	}
+	.navWrap{
+		
+	}
+	.nav{
+		
+	}
+	.supplimentary{
+		//unused
+		display: none;
+	}
+	.main{
+		min-height: 100%;
+	}
+	.secondary{
+		
+	}
+	.footer{
+		width: 100%;
+	}
+	
+
+	//GRID SETUPS
+	/*See _layouts.scss*/
+	//CONTENT
+	.content{
+		lost-column: 12/12;
+	}
+	@media screen and (max-width: 1700px){
+		.content{
+			lost-column: 12/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.content{
+			lost-column: 12/12;
+		}
+	}
+
+	//MAIN
+	.main{
+		lost-column: 12/12;
+	}
+	@media screen and (max-width: 1000px){
+		.main{
+			lost-column: 12/12;
+		}
+	}
+
+}
