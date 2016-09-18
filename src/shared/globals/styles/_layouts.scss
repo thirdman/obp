@@ -1,0 +1,151 @@
+@import "_global.scss";
+
+.Overview{
+	// STRUCTURAL DIVS
+	.header{
+		width: 100%;
+	}
+	.content{
+		
+	}
+	.hero{
+		width: 100%;
+	}
+	.navWrap{
+		
+	}
+	.nav{
+		
+	}
+	.supplimentary{
+		
+	}
+	.main{
+		min-height: 100%;
+	}
+	.secondary{
+		
+	}
+	.footer{
+		width: 100%;
+	}
+	
+
+	// when there is a class of editMode, it will show you all the sections.
+	&.editMode{
+		.hero, .header, .nav, .supplimentary, .main, .secondary, .footer{
+			border: 4px solid rgba(255, 113, 228, 0.3);
+			position: relative;
+			margin-top: 2px;
+			padding: 8px;
+			&:after{
+				content: "";
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				z-index: $z-index-top;
+				color: #000;
+				background: rgba(255,255,255,.8);
+				display: block;
+				padding-left: 4px;
+				font-size: $font-size-small;
+			}
+		}
+		.header{
+			border: 4px solid rgba(188, 199, 101, 0.57) !important;
+			&:after{
+				content: "HEADER";
+			}
+		}
+		.hero{
+			border: 4px solid rgba(255, 17, 191, 0.3) !important;
+			&:after{
+				content: "HERO";
+			}
+		}
+		.nav{
+			border: 4px solid rgba(67, 204, 20, 0.3) !important;
+			&:after{
+				content: "NAV";
+				color: rgba(47, 204, 20, 1);
+			}
+		}
+		.supplimentary{
+			border: 4px solid rgba(255, 191, 0, 0.71);
+			&:after{
+				content: "SUPPLIMENTARY";
+			}
+		}
+		.main{
+			border: 4px solid rgba(80, 110, 228, 0.3);
+			&:after{
+				content: "MAIN";
+			}
+		}
+		.secondary{
+			border: 4px solid rgba(0, 168, 197, 0.3);
+			&:after{
+				content: "SECONDARY";
+			}
+		}
+		.footer{
+			border: 4px solid rgba(226, 222, 39, 0.5);
+			&:after{
+				content: "FOOTER";
+			}
+		}
+	}
+
+	//GRID SETUPS
+	
+	//CONTENT
+	.content{
+		lost-column: 9/12;
+	}
+	@media screen and (max-width: 1700px){
+		.content{
+			lost-column: 10/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.content{
+			lost-column: 12/12;
+		}
+	}
+	// SECONDARY
+	.secondary{
+		lost-column: 3/12;
+	}
+	@media screen and (max-width: 1700px){
+		.secondary{
+			lost-column: 2/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.secondary{
+			lost-column: 12/12;
+		}
+	}
+
+	//INSIDE CONTENT
+	//NAV
+	.navWrap{
+		lost-column: 3/12;
+	}
+	@media screen and (max-width: 1000px){
+		.navWrap{
+			lost-column: 12/12;
+		}
+	}
+	//MAIN
+	.main{
+		lost-column: 9/12;
+	}
+	@media screen and (max-width: 1000px){
+		.main{
+			lost-column: 12/12;
+		}
+	}
+}
