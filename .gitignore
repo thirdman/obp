@@ -6,5 +6,3 @@ webpack-assets.json
 webpack-stats.json
 npm-debug.log
 sftp-config.json
-
-webpack/dev.config.js
