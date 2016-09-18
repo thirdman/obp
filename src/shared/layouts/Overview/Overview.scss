@@ -3,15 +3,17 @@
 .Overview{
 	// STRUCTURAL DIVS
 	.header{
-		
+		width: 100%;
 	}
 	.content{
-		
 	}
 	.hero{
-		
+		width: 100%;
 	}
 	.nav{
+		
+	}
+	.subNav{
 		
 	}
 	.supplimentary{
@@ -24,16 +26,17 @@
 		
 	}
 	.footer{
-		
+		width: 100%;
 	}
 	
-	
+
 	// when there is a class of editMode, it will show you all the sections.
 	&.editMode{
-		#layoutHero, #layoutHeader, #layoutSubnav, #layoutSuplimentary, #layoutMain, #layoutSecondary, #layoutFooter{
+		.hero, .header, .nav, .subNav, .supplimentary, .main, .secondary, .footer{
 			border: 4px solid rgba(255, 113, 228, 0.3);
 			position: relative;
 			margin-top: 2px;
+			padding: 8px;
 			&:after{
 				content: "";
 				top: 0;
@@ -49,48 +52,52 @@
 				font-size: $font-size-small;
 			}
 		}
-		#layoutHeader{
+		.header{
 			border: 4px solid rgba(188, 199, 101, 0.57) !important;
 			&:after{
 				content: "HEADER";
 			}
 		}
-		#layoutHero{
+		.hero{
 			border: 4px solid rgba(255, 17, 191, 0.3) !important;
 			&:after{
 				content: "HERO";
 			}
 		}
-		#layoutSubnav{
+		.nav{
+			border: 4px solid rgba(67, 204, 20, 0.3) !important;
+			&:after{
+				content: "NAV";
+				color: rgba(47, 204, 20, 1);
+			}
+		}
+		.subNav{
 			border: 4px solid rgba(47, 204, 20, 0.3) !important;
 			&:after{
 				content: "SUBNAV";
 				color: rgba(47, 204, 20, 1);
 			}
 		}
-		#layoutSuplimentary{
+		.supplimentary{
 			border: 4px solid rgba(255, 191, 0, 0.71);
-			padding: 8px;
 			&:after{
 				content: "SUPPLIMENTARY";
 			}
 		}
-		#layoutMain{
+		.main{
 			border: 4px solid rgba(80, 110, 228, 0.3);
 			&:after{
 				content: "MAIN";
 			}
 		}
-		#layoutSecondary{
+		.secondary{
 			border: 4px solid rgba(0, 168, 197, 0.3);
-			padding: 8px;
 			&:after{
 				content: "SECONDARY";
 			}
 		}
-		#layoutFooter{
+		.footer{
 			border: 4px solid rgba(226, 222, 39, 0.5);
-			padding: 8px;
 			&:after{
 				content: "FOOTER";
 			}
