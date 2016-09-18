@@ -7,6 +7,9 @@ import {
 	Login,
 	NotFound
 } from 'pages';
+import {
+	Overview
+} from 'layouts';
 
 import routeHelper from '../helpers/RouteHelper';
 
@@ -35,8 +38,7 @@ export default (store) => {
 			.then(() => { cb(); })
 			.catch(() => { cb(); });
 	};
-
-	console.log(requireLogin);
+	console.log(typeof requireLogin);
 	/**
 	 * Please keep routes in alphabetical order
 	 */
@@ -47,6 +49,7 @@ export default (store) => {
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
 			<Route path="docs" component={ComponentDocs} />
+			<Route path="overview" component={Overview} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

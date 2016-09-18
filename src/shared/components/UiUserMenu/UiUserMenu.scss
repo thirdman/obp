@@ -1,0 +1,92 @@
+@import "../../globals/styles/_global.scss";
+
+.UiUserMenu {
+	background: transparent;
+	height: 32px;
+  width: 44px;
+  padding: 0;
+  position: relative;
+	text-align: left;
+	.user{
+		color: $nomosBlack;
+		position: absolute;
+		left: 0;
+		height: 32px;
+		line-height: 30px;
+		.loggedIn{
+			height: 32px;
+			.iconWrap{
+		    width: 32px;
+		    height: 32px;
+		    display: inline-block;
+		    vertical-align: middle;
+		    background: $nomosGrey;
+		    padding: 3px;
+		    border-radius: 30px;
+		    cursor: pointer;
+		    &.isOpen{
+			    background: $nomosLightGrey;
+			    padding: 3px;
+			    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.3) inset;
+		    }
+			}
+			.arrowWrap{
+				width: 10px;
+				margin-left: 2px;
+				height: 32px;
+				display: inline-block;
+				vertical-align: middle;	
+			}
+		}
+		.userNameText{
+			padding: 0;
+			font-size: 12px;
+		}
+	}
+	.actionItems{
+		position: absolute;
+		right: 0;
+		top: 100%;
+		min-width: 160px;
+		margin-top: 12px;
+		background: #fff;
+		box-shadow: 0 1px 16px -5px rgba(0, 0,0, .35);
+		border-radius: 4px;
+		z-index: 1;
+		line-height: 32px;
+		.userActionHeader{
+			position: relative;
+			border-bottom: 1px solid $nomosLine;
+			background: #f9f9f9;
+			margin: 0;
+			padding: 4px 4px 4px 8px;
+			border-radius: 4px 4px 0 0;
+			line-height: 16px;
+		}
+		.triangle{
+			width: 12px;
+			height: 12px;
+			background: #f9f9f9;
+			display: block;
+			position: absolute;
+			top: -6px;
+			right: 24px;
+			margin-left: auto;
+			margin-right: auto;
+			transform: rotate(45deg);
+			box-shadow: -1px -1px 1px -1px rgba(0,0,0,.2);
+		}
+	}
+	.actionItem{
+		background: transparent;
+		color: $nomosBlack !important;
+		text-align: left;
+		text-decoration: none;
+		padding: 8px;
+		cursor: pointer;
+		&:hover{
+			color: #000 !important;
+			background: #f9f9f9 !important;
+		}
+	}
+}

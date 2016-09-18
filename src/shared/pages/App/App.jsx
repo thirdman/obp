@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
+import { MainNavWrap } from 'components';
+
 import config from '../../../config';
 
 const styles = require('./App.scss');
@@ -24,6 +26,7 @@ export default class App extends Component {
 		return (
 			<div className={styles.app}>
 				<Helmet {...config.app.head} />
+				<MainNavWrap />
 				<div className={styles.appContent}>
 					{this.props.children}
 				</div>

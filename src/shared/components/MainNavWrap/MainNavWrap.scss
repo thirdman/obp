@@ -1,0 +1,228 @@
+@import "../../globals/styles/_global.scss";
+
+.MainNavWrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  //width: 100%;
+  height: 100%;
+  //overflow: hidden;
+  pointer-events: none;
+  z-index: 150;
+	.navBarContent{
+    position: relative;
+    display: block;
+    width: 240px;
+    height: 100%;
+    //-webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+ 		transition: all 330ms ease-in-out;
+    will-change: all;
+    pointer-events: auto; 
+	  color: $nomosGrey;
+	  //position: fixed;
+	  z-index: 160;
+	  color: #fff;
+	  background: #444;
+	  background: $nomosDarkBlack;
+	}
+  &:after {
+    content: '';
+    // display: block;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    will-change: opacity;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+    opacity: 0;
+	}
+  &.navOpen{
+    pointer-events: auto;
+    .navBarContent{
+      // -webkit-transform: 0%;
+ 		  transition: all 330ms ease-in-out;
+ 			transform: translateX(0%);
+    }
+
+		&.animatable {
+			.navBarContent {
+		    transition: translate 330ms ease-out;
+		  }
+		}
+		&:after {
+	    //opacity: .4;
+	    opacity: 0;
+	    pointer-events: auto;
+		}
+  }
+
+
+
+  &.navDocked{
+		.navBarContent{
+			width: 60px;
+		}
+		text-align: left;
+	  //-webkit-transform: translateX(-100%);
+	//	transform: translateX(-100%);
+	//	transition: transform 300ms linear;
+	//	will-change: transform;
+	
+	  &.navOpen{
+			//transform: translate3d(0, 0, 0);
+			//background: $nomosDarkBlack;
+			  //  -webkit-transform: none;
+          //  transform: none;
+	  }
+	  &.navClosed{
+			//transform: translate3d(-240px, 0, 0);
+			//background: $nomosDarkBlack;
+	  }
+  }
+  lost-utility: clearfix;
+	.navigation{
+    display: block;
+		.menuItem{
+			display: block;
+			padding: 0 $padding*2;
+			color: $nomosLightGrey;
+			cursor: pointer;
+			line-height: 50px;
+			text-decoration: none;
+			&:hover{
+				color: #fff;
+				background: rgba(255,255,255,.05);
+			}
+			&.active{
+				border-bottom: 4px solid $nomosBlue;
+				background: rgba(255,255,255,.05);
+			}		
+		}		
+	}
+	&.navDocked{
+		.navigation{
+			.menuItem{
+				padding: 0 8px;
+				font-size: 12px;
+			}
+		}
+	}
+	.silo{
+		height: 50px;		
+		line-height: 50px;
+		&:first-child{
+			border-left: none;
+		}
+	}
+	.hamburger{
+		position: absolute; 
+		top: 24px;
+		left: 240px;
+		z-index: 999;
+		padding: 8px 4px ;
+	}
+}
+
+/*
+.banner{
+	background: transparent;
+	height: 48px;
+  top: 16px;
+  right: 0;
+  position: fixed;
+  width: 72px;
+  z-index: 4;
+	.user{
+		color: $nomosBlack;
+		padding-right: 4px;
+		position: absolute;
+		left: 0;
+		height: 48px;
+		.loggedIn{
+			height: 48px;
+			.iconWrap{
+		    width: 32px;
+		    height: 32px;
+		    display: inline-block;
+		    vertical-align: middle;
+		    //padding: 2px;
+		    background: $nomosGrey;
+		    border-radius: 30px;
+		    cursor: pointer;
+		    &.isActive{
+			    background: #fff;
+			    padding: 2px;
+			    box-shadow: 0 0 14px -1px rgba(0,0,0,.3);
+		    }
+			}
+			.arrowWrap{
+				width: 10px;
+				margin-left: 2px;
+				height: 100%;
+				display: inline-block;
+				vertical-align: middle;	
+				&.isActive{
+				}
+			}
+		}
+		.userNameText{
+			padding: 0;
+			font-size: 12px;
+		}
+	}
+	.actionItems{
+		position: absolute;
+		right: 0;
+		top: 100%;
+		min-width: 160px;
+		margin-top: 4px;
+		background: #fff;
+		box-shadow: 0 1px 16px -5px rgba(0, 0,0, .35);
+		border-radius: 4px;
+		z-index: 1;
+		line-height: 32px;
+		.userActionHeader{
+			position: relative;
+			border-bottom: 1px solid $nomosLine;
+			background: #f9f9f9;
+			margin: 0;
+			padding: 4px 4px 4px 8px;
+			border-radius: 4px 4px 0 0;
+			line-height: 16px;
+		}
+		.triangle{
+			width: 12px;
+			height: 12px;
+			background: #f9f9f9;
+			display: block;
+			position: absolute;
+			top: -6px;
+			right: 24px;
+			margin-left: auto;
+			margin-right: auto;
+			transform: rotate(45deg);
+			box-shadow: -1px -1px 1px -1px rgba(0,0,0,.2);
+		}
+	}
+	.actionItem{
+		background: transparent;
+		color: $nomosBlack !important;
+		text-align: left;
+		text-decoration: none;
+		padding: 8px;
+		cursor: pointer;
+		&:hover{
+			color: #000 !important;
+			background: #f9f9f9 !important;
+		}
+	}
+}
+*/
+
+

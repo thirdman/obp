@@ -34,7 +34,6 @@
 		line-height: $padding*2;
 		color: $nomosGrey;
 	}
-
 }
 
 html{
@@ -50,4 +49,13 @@ body{
 	padding-left: 240px;
 	margin: 0;
 	height: 100%;
+}
+
+.layoutWrap{
+	height: 100%;
+	max-width: 100%;
+	margin-top: 16px;
+	margin-left: 0;
+	margin-right: 0;
+	padding-top: 0;	
 }

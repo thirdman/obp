@@ -1,0 +1,261 @@
+@import "../../globals/styles/_global.scss";
+
+.TopBar{
+	position: relative;
+	border-bottom: 1px solid $nomosBlack;
+	height: 64px;	
+  padding-top: 16px;
+  display: block;
+
+	.PrimaryContent{
+		position: relative;
+		padding: 0;
+		margin: 0;
+	}
+
+	.navWrap{
+    display: block;
+    overflow-x: hidden;
+    position: relative;
+		.topBarNav{
+			text-align: left;
+		}
+		.topBarNavOverflow{
+			width: 100px;
+			position: absolute;
+		}
+		.moreItemLink{
+			padding-right: 0;
+			min-width: 98px;
+			cursor: pointer;
+			.moreIconWrap{
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.innerLink{
+				padding: 4px 8px;
+				border: 0px solid $nomosGrey;
+				border-radius: 0;
+				border-left: 1px solid $nomosLine;
+				background: transparent;
+				font-weight: bold;
+			}
+			.innerNumber{
+			}
+			&:hover{
+				&:after{
+					display: none;
+				}
+			}
+		}
+	  button.OverflowButton {
+		  position: absolute;
+		  display: none;
+		  height: 100%;
+		  right: 0;
+		  padding: 0 15px;
+		  border: 0;
+		  outline: none;
+		  color: $nomosGrey;
+		  cursor: pointer;
+		  background-color: transparent;
+		  opacity: 1;
+		  transition: opacity .5s ease;
+		  &.hidden{
+			  transition: opacity .5s ease;
+			  opacity: 0;
+		  }
+		  &:hover {
+				background-color: rgba(0,0,0,.15);
+		  }
+			.moreCount{
+		    position: absolute;
+		    width: 30px;
+		    height: 30px;
+		    left: -18px;
+		    top: 12px;
+		    text-align: center;
+		    background-color: #eee;
+		    color: $nomosGrey;
+		    font-size: 14px;
+		    line-height: 26px;
+		    border-radius: 50%;
+		    border: 3px solid $nomosGrey;
+		    font-weight: bold;
+		    &:before{
+			    content: "+";
+		    }
+			}
+	  }
+	}
+	span.navItem{
+		border: 0;
+		border-right: 0px solid #ddd;
+		padding-left: 4px;
+		padding-right: 16px;
+		line-height: 48px;
+		height: 48px;
+		margin-left: 2px;
+		position: relative;
+		&:after{
+			visibility: 0;
+			width: 0;
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 4px;
+			right: 4px;
+			height: 4px;
+			background: $nomosBlack;
+		}
+		&:first-child{
+			margin-left: 0;
+			&:after{
+				left: 0;
+			}
+		}
+		&.itemOrg{
+			font-weight: bold;
+			white-space: nowrap;
+		}
+		&.itemAgreements{}
+		&.itemProperty{}
+		&.itemEntities{}
+		&.itemFiles{}
+		&.itemSettings{}
+		&.selected, &:hover{
+			&:after{
+				width: 100%;
+				transition: width .3s ease-out;
+			}
+			position: relative;
+		}
+		&:hover{
+			cursor: pointer;
+			color: $nomosDarkBlack;
+		}
+	}	
+	.visibleLinks {
+    display: inline-table; 
+    span.navItem {
+      display: table-cell;
+      &:first-child{
+	 			border-left: none;     
+      }
+    }
+  }
+  
+  .hiddenLinks {
+    position: absolute;
+    z-index: $z-index-top;
+    top: 100%;
+    margin-top: -2px;
+    width: 200px;
+    background: #fff;
+    box-shadow: 0 2px 16px -5px rgba(0,0,0,.2);
+    span.navItem {
+      display: block;
+      border-top: 1px solid $nomosLine;
+      border-left: none;
+    }
+  }
+  
+  .hidden {
+    visibility: hidden;
+  }
+
+	.secondaryContent{
+		float: right;
+		text-align: right;
+		line-height: 48px;
+		position: relative;
+		z-index: 2;
+		.searchForm{
+			width: 32px;
+			@include breakpoint(small){
+				width: 64px;
+			}
+			@include breakpoint(medium){
+				width: 72px;
+			}
+			@include breakpoint(large){
+				width: 140px;
+			}
+			@include breakpoint(xlarge){
+				width: 140px;
+			}
+			@include breakpoint(huge){
+				width: 300px;
+			}
+			border: 3px solid $nomosGrey;
+			position: relative;
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 24px;
+			border-radius: 24px;	
+			height: 32px;
+			cursor: pointer;
+			&:hover{
+				background: $nomosLightLightGrey;
+				cursor: pointer;
+			}
+			.buttonTrigger{
+				position: relative;
+				top: -3px; // positions the icon.
+				margin-left: -3px;
+				@include breakpoint(small){
+					margin-left: 4px;
+				}
+			}
+		}
+		.buttonTrigger{
+			width: 32px;
+			height: 32px;
+			display: inline-block;
+			vertical-align: middle;
+			//padding: 2px;
+			margin-left: 4px;
+			cursor: pointer;
+			&.userTrigger{
+				width: 44px;
+			}
+		}
+	}
+	
+		.oneCol{
+		lost-column: 1/12;
+	}
+	.twoCol{
+		lost-column: 2/12;
+	}
+	.threeCol{
+		lost-column: 3/12;
+	}
+	.fourCol{
+		lost-column: 4/12;
+	}
+	.fiveCol{
+		lost-column: 5/12;
+	}
+	.sixCol{
+		lost-column: 6/12;
+	}
+	.sevenCol{
+		lost-column: 7/12;
+	}
+	.eightCol{
+		lost-column: 8/12;
+	}
+	.nineCol{
+		lost-column: 9/12;
+	}
+	.tenCol{
+		lost-column: 10/12;
+	}
+	.elevenCol{
+		lost-column: 11/12;
+	}
+	.twelveCol{
+		lost-column: 12/12;
+	}
+}

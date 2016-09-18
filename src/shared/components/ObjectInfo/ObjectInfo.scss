@@ -1,0 +1,80 @@
+@import "../../globals/styles/_global.scss";
+
+.ObjectInfo{
+	position: relative;
+	width: 100%;
+	background: #fff;
+	height: 64px;
+	position: relative;
+	z-index: 1;
+	border-radius: 4px 4px;
+	box-shadow: 0px 1px 16px -8px rgba(0, 0, 0, 0.35);
+	//box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.2s ease-in-out;
+
+	.iconWrap{
+		width: 64px;
+		height: 64px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: 8px;
+		width:64px;
+		background: rgba(0,0,0,.02);
+		height: 100%;
+		border-radius: 4px 0 0 4px;
+		z-index: 2;
+		overflow: hidden;
+		img{
+			height: 100%;
+		  min-width: 100%;
+		  -o-object-fit: cover;
+		  object-fit: cover;
+		}
+	}
+	.titleWrap{
+		padding: 0;
+		padding-left: 72px;
+		width: 100%;
+		h3{padding: 0; margin: 0;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		h4.subtitle{
+			.bold{
+				font-weight: bold;
+			}
+			span.objectId{
+				&:after{
+					content: " ";
+				}
+			}
+			span.objectType{
+				&:after{
+					content: " ";
+				}
+			}
+		}
+		span.objectType + span:before {
+		    content: " / "; 
+		}
+		span{
+			position: relative;
+		}
+	}
+
+	.buttonWrap{
+		float: right;
+		padding: 8px;
+		height: 64px;
+		margin-left: 8px;
+		.iconWrapper{
+			width: 48px; 
+			height: 48px;
+			padding: 2px;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+}
