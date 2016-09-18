@@ -13,8 +13,8 @@ const Overview = () => (
 		<Row>
 			<div className={styles.hero} id="layoutHero" />
 			<div className={styles.content}>
-				<div className={styles.nav}>
-					<div className={styles.subNav} id="layoutSubNav" />
+				<div className={styles.navWrap}>
+					<div className={styles.nav} id="layoutNav" />
 					<div className={styles.supplimentary} id="layoutSupplimentary" />
 				</div>
 				<div className={styles.main} id="layoutMain" />

@@ -10,10 +10,10 @@
 	.hero{
 		width: 100%;
 	}
-	.nav{
+	.navWrap{
 		
 	}
-	.subNav{
+	.nav{
 		
 	}
 	.supplimentary{
@@ -32,7 +32,7 @@
 
 	// when there is a class of editMode, it will show you all the sections.
 	&.editMode{
-		.hero, .header, .nav, .subNav, .supplimentary, .main, .secondary, .footer{
+		.hero, .header, .nav, .supplimentary, .main, .secondary, .footer{
 			border: 4px solid rgba(255, 113, 228, 0.3);
 			position: relative;
 			margin-top: 2px;
@@ -68,13 +68,6 @@
 			border: 4px solid rgba(67, 204, 20, 0.3) !important;
 			&:after{
 				content: "NAV";
-				color: rgba(47, 204, 20, 1);
-			}
-		}
-		.subNav{
-			border: 4px solid rgba(47, 204, 20, 0.3) !important;
-			&:after{
-				content: "SUBNAV";
 				color: rgba(47, 204, 20, 1);
 			}
 		}
@@ -137,11 +130,11 @@
 
 	//INSIDE CONTENT
 	//NAV
-	.nav{
+	.navWrap{
 		lost-column: 3/12;
 	}
 	@media screen and (max-width: 1000px){
-		.nav{
+		.navWrap{
 			lost-column: 12/12;
 		}
 	}
