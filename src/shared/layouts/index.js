@@ -5,3 +5,4 @@
  */
 
 export Overview from './Overview/Overview';
+export Summary from './Summary/Summary';

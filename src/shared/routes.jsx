@@ -8,7 +8,8 @@ import {
 	NotFound
 } from 'pages';
 import {
-	Overview
+	Overview,
+	Summary
 } from 'layouts';
 
 import routeHelper from '../helpers/RouteHelper';
@@ -50,6 +51,7 @@ export default (store) => {
 			{ /* Routes - do require logged in*/ }
 			<Route path="docs" component={ComponentDocs} />
 			<Route path="overview" component={Overview} />
+			<Route path="summary" component={Summary} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>
