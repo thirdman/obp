@@ -2,7 +2,7 @@ Column
 
 *****title*****
 
-Utility layout Column Component. use in conjunction with row. By default it will fill up all available space (ie 12/12 columns)
+Utility layout Column Component. use in conjunction with row. By default it will fill up all available space (ie 12/12 columns).*NOTE* until I figure out the bug in webpack/scss/react/jsx/modules, every width perentage will be of 12.
 
 
 #### props
