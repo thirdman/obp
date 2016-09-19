@@ -129,4 +129,11 @@ classNameProps	|	`array`	| ['normal']	|	array of classes to apply to the compone
 		"validationMessageMissing": "This input must have some content",
 		"classNameProps": ["normal", "space", "hasValidation"]
 	}
+},{
+	"component": "ContentItem",
+	"props": {
+		"type": "info",
+		"title": "Is Gareth Cool?",
+		"classNameProps": ["normal"]
+	}
 }]
