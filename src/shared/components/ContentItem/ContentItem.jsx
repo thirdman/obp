@@ -68,13 +68,13 @@ export default class ContentItem extends Component {
 		let iconClasses;
 
 		toggleClasses = classSet({
-			hasValidation,
-			isRequired,
-			hasDivider,
-			hasBorder,
-			hasBackground,
-			validationError,
-			validationMissing
+			[styles.hasValidation]: hasValidation,
+			[styles.isRequired]: isRequired,
+			[styles.hasDivider]: hasDivider,
+			[styles.hasBorder]: hasBorder,
+			[styles.hasBackground]: hasBackground,
+			[styles.validationError]: validationError,
+			[styles.validationMissing]: validationMissing
 		});
 
 		classes = classNameProps.slice();

@@ -28,45 +28,42 @@ export default class ObjectSummary extends Component {
 							<Column occupy={4} of={12}>
 								<ContentItem
 									title="Total rent"
-									hasDivider
 									classNameProps={['noMargin', 'paddingLeft']}
 									>
 									<Info content="$1245" />
 								</ContentItem>
 								<ContentItem
 									title="Monthly Rent"
-									hasDivider
 									classNameProps={['noMargin', 'paddingLeft']}
 									>
 									<Info content="$103" />
 								</ContentItem>
 								<ContentItem
 									title="Payment Date"
-									hasDivider
 									classNameProps={['noMargin', 'paddingLeft']}
 									>
 									<Info content="1st monday of each month" />
 								</ContentItem>
 							</Column>
 							<Column occupy={4} of={12}>
-								<ContentItem title="next event date" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="next event date" classNameProps={['noMargin']}>
 									<Info content="12 Jan 2014" />
 								</ContentItem>
-								<ContentItem title="Next event" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="Next event" classNameProps={['noMargin']}>
 									<Info content="Rent Review" />
 								</ContentItem>
-								<ContentItem title="Event status" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="Event status" classNameProps={['noMargin']}>
 									<Info content="Upcoming" />
 								</ContentItem>
 							</Column>
 							<Column occupy={4} of={12} isLast>
-								<ContentItem title="Matter references" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="Matter references" classNameProps={['noMargin']}>
 									<Info content="Khanh, Is, Cool" />
 								</ContentItem>
-								<ContentItem title="Agreement Id" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="Agreement Id" classNameProps={['noMargin']}>
 									<Info content="12345" />
 								</ContentItem>
-								<ContentItem title="Organisation" hasDivider classNameProps={['noMargin']}>
+								<ContentItem title="Organisation" classNameProps={['noMargin']}>
 									<Info content="Dee bee company" />
 								</ContentItem>
 							</Column>
