@@ -20,14 +20,16 @@ export default class Overview extends Component {
 
 		return (
 			<div
-			className={cx(styles.Layout, styles.Overview, globalStyles.layoutWrap)}
-			>
-				<Row>
-					{mappedChildren.layoutHeader &&
+				className={cx(
+					styles.Layout,
+					styles.Overview,
+					globalStyles.layoutWrap)} >
+				{mappedChildren.layoutHeader &&
+					<Row>
 						<div className={styles.header} id="layoutHeader">
 							{mappedChildren.layoutHeader || null}
-						</div>}
-				</Row>
+						</div>
+					</Row>}
 				<Row>
 					{mappedChildren.layoutHero &&
 						<div className={styles.hero} id="layoutHero">
