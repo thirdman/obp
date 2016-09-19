@@ -53,7 +53,7 @@ export default class AuthStore {
 
 	jwtAuth({ token }) {
 		return new Promise((resolve, reject) => {
-			client.post('/verify', {
+			client.post('/refresh', {
 				headers: [
 					{tag: 'authorization', value: token}
 				]
