@@ -17,6 +17,7 @@ export MainNavWrap from './MainNavWrap/MainNavWrap';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
 export QuickView from './QuickView/QuickView';
 export Row from './Row/Row';
+export Section from './Section/Section';
 export SlideToggle from './SlideToggle/SlideToggle';
 export SubNavWrap from './SubNavWrap/SubNavWrap';
 export UiBrandLogo from './UiBrandLogo/UiBrandLogo';
