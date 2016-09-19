@@ -5,5 +5,6 @@
  */
 
 export Header from './Header/Header';
+export ObjectSummary from './ObjectSummary/ObjectSummary';
 export Placeholder from './Placeholder/Placeholder';
 export Secondary from './Secondary/Secondary';

@@ -14,7 +14,7 @@ export default class Secondary extends Component {
 	render() {
 		const { title } = this.props;
 		return (
-			<div className={cx(styles.Placeholder)}>
+			<div className={cx(styles.Secondary)}>
 				{title ?
 					<h3>{title}</h3>
 					: null
