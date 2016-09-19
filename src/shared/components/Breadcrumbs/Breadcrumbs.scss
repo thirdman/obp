@@ -1,0 +1,51 @@
+@import "../../globals/styles/_global.scss";
+
+.Breadcrumbs{
+	position: relative;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	.section{
+		display: inline-block;
+		vertical-align: middle;
+		&.isActive{
+			color: $nomosBlack;
+			cursor: default;
+			.sectionText{
+				color: $nomosBlack;
+			}
+		}
+		.sectionText{
+			color: $nomosBlue;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		&.isLink{
+			cursor: pointer;
+		}
+		.iconWrap{
+			margin-right: 4px;
+		}
+	}
+	.divider{
+		display: inline-block;
+		color: $nomosLightGrey;
+		vertical-align: middle;
+		margin-left: 4px;
+		margin-right: 4px;
+		.iconWrap{
+	    width: 16px;
+	    height: 16px;
+	    line-height: 1em;
+	    padding: 4px;
+	    vertical-align: top;
+		}
+	}
+	.iconWrap{
+		width: 18px;
+		height: 18px;
+		display: inline-block;
+		line-height: 1em;
+		vertical-align: middle;
+	}
+}
