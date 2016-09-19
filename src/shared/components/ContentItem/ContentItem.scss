@@ -1,0 +1,214 @@
+@import "../../globals/styles/_global.scss";
+
+
+.ContentItem{
+	position: relative;
+	margin: 8px 0;
+	padding: 8px 0;
+	.description{
+		padding: 0;
+		margin: 0;
+		font-style: normal;
+		color: $nomosGrey;
+		font-style: italic;
+		position: relative;
+	}
+	.inputWrapper{
+		overflow-x: hidden;
+		.preText{
+			margin-right: 0;
+	    background: #f3f3f3;
+	    padding: 4px 8px;
+	    border-radius: 8px 0 0 8px;
+	    float: left;
+		}
+		.postText{
+	    padding: 4px 8px;
+			margin-left: 4px;
+			float: right;
+		}
+		.units{
+	    padding: 4px 8px;
+			float: right;
+		}
+	}
+	.units{
+		margin-left: 0;
+    background: #f3f3f3;
+    padding: 4px 8px;
+    border-radius: 0 8px 8px 0;
+	}
+	.icon{
+		position: relative;
+		display: inline-block;
+		margin-right: 4px;
+		margin-left: -24px; //positions it hangin to the left
+		width: 20px;
+		height: 20px;
+		background: url(../../images/icons/interface/question.svg) center center no-repeat;
+		background-size: 20px; 
+		line-height: 14px;
+		vertical-align: middle;
+	}
+	.requiredMarker{
+    position: relative;
+    margin-left: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    line-height: 14px;
+    border-radius: 10px;
+    // background: #fff;
+    text-align: center;
+	}
+	.helpIconWrap{
+		position: absolute;
+		display: block;
+		right: 2px;
+		top: $padding;
+		width: 20px;
+		height: 20px;
+		opacity: .2;
+		cursor: pointer;
+		z-index: 2;
+		padding: 2px;
+		.helpContent{
+	    display: none;
+	    position: relative;
+	    width: 200px;
+	    height: 100px;
+	    background: #fff;
+	    margin-top: -100px;
+	    margin-left: -90px;
+	    opacity: 1;
+	    border-radius: 4px;
+	    padding: 8px;
+	    box-shadow: 0 0 3px rgba(0,0,0,.2);
+	    z-index: 100;
+		}
+		&:hover{
+			opacity: 1;
+			.helpContent{
+				opacity: 1;
+		    display: block;
+				animation: slideUp .3s normal forwards  ease-out;
+			}
+		}
+	}
+	.validation{
+		margin: 0;
+		display: block;
+		color: $nomosRed;
+		&:before{
+			content: "";
+			width: 20px;
+			height: 20px	;
+			line-height: 1em;
+			vertical-align: top;
+			display: inline-block;
+			margin-right: 4px;
+			background-size: 20px 20px;
+			background-image: url(../../images/icons/interface/alert-triangle.svg);
+			opacity: .5;
+		}
+	}
+	
+	// component modifiers
+	&.inline{
+		display: inline-block;
+		+.inline{
+			margin-left: 16px;
+			.icon{
+				margin-left: 0;
+			}
+		}
+	}
+	&.space{
+		margin-top: 24px;
+	}
+	&.highlighted{
+		background: $nomosLightLightGrey;
+		padding: 8px;
+		border-radius: 4px;
+		.icon{
+			margin-left: -28px;
+			margin-right: 8px;
+		}
+	}
+	&.hasDivider{
+		border-top: 1px dotted $nomosLine;
+	}
+	&.hasBorder{
+		border: 1px solid $nomosLine;
+		padding-left: 8px;
+	}
+	&.hasBackground{
+		background: #f9f9f9;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+	&.isRequired{
+
+	}
+	&.validationError{
+		border: 1px solid $nomosRed;
+		border-radius: 4px 4px 0 0;
+		padding: 8px;
+	}
+	&.validationMissing{
+		border: 1px solid $nomosRed;
+		border-radius: 4px 4px 0 0;
+		padding: 8px;
+	}
+	&.oneCol{
+		lost-column: 1/12;
+	}
+	&.twoCol{
+		lost-column: 2/12;
+	}
+	&.threeCol{
+		lost-column: 3/12;
+	}
+	&.fourCol{
+		lost-column: 4/12;
+	}
+	&.fiveCol{
+		lost-column: 5/12;
+	}
+	&.sixCol{
+		lost-column: 6/12;
+	}
+	&.sevenCol{
+		lost-column: 7/12;
+	}
+	&.eightCol{
+		lost-column: 8/12;
+	}
+	&.nineCol{
+		lost-column: 9/12;
+	}
+	&.tenCol{
+		lost-column: 10/12;
+	}
+	&.elevenCol{
+		lost-column: 11/12;
+	}
+	&.twelveCol{
+		lost-column: 12/12;
+	}
+}
+
+
+
+@keyframes slideUp {
+  from {
+   // opacity: 0;
+    transform: translateY(0px);
+  }
+  to {
+   // opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+

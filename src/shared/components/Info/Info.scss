@@ -1,0 +1,7 @@
+@import "../../globals/styles/_global.scss";
+
+.Info{
+	&.highlighted{
+		background: $nomosYellow;
+	}
+}

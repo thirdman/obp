@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 const styles = require('./Placeholder.scss');
 
-export default class ObjectInfo extends Component {
+export default class Placeholder extends Component {
 	static propTypes = {
 		title: React.PropTypes.string,
 		content: React.PropTypes.string
