@@ -1,0 +1,52 @@
+@import "../../globals/styles/_global.scss";
+@import "../../globals/styles/_layouts.scss";
+
+.View{
+	// STRUCTURAL DIVS
+	.header{
+		width: 100%;
+	}
+	.content{
+	}
+	.hero{
+		//unused
+		display: none;
+	}
+	.navWrap{
+		
+	}
+	.nav{
+		
+	}
+	.supplimentary{
+		//unused
+		display: none;
+	}
+	.main{
+		min-height: 100%;
+	}
+	.secondary{
+		
+	}
+	.footer{
+		width: 100%;
+	}
+	
+
+	//GRID SETUPS
+	/*See _layouts.scss*/
+	//CONTENT
+	.content{
+		lost-column: 12/12;
+	}
+	@media screen and (max-width: 1700px){
+		.content{
+			lost-column: 12/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.content{
+			lost-column: 12/12;
+		}
+	}
+}
