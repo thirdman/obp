@@ -16,7 +16,7 @@ render() {
 			breadcrumbData = [
 				{ text: 'Home', link: 'home' },
 				{ text: 'Agreements', link: 'agreements' },
-				{ text: 'View', active: true },
+				{ text: 'Overview', active: true },
 			]
 		} = this.props;
 		let theSections;

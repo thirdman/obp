@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Overview } from 'layouts';
 import { ObjectInfo, SubNavWrap } from 'components';
-import { Header, Placeholder } from 'containers';
+import { Header, Placeholder, Secondary} from 'containers';
 import { connect } from '../../../utils/state';
 
 @connect('store')
@@ -17,7 +17,7 @@ export default class AgreementsSummary extends Component {
 					<li>three</li>
 				</SubNavWrap>
 				<Placeholder key={'layoutMain'} title="Content here" />
-				<p key={'layoutSecondary'}>We are at 6 !</p>
+				<Secondary key={'layoutSecondary'} />
 			</Overview>
 		);
 	}
