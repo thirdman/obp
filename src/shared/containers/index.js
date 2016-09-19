@@ -5,3 +5,4 @@
  */
 
 export Header from './Header/Header';
+export Placeholder from './Placeholder/Placeholder';
