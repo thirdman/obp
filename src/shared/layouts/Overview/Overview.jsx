@@ -19,7 +19,9 @@ export default class Overview extends Component {
 		const mappedChildren = this.mapChildren(this.props.children);
 
 		return (
-			<div className={cx(styles.Overview, styles.editMode, globalStyles.layoutWrap)} >
+			<div
+			className={cx(styles.Layout, styles.Overview, globalStyles.layoutWrap)}
+			>
 				<Row>
 					{mappedChildren.layoutHeader &&
 						<div className={styles.header} id="layoutHeader">

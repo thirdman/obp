@@ -3,6 +3,7 @@ import {IndexRoute, Route} from 'react-router';
 import {
 	App,
 	AgreementOverview,
+	AgreementsSummary,
 	ComponentDocs,
 	Home,
 	Login,
@@ -58,13 +59,11 @@ export default (store) => {
 			<Route path="create" component={Create} />
 			<Route path="edit" component={Edit} />
 			<Route path="overview" component={Overview} />
-<<<<<<< 6ddb8d53576e0589dd21ccc31797788678dfd9ab
 			<Route path="report" component={Report} />
 			<Route path="summary" component={Summary} />
 			<Route path="view" component={View} />
-=======
 			<Route path="agreementOverview" component={AgreementOverview} />
->>>>>>> refactor
+			<Route path="agreementsSummary" component={AgreementsSummary} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>
