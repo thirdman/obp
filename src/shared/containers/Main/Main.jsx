@@ -41,6 +41,11 @@ export default class Main extends Component {
 						<Section hasDivider title="A section with placeholder" >
 							<Placeholder />
 						</Section>
+						<Section
+							hasDivider
+							title="Another section"
+							description="this is a simple description"
+							/>
 					</span>
 					)
 				}
