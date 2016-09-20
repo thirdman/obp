@@ -9,6 +9,9 @@ export default class ObjectInfo extends Component {
 
 	static propTypes = {
 		title: React.PropTypes.string,
+		id: React.PropTypes.string,
+		type: React.PropTypes.string,
+		mode: React.PropTypes.string,
 		buttons: React.PropTypes.array,
 		children: React.PropTypes.oneOfType([
 			React.PropTypes.arrayOf(React.PropTypes.node),
@@ -44,7 +47,10 @@ export default class ObjectInfo extends Component {
 	render() {
 		const {
 			classNameProps = [],
-			title
+			title,
+			type,
+			mode,
+			id
 		} = this.props;
 		let classes;
 
@@ -68,10 +74,13 @@ export default class ObjectInfo extends Component {
 					<h3>{title}</h3>
 					<h4 className={styles.subtitle}>
 						<span className={styles.objectId}>
-							<span className={styles.bold}>ID:</span>122345
+							<span className={styles.bold}>ID:</span> {id}
 						</span>
 						<span className={styles.objectType}>
-							<span className={styles.bold}>Type:</span>Property
+							<span className={styles.bold}> Type:</span> {type}
+						</span>
+						<span className={styles.objectType}>
+							<span className={styles.bold}> Mode:</span> {mode}
 						</span>
 					</h4>
 				</div>

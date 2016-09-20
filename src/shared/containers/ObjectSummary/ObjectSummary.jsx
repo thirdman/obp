@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import cx from 'classnames';
+import moment from 'moment';
 import { ContentItem, Info, ObjectInfo, Column, Row} from 'components';
 
 const styles = require('./ObjectSummary.scss');
@@ -7,11 +8,13 @@ const styles = require('./ObjectSummary.scss');
 export default class ObjectSummary extends Component {
 	static propTypes = {
 		title: React.PropTypes.string,
-		content: React.PropTypes.string
+		content: React.PropTypes.string,
+		objectData: React.PropTypes.object
 	}
 
 	render() {
-		const { title, content } = this.props;
+		const { title, content, objectData} = this.props;
+		const agreement = objectData;
 		return (
 			<div className={cx(styles.ObjectSummary)}>
 				{title ?
@@ -23,48 +26,60 @@ export default class ObjectSummary extends Component {
 					:
 					(
 					<span>
-						<ObjectInfo key={'layoutHero'} title="This is a test title" />
+						<ObjectInfo
+							key={'layoutHero'}
+							title={agreement.attributes.knownAs}
+							id={`${agreement.id}`}
+							type={agreement.attributes.agreementType}
+							mode={agreement.attributes.agreementMode}
+						/>
 						<Row isFlex classNameProps={['hasPadding']}>
-							<Column occupy={4} of={12}>
-								<ContentItem
-									title="Total rent"
-									classNameProps={['noMargin', 'paddingLeft']}
-									>
-									<Info content="$1245" />
+							<Column occupy={3} of={12}>
+								<ContentItem title="Commencement" classNameProps={['noMargin', 'paddingLeft']}>
+									<Info
+										content={
+											moment(Number(agreement.attributes.commencementDate)).format('DD MM YYYY')
+											}
+									/>
 								</ContentItem>
-								<ContentItem
-									title="Monthly Rent"
-									classNameProps={['noMargin', 'paddingLeft']}
-									>
-									<Info content="$103" />
-								</ContentItem>
-								<ContentItem
-									title="Payment Date"
-									classNameProps={['noMargin', 'paddingLeft']}
-									>
-									<Info content="1st monday of each month" />
+								<ContentItem title="Expected Expiry" classNameProps={['noMargin', 'paddingLeft']}>
+									<Info
+										content={moment(Number(agreement.attributes.expiryDate)).format('DD MM YYYY')}
+									/>
 								</ContentItem>
 							</Column>
-							<Column occupy={4} of={12}>
-								<ContentItem title="next event date" classNameProps={['noMargin']}>
-									<Info content="12 Jan 2014" />
+							<Column occupy={3} of={12}>
+								<ContentItem
+									title="Total Annual Rent"
+									classNameProps={['noMargin', 'paddingLeft']}
+									>
+									<Info content={agreement.attributes.totalAnnualRent} />
 								</ContentItem>
-								<ContentItem title="Next event" classNameProps={['noMargin']}>
-									<Info content="Rent Review" />
-								</ContentItem>
-								<ContentItem title="Event status" classNameProps={['noMargin']}>
-									<Info content="Upcoming" />
+								<ContentItem
+									title="Payment Period"
+									classNameProps={['noMargin', 'paddingLeft']}
+									>
+									<Info content={agreement.attributes.paymentPeriod} />
 								</ContentItem>
 							</Column>
-							<Column occupy={4} of={12} isLast>
-								<ContentItem title="Matter references" classNameProps={['noMargin']}>
-									<Info content="Khanh, Is, Cool" />
+							<Column occupy={3} of={12}>
+								<ContentItem title="Created" classNameProps={['noMargin']}>
+									<Info
+										content={moment(Number(agreement.attributes.insertedDate)).format('DD MM YYYY')}
+									/>
 								</ContentItem>
-								<ContentItem title="Agreement Id" classNameProps={['noMargin']}>
-									<Info content="12345" />
+								<ContentItem title="Last Updated" classNameProps={['noMargin']}>
+									<Info
+										content={moment(Number(agreement.attributes.updatedDate)).format('DD MM YYYY')}
+									/>
 								</ContentItem>
-								<ContentItem title="Organisation" classNameProps={['noMargin']}>
-									<Info content="Dee bee company" />
+							</Column>
+							<Column occupy={3} of={12} isLast>
+								<ContentItem title="Tax" classNameProps={['noMargin']}>
+									<Info content={agreement.attributes.taxation} />
+								</ContentItem>
+								<ContentItem title="Currency" classNameProps={['noMargin']}>
+									<Info content={agreement.attributes.currency} />
 								</ContentItem>
 							</Column>
 						</Row>
