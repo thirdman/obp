@@ -13,9 +13,9 @@ export default class AgreementsSummary extends Component {
 				<ObjectInfo key={'layoutHero'} title="This is a test title" />
 				<ObjectSummary key={'layoutHero'} />
 				<SubNavWrap key={'layoutNav'} >
-					<li>one</li>
-					<li>two</li>
-					<li>three</li>
+					<li className={'isSelected'}>Example Nav Item One</li>
+					<li>Example Two</li>
+					<li>Example Three</li>
 				</SubNavWrap>
 				<Main key={'layoutMain'} />
 				<Secondary key={'layoutSecondary'} />
