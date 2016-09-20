@@ -2,7 +2,17 @@
 
 .Section{
 	position: relative;
-
+	.contentTitle{ 
+		padding: 8px 0 0;
+	}
+	.contentSubtitle{
+		padding: 8px 0;
+		}
+	.contentDescription{
+		padding: 8px 0;
+		font-size: $font-size-small;
+		margin-bottom: 16px;
+	}
 	// TYPE PROPS
 	&.area{
 		//default. Nothing to see hwer yet
@@ -19,20 +29,11 @@
 		padding: 0; //see contentContent
 		animation: fadeIn .3s;
 		position: relative;
+		.contentDescription{
+			border-bottom: 1px dotted $nomosLine;
+		}
 		&.onDark{
 			box-shadow: 0px 5px 26px -6px rgba(0, 0, 0, 0.55);	
-		}
-		.contentTitle{ 
-			padding: 8px 0 0;
-		}
-		.contentSubtitle{
-			padding: 8px 0;
-			}
-		.contentDescription{
-			padding: 8px 0;
-			font-size: $font-size-small;
-			border-bottom: 1px dotted $nomosLine;
-			margin-bottom: 16px;
 		}
 	}
 	&.wizard{
