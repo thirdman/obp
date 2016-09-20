@@ -9,7 +9,7 @@ const styles = require('./Section.scss');
 export default class Section extends Component {
 
 	static propTypes = {
-		type: React.PropTypes.oneOf,
+		type: React.PropTypes.string,
 		title: React.PropTypes.string,
 		subtitle: React.PropTypes.string,
 		description: React.PropTypes.string,

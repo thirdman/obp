@@ -23,7 +23,7 @@ export default class Summary extends Component {
 				className={cx(
 					styles.Layout,
 					styles.Summary,
-					styles.editMode,
+					// styles.editMode,
 					globalStyles.layoutWrap)} >
 				{mappedChildren.layoutHeader &&
 					<Row>

@@ -9,6 +9,9 @@ ObjectInfo
 |Property								|	Type			|	Default		|	Description
 :-----------------------|:----------|:----------|:--------------------------------
 title										|	`string`	|	-					|	title text
+id											|	`string`	|	-					|	object id
+type										|	`string`	|	-					|	object type (subtype)
+mode										|	`string`	|	-					|	object mode (active/inactive)
 classNameProps					|	`array`		| []				|	array of buttons to display (see example below)
 classNameProps					|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
 
