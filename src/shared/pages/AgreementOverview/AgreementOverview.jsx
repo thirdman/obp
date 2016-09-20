@@ -150,7 +150,7 @@ export default class AgreementOverview extends Component {
 					<li>Other Info</li>
 					<li>Activity</li>
 				</SubNavWrap>
-				<Main key={'layoutMain'} content={agreement.attributes.fileNotes} />
+				<Main key={'layoutMain'} objectData={agreement} content=" " />
 				<Secondary key={'layoutSecondary'} />
 			</Overview>
 		);

@@ -35,14 +35,14 @@ export default class ObjectSummary extends Component {
 						/>
 						<Row isFlex classNameProps={['hasPadding']}>
 							<Column occupy={3} of={12}>
-								<ContentItem title="Commencement" classNameProps={['noMargin']}>
+								<ContentItem title="Commencement" classNameProps={['noMargin', 'paddingLeft']}>
 									<Info
 										content={
 											moment(Number(agreement.attributes.commencementDate)).format('DD MM YYYY')
 											}
 									/>
 								</ContentItem>
-								<ContentItem title="Expected Expiry" classNameProps={['noMargin']}>
+								<ContentItem title="Expected Expiry" classNameProps={['noMargin', 'paddingLeft']}>
 									<Info
 										content={moment(Number(agreement.attributes.expiryDate)).format('DD MM YYYY')}
 									/>

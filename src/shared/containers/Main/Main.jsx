@@ -8,15 +8,41 @@ const styles = require('./Main.scss');
 export default class Main extends Component {
 	static propTypes = {
 		title: React.PropTypes.string,
-		content: React.PropTypes.string
+		content: React.PropTypes.string,
+		objectData: React.PropTypes.object
 	}
 
 	render() {
-		const { title, content } = this.props;
+		const { title, content, objectData } = this.props;
+		const agreement = objectData;
 		return (
 			<div className={cx(styles.Main)}>
 				{title ?
 					<h2>{title}</h2>
+					: null
+				}
+				{objectData ?
+					(<span>
+						<Section title="Summary of Information" classNameProps={['space']}>
+							<ContentItem title="Agreement" classNameProps={['noMargin']}>
+								<Info
+									content={agreement.attributes.knownAs}
+								/>
+							</ContentItem>
+						</Section>
+						<Section title="Parties" hasDivider>
+							<ContentItem title="Landlord id" classNameProps={['noMargin']}>
+								<Info
+									content={agreement.relationships.parties.Landlord.data[0].id}
+								/>
+							</ContentItem>
+							<ContentItem title="Tenant id" classNameProps={['noMargin']}>
+								<Info
+									content={agreement.relationships.parties.Tenant.data[0].id}
+								/>
+							</ContentItem>
+						</Section>
+					</span>)
 					: null
 				}
 				{content ?
