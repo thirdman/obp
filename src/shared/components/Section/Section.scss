@@ -132,11 +132,33 @@
 	&.twelveCol{
 		lost-column: 12/12;
 	}
+	.loadingContent{
+		display: none;
+		.loadingIconWrap{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			height: 18px;
+			width: 18px;
+			margin-top: -9px;
+			margin-left: -9px;
+			content: "";
+			animation: spin .5s linear;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;	
+		}
+	}
+	&.isLoading{
+		.loadingContent{
+			display: block;
+		}
+	}
 }
 
 
 
 .isLoading{
+/*
 	&:before{
 		position: absolute;
 		left: 50%;
@@ -152,8 +174,9 @@
 		animation-fill-mode: forwards;
 		animation-iteration-count: infinite;
 	}
+*/
 	> * {
-		opacity: .1;
+		opacity: .2;
 		filter: blur(5px);
 	}
 	> .loadingMessage{
@@ -166,6 +189,10 @@
 		text-align: center;
 		font-size: $font-size-small;
 		color: $nomosGrey;
+		filter: none;
+	}
+	> .loadingContent{
+		opacity: 1;
 		filter: none;
 	}
 }

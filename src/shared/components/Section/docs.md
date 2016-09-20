@@ -55,12 +55,17 @@ children				|	`oneOfType` | - 			| (required) this component is designed to wrap
 <section type="section"><div>test content</div></Section>
 *****example*****
 [{
-	"component": "Section"
+	"component": "Section",
+	"props": {
+		"title": "two test tickles"
+	}
 },{
 	"component": "Section",
 	"props": {
+		"classNameProps": ["isLoading"],
 		"type":"section",
-		"isloading": true
+		"isloading": true,
+		"description": "Porta a magna mattis nascetur consequat velit urna eget parturient id per sit neque vel scelerisque luctus vestibulum ultrices volutpat. A nunc at dis penatibus conubia id vestibulum consectetur orci taciti a a ."
 	}
 },{
 	"component": "Section",

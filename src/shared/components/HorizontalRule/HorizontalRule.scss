@@ -1,0 +1,68 @@
+@import "../../globals/styles/_global.scss";
+
+.HorizontalRule {
+  lost-utility: clearfix;
+  display: block;
+  margin: 0;
+  width: 100%;
+  border-top-color: $nomosLine; 
+  border-top-style: solid;
+  border-top-width: 1px;
+  &.isCentered{
+	  margin-left: auto;
+	  margin-right: auto;
+  }
+  &.hasMargins{
+	  margin-top: 16px;
+	  margin-bottom: 16px;
+  }
+	//STYLES
+  &.solid{
+	  border-top-style: solid;
+  }
+  &.dashed{
+	  border-top-style: dashed;
+  }
+  &.dotted{
+	  border-top-style: dotted;
+  }
+	//COLORS
+  &.black{
+	  border-top-color: $nomosBlack;
+  }
+  &.darkGrey{
+	  border-top-color: $nomosDarkGrey;
+  }
+  &.grey{
+	  border-top-color: $nomosGrey;
+  }
+  &.lightGrey{
+	  border-top-color: $nomosLightGrey;
+  }
+  &.lightLightGrey{
+	  border-top-color: $nomosLightLightGrey;
+  }
+  &.line{
+	  border-top-color: $nomosLine;
+  }
+  &.blue{
+	  border-top-color: $nomosBlue;
+  }
+  &.white{
+	  border-top-color: #fff;
+  }
+  &.green{
+	  border-top-color: $nomosGreen;
+  }
+  &.orange{
+	  border-top-color: $nomosOrange;
+  }
+  &.red{
+	  border-top-color: $nomosRed;
+  }
+  &.yellow{
+	  border-top-color: $nomosYellow;
+  }
+
+
+}

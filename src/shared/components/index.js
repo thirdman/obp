@@ -9,6 +9,7 @@ export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
 export Column from './Column/Column';
 export ContentItem from './ContentItem/ContentItem';
+export HorizontalRule from './HorizontalRule/HorizontalRule';
 export Icon from './Icon/Icon';
 export Info from './Info/Info';
 export IconButton from './IconButton/IconButton';

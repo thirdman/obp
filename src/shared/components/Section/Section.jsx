@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { HorizontalRule } from 'components';
+import { Icon, HorizontalRule } from 'components';
 import classSet from 'react-classset';
 import cx from 'classnames';
 
@@ -53,14 +53,19 @@ export default class Section extends Component {
 			.map((classV) => styles[classV]).join(' ');
 		return (
 			<div className={cx(styles.Section, classes, toggleClasses)} style={styleProps}>
-				{hasDivider ?
-					<HorizontalRule classNameProps={['normal']} />
-					: null
-				}
+					<div className={styles.loadingContent}>
+						<div className={styles.loadingIconWrap}>
+							<Icon icon="loading" color="grey" size={18} />
+						</div>
+					</div>
 				{loadingMessage &&
 					<div className={styles.loadingMessage}>
 						{loadingMessage }
 					</div>
+				}
+				{hasDivider ?
+					<HorizontalRule classNameProps={['normal']} />
+					: null
 				}
 				{title ?
 					<h3 className={styles.contentTitle}>{title}</h3>
