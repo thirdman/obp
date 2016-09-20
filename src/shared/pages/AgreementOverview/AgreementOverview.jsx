@@ -11,7 +11,6 @@ export default class AgreementOverview extends Component {
 		const { agreementOverview } = this.context.store.pages;
 
 		agreementOverview.fetchAgreement(routeParams.agreementId);
-		this.context.store.pages.agreementOverview.updateError('sdfsfdsfd');
 	}
 
 	render() {

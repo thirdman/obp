@@ -74,9 +74,9 @@ export default class AuthStore {
 					this.saveJwt(data.authorization);
 					this.updateUser({ username: data.username });
 					resolve();
-				}).catch(() => {
+				}).catch((err) => {
 					this.clearJwt();
-					reject();
+					reject(err);
 				});
 			}
 		});

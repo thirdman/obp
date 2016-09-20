@@ -5,16 +5,26 @@ import client from '../../../helpers/ApiClient';
 
 export default class AgreementOverviewStore {
 
-	@observable user = {};
-	@observable error = '';
+	@observable agreement = null;
+	@observable fetching = true;
+	@observable error = null;
 
 	@action
 	updateError(error = null) {
 		this.error = error;
+		this.fetching = false;
+	}
+
+	@action
+	updateAgreement(agreement) {
+		this.agreement = agreement;
+		this.fetching = false;
 	}
 
 	@action
 	fetchAgreement(agreementId = null) {
+		this.fetching = true;
+
 		if (!this.verifyId(agreementId)) {
 			this.updateError({
 				type: 'message',
@@ -23,10 +33,10 @@ export default class AgreementOverviewStore {
 		} else {
 			client.get(`/organisations/1/agreements/${agreementId}`)
 			.then((res) => {
-				console.log(res);
+				this.updateAgreement(res.data[0]);
 			})
 			.catch((err) => {
-				console.log(err);
+				this.updateError(err.errors[0]);
 			});
 		}
 	}

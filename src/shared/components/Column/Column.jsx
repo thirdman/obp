@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-const styles = require('./column.scss');
+const styles = require('./Column.scss');
 
 const Column = ({ isFlex = true, occupy = 12, of = 12, devMode = false, children}) => (
 	<div
