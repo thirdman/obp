@@ -2,6 +2,7 @@
 import { useStrict } from 'mobx';
 import { store } from '../utils/state';
 
+import PagesStores from './stores/pages';
 import UIStore from './stores/ui';
 import AppStore from './stores/app';
 import AuthStore from './stores/auth';
@@ -19,6 +20,7 @@ useStrict(true);
 */
 export default store
 	.setup({
+		pages: PagesStores,
 		ui: UIStore,
 		app: AppStore,
 		auth: AuthStore

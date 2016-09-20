@@ -37,10 +37,11 @@ export default class AuthStore {
 			}
 		}).then((res) => {
 			const data = res.data[0];
-			window.localStorage.token = data.authorization;
+			this.saveJwt(data.authorization);
 			this.updateUser({ username });
 			this.proceedToNextPath();
 		}).catch((err) => {
+			this.clearJwt();
 			this.updateError(err.errors[0]);
 		});
 	}
@@ -51,13 +52,9 @@ export default class AuthStore {
 		this.updateUser({});
 	}
 
-	jwtAuth({ token }) {
+	jwtAuth() {
 		return new Promise((resolve, reject) => {
-			client.post('/refresh', {
-				headers: [
-					{tag: 'authorization', value: token}
-				]
-			}).then((res) => {
+			client.post('/refresh').then((res) => {
 				resolve(res);
 			}).catch((err) => {
 				reject(err);
@@ -70,17 +67,29 @@ export default class AuthStore {
 			if (!window.localStorage.token) {
 				reject();
 			} else {
-				this.jwtAuth({ token: window.localStorage.token })
+				client.setJwt(window.localStorage.token);
+				this.jwtAuth()
 				.then((res) => {
 					const data = res.data[0];
-					window.localStorage.token = data.authorization;
+					this.saveJwt(data.authorization);
 					this.updateUser({ username: data.username });
 					resolve();
 				}).catch(() => {
+					this.clearJwt();
 					reject();
 				});
 			}
 		});
+	}
+
+	saveJwt(jwt) {
+		window.localStorage.token = jwt;
+		client.setJwt(jwt);
+	}
+
+	clearJwt() {
+		window.localStorage.token = null;
+		client.setJwt(null);
 	}
 
 	proceedToNextPath() {

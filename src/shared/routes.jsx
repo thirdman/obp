@@ -62,8 +62,8 @@ export default (store) => {
 			<Route path="report" component={Report} />
 			<Route path="summary" component={Summary} />
 			<Route path="view" component={View} />
-			<Route path="agreementOverview" component={AgreementOverview} />
-			<Route path="agreementsSummary" component={AgreementsSummary} />
+			<Route path="agreements" component={AgreementsSummary} />
+			<Route path="agreements/:agreementId" component={AgreementOverview} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

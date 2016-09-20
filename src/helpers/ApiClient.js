@@ -40,6 +40,10 @@ class _ApiClient {
 						request.set(tag, value);
 					});
 				}
+				// always set authorisation header if we have jwt
+				if (this.jwt) {
+					request.set('authorization', this.jwt);
+				}
 				// if params are supplied, send with params
 				if (params) { request.query(params); }
 				// if data are supplied, send with data
