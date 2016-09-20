@@ -6,6 +6,13 @@ import { connect } from '../../../utils/state';
 
 @connect('store')
 export default class AgreementOverview extends Component {
+	componentWillMount() {
+		const { routeParams } = this.props;
+		const { agreementOverview } = this.context.store.pages;
+
+		agreementOverview.fetchAgreement(routeParams.agreementId);
+	}
+
 	render() {
 		return (
 			<Overview>
