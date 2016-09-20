@@ -148,6 +148,15 @@
 		padding-left: 8px;
 		padding-right: 8px;
 	}
+	&.noMargin{
+		margin: 0 0;
+	}
+	&.paddingLeft{
+		padding-left: $padding;
+	}
+	&.paddingRight{
+		padding-left: $padding;
+	}
 	&.isRequired{
 
 	}

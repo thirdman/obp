@@ -31,11 +31,11 @@ export default class Overview extends Component {
 						</div>
 					</Row>}
 				<Row>
-					{mappedChildren.layoutHero &&
-						<div className={styles.hero} id="layoutHero">
-							{mappedChildren.layoutHero || null}
-						</div>}
 					<div className={styles.content}>
+						{mappedChildren.layoutHero &&
+							<div className={styles.hero} id="layoutHero">
+								{mappedChildren.layoutHero || null}
+							</div>}
 						<div className={styles.navWrap}>
 							{mappedChildren.layoutNav &&
 								<div className={styles.nav} id="layoutNav">

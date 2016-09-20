@@ -1,0 +1,237 @@
+@import "../../globals/styles/_global.scss";
+
+.Section{
+	position: relative;
+	.contentTitle{ 
+		padding: 8px 0 0;
+	}
+	.contentSubtitle{
+		padding: 8px 0;
+		}
+	.contentDescription{
+		padding: 8px 0;
+		font-size: $font-size-small;
+		margin-bottom: 16px;
+	}
+	// TYPE PROPS
+	&.area{
+		//default. Nothing to see hwer yet
+	}
+	&.section{
+			/// animation: foldIn .9s ease-out;
+	}
+	&.container{
+		// Nothing to see
+	}
+	&.view{
+		box-shadow: 0px 1px 16px -8px rgba(0, 0, 0, 0.35), 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+		background: #fff;
+		padding: 0; //see contentContent
+		animation: fadeIn .3s;
+		position: relative;
+		.contentDescription{
+			border-bottom: 1px dotted $nomosLine;
+		}
+		&.onDark{
+			box-shadow: 0px 5px 26px -6px rgba(0, 0, 0, 0.55);	
+		}
+	}
+	&.wizard{
+		padding: 0;
+		padding-top: 16px;
+		.contentTitle, .contentSubtitle, .contentDescription{
+			padding-left: 16px;
+			padding-right: 16px;
+		}
+	}
+
+	
+	//MISC PROPS
+	&.normal{
+		text-align: left;
+		width: 100%;
+	}
+	&.space{
+		margin-top: 24px;
+	}
+	&.hasDivider{
+		margin-top: 40px;
+	}
+	// SECTION PROPS
+	&.notSelected{
+		opacity: 0;
+		transition: all .5s ease-in;
+	}
+	&.beforeSelected{
+		transition: all .5s ease-in;
+	}
+	&.afterSelected{
+		transition: all .5s ease-in;
+	}
+	&.selected{
+		opacity: 1;
+		transition: all .5s ease-in;
+	}
+	&.right{
+		text-align: right;
+	}
+	
+	//TITLE & DESCRIPTION
+	.contentTitle{	
+		padding-top: 0;
+		+ .contentSubtitle, + .contentDescription{
+			margin-top: -$padding;
+			margin-bottom: 0;
+		}
+	}
+	.contentSubtitle{
+		margin-top: 0;
+	}
+	.contentDescription{
+		// 	border-bottom: 1px dotted $nomosLine;
+		color: $nomosGrey;
+		padding-bottom: 1em;
+	}
+	.contentContent{
+		// padding: 16px; used inside the component
+	}
+	
+	//SPACING
+	&.oneCol{
+		lost-column: 1/12;
+	}
+	&.twoCol{
+		lost-column: 2/12;
+	}
+	&.threeCol{
+		lost-column: 3/12 ;
+	}
+	&.fourCol{
+		lost-column: 4/12;
+	}
+	&.fiveCol{
+		lost-column: 5/12;
+	}
+	&.sixCol{
+		lost-column: 6/12;
+	}
+	&.sevenCol{
+		lost-column: 7/12;
+	}
+	&.eightCol{
+		lost-column: 8/12;
+	}
+	&.nineCol{
+		lost-column: 9/12;
+	}
+	&.tenCol{
+		lost-column: 10/12;
+	}
+	&.elevenCol{
+		lost-column: 11/12;
+	}
+	&.twelveCol{
+		lost-column: 12/12;
+	}
+	.loadingContent{
+		display: none;
+		.loadingIconWrap{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			height: 18px;
+			width: 18px;
+			margin-top: -9px;
+			margin-left: -9px;
+			content: "";
+			animation: spin .5s linear;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;	
+		}
+	}
+	&.isLoading{
+		.loadingContent{
+			display: block;
+		}
+	}
+}
+
+
+
+.isLoading{
+/*
+	&:before{
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		height: 40px;
+		width: 40px;
+		margin-top: -20px;
+		margin-left: -20px;
+		background: red;
+		content: "";
+		background: url(../../images/icons/loading.svg) center center no-repeat;
+		animation: spin .5s linear;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+	}
+*/
+	> * {
+		opacity: .2;
+		filter: blur(5px);
+	}
+	> .loadingMessage{
+		opacity: 1;
+		position: absolute;
+		top: 50%;
+		width: 100%;
+		margin-top: 20px; //related to half the loading icon height
+		height: 1em;
+		text-align: center;
+		font-size: $font-size-small;
+		color: $nomosGrey;
+		filter: none;
+	}
+	> .loadingContent{
+		opacity: 1;
+		filter: none;
+	}
+}
+
+
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+ }
+}
+
+/*
+@keyframes foldIn {
+  0% {
+	  	//background-color: rgba(255, 202, 66,1); 
+      opacity: 0;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+		  transform:scale(1) rotateX(-20deg) translateY(16px);
+  }
+  30% {
+	  	//background-color: rgba(255, 202, 66,1); 
+      opacity: 1;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+			transform: scale(1) rotateX(0deg)  translateY(0) ;
+ }
+  100% {
+	  	//background-color: rgba(244, 245, 245,1); 
+      opacity: 1;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+			transform: scale(1) rotateX(0deg)  translateY(0) ;
+ }
+}
+*/

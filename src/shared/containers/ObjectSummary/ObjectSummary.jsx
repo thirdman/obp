@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import cx from 'classnames';
-import { ContentItem, Info, Column, Row} from 'components';
+import { ContentItem, Info, ObjectInfo, Column, Row} from 'components';
 
 const styles = require('./ObjectSummary.scss');
 
@@ -21,41 +21,54 @@ export default class ObjectSummary extends Component {
 				{content ?
 					<div>{content}</div>
 					:
-					(<Row isFlex={false}>
-					<Column occupy={4} of={12}>
-						<ContentItem title="Total rent" hasDivider hasBackground>
-							<Info content="$1245" />
-						</ContentItem>
-						<ContentItem title="Monthly Rent" hasDivider hasBackground>
-							<Info content="$103" />
-						</ContentItem>
-						<ContentItem title="Payment Date" hasDivider hasBackground>
-							<Info content="1st monday of each month" />
-						</ContentItem>
-					</Column>
-					<Column occupy={4} of={12}>
-						<ContentItem title="next event date" hasDivider hasBackground>
-							<Info content="12 Jan 2014" />
-						</ContentItem>
-						<ContentItem title="Next event" hasDivider hasBackground>
-							<Info content="Rent Review" />
-						</ContentItem>
-						<ContentItem title="Event status" hasDivider hasBackground>
-							<Info content="Upcoming" />
-						</ContentItem>
-					</Column>
-					<Column occupy={4} of={12}>
-						<ContentItem title="Matter references" hasDivider hasBackground>
-							<Info content="Khanh, Is, Cool" />
-						</ContentItem>
-						<ContentItem title="Agreement Id" hasDivider hasBackground>
-							<Info content="12345" />
-						</ContentItem>
-						<ContentItem title="Organisation" hasDivider hasBackground>
-							<Info content="Dee bee company" />
-						</ContentItem>
-					</Column>
-					</Row>
+					(
+					<span>
+						<ObjectInfo key={'layoutHero'} title="This is a test title" />
+						<Row isFlex classNameProps={['hasPadding']}>
+							<Column occupy={4} of={12}>
+								<ContentItem
+									title="Total rent"
+									classNameProps={['noMargin', 'paddingLeft']}
+									>
+									<Info content="$1245" />
+								</ContentItem>
+								<ContentItem
+									title="Monthly Rent"
+									classNameProps={['noMargin', 'paddingLeft']}
+									>
+									<Info content="$103" />
+								</ContentItem>
+								<ContentItem
+									title="Payment Date"
+									classNameProps={['noMargin', 'paddingLeft']}
+									>
+									<Info content="1st monday of each month" />
+								</ContentItem>
+							</Column>
+							<Column occupy={4} of={12}>
+								<ContentItem title="next event date" classNameProps={['noMargin']}>
+									<Info content="12 Jan 2014" />
+								</ContentItem>
+								<ContentItem title="Next event" classNameProps={['noMargin']}>
+									<Info content="Rent Review" />
+								</ContentItem>
+								<ContentItem title="Event status" classNameProps={['noMargin']}>
+									<Info content="Upcoming" />
+								</ContentItem>
+							</Column>
+							<Column occupy={4} of={12} isLast>
+								<ContentItem title="Matter references" classNameProps={['noMargin']}>
+									<Info content="Khanh, Is, Cool" />
+								</ContentItem>
+								<ContentItem title="Agreement Id" classNameProps={['noMargin']}>
+									<Info content="12345" />
+								</ContentItem>
+								<ContentItem title="Organisation" classNameProps={['noMargin']}>
+									<Info content="Dee bee company" />
+								</ContentItem>
+							</Column>
+						</Row>
+					</span>
 					)
 				}
 			</div>
