@@ -42,6 +42,9 @@ export default class Main extends Component {
 								/>
 							</ContentItem>
 						</Section>
+						<Section title="Property" hasDivider description="Nothing to see here, yet" />
+						<Section title="Events" hasDivider description="Nothing to see here, yet" />
+						<Section title="Other Info" hasDivider description="Nothing to see here, yet" />
 					</span>)
 					: null
 				}
