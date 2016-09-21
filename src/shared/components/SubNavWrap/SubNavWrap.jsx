@@ -27,7 +27,7 @@ export default class SubNavWrap extends Component {
 		const {listData, currentlySelected} = this.props;
 		return (
 			<ul className={styles.SubNavWrap}>
-				{listData.map((item, index) =>
+				{listData && listData.map((item, index) =>
 					(
 						<li
 							key={`navitem${index}`}

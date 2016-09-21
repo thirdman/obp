@@ -1,0 +1,63 @@
+@import "../../globals/styles/_global.scss";
+
+.DevIcons{
+	.gridWrap{
+		lost-flex-container: row;
+		height: 100%;
+		padding-right: 16px;
+	}
+	.iconObject{
+		lost-waffle: 1/3;
+		
+		// width: 200px;
+		text-align: center;
+		// display: block;	
+		padding: 20px;		
+		background: $nomosLightLightGrey;
+		border-radius: 4px;
+		min-height: 140px;
+		transition: transform .2s ease;
+		&:hover{
+			background: #fff;
+			cursor: pointer;
+			transform: scale(1.2);
+			box-shadow: 0 0 16px -5px rgba(0,0,0,.4);
+			z-index: 999;
+			h5{
+				color: $nomosBlack;
+			}
+			.iconWrapper{
+				width: 50px;
+			}
+		}
+	}
+	.iconWrapper{
+		display: block;
+		width: 40px;
+		margin: 10px auto;
+	}
+	
+	.objectSummary{
+		padding: $padding;
+		background: #fff;
+		.objectSummaryColumn{
+			border-left: 1px solid $nomosLine;
+			padding-left: 8px;
+		}
+	}
+	.viewDetail{
+		padding:0;
+		//border-top: 1px solid #eee;
+		margin-top: 1px;
+		.viewDetailRow{
+			
+		}
+		.viewDetailNav{
+			//background: #f9f9f9;
+			padding: 0;
+		}
+		.viewDetailContent{
+			padding: 8px;
+		}
+	}
+}

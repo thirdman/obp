@@ -5,6 +5,8 @@ import {
 	AgreementOverview,
 	AgreementsSummary,
 	ComponentDocs,
+	DevHome,
+	DevIcons,
 	Home,
 	Login,
 	NotFound
@@ -56,6 +58,10 @@ export default (store) => {
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
 			<Route path="docs" component={ComponentDocs} />
+			<Route path="dev" component={DevHome} />
+			<Route path="dev/home" component={DevHome} />
+			<Route path="dev/docs" component={ComponentDocs} />
+			<Route path="dev/icons" component={DevIcons} />
 			<Route path="create" component={Create} />
 			<Route path="edit" component={Edit} />
 			<Route path="overview" component={Overview} />
