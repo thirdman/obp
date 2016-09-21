@@ -135,21 +135,23 @@ export default class AgreementOverview extends Component {
 	 */
 	render() {
 		console.log(agreement);
-
+		console.log(this.props);
+		const { location } = this.props;
 		return (
 			<Overview>
 				<Header key={'layoutHeader'} title="Agreement Overview" />
 				<ObjectSummary key={'layoutHero'} objectData={agreement} />
-				<SubNavWrap key={'layoutNav'} >
-					<li className={'isSelected'}>Summary</li>
-					<li>Property</li>
-					<li>Parties</li>
-					<li>Rent & Payments</li>
-					<li>Events</li>
-					<li>Documents</li>
-					<li>Other Info</li>
-					<li>Activity</li>
-				</SubNavWrap>
+				<SubNavWrap
+					key={'layoutNav'}
+					currentlySelected={0}
+					listData={[
+						{label: 'Summary', link: `${location.pathname}/summary`},
+						{label: 'Property', link: `${location.pathname}/property`},
+						{label: 'Parties', link: `${location.pathname}/parties`},
+						{label: 'Rent & Payments', link: `${location.pathname}/rent`},
+						{label: 'Events', link: `${location.pathname}/events`},
+					]}
+				/>
 				<Main key={'layoutMain'} objectData={agreement} content=" " />
 				<Secondary key={'layoutSecondary'} />
 			</Overview>
