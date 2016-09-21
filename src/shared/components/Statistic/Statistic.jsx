@@ -40,14 +40,14 @@ export default class Statistic extends Component {
 		let contentNumber;
 		let digitCount = 0;
 		let trimContent;
-		let isNumber;
+		// let isNumber;
 
 		// To be reviewed later
 
-		if (isNumber(parseFloat(content))) {
+		if (this.isNumber(parseFloat(content))) {
 			contentNumber = parseFloat(content);
 			digitCount = this.countDecimals(contentNumber);
-		} else if (isNumber(content.substring(1).replace(/[, ]+/g, ''))) {
+		} else if (this.isNumber(content.substring(1).replace(/[, ]+/g, ''))) {
 			trimContent = content.substring(0, 1);
 			contentNumber = content.substring(1).replace(/[, ]+/g, '');
 			contentNumber = parseFloat(contentNumber.replace(/[, ]+/g, '').trim());
