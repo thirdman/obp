@@ -135,7 +135,6 @@ export default class AgreementOverview extends Component {
 	 */
 	render() {
 		console.log(agreement);
-		console.log(this.props);
 		const { location } = this.props;
 		return (
 			<Overview>
