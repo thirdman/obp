@@ -30,7 +30,7 @@ export default class ObjectSummary extends Component {
 							key={'layoutHero'}
 							title={agreement.attributes.knownAs}
 							id={`${agreement.id}`}
-							type={agreement.attributes.agreementType}
+							type={'agreement'}
 							mode={agreement.attributes.agreementMode}
 						/>
 						<Row isFlex classNameProps={['hasPadding']}>
