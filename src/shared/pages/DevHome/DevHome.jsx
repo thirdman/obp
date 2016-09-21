@@ -1,12 +1,22 @@
 import { Component } from 'react';
 import { Overview } from 'layouts';
+import { autobind } from 'core-decorators';
+import { browserHistory } from 'react-router';
 import { Column, Row, SubNavWrap, Section } from 'components';
 import { Header } from 'containers';
+
 
 // const globalStyles = require('../App/App.scss');
 const styles = require('./DevHome.scss');
 
 export default class DevIcons extends Component {
+	@autobind
+	onClick(link) {
+		return () => {
+			browserHistory.push(link);
+		};
+	}
+
 	render() {
 		// const { location } = this.props;
 		return (
@@ -16,32 +26,37 @@ export default class DevIcons extends Component {
 					key={'layoutNav'}
 					currentlySelected={0}
 					listData={[
-						{label: 'Dev Home', link: '/dev'},
-						{label: 'Documentation', link: '/dev/docs'},
-						{label: 'Icons', link: '/dev/icons'}
+						{label: 'Dev Home', href: '/dev'},
+						{label: 'Documentation', href: '/dev/docs'},
+						{label: 'Icons', href: '/dev/icons'}
 					]}
 				/>
 				<div key={'layoutMain'} className={styles.DevHome}>
 					<Section title="Links" type="section">
+						<div>NOTE: most of these links dont work yet!</div>
 						<Row>
 							<Column occupy="4" of="12">
 								<h4>Documentation</h4>
-								<a link="sdf">Front end</a>
-								<a link="sdf">`Api (whiteboard)`</a>
-								<a link="sdf">Icons</a>
-								<a link="github">Github</a>
+								<span onClick={this.onClick('/dev/docs')} className={styles.link}>
+									Component Docs
+								</span>
+								<span onClick={this.onClick('/dev/whiteboard')} className={styles.link}>
+									Api (whiteboard)
+								</span>
+								<span onClick={this.onClick('/dev/icons')} className={styles.link}>Icons</span>
+								<span onClick={this.onClick('https://github.com/NomosAdmin/')} className={styles.link}>Github</span>
 							</Column>
 							<Column occupy="4" of="12">
 								<h4>Servers</h4>
-								<a link="https://dev-api.nomosone.com">dev-api</a>
-								<a link="https://test-api.nomosone.com">test-api</a>
-								<a link="https://api.nomosone.com">prod: api</a>
-								<a link="https://test-app.nomosone.com">test-app</a>
-								<a link="https://app.nomosone.com">prod: app</a>
+								<span onClick={this.onClick('https://dev-api.nomosone.com')} className={styles.link}>dev-api</span>
+								<span onClick={this.onClick('https://test-api.nomosone.com')} className={styles.link}>test-api</span>
+								<span onClick={this.onClick('https://api.nomosone.com')} className={styles.link}>prod: api</span>
+								<span onClick={this.onClick('https://test-app.nomosone.com')} className={styles.link}>test-app</span>
+								<span onClick={this.onClick('https://app.nomosone.com')} className={styles.link}>prod: app</span>
 							</Column>
 							<Column occupy="4" of="12">
 								<h4>Integrations</h4>
-								<a link="https://xero.com">Xero</a>
+								<span onClick={this.onClick('https://xero.com')} className={styles.link}>Xero</span>
 							</Column>
 						</Row>
 					</Section>
