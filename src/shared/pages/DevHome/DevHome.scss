@@ -1,0 +1,10 @@
+@import "../../globals/styles/_global.scss";
+
+.DevHome{
+	padding-bottom: 32px;
+	.link{
+		cursor: pointer;
+		color: $nomosBlue;
+		text-decoration: underline;
+	}
+}

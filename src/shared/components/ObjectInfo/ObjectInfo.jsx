@@ -12,6 +12,7 @@ export default class ObjectInfo extends Component {
 		id: React.PropTypes.string,
 		type: React.PropTypes.string,
 		mode: React.PropTypes.string,
+		display: React.PropTypes.string,
 		buttons: React.PropTypes.array,
 		children: React.PropTypes.oneOfType([
 			React.PropTypes.arrayOf(React.PropTypes.node),
@@ -48,13 +49,16 @@ export default class ObjectInfo extends Component {
 		const {
 			classNameProps = [],
 			title,
-			type,
+			type = 'property',
 			mode,
+			display = 'large',
 			id
 		} = this.props;
 		let classes;
 
-		classes = classNameProps
+		classes = classNameProps.slice();
+		classes = classes.concat(display || '');
+		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 
@@ -65,13 +69,13 @@ export default class ObjectInfo extends Component {
 					classes,
 					globalStyles.row)} >
 				<div className={styles.iconWrap}>
-					<Icon icon="property" color="grey" />
+					<Icon icon={type} color={!mode === 'Inactive' ? 'grey' : 'lightGrey'} />
 				</div>
 				<div className={styles.titleWrap}>
 					<div className={styles.buttonWrap}>
 						{this.getButtonComps()}
 					</div>
-					<h3>{title}</h3>
+					<h3>{title}{mode === 'Inactive' ? ' (Inactive)' : null}</h3>
 					<h4 className={styles.subtitle}>
 						<span className={styles.objectId}>
 							<span className={styles.bold}>ID:</span> {id}

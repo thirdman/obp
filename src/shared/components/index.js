@@ -20,6 +20,7 @@ export QuickView from './QuickView/QuickView';
 export Row from './Row/Row';
 export Section from './Section/Section';
 export SlideToggle from './SlideToggle/SlideToggle';
+export Statistic from './Statistic/Statistic';
 export SubNavWrap from './SubNavWrap/SubNavWrap';
 export UiBrandLogo from './UiBrandLogo/UiBrandLogo';
 export UiUserMenu from './UiUserMenu/UiUserMenu';
