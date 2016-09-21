@@ -9,7 +9,7 @@ import { Header } from 'containers';
 // const globalStyles = require('../App/App.scss');
 const styles = require('./DevHome.scss');
 
-export default class DevIcons extends Component {
+export default class DevHome extends Component {
 	@autobind
 	onClick(link) {
 		return () => {
