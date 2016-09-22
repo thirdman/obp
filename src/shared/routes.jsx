@@ -3,6 +3,7 @@ import {IndexRoute, Route} from 'react-router';
 import {
 	App,
 	AgreementOverview,
+	AgreementView,
 	AgreementsSummary,
 	ComponentDocs,
 	DevHome,
@@ -70,6 +71,7 @@ export default (store) => {
 			<Route path="view" component={View} />
 			<Route path="agreements" component={AgreementsSummary} />
 			<Route path="agreements/:agreementId" component={AgreementOverview} />
+			<Route path="agreements/:agreementId/:sectionName" component={AgreementView} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

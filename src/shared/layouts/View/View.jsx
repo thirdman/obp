@@ -23,7 +23,6 @@ export default class View extends Component {
 				className={cx(
 					styles.Layout,
 					styles.View,
-					styles.editMode,
 					globalStyles.layoutWrap)} >
 				{mappedChildren.layoutHeader &&
 					<Row>

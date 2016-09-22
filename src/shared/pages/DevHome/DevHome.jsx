@@ -33,7 +33,6 @@ export default class DevHome extends Component {
 				/>
 				<div key={'layoutMain'} className={styles.DevHome}>
 					<Section title="Links" type="section">
-						<div>NOTE: most of these links dont work yet!</div>
 						<Row>
 							<Column occupy={4} of={12}>
 								<h4>Documentation</h4>
@@ -63,9 +62,8 @@ export default class DevHome extends Component {
 					<Section title="Status" hasDivider>
 						<Row>
 							<Column occupy={12}>
-								<h3>Status</h3>
+								<div>status will be here</div>
 							</Column>
-							<div>status will be here</div>
 						</Row>
 					</Section>
 					<Section title="Statistics" hasDivider>
