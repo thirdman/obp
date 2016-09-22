@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Overview } from 'layouts';
-import { SubNavWrap } from 'components';
-import { Header, ObjectSummary, Main, Secondary} from 'containers';
-import { connect } from '../../../utils/state';
+import { Edit } from 'layouts';
+import { ObjectInfo, SubNavWrap } from 'components';
+import { Header, Main, Secondary } from 'containers';
+// import { connect } from '../../../utils/state';
 
 // const globalStyles = require('../App/App.scss');
 const agreement = {
@@ -119,41 +119,45 @@ const agreement = {
 	}
 };
 
-@connect('store')
-export default class AgreementOverview extends Component {
+// @connect('store')
+export default class AgreementView extends Component {
 
-	/**
-	 *
 	componentWillMount() {
 		const { routeParams } = this.props;
-		const { agreementOverview } = this.context.store.pages;
-
-		agreementOverview.fetchAgreement(routeParams.agreementId);
+		console.log(routeParams);
+		// const { agreementOverview } = this.context.store.pages;
+		// agreementOverview.fetchAgreement(routeParams.sectionName);
 	}
 
-	/**
-	 */
 	render() {
+		const { location, routeParams } = this.props;
+		// console.log(routeParams);
 		console.log(agreement);
-		const { location } = this.props;
+		// console.log(location);
 		return (
-			<Overview>
-				<Header key={'layoutHeader'} title="Agreement Overview" />
-				<ObjectSummary key={'layoutHeader'} objectData={agreement} />
+			<Edit>
+				<Header key={'layoutHeader'} title={`Agreement: ${routeParams.sectionName}`} />
+				<ObjectInfo
+					key={'layoutHero'}
+					title={agreement.attributes.knownAs}
+					id={`${agreement.id}`}
+					type={'agreement'}
+					mode={agreement.attributes.agreementMode}
+				/>
 				<SubNavWrap
 					key={'layoutNav'}
-					currentlySelected={0}
+					currentlySelected={2}
 					listData={[
 						{label: 'Summary', link: `${location.pathname}/summary`},
 						{label: 'Property', link: `${location.pathname}/property`},
 						{label: 'Parties', link: `${location.pathname}/parties`},
 						{label: 'Rent & Payments', link: `${location.pathname}/rent`},
-						{label: 'Events', link: `${location.pathname}/events`},
+						{label: 'Events', link: `${location.pathname}/events`}
 					]}
 				/>
 				<Main key={'layoutMain'} objectData={agreement} content=" " />
 				<Secondary key={'layoutSecondary'} />
-			</Overview>
+			</Edit>
 		);
 	}
 }

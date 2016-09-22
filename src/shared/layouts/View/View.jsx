@@ -32,6 +32,10 @@ export default class View extends Component {
 					</Row>}
 				<Row>
 					<div className={styles.content}>
+						{mappedChildren.layoutHero &&
+							<div className={styles.hero} id="layoutHero">
+								{mappedChildren.layoutHero || null}
+							</div>}
 						<div className={styles.navWrap}>
 							{mappedChildren.layoutNav &&
 								<div className={styles.nav} id="layoutNav">

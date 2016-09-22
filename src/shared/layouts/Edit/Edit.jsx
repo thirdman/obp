@@ -19,7 +19,7 @@ export default class Edit extends Component {
 		const mappedChildren = this.mapChildren(this.props.children);
 
 		return (
-			<div className={cx(styles.Layout, styles.Edit,	styles.editMode, globalStyles.layoutWrap)} >
+			<div className={cx(styles.Layout, styles.Edit, globalStyles.layoutWrap)} >
 				{mappedChildren.layoutHeader &&
 					<Row>
 						<div className={styles.header} id="layoutHeader">
@@ -28,6 +28,10 @@ export default class Edit extends Component {
 					</Row>}
 				<Row>
 					<div className={styles.content}>
+						{mappedChildren.layoutHero &&
+							<div className={styles.hero} id="layoutHero">
+								{mappedChildren.layoutHero || null}
+							</div>}
 						<div className={styles.navWrap}>
 							{mappedChildren.layoutNav &&
 								<div className={styles.nav} id="layoutNav">

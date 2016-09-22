@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import { autobind } from 'core-decorators';
+import { browserHistory } from 'react-router';
 import { View } from 'layouts';
-import { SubNavWrap } from 'components';
+import { ObjectInfo, SubNavWrap } from 'components';
 import { Header, Main, Secondary } from 'containers';
 // import { connect } from '../../../utils/state';
 
@@ -129,14 +131,28 @@ export default class AgreementView extends Component {
 		// agreementOverview.fetchAgreement(routeParams.sectionName);
 	}
 
+@autobind
+	onClick(link) {
+		return () => {
+			browserHistory.push(link);
+		};
+	}
+
 	render() {
 		const { location, routeParams } = this.props;
-		console.log(routeParams);
+		// console.log(routeParams);
 		console.log(agreement);
-		console.log(location);
+		// console.log(location);
 		return (
 			<View>
 				<Header key={'layoutHeader'} title={`Agreement: ${routeParams.sectionName}`} />
+				<ObjectInfo
+					key={'layoutHero'}
+					title={agreement.attributes.knownAs}
+					id={`${agreement.id}`}
+					type={'agreement'}
+					mode={agreement.attributes.agreementMode}
+				/>
 				<SubNavWrap
 					key={'layoutNav'}
 					currentlySelected={2}
@@ -147,7 +163,11 @@ export default class AgreementView extends Component {
 						{label: 'Rent & Payments', link: `${location.pathname}/rent`},
 						{label: 'Events', link: `${location.pathname}/events`}
 					]}
-				/>
+				>
+					<span onClick={this.onClick('/agreements/1234/parties/edit/')}>
+						edit this page
+					</span>
+				</SubNavWrap>
 				<Main key={'layoutMain'} objectData={agreement} content=" " />
 				<Secondary key={'layoutSecondary'} />
 			</View>
