@@ -1,0 +1,87 @@
+@import "../../globals/styles/_global.scss";
+
+.ProgressBar {
+	display: block;
+	background: $nomosLightGrey;
+	border-radius: 2px;
+	overflow: hidden;
+	.bar{
+		transition: width .3s linear;
+		background: $nomosBlue;
+		height: 10px;
+		}
+	//types
+	&.standard{
+		height: 8px;
+	}
+	&.line{
+		height: 2px;
+	}
+	
+	//MODIFIERS
+	&.hasPadding{
+		margin: 8px;
+	}
+	
+	//COLOURS
+  &.black{
+		.bar{
+			background: $nomosBlack;
+		}
+  }
+  &.darkGrey{
+		.bar{
+			background: $nomosDarkGrey;
+		}
+  }
+  &.grey{
+		.bar{
+			background: $nomosGrey;
+		}
+  }
+  &.lightGrey{
+		.bar{
+			background: $nomosLightGrey;
+		}
+  }
+  &.lightLightGrey{
+		.bar{
+			background: $nomosLightLightGrey;
+		}
+  }
+  &.line{
+		.bar{
+			background: $nomosLine;
+		}
+  }
+  &.blue{
+		.bar{
+			background: $nomosBlue;
+		}
+  }
+  &.white{
+		.bar{
+			background: #fff;
+		}
+  }
+  &.green{
+		.bar{
+			background: $nomosGreen;
+		}
+  }
+  &.orange{
+		.bar{
+			background: $nomosOrange;
+		}
+  }
+  &.red{
+		.bar{
+			background: $nomosRed;
+		}
+  }
+  &.yellow{
+		.bar{
+			background: $nomosYellow;
+		}
+	}
+}
