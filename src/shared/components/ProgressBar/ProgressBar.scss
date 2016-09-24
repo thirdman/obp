@@ -17,7 +17,11 @@
 	&.line{
 		height: 2px;
 	}
-	
+	&.progress{
+		height: 8px;
+		margin-left: 4px;
+		margin-right: 4px;
+	}	
 	//MODIFIERS
 	&.hasPadding{
 		margin: 8px;

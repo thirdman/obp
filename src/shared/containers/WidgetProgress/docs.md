@@ -1,20 +1,19 @@
-ProgressBar
+WidgetProgress
 
 *****title*****
 
-Simple animated bar for a loading type progress
+Shows a timeline with markers
 
 
 #### props
 |Property				|	Type			|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
-title						|	`string`	|	-					|	Title for widget
-type						|	`string`	|	'standard'	|	one of ('standard', 'line', progress): determined height/style of bar.
+completed				|	`number`	|	-					|	percent completed, without the % sign
+type						|	`string`	|	'standard'	|	one of ('standard', 'line'): determined height/style of bar.
 color						|	`string`	|	'blue'		|	use the nomos color keywords
 units						|	`string`	|	'%'				|	one of '%' or 'px'. Css unit to use, could also use px for an absolute sizing
-hasMarkers			|	`bool`		|	'false'		|	shows markers on the timeline.
-hasTitles				|	`bool`		|	'false'		|	shows titles of the markers
-markerData			|	`array`		|	[]				|	array of markers to display
+hasPadding			|	`bool`		|	'false'		|	true adds 8px margin.
+hasToday				|	`bool`		|	'false'		|	adds a label where today is.
 classNameProps	|	`array`		| ['normal'] |	array of classes to apply to the component (see below for available classes)
 
 
@@ -26,18 +25,31 @@ classNameProps	|	`array`		| ['normal'] |	array of classes to apply to the compon
 
 
 #### TODO
-
+- show the % while loading
+- a loading message?
+- add a 'loding' type.
+- unify width and colour options from the ProgressStatus
 
 *****description*****
-<WidgetProgress completed="68" />
-
+<ProgressBar completed="68" />
+<ProgressBar completed="88" type="line" color="darkGrey" hasPadding />
 
 *****example*****
 [
 {
-	"component": "WidgetProgress",
+	"component": "ProgressBar",
 	"props": {
 		"completed": 68,
 		"classNameProps": ["normal"]
 		}
-}]
+},
+{
+	"component": "ProgressBar",
+	"props": {
+		"completed": 88,
+		"type": "line",
+		"color": "red",
+		"hasPadding": true
+		}
+}
+]

@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import cx from 'classnames';
 import { ContentItem, Info, Statistic } from 'components';
+import { WidgetProgress } from 'containers';
 
 const styles = require('./Secondary.scss');
 
@@ -26,6 +27,7 @@ export default class Secondary extends Component {
 				<ContentItem title="Is Gareth Cool?">
 					<Info content="Yes, oh yes he is" />
 				</ContentItem>
+				<WidgetProgress title={'Agreement Progress'} hasMarkers />
 			</div>
 		);
 	}

@@ -9,3 +9,4 @@ export Main from './Main/Main';
 export ObjectSummary from './ObjectSummary/ObjectSummary';
 export Placeholder from './Placeholder/Placeholder';
 export Secondary from './Secondary/Secondary';
+export WidgetProgress from './WidgetProgress/WidgetProgress';

@@ -139,7 +139,7 @@ export default class AgreementOverview extends Component {
 		return (
 			<Overview>
 				<Header key={'layoutHeader'} title="Agreement Overview" />
-				<ObjectSummary key={'layoutHeader'} objectData={agreement} />
+				<ObjectSummary key={'layoutHero'} objectData={agreement} />
 				<SubNavWrap
 					key={'layoutNav'}
 					currentlySelected={0}
