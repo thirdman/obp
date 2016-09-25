@@ -1,6 +1,8 @@
 export App from './App/App';
 
 export AgreementOverview from './AgreementOverview/AgreementOverview';
+export AgreementEdit from './AgreementEdit/AgreementEdit';
+export AgreementView from './AgreementView/AgreementView';
 export AgreementsSummary from './AgreementsSummary/AgreementsSummary';
 export ComponentDocs from './ComponentDocs/ComponentDocs';
 export DevHome from './DevHome/DevHome';

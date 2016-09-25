@@ -1,0 +1,104 @@
+@import "../../globals/styles/_global.scss";
+
+.WidgetProgress{
+	.progressWrap{
+		//postions everything
+		background: #eee;
+		position: relative;
+		}
+	//types
+	&.standard{
+	}
+	&.line{
+	}
+	&.progress{
+		height: 2px;
+	}
+	//MODIFIERS
+	&.hasMarkers{
+
+	}	
+	//MARKERS
+	.markerItem{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 10px;
+		width: 10px;
+		.markerTitle{
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 10px;
+			background: #fff;
+			padding: 2px 4px;
+			border-radius: 2px;
+			box-shadow: 0 0 8px -2px rgba(0,0,0,0.2);
+			font-size: $font-size-small;
+			z-index: 2;
+		}
+		.marker{
+			width: 10px;
+			height: 10px;
+			position: relative;
+			top: -1px;
+			background: #fff;
+			display: block;
+			border-radius: 8px;
+			border: 2px solid #fff;
+			z-index: 1;
+			box-shadow: 0 0 8px -2px rgba(0,0,0,0.2);
+		}
+		&.complete{
+			.marker{
+				border: 1px solid #fff;
+				background: $nomosBlue;
+			}
+		}
+		&.incomplete{
+			.marker{
+				background: #eee;				
+			}
+		}
+		&.isLast{
+			left: inherit !important;
+			right: 0;
+			text-align: right;
+			.markerTitle{
+				left: inherit !important;
+				right: 0;
+			}
+		}
+		&:hover{
+			.markerTitle{
+				display: block;
+			}
+			.marker{
+				background: $nomosBlack;
+				border-color: $nomosBlack;
+				box-shadow: 0 0 8px 0px rgba(0,0,0,0.5);
+				cursor: pointer;
+			}
+		}
+	}
+	.todayMarker{
+		position: absolute;
+		left:0;
+		top: 0;
+    background: $nomosBlack;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+	}
+	.todayLabel{
+		position: absolute;
+		left:0;
+		top: 4px;
+    background: transparent;
+    width: 50px;
+    margin-left: -25px;
+    color: $nomosGrey;
+    font-size: $font-size-small;
+    text-align: center;
+	}
+}

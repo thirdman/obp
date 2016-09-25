@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import cx from 'classnames';
 import { ContentItem, Info, Statistic } from 'components';
+import { WidgetProgress } from 'containers';
 
 const styles = require('./Secondary.scss');
 
@@ -19,11 +20,12 @@ export default class Secondary extends Component {
 					<h3>{title}</h3>
 					: null
 				}
+				<WidgetProgress title={'Agreement Progress'} hasMarkers />
 				<div className={styles.secondaryUpper}>
-					<Statistic title="time to Option" content="2.41" units="years" hasDivider classNameProps={['isHorizontal']} />
+					<Statistic title="time to Option" content="2.41" units="years" hasDivider hasSpace classNameProps={['isHorizontal']} />
 					<Statistic title="Time to Expiry" content="3.41" units="years" hasDivider classNameProps={['isHorizontal']} />
 				</div>
-				<ContentItem title="Is Gareth Cool?">
+				<ContentItem title="Is Gareth Cool?" >
 					<Info content="Yes, oh yes he is" />
 				</ContentItem>
 			</div>

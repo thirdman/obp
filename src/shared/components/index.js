@@ -16,6 +16,7 @@ export IconButton from './IconButton/IconButton';
 export InputRadio from './InputRadio/InputRadio';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
+export ProgressBar from './ProgressBar/ProgressBar';
 export QuickView from './QuickView/QuickView';
 export Row from './Row/Row';
 export Section from './Section/Section';
