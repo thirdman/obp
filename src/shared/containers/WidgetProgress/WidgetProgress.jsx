@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classSet from 'react-classset';
 import cx from 'classnames';
 import moment from 'moment';
+import ReactTooltip from 'react-tooltip';
 import { ProgressBar } from 'components';
 
 const styles = require('./WidgetProgress.scss');
@@ -116,6 +117,7 @@ export default class WidgetProgress extends Component {
 						left: progressPercent + '%'
 					};
 				}
+
 				return (
 					<div
 						key={`marker${index}`}
@@ -123,12 +125,15 @@ export default class WidgetProgress extends Component {
 							cx(styles.markerItem, thisTypeClass, (item.percent > 95 ? styles.isLast : ''))
 							}
 						style={thisTempStyle}
+						data-tip
+						data-for={`tooltipMarker${index}`}
+						data-class={styles.tooltip}
 						>
 						<span className={styles.marker} />
-						<div className={styles.markerTitle}>
+						<ReactTooltip id={`tooltipMarker${index}`} type="light">
 							<h4>{item.title}</h4>
-							{moment(Number(item.date)).format('DD MM YYYY')}
-							</div>
+							<div>{moment(Number(item.date)).format('DD MM YYYY')}</div>
+						</ReactTooltip>
 					</div>
 				);
 			});
