@@ -35,9 +35,10 @@ classNameProps	|	`array`		| ['normal'] |	array of classes to apply to the compon
 *****example*****
 [
 {
-	"component": "WidgetProgress",
+	"component": "ProgressBar",
 	"props": {
 		"completed": 68,
 		"classNameProps": ["normal"]
 		}
-}]
+}
+]

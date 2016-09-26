@@ -87,7 +87,7 @@ children				|	`oneOfType` | - 			| (required) this component is designed to wrap
 	"component": "Section",
 	"props": {
 		"type":"section",
-		"styleProps": [{"border": "1px solid red"}],
+		"styleProps": {"border": "1px solid red"},
 		"title": "A section with styleProps",
 		"description": "Sscelerisque semper inceptos conubia tristique nisi morbi vestibulum himenaeos. Ullamcorper scelerisque natoque fermentum tellus risus a nostra dui mauris condimentum consectetur gravida suscipit commodo orci dapibus risus suscipit parturient. Imperdiet ridiculus vestibulum senectus a parturient adipiscing per parturient ad ante a magna dictumst molestie a tristique ullamcorper nascetur egestas accumsan hac parturient lectus at a a habitasse. Feugiat a a nisl praesent mattis odio scelerisque cras primis scelerisque a adipiscing habitant mus senectus ipsum morbi congue consectetur ut volutpat nostra.",
 		"classNameProps": ["normal", "space"]

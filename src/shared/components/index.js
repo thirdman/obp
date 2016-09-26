@@ -13,6 +13,7 @@ export HorizontalRule from './HorizontalRule/HorizontalRule';
 export Icon from './Icon/Icon';
 export Info from './Info/Info';
 export IconButton from './IconButton/IconButton';
+export InputCheckbox from './InputCheckbox/InputCheckbox';
 export InputRadio from './InputRadio/InputRadio';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
