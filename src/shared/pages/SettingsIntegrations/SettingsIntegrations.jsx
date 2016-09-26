@@ -9,14 +9,14 @@ import { Header } from 'containers';
 // @connect('store')
 export default class SettingsIntegrations extends Component {
 
+	/*
 	componentWillMount() {
 		const { routeParams } = this.props;
 		console.log(routeParams);
-		// const { agreementOverview } = this.context.store.pages;
-		// agreementOverview.fetchAgreement(routeParams.sectionName);
 	}
+	*/
 
-@autobind
+	@autobind
 	onClick(link) {
 		return () => {
 			browserHistory.push(link);
