@@ -33,6 +33,27 @@
 * TOOLTIPS
 */
 
+	.media{
+	  display: flex;
+	  align-items: flex-start;
+		.figure{
+			width: 24px;
+			display: block;
+			margin-right: $padding;
+		}
+		.body{
+			flex: 1;
+			h5{
+				font-weight: normal;
+			}
+		}
+	}
+
+
+/*
+* TOOLTIPS
+*/
+
 .tooltip{
 	background-color: #fff !important;
 	color: $nomosBlack !important;
