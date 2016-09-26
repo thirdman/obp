@@ -10,11 +10,11 @@ import {
 	DevHome,
 	DevComponentDocs,
 	DevIcons,
-	Home,
 	Login,
 	NotFound,
 	SettingsIntegrations,
-	SettingsIntegrationsDetail
+	SettingsIntegrationsDetail,
+	TempApiManager
 } from 'pages';
 import {
 	Create,
@@ -59,7 +59,7 @@ export default (store) => {
 	return (
 		<Route path="/" component={App}>
 			{ /* Routes - do not require logged in*/ }
-			<IndexRoute component={Home} />
+			<IndexRoute component={TempApiManager} />
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
 			<Route path="docs" component={DevComponentDocs} />
