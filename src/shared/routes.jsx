@@ -6,8 +6,9 @@ import {
 	AgreementView,
 	AgreementEdit,
 	AgreementsSummary,
-	ComponentDocs,
+	// ComponentDocs,  // refactor out when cofirmed the new docs work
 	DevHome,
+	DevComponentDocs,
 	DevIcons,
 	Home,
 	Login,
@@ -59,10 +60,10 @@ export default (store) => {
 			<IndexRoute component={Home} />
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
-			<Route path="docs" component={ComponentDocs} />
+			<Route path="docs" component={DevComponentDocs} />
 			<Route path="dev" component={DevHome} />
 			<Route path="dev/home" component={DevHome} />
-			<Route path="dev/docs" component={ComponentDocs} />
+			<Route path="dev/docs" component={DevComponentDocs} />
 			<Route path="dev/icons" component={DevIcons} />
 			<Route path="create" component={Create} />
 			<Route path="edit" component={Edit} />

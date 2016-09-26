@@ -1,0 +1,135 @@
+@import "../../globals/styles/_global.scss";
+/*
+	For styling of display of dcoumentaiton.
+	Some of these thigns are custom done because this is a special page
+	
+*/
+body{
+}
+.Styleguide{
+	lost-utility: clearfix;
+
+	#StyleguideSidebar, .StyleguideSidebar{
+	}
+	.StyleguideSidebar{
+		position: relative;
+		width: 100%;
+		&.isScrolled{
+			div:first-child{
+				display: block;
+			}
+		}
+		&.isScrolled ul{
+			position: fixed;
+			z-index: 99;
+			top: 0;
+			/*FUN STUFF*/
+	    // background: rgba(0,0,0,.05);
+	    // padding: 8px 24px;
+	    margin-left: -32px;
+	    height: 100%;
+	    overflow-y: scroll;
+	    transition: all .3s ease;    
+		}
+		&.notScrolled ul{
+			background: #fff;
+	    // transition: all .3s ease;    
+		}
+	}
+	.row{
+		lost-utility: clearfix;
+	}
+	.secondaryColumn{
+		lost-column: 3/12
+	}
+	.primaryColumn{
+		lost-column: 9/12
+	}
+}
+
+.toggleButton{
+  position: absolute;
+  right: 4px;
+  background: #f9f9f9;
+  padding: 0 4px;
+  border: 1px solid #ddd;
+  border-top: 1px solid #f3f3f3;
+  margin-top: -1px;
+  border-radius: 0 0 3px 3px;
+  z-index: 2;
+  color: $nomosBlue;
+  font-size: 12px;
+	text-decoration: underline;
+	cursor: pointer;	
+}
+
+
+
+/*COMPONENTS*/
+
+.StyleguideComponent{
+	padding-top: 16px;
+	padding-bottom: 16px;
+	position: relative;
+}
+
+.StyleguideComponentTitle{
+}
+
+.StyleguideComponentDescription{
+	margin: 8px 0 -8px;
+	padding: 16px;
+	background: #f9f9f9;
+	display: block;
+	border: 1px solid $nomosLine;
+	border-bottom: none;
+  overflow-x: scroll;
+}
+
+.StyleguideComponentExample{
+	margin-top: 8px;
+	padding: 32px;
+  border: 1px solid #d4d9d9;
+  border-radius: 4px 4px 0 0;
+  background: white;
+  position: relative;
+}
+
+.StyleguideComponentCode {
+  position: relative;
+  background-color: white;
+  padding: 32px;
+  border: 1px solid #d4d9d9;
+  border-top: 0px solid rgba(0, 0, 0, 0.07);
+  border-radius: 0 0 4px 4px;
+  overflow-x: scroll;
+  pre{
+	  
+  }
+}
+
+
+.StyleguideSidebarList{
+	padding: 16px 0;
+	margin-top: 0;
+	list-style-type: none;
+	position: relative;
+	&.sticky{
+		//position: fixed;
+		//z-index: 99;
+	}
+	
+	&.notSticky{
+		//background: pink;
+		//position: relative;
+	}
+
+	li{
+		border-bottom: 1px dashed #ddd;
+		padding: 0;
+		a{
+			padding: 4px 0;
+			display: block;
+		}
+	}
+}
