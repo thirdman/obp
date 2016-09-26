@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 // import { Link } from 'react-router';
-import { UiBrandLogo } from 'components';
+import { Icon, UiBrandLogo } from 'components';
 import cx from 'classnames';
 
 export default class MainNavWrap extends Component {
@@ -30,6 +30,17 @@ export default class MainNavWrap extends Component {
 					<UiBrandLogo isSmall={navDocked} />
 						<div className={styles.navigation}>
 							<a className={styles.menuItem}>Docs</a>
+							<div className={styles.media}>
+								<span className={styles.figure}>
+									<Icon icon="view" />
+									{
+										// will be replaces with Avatar after I make it
+									}
+								</span>
+								<span className={styles.body}>
+									<h5>name will be here</h5>
+								</span>
+							</div>
 						</div>
 				</div>
 			</div>
