@@ -77,7 +77,7 @@ export default (store) => {
 			<Route path="agreements/:agreementId" component={AgreementOverview} />
 			<Route path="agreements/:agreementId/:sectionName" component={AgreementView} />
 			<Route path="agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
-			<Route path="integrations/" component={SettingsIntegrations} />
+			<Route path="integrations" component={SettingsIntegrations} />
 			<Route path="integrations/xero" component={SettingsIntegrationsDetail} />
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
