@@ -5,6 +5,7 @@
  *	Please keep alphabetical
  */
 
+export Avatar from './Avatar/Avatar';
 export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
 export Column from './Column/Column';
