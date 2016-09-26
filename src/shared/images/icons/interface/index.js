@@ -53,5 +53,5 @@ export upload from './upload.svg';
 export user from './user.svg';
 export variation from './variation.svg';
 export view from './view.svg';
-export view from './warning.svg';
+export warning from './warning.svg';
 export x from './x.svg';

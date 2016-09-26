@@ -1,0 +1,33 @@
+@import "../../globals/styles/_global.scss";
+
+.DevComponentDocs{
+		// max-width: 80em !important; // temp override
+		// padding-top: 50px !important;
+		
+	h4{
+		margin-top: 1em;
+	}
+	table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+        border-spacing: 0;
+    border-collapse: collapse;
+    tr {
+			background-color: #fff;
+			border-top: 1px solid #ccc;
+			 &:nth-child(2n){
+				 background-color: #f8f8f8;
+			 }
+    }
+    th, td{
+	    padding: 6px 13px;
+			border: 1px solid #ddd;
+    }
+    th{
+	    font-weight: bold;
+    }
+	}
+}

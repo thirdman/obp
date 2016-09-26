@@ -2,24 +2,24 @@ import React from 'react';
 import cx from 'classnames';
 import { Icon } from 'components';
 
-const styles = require('./InputRadio.scss');
+const styles = require('./InputCheckbox.scss');
 
-const InputRadio = ({ isSelected, value }) => (
+const InputCheckbox = ({ isSelected, value }) => (
 	<span
 		className={cx(
-			styles.InputRadio,
+			styles.InputCheckbox,
 			(isSelected ? styles.selected : ''))}
 	>
 		<span className={styles.radioIcon} >
 			<Icon
-				icon={isSelected ? 'radio-selected' : 'radio-unselected'}
+				icon={isSelected ? 'checkbox-selected' : 'checkbox-unselected'}
 				classNameProps={['normal']}
 			/>
 		</span>
 		<input
 			value={value}
 			id={'a123'}
-			type={'radio'}
+			type={'checkbox'}
 			className={styles.radio}
 			checked={isSelected}
 			onChange={() => { console.log('clicked!'); }}
@@ -28,9 +28,9 @@ const InputRadio = ({ isSelected, value }) => (
 	</span>
 );
 
-InputRadio.propTypes = {
+InputCheckbox.propTypes = {
 	isSelected: React.PropTypes.bool,
 	value: React.PropTypes.string
 };
 
-export default InputRadio;
+export default InputCheckbox;
