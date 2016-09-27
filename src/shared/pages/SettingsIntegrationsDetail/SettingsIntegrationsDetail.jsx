@@ -25,9 +25,6 @@ export default class SettingsIntegrationsDetail extends Component {
 	}
 
 	render() {
-		const { location, routeParams } = this.props;
-		console.log(routeParams);
-		console.log(location);
 		return (
 			<View>
 				<Header key={'layoutHeader'} title={'PUT TITLE HERE'} />

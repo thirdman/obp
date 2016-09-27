@@ -10,7 +10,13 @@ export default class AuthStore {
 	jwt = null;
 
 	@observable user = {};
+	@observable orgs = [
+		{ orgName: 'Org 1' },
+		{ orgName: 'Org 2' },
+		{ orgName: 'Org 3' }
+	];
 	@observable error = '';
+
 	@action
 	updateUser(data = null) {
 		this.user = data || {};
@@ -39,6 +45,7 @@ export default class AuthStore {
 			const data = res.data[0];
 			this.saveJwt(data.authorization);
 			this.updateUser({ username });
+			this.getOrgs();
 			this.proceedToNextPath();
 		}).catch((err) => {
 			this.clearJwt();
@@ -73,6 +80,7 @@ export default class AuthStore {
 					const data = res.data[0];
 					this.saveJwt(data.authorization);
 					this.updateUser({ username: data.username });
+					this.getOrgs();
 					resolve();
 				}).catch((err) => {
 					this.clearJwt();
@@ -80,6 +88,22 @@ export default class AuthStore {
 				});
 			}
 		});
+	}
+
+	@action
+	getOrgs() {
+		this.orgs = [
+			{ orgName: 'Org 1' },
+			{ orgName: 'Org 2' },
+			{ orgName: 'Org 3' }
+		];
+		/*
+		client.get('/organisations').then((res) => {
+			resolve(res);
+		}).catch((err) => {
+			reject(err);
+		});
+		*/
 	}
 
 	saveJwt(jwt) {
@@ -98,15 +122,4 @@ export default class AuthStore {
 		browserHistory.push(nextPath);
 		routeHelper.clear();
 	}
-
-/*
-	@action
-	register({ email, password, username }) {
-		console.log(' register to be implemented');
-		/*
-		return service('user')
-			.create({ email, password, username });
-		*
-	}
-*/
 }
