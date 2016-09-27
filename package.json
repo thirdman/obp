@@ -35,7 +35,7 @@
       "env": {
         "MODE": "remote",
         "APP_HOST": "http://localhost",
-        "API_HOST": "https://test-api.nomosone.com/v1",
+        "API_HOST": "https://test-api.nomosone.com/v0",
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 8080,
