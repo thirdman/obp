@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 // import { Link } from 'react-router';
 import { Avatar, UiBrandLogo } from 'components';
 import cx from 'classnames';
+import { connect } from '../../../utils/state';
 
+@connect('store')
 export default class MainNavWrap extends Component {
 
 	static propTypes = {
@@ -29,23 +31,38 @@ export default class MainNavWrap extends Component {
 				<div className={styles.navBarContent}>
 					<UiBrandLogo isSmall={navDocked} />
 						<div className={styles.navigation}>
-							<a className={styles.menuItem}>Docs</a>
-							<div className={styles.media}>
-								<span className={styles.figure}>
-									<Avatar
-										type="org"
-										size="small"
-										title="Tyrion Lannister"
-										imageUrl="https://pbs.twimg.com/profile_images/668279339838935040/8sUE9d4C.jpg"
-									/>
-								</span>
-								<span className={styles.body}>
-									<h5>name will be here</h5>
-								</span>
-							</div>
+							{ this.getOrgsComp() }
 						</div>
 				</div>
 			</div>
 		);
+	}
+
+	getOrgsComp() {
+		const { orgs = [] } = this.context.store.auth;
+		const { currentOrg = null } = this.context.store.app;
+		const styles = require('./MainNavWrap.scss');
+
+		if (orgs.length) {
+			return orgs.map((org, index) => (
+				<div
+					className={`${styles.media} ${currentOrg === org.orgName ? styles.isSelected : ''}`}
+					key={`orgIcon${index}`}>
+					<span className={styles.figure}>
+						<Avatar
+							type="org"
+							size="small"
+							title={org.orgName}
+							imageUrl="https://pbs.twimg.com/profile_images/668279339838935040/8sUE9d4C.jpg"
+						/>
+					</span>
+					<span className={styles.body}>
+						<h5>{org.orgName}</h5>
+					</span>
+				</div>
+			));
+		} else {
+			return null;
+		}
 	}
 }

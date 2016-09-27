@@ -18,6 +18,21 @@ export default class Avatar extends Component {
 		classNameProps: React.PropTypes.array
 	}
 
+	state = {
+		tooltip: this.makeId()
+	}
+
+	makeId() {
+		let text = '';
+		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		for (let i = 0; i < 5; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+
+		return text;
+	}
+
 	render() {
 		const {
 			classNameProps = [],
@@ -30,7 +45,6 @@ export default class Avatar extends Component {
 		let classes;
 		let defaultIcon;
 		let randomNumber = parseInt(Math.random() * ((9999999999 - 1111111111) + 1111111111), 10);
-		console.log(randomNumber);
 
 		if (type === 'user') {
 			defaultIcon = iconUser;
