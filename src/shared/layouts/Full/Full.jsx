@@ -32,10 +32,10 @@ export default class Full extends Component {
 					</Row>}
 				<Row>
 					<div className={styles.content}>
-						{mappedChildren.layoutMain &&
-							<div className={styles.main} id="layoutMain">
-								{mappedChildren.layoutMain || null}
-							</div>}
+					{mappedChildren.layoutMain &&
+						<div className={styles.main} id="layoutMain">
+							{mappedChildren.layoutMain || null}
+						</div>}
 					</div>
 				</Row>
 				{mappedChildren.layoutFooter &&

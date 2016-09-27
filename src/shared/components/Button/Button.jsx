@@ -47,9 +47,10 @@ export default class Button extends Component {
 		let iconWrapStyles;
 		let tempSize = iconSize ? (iconSize + 'px') : null;
 
+
 		toggleClasses = classSet({
-			isDisabled,
-			isHighlighted
+			[styles.isDisabled]: isDisabled,
+			[styles.isHighlighted]: isHighlighted
 		});
 		classes = classNameProps.slice();
 		classes = classes.concat(type || '');
