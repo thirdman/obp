@@ -149,13 +149,14 @@
 		&:hover{
 			//background: rgba(255,255,255,.05);
 			background: rgba(0,0,0,.5);
+			cursor: pointer;
 			.body h5{
 				color: $nomosLightGrey;	
 			}
 		}
 		&.isSelected{
-			border-bottom: 4px solid $nomosBlue;
-			background: rgba(255,255,255,.05);
+			border-left: 4px solid $nomosBlue;
+			background: rgba(0,0,0,.5);
 			.body h5{
 				color: $nomosLightGrey;	
 			}
