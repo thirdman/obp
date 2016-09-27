@@ -19,6 +19,7 @@ export default class ContentItem extends Component {
 		hasDivider: React.PropTypes.bool,
 		hasBorder: React.PropTypes.bool,
 		hasBackground: React.PropTypes.bool,
+		hasPadding: React.PropTypes.bool,
 		validationError: React.PropTypes.bool,
 		validationMissing: React.PropTypes.bool,
 		validationMessageError: React.PropTypes.string,
@@ -55,6 +56,7 @@ export default class ContentItem extends Component {
 			hasDivider = false,
 			hasBorder = false,
 			hasBackground = false,
+			hasPadding = true,
 			validationError = false,
 			validationMissing = false
 			} = this.props;
@@ -73,6 +75,7 @@ export default class ContentItem extends Component {
 			[styles.hasDivider]: hasDivider,
 			[styles.hasBorder]: hasBorder,
 			[styles.hasBackground]: hasBackground,
+			[styles.hasPadding]: hasPadding,
 			[styles.validationError]: validationError,
 			[styles.validationMissing]: validationMissing
 		});
