@@ -153,9 +153,12 @@
 				color: $nomosLightGrey;	
 			}
 		}
-		&.active{
+		&.isSelected{
 			border-bottom: 4px solid $nomosBlue;
 			background: rgba(255,255,255,.05);
+			.body h5{
+				color: $nomosLightGrey;	
+			}
 		}		
 	}
 }
