@@ -34,6 +34,7 @@ export default class Avatar extends Component {
 	}
 
 	render() {
+		const { tooltip } = this.state;
 		const {
 			classNameProps = [],
 			type = 'user',
@@ -44,7 +45,6 @@ export default class Avatar extends Component {
 
 		let classes;
 		let defaultIcon;
-		let randomNumber = parseInt(Math.random() * ((9999999999 - 1111111111) + 1111111111), 10);
 
 		if (type === 'user') {
 			defaultIcon = iconUser;
@@ -63,7 +63,7 @@ export default class Avatar extends Component {
 			<div
 				className={cx(styles.Avatar, classes)}
 				data-tip={title}
-				data-for={`AvatarTooltip${randomNumber}`}
+				data-for={`AvatarTooltip${tooltip}`}
 				data-class={styles.tooltip}
 			>
 				{imageUrl ?
@@ -74,7 +74,7 @@ export default class Avatar extends Component {
 						dangerouslySetInnerHTML={{__html: defaultIcon}}
 					/>
 				}
-				<ReactTooltip id={`AvatarTooltip${randomNumber}`} type="light" />
+				<ReactTooltip id={`AvatarTooltip${tooltip}`} type="light" />
 			</div>
 		);
 	}
