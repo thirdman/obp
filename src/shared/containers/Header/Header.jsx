@@ -4,7 +4,7 @@ import { Breadcrumbs } from 'components';
 
 const styles = require('./Header.scss');
 
-const Header = ({ title, hasDivider = false, hasBreadcrumbs = true}) => (
+const Header = ({ title, hasDivider = false, hasBreadcrumbs = false}) => (
 	<div className={cx(styles.Header, (hasDivider ? styles.hasDivider : null))}>
 		{hasBreadcrumbs ?
 			<Breadcrumbs />

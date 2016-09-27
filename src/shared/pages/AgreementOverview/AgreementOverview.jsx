@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Overview } from 'layouts';
-import { SubNavWrap } from 'components';
+import { Breadcrumbs, SubNavWrap } from 'components';
 import { Header, ObjectSummary, Main, Secondary} from 'containers';
 import { connect } from '../../../utils/state';
 
@@ -132,13 +132,20 @@ export default class AgreementOverview extends Component {
 	}
 
 	/**
+					<Breadcrumbs key={'layoutBreadcrumbs'} params={routeParams} />
+				<Header key={'layoutHeader'} title="Agreement Overview" />
 	 */
 	render() {
 		console.log(agreement);
-		const { location } = this.props;
+		const { location, routeParams, route} = this.props;
+		console.log('route: ', route);
+		console.log('routeParams: ', routeParams);
 		return (
 			<Overview>
-				<Header key={'layoutHeader'} title="Agreement Overview" />
+				<div key={'layoutHeader'} >
+					<Breadcrumbs params={routeParams} route={route} />
+					<Header title="Agreement Overview" />
+				</div>
 				<ObjectSummary key={'layoutHero'} objectData={agreement} />
 				<SubNavWrap
 					key={'layoutNav'}
