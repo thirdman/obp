@@ -10,7 +10,7 @@ export default class InputText extends Component {
 	state = {
 		error: null,
 		hasContent: (
-			this.props.value // && this.props.value.length > 0
+			this.props.value && this.props.value.length > 0 // eslint-disable-line no-unneeded-ternary
 			) ?
 			true
 			: false,  // eslint-disable-line no-unneeded-ternary
