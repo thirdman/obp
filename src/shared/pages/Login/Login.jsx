@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import cx from 'classnames';
-import { Button, ContentItem, Info, Row } from 'components';
+import { Button, ContentItem, Info, InputText, Row } from 'components';
 import { Full } from 'layouts';
 import { connect } from '../../../utils/state';
 
@@ -15,8 +15,12 @@ export default class Login extends Component {
 	handleSubmit = (event) => {
 		if (event) { event.preventDefault(); }
 		const { auth } = this.context.store;
-		const username = this.usernameInput.value;
-		const password = this.passwordInput.value;
+		// console.log(this.usernameInput);
+		// console.log(this.passwordInput);
+		const username = this.usernameInput.textInput.value;
+		const password = this.passwordInput.textInput.value;
+		// console.log(username);
+		// console.log(password);
 
 		if (!this.validateInput(username, password)) {
 			return false;
@@ -66,25 +70,50 @@ export default class Login extends Component {
 										className={cx(globalStyles.contentItem,
 											globalStyles.hasValidation,
 											globalStyles.required)}>
+										<ContentItem hasPadding={false}>
+											<InputText
+												placeholder="Username/Email"
+												isRequired
+												hasRequiredIcon={false}
+												ref={(ref) => this.usernameInput = ref}
+												placeholderBelow
+												onKeyDownProps={this.quickSubmit}
+											/>
+										</ContentItem>
+{/*
 										<input
 											id="username"
 											type="text"
-											ref={(ref) => this.usernameInput = ref}
+											ref={(ref) => this.usernameInputOld = ref}
 											required="required"
 											onKeyDown={this.quickSubmit} />
 										<label htmlFor="username">Username/Email</label>
+*/}
 									</div>
 									<div
 										className={cx(globalStyles.contentItem,
 											globalStyles.hasValidation,
 											globalStyles.required)}>
+											<ContentItem hasPadding={false}>
+												<InputText
+													id="password"
+													type="password"
+													placeholder="Password"
+													ref={(ref) => this.passwordInput = ref}
+													isRequired
+													hasRequiredIcon={false}
+													onKeyDownProps={this.quickSubmit}
+												/>
+											</ContentItem>
+{/*
 										<input
 											id="password"
 											type="password"
-											ref={(ref) => this.passwordInput = ref}
+											ref={(ref) => this.passwordInputOld = ref}
 											required="required"
 											onKeyDown={this.quickSubmit} />
 										<label htmlFor="password">Password</label>
+*/}
 									</div>
 									{(error) &&
 										<ContentItem>
