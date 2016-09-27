@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { Row } from 'components';
 
-const styles = require('./Overview.scss');
+const styles = require('./Full.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class Full extends Component {
