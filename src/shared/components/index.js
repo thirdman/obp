@@ -16,6 +16,7 @@ export Info from './Info/Info';
 export IconButton from './IconButton/IconButton';
 export InputCheckbox from './InputCheckbox/InputCheckbox';
 export InputRadio from './InputRadio/InputRadio';
+export InputToggle from './InputToggle/InputToggle';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
 export ProgressBar from './ProgressBar/ProgressBar';
