@@ -21,6 +21,8 @@ const routes = getRoutes(store);
 if (process.env.NODE_ENV !== 'production') {
 	window.React = React;
 }
+// https://github.com/ReactTraining/react-router/issues/964
+browserHistory.listen(store.app.onUrlChange());
 
 function renderApp(AppComponent) {
 	render(
