@@ -31,19 +31,18 @@ export default (store) => {
 	const requireLogin = (nextState, replace, cb) => {
 		const { auth } = store;
 		// Kick you back to login page if have not logged in
-		console.log('checking logged in or not.... ');
 		auth.checkLoggedIn()
-			.then(() => {
-				cb();
-			})
-			.catch(() => {
-				routeHelper.updateNextPath(location.pathname);
-				replace({
-					pathname: '/login'
-				});
-
-				cb();
+		.then(() => {
+			cb();
+		})
+		.catch(() => {
+			routeHelper.updateNextPath(location.pathname);
+			replace({
+				pathname: '/login'
 			});
+
+			cb();
+		});
 	};
 
 	const onLogin = (nextState, replace, cb) => {
@@ -59,26 +58,29 @@ export default (store) => {
 	return (
 		<Route path="/" component={App}>
 			{ /* Routes - do not require logged in*/ }
-			<IndexRoute component={TempApiManager} />
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
-			<Route path="docs" component={DevComponentDocs} />
-			<Route path="dev" component={DevHome} />
-			<Route path="dev/home" component={DevHome} />
-			<Route path="dev/docs" component={DevComponentDocs} />
-			<Route path="dev/icons" component={DevIcons} />
-			<Route path="create" component={Create} />
-			<Route path="edit" component={Edit} />
-			<Route path="overview" component={Overview} />
-			<Route path="report" component={Report} />
-			<Route path="summary" component={Summary} />
-			<Route path="view" component={View} />
-			<Route path="agreements" component={AgreementsSummary} />
-			<Route path="agreements/:agreementId" component={AgreementOverview} />
-			<Route path="agreements/:agreementId/:sectionName" component={AgreementView} />
-			<Route path="agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
-			<Route path="integrations" component={SettingsIntegrations} />
-			<Route path="integrations/xero" component={SettingsIntegrationsDetail} />
+			<Route onEnter={requireLogin}>
+				<IndexRoute component={TempApiManager} />
+				<Route path=":orgId" component={SettingsIntegrations} />
+				<Route path="docs" component={DevComponentDocs} />
+				<Route path="dev" component={DevHome} />
+				<Route path="dev/home" component={DevHome} />
+				<Route path="dev/docs" component={DevComponentDocs} />
+				<Route path="dev/icons" component={DevIcons} />
+				<Route path="create" component={Create} />
+				<Route path="edit" component={Edit} />
+				<Route path="overview" component={Overview} />
+				<Route path="report" component={Report} />
+				<Route path="summary" component={Summary} />
+				<Route path="view" component={View} />
+				<Route path=":orgId/agreements" component={AgreementsSummary} />
+				<Route path=":orgId/agreements/:agreementId" component={AgreementOverview} />
+				<Route path=":orgId/agreements/:agreementId/:sectionName" component={AgreementView} />
+				<Route path=":orgId/agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
+				<Route path=":orgId/integrations" component={SettingsIntegrations} />
+				<Route path=":orgId/integrations/xero(/:section)" component={SettingsIntegrationsDetail} />
+			</Route>
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 import { Avatar, UiBrandLogo } from 'components';
 import cx from 'classnames';
 import { connect } from '../../../utils/state';
@@ -45,21 +45,24 @@ export default class MainNavWrap extends Component {
 
 		if (orgs.length) {
 			return orgs.map((org, index) => (
+			<Link to={`/${org.id}/integrations`} key={`orgIcon${index}`}>
 				<div
-					className={`${styles.media} ${currentOrg === org.orgName ? styles.isSelected : ''}`}
-					key={`orgIcon${index}`}>
+					className={
+						`${styles.media} ${currentOrg === org.id ? styles.isSelected : ''}`
+					}>
 					<span className={styles.figure}>
 						<Avatar
 							type="org"
 							size="small"
-							title={org.orgName}
+							title={org.attributes.name}
 							imageUrl="https://pbs.twimg.com/profile_images/668279339838935040/8sUE9d4C.jpg"
 						/>
 					</span>
 					<span className={styles.body}>
-						<h5>{org.orgName}</h5>
+						<h5>{org.attributes.name}</h5>
 					</span>
 				</div>
+			</Link>
 			));
 		} else {
 			return null;

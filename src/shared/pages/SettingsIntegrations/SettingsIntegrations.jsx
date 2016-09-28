@@ -1,12 +1,11 @@
 import { Component } from 'react';
-import { autobind } from 'core-decorators';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { View } from 'layouts';
 // import { SubNavWrap } from 'components';
 import { Header } from 'containers';
-// import { connect } from '../../../utils/state';
+import { connect } from '../../../utils/state';
 
-// @connect('store')
+@connect('store')
 export default class SettingsIntegrations extends Component {
 
 	/*
@@ -16,25 +15,22 @@ export default class SettingsIntegrations extends Component {
 	}
 	*/
 
-	@autobind
-	onClick(link) {
-		return () => {
-			browserHistory.push(link);
-		};
-	}
-
 	render() {
+		const { app, auth } = this.context.store;
+		const { currentOrg = null } = app;
+		const org = auth.getOrg(currentOrg);
+		let orgName = org && org.attributes.name;
+
 		return (
 			<View>
-				<Header key={'layoutHeader'} title={'Your Integrations'} />
+				<Header key={'layoutHeader'} title={`Your Integrations for ${orgName}`} />
 				<div key={'layoutHero'}>
 					<p>Select the integration you wish to activate or edit</p>
 				</div>
-				<div> key={'layoutMain'} >
-					{
-					// KENNEK TO PUT API MANAGER LIST HERE
-					// SO WE CAN SEE IT
-					}
+				<div key={'layoutMain'} >
+					<Link to={`/${currentOrg}/integrations/xero`}>
+						<span>{'Xero'}</span>
+					</Link>
 				</div>
 				<div key={'layoutSecondary'} >
 					Temporary text to remind Gareth about this space

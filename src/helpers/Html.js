@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom/server';
 import serialize from 'serialize-javascript';
@@ -23,8 +24,8 @@ export default class Html extends Component {
 		const {assets, component, store} = this.props;
 		const content = component ? ReactDOM.renderToString(component) : '';
 		const head = Helmet.rewind();
-	 	return (
-			<html lang="en-us">
+		return (
+			<html lang={'en-us'}>
 				<head>
 					{head.base.toComponent()}
 					{head.title.toComponent()}
@@ -46,21 +47,20 @@ export default class Html extends Component {
 							type="text/css"
 							charSet="UTF-8" />
 					)}
-
-					{/* (will be present only in development mode) */}
-					{/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
-					{/* can smoothen the initial style flash (flicker) on page load in development mode. */}
-					{/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
+	{/* (will be present only in development mode) */}
+	{/* outputs a <style/> tag with all bootstrap styles + App.scss + it could be CurrentPage.scss. */}
+	{/* can smoothen the initial style flash (flicker) on page load in development mode. */}
+	{/* ideally one could also include here the style for the current page (Home.scss, About.scss, etc) */}
 				</head>
 				<body>
 					<div
 						id="content"
 						dangerouslySetInnerHTML={{__html: content}}
-						style={{height: `100%`}} />
+						style={{height: '100%'}} />
 					<script
 						dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store)};`}}
 						charSet="UTF-8" />
-					<script src={assets.javascript.main} charSet="UTF-8"/>
+					<script src={assets.javascript.main} charSet="UTF-8" />
 				</body>
 			</html>
 		);
