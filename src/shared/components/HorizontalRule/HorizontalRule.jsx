@@ -15,7 +15,7 @@ export default class HorizontalRule extends Component {
 			} = this.props;
 
 		let toggleClasses;
-		let classes = classNameProps;
+		let classes;
 		let tempStyle;
 
 		toggleClasses = classSet({
@@ -23,6 +23,7 @@ export default class HorizontalRule extends Component {
 			[styles.hasMargins]: hasMargins
 		});
 
+		classes = classNameProps.slice();
 		classes = classes.concat(color);
 		classes = classes
 			.filter((cName) => { return !!cName; })

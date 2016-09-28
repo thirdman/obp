@@ -1,0 +1,228 @@
+@import "../../globals/styles/_global.scss";
+
+.InputText {
+	padding: $padding 0;
+	position: relative;
+	margin-bottom: $padding;
+	&.inline{
+		overflow-x: hidden; 
+	}
+	&.clean{
+		margin-top: 8px;
+		input{
+			~ label{
+				position: absolute;
+				top: 0;
+		    left: 0;
+		    color: #aaa;
+		    font-size: 1em;
+				font-style: italic;
+		    font-weight: normal;
+		    line-height: 1em;
+		    transition: 0.2s ease;
+		    padding: 8px 16px 8px 0px; 
+			}
+			&:focus{
+				outline: none;
+				background: #fff;
+		    ~ label {
+		      color: #777;
+		      transform: translate(-12%, -50%) scale(0.75);
+		      // font-style: inherit;
+				}
+			}
+/*
+			&:valid{
+				outline: none;
+		    ~ label {
+		      color: #777;
+		      //transform: translate(-12%, -50%) scale(0.75);
+		      font-style: italic;
+		      opacity: 0;
+				}
+			}
+*/
+		}
+		&.hasContent{
+			input{
+				~ label{
+		      opacity: 0;
+				}
+			}
+		}
+	}
+	&.space{
+		margin: 24px 0;
+	}
+	&.small{
+		width: 100px;
+		display: inline-block;
+	}
+	&.medium{}
+	&.large{}
+	input{
+	  padding: 5px 0px;
+	  border: none;
+	  border-bottom: 1px solid #ddd;
+	  background: transparent;
+	  margin: 0 8px 0 0;
+	  width: 100%;
+	  font-size: 1em;
+		position: relative;
+		outline: none;
+	  z-index: 1;
+	
+		~ label{
+			position: absolute;
+			top: 0;
+	    left: 0;
+	    color: #aaa;
+	    font-size: 1em;
+			font-style: italic;
+	    font-weight: normal;
+	    line-height: 1em;
+	    transition: 0.2s ease;
+	    padding: 8px 16px 8px 0px; 
+		}
+
+		&:focus{
+			outline: none;
+			border-bottom: 1px solid #4A90E2;			
+	    ~ label {
+	      color: #777;
+	      transform: translate(-12%, -50%) scale(0.75);
+	      // font-style: inherit;
+			}
+		}
+/*
+		&:valid{
+			outline: none;
+	    ~ label {
+	      color: #777;
+	      transform: translate(-12%, -50%) scale(0.75);
+	      font-style: inherit;
+			}
+		}
+*/
+	}
+	&.normal{
+		//margin-top: 16px;
+		input{
+			border: 1px solid #ccc;
+			padding-left: 8px;
+			~ label{
+				position: absolute;
+				top: 8px;
+		    left: 0;
+		    color: #aaa;
+		    font-size: 1em;
+				font-style: italic;
+		    font-weight: normal;
+		    line-height: 1em;
+		    transition: 0.2s ease;
+		    padding: 8px 16px 8px 8px; 
+			}
+			&:focus{
+				outline: none;
+				border: 1px solid $nomosBlue;
+		    ~ label {
+					top: 8px;
+		      color: #777;
+		      transform: none;
+		      font-style: italic;
+		      opacity: 0;
+				}
+			}
+/*
+			&:valid{
+				outline: none;
+		    ~ label {
+					top: 8px;
+		      color: #777;
+		      transform: none;
+		      font-style: italic;
+		      opacity: 0;
+				}
+			}
+*/
+		}
+		label{
+		}
+	}
+	&.placeholderBelow{
+		padding-bottom: 1em;
+		margin-bottom: 0;
+		input ~ label{
+			padding: 0;
+			top: 8px;
+		}
+		input{
+			&:focus{
+				~ label{
+					top: 40px;
+		      color: #777;
+		      transform: none;
+		      font-style: italic;
+		      opacity: 1;
+		      font-size: 10px;
+				}
+			}
+		}
+		&.hasContent{
+			input{
+				~ label{
+					top: 40px;
+		      color: #777;
+		      transform: none;
+		      font-style: italic;
+		      opacity: 1;
+		      font-size: 10px;
+				}
+			}
+		}
+	}
+	&.hasValidation{
+	}
+	&.hasError{
+		input{
+			border: 1px solid $nomosRed;
+			background: #f9f9f9;
+			&:focus{
+				background: #fff;
+				border: 1px solid $nomosBlue;
+			}
+		}
+	}
+	&.hasContent{
+		
+	}
+	&.contentItem{
+		//moves it up for when it is in a content item to make the error message touch.
+		margin-top: -8px;
+	}
+	.requiredMarker{
+    position: absolute;
+    top: 0;
+    right: -8px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    background: #fff;
+    background-size: 16px;
+    z-index: 4;
+	}
+	&.isRequired{
+		input{
+		}
+		label{
+			&:after{
+				//content: ' (Required)';
+				// text-transform: capitalize;
+			}
+		}
+	}
+}

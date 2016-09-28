@@ -18,8 +18,8 @@ hasValidation		|	`bool`		|	false	|	if validation should show
 isRequired			|	`bool`		|	false	|	if this input is required to be completed
 isValid					|	`bool`		|	false	|	indicated this contentItem is valid and complete
 hasDivider			|	`bool`		|	false	|	puts a line above the contentItem
-hasDivider			|	`bool`		|	false	|	controls whether a border is to be shown
 hasBackground		|	`bool`		|	false	|	controls whether a background is to be shown
+hasPadding			|	`bool`		|	true	|	adds 8px padding above & below. (set to false when running contentItems without titles)
 validationError	|	`bool`		|	false	|	when true the component will show the content error message
 validationMissing	|	`bool`		|	false	|	when true the component will show the missing content error
 validationMessageError		|	`string`	|	-	|	message to appear if input is invalid

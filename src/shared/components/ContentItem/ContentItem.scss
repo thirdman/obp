@@ -4,7 +4,7 @@
 .ContentItem{
 	position: relative;
 	margin: 8px 0;
-	padding: 8px 0;
+	padding: 0;
 	.description{
 		padding: 0;
 		margin: 0;
@@ -114,7 +114,10 @@
 		}
 	}
 	
-	// component modifiers
+	// MODIFIERS
+	&.hasPadding{
+		padding: 8px 0;
+	}
 	&.inline{
 		display: inline-block;
 		+.inline{

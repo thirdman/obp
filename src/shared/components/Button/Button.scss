@@ -59,7 +59,7 @@
 			background:lighten($nomosGrey, 5%);
 		}
 	}
-	&.highlighted, &.selected, &.blue{
+	&.isHighlighted, &.highlighted, &.selected, &.blue{
 		background:$nomosBlue; 
 		color: #fff;
 		&:hover{
