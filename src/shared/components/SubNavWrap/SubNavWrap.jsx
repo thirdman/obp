@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { autobind } from 'core-decorators';
-import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { Icon } from 'components';
 
 const styles = require('./SubNavWrap.scss');
@@ -16,30 +15,20 @@ export default class SubNavWrap extends Component {
 		])
 	}
 
-	@autobind
-	onClick(link) {
-		return () => {
-			browserHistory.push(link);
-		};
-	}
-
 	render() {
-		const {listData, currentlySelected} = this.props;
+		const {listData, selected} = this.props;
 		return (
 			<ul className={styles.SubNavWrap}>
-				{listData && listData.map((item, index) =>
-					(
+				{listData && listData.map(({link, name, label}, index) =>
+					(<Link to={link} key={`navitem${index}`}>
 						<li
-							key={`navitem${index}`}
-							className={index === currentlySelected ? styles.isSelected : ''}
-							onClick={this.onClick(item.link)}
-							>
-							{item.label}
+							className={name === selected ? styles.isSelected : ''}>
+							{label}
 							<span className={styles.iconWrap}>
-								<Icon icon="chevron-right" color={index === currentlySelected ? 'blue' : 'grey'} />
+								<Icon icon="chevron-right" color={name === selected ? 'blue' : 'grey'} />
 							</span>
 						</li>
-					))
+					</Link>))
 				}
 				{this.props.children}
 			</ul>
