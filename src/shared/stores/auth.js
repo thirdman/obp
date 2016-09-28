@@ -10,11 +10,7 @@ export default class AuthStore {
 	jwt = null;
 
 	@observable user = {};
-	@observable orgs = [
-		{ orgName: 'Org 1' },
-		{ orgName: 'Org 2' },
-		{ orgName: 'Org 3' }
-	];
+	@observable orgs = [];
 	@observable error = '';
 
 	@action
@@ -26,6 +22,11 @@ export default class AuthStore {
 	@action
 	updateError(error = null) {
 		this.error = error;
+	}
+
+	@action
+	updateOrgs(orgs = []) {
+		this.orgs = orgs;
 	}
 
 	@computed
@@ -57,6 +58,8 @@ export default class AuthStore {
 	logout() {
 		window.localStorage.token = '';
 		this.updateUser({});
+		this.updateOrgs([]);
+		this.updateError('');
 	}
 
 	jwtAuth() {
@@ -90,20 +93,12 @@ export default class AuthStore {
 		});
 	}
 
-	@action
 	getOrgs() {
-		this.orgs = [
-			{ orgName: 'Org 1' },
-			{ orgName: 'Org 2' },
-			{ orgName: 'Org 3' }
-		];
-		/*
 		client.get('/organisations').then((res) => {
-			resolve(res);
+			this.updateOrgs(res.data);
 		}).catch((err) => {
-			reject(err);
+			this.updateError(err.errors[0]);
 		});
-		*/
 	}
 
 	saveJwt(jwt) {
@@ -121,5 +116,12 @@ export default class AuthStore {
 
 		browserHistory.push(nextPath);
 		routeHelper.clear();
+	}
+
+	getOrg(id) {
+		let currentOrg = _.find(this.orgs, (org) => {
+			return org.id === id;
+		});
+		return currentOrg;
 	}
 }
