@@ -10,7 +10,24 @@ export default class AuthStore {
 	jwt = null;
 
 	@observable user = {};
-	@observable orgs = [];
+	@observable orgs = [
+		{
+			type: 'organisations',
+			id: 3045,
+			attributes: {name: 'Dave2s Demo Org'}
+		}, {
+			type: 'organisations',
+			id: 282,
+			attributes: {name: 'Dtest2 Legal Firm'}
+		}, {
+			type: 'organisations',
+			id: 2737,
+			attributes: {name: 'Gareth is cool'}
+		}, {
+			type: 'organisations',
+			id: 3058,
+			attributes: {name: 'NEW ORG 18/12'}
+		}];
 	@observable error = '';
 
 	@action

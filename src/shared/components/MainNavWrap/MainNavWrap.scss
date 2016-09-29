@@ -9,6 +9,9 @@
   //overflow: hidden;
   pointer-events: none;
   z-index: 150;
+  a{
+	  text-decoration: none;
+  }
 	.navBarContent{
     position: relative;
     display: block;
@@ -134,6 +137,7 @@
 	// media: see global.scss
 	.media{
 		padding: 4px 4px 4px 8px;
+		text-decoration: none;
 		.figure{
 			width: 24px;
 			margin-top: 4px;
