@@ -60,6 +60,7 @@ export default (store) => {
 			{ /* Routes - do not require logged in*/ }
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
+			<Route onEnter={requireLogin}>
 				<IndexRoute component={TempApiManager} />
 				<Route path=":orgId" component={SettingsIntegrations} />
 				<Route path="docs" component={DevComponentDocs} />
@@ -72,14 +73,13 @@ export default (store) => {
 				<Route path="overview" component={Overview} />
 				<Route path="report" component={Report} />
 				<Route path="summary" component={Summary} />
+				<Route path="view" component={View} />
 				<Route path=":orgId/agreements" component={AgreementsSummary} />
 				<Route path=":orgId/agreements/:agreementId" component={AgreementOverview} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName" component={AgreementView} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
 				<Route path=":orgId/integrations" component={SettingsIntegrations} />
 				<Route path=":orgId/integrations/xero(/:section)" component={SettingsIntegrationsDetail} />
-			<Route onEnter={requireLogin}>
-				<Route path="view" component={View} />
 			</Route>
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
