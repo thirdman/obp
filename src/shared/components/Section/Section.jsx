@@ -15,6 +15,7 @@ export default class Section extends Component {
 		description: React.PropTypes.string,
 		hasDivider: React.PropTypes.bool,
 		isLoading: React.PropTypes.bool,
+		isError: React.PropTypes.bool,
 		loadingMessage: React.PropTypes.string,
 		styleProps: React.PropTypes.object,
 		classNameProps: React.PropTypes.array,
@@ -33,6 +34,7 @@ export default class Section extends Component {
 			hasDivider,
 			isLoading,
 			loadingMessage,
+			isError,
 			classNameProps = [],
 			styleProps,
 			children
@@ -43,6 +45,7 @@ export default class Section extends Component {
 
 		toggleClasses = classSet({
 			[styles.isLoading]: isLoading,
+			[styles.isError]: isError,
 			[styles.hasDivider]: hasDivider
 		});
 
@@ -58,10 +61,17 @@ export default class Section extends Component {
 							<Icon icon="loading" color="grey" size={18} />
 						</div>
 					</div>
-				{loadingMessage &&
+				{isError ?
+					<div className={styles.iconWrap + ' ' + styles.errorIcon}>
+						<Icon icon="alert" color="red" />
+					</div>
+					: null
+				}
+				{loadingMessage ?
 					<div className={styles.loadingMessage}>
 						{loadingMessage }
 					</div>
+					: null
 				}
 				{hasDivider ?
 					<HorizontalRule classNameProps={['normal']} />
@@ -79,7 +89,7 @@ export default class Section extends Component {
 					<div className={styles.contentDescription}>{description}</div>
 					: null
 				}
-				{children}
+				{!isError ? children : null}
 			</div>
 		);
 	}

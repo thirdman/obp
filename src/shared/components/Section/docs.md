@@ -14,6 +14,7 @@ subtitle				|	`string`	|	''				|	(optional) if exists, will display a subtitle f
 description			|	`string`	|	''				|	(optional) if exists, will display a div with a paragraph
 loadingMessage	|	`string`	|	-					|	text to appear while loading. If has content, then loading message will appear.
 isLoading				|	`bool`		|	false			|	shows the loading icon
+isError					|	`bool`		|	false			|	error styling. Use loadingMessage to display text
 hasDivider			|	`bool`		|	false			|	show a dividing line abov this component
 styleProps			|	`object` 	| - 				| Object of styles to use
 classNameProps	|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
@@ -65,6 +66,14 @@ children				|	`oneOfType` | - 			| (required) this component is designed to wrap
 		"classNameProps": ["isLoading"],
 		"type":"section",
 		"isloading": true,
+		"description": "Porta a magna mattis nascetur consequat velit urna eget parturient id per sit neque vel scelerisque luctus vestibulum ultrices volutpat. A nunc at dis penatibus conubia id vestibulum consectetur orci taciti a a ."
+	}
+},{
+	"component": "Section",
+	"props": {
+		"type":"section",
+		"isError": true,
+		"loadingMessage": "This is the loading message",
 		"description": "Porta a magna mattis nascetur consequat velit urna eget parturient id per sit neque vel scelerisque luctus vestibulum ultrices volutpat. A nunc at dis penatibus conubia id vestibulum consectetur orci taciti a a ."
 	}
 },{

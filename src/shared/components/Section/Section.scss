@@ -45,7 +45,27 @@
 		}
 	}
 
-	
+	// INTERNALS
+	.loadingMessage{
+		margin: 8px;
+		text-align: center;
+	}
+
+	//MODIFIERS
+	&.isError{
+		border: 1px solid $nomosRed;
+		.iconWrap.errorIcon{
+			width: 80px;
+			height: 80px;
+	    margin-left: auto;
+	    margin-right: auto;
+	    margin-top: 8px;
+	    margin-bottom: 8px;
+		}
+		.loadingMessage{
+			color: $nomosRed;
+		}
+	}	
 	//MISC PROPS
 	&.normal{
 		text-align: left;
