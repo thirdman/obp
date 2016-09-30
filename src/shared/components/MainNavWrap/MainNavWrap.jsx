@@ -48,7 +48,7 @@ export default class MainNavWrap extends Component {
 			<Link to={`/${org.id}/integrations`} key={`orgIcon${index}`}>
 				<div
 					className={
-						`${styles.media} ${currentOrg === org.id ? styles.isSelected : ''}`
+						`${styles.media} ${currentOrg.id === org.id ? styles.isSelected : ''}`
 					}>
 					<span className={styles.figure}>
 						<Avatar
