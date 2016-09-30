@@ -46,17 +46,17 @@ export default class SettingsIntegrationsDetail extends Component {
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg}/integrations/xero`,
+							link: `/${currentOrg.id}/integrations/xero`,
 							name: 'connect'
 						},
 						{
 							label: 'Match',
-							link: `/${currentOrg}/integrations/xero/match-entity`,
+							link: `/${currentOrg.id}/integrations/xero/match-entity`,
 							name: 'match-entity'
 						},
 						{
 							label: 'Invoice',
-							link: `/${currentOrg}/integrations/xero/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
 							name: 'invoice-settings'
 						}
 					]}
@@ -72,11 +72,19 @@ export default class SettingsIntegrationsDetail extends Component {
 	}
 
 	getMainComp() {
+		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
 		switch (section) {
 			case 'connect':
 				return (
-					<ConnectionSection />
+					<ConnectionSection
+						token={currentOrg.accessTokens} />
+				);
+			case 'done-auth':
+				return (
+					<ConnectionSection
+						token={currentOrg.accessTokens}
+						doneAuth />
 				);
 			case 'match-entity':
 				return (
