@@ -8,18 +8,17 @@ import { connect } from '../../../utils/state';
 @connect('store')
 export default class SettingsIntegrations extends Component {
 
-	/*
-	componentWillMount() {
-		const { routeParams } = this.props;
-		console.log(routeParams);
-	}
-	*/
-
 	render() {
 		const { app, auth } = this.context.store;
 		const { currentOrg = null } = app;
-		const org = auth.getOrg(currentOrg);
+		const org = auth.getOrg(currentOrg.id);
 		let orgName = org && org.attributes.name;
+		let connected;
+
+		if (currentOrg.accessTokens.xero &&
+			currentOrg.accessTokens.xero.connectedAt) {
+			connected = true;
+		}
 
 		return (
 			<View>
@@ -28,8 +27,8 @@ export default class SettingsIntegrations extends Component {
 					<p>Select the integration you wish to activate or edit</p>
 				</div>
 				<div key={'layoutMain'} >
-					<Link to={`/${currentOrg}/integrations/xero`}>
-						<span>{'Xero'}</span>
+					<Link to={`/${currentOrg.id}/integrations/xero`}>
+						<span>{`Xero ${connected ? '- Connected' : ''}`}</span>
 					</Link>
 				</div>
 				<div key={'layoutSecondary'} >
