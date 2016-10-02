@@ -37,7 +37,23 @@ export default class SettingsIntegrations extends Component {
 						<span>{'Xero'}</span>
 					</Link>
 					<Link to={`/${currentOrg}/integrations/xero`}>
-						<ObjectInfo title="Xero" type="custom" imageUrl={xeroLogo} />
+						<ObjectInfo
+							title="Xero"
+							type="custom"
+							subType="Financial Software"
+							imageUrl={xeroLogo}
+							buttons={[
+								{	text: 'View',
+									helpText: 'View this Integration',
+									icon: {
+										icon: 'view',
+										color: 'lightGrey',
+										classNameProps: ['normal']
+										},
+									classNameProps: ['normal']
+								}
+							]}
+						/>
 					</Link>
 				</div>
 				<div key={'layoutSecondary'} >

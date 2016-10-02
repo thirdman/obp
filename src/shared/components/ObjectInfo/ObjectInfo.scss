@@ -58,6 +58,11 @@ $sizeSmall: 32px;
 					content: " ";
 				}
 			}
+			span.objectSubType{
+				&:after{
+					content: " ";
+				}
+			}
 		}
 		span.objectType + span:before {
 		    content: " / "; 

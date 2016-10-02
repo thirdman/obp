@@ -11,6 +11,7 @@ ObjectInfo
 title										|	`string`	|	-					|	title text
 id											|	`string`	|	-					|	object id
 type										|	`string`	|	-					|	object type (subtype), or 'custom'
+subType									|	`string`	|	-					|	secondary level type to be displayed
 imageUrl								|	`string`	|	-					|	url to use if type = 'custom'
 mode										|	`string`	|	-					|	object mode (active/inactive)
 display									|	`string`	|	'large'		|	sets the display type of the output. (oneOf: 'large', 'small', ''flat)
