@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router';
-import { Overview } from 'layouts';
+import { Summary } from 'layouts';
 import { ObjectInfo } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
@@ -27,15 +27,12 @@ export default class SettingsIntegrations extends Component {
 		let orgName = org && org.attributes.name;
 
 		return (
-			<Overview>
+			<Summary>
 				<Header key={'layoutHeader'} title={`Your Integrations for ${orgName}`} />
 				<div key={'layoutHero'}>
 					<p>Select the integration you wish to activate or edit</p>
 				</div>
 				<div key={'layoutMain'} >
-					<Link to={`/${currentOrg}/integrations/xero`}>
-						<span>{'Xero'}</span>
-					</Link>
 					<Link to={`/${currentOrg}/integrations/xero`}>
 						<ObjectInfo
 							title="Xero"
@@ -58,9 +55,13 @@ export default class SettingsIntegrations extends Component {
 					</Link>
 				</div>
 				<div key={'layoutSecondary'} >
-					Temporary text to remind Gareth about this space
+					<h4>What is an integration?</h4>
+					<p>Integrations allow you to extend the
+							functionality of nomos one with related software you use. For example, if you
+							use Xero accounting software, you can view invoice information right with your
+							entities inside nomos one. </p>
 				</div>
-			</Overview>
+			</Summary>
 		);
 	}
 }
