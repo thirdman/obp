@@ -115,4 +115,7 @@ $sizeSmall: 32px;
 	&.flat{
 		box-shadow: none;
 	}
+	&.hasBorder{
+		border: 1px solid $nomosLine;
+	}
 }

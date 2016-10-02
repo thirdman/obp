@@ -53,6 +53,7 @@ export default class SettingsIntegrations extends Component {
 									classNameProps: ['normal']
 								}
 							]}
+							classNameProps={['hasBorder']}
 						/>
 					</Link>
 				</div>
