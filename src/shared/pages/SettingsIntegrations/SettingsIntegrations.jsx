@@ -1,9 +1,14 @@
 import { Component } from 'react';
 import { Link } from 'react-router';
-import { View } from 'layouts';
-// import { SubNavWrap } from 'components';
+import { Overview } from 'layouts';
+import { ObjectInfo } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
+
+// Khanh we need to abstract this for future flexibility:
+// const xeroLogo = '/images/assets/xero.png';
+// Faked logo url because png won't work:
+const xeroLogo = 'http://www.stoneconsulting.com.au/wp-content/uploads/2016/04/xero-logo.png';
 
 @connect('store')
 export default class SettingsIntegrations extends Component {
@@ -22,7 +27,7 @@ export default class SettingsIntegrations extends Component {
 		let orgName = org && org.attributes.name;
 
 		return (
-			<View>
+			<Overview>
 				<Header key={'layoutHeader'} title={`Your Integrations for ${orgName}`} />
 				<div key={'layoutHero'}>
 					<p>Select the integration you wish to activate or edit</p>
@@ -31,11 +36,12 @@ export default class SettingsIntegrations extends Component {
 					<Link to={`/${currentOrg}/integrations/xero`}>
 						<span>{'Xero'}</span>
 					</Link>
+					<ObjectInfo title="Xero" type="custom" imageUrl={xeroLogo} />
 				</div>
 				<div key={'layoutSecondary'} >
 					Temporary text to remind Gareth about this space
 				</div>
-			</View>
+			</Overview>
 		);
 	}
 }

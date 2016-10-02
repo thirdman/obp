@@ -7,20 +7,6 @@ const globalStyles = require('../../pages/App/App.scss');
 
 export default class ObjectInfo extends Component {
 
-	static propTypes = {
-		title: React.PropTypes.string,
-		id: React.PropTypes.string,
-		type: React.PropTypes.string,
-		mode: React.PropTypes.string,
-		display: React.PropTypes.string,
-		buttons: React.PropTypes.array,
-		children: React.PropTypes.oneOfType([
-			React.PropTypes.arrayOf(React.PropTypes.node),
-			React.PropTypes.node
-		]),
-		classNameProps: React.PropTypes.array
-	}
-
 	getButtonComps() {
 		const { buttons = null } = this.props;
 		let buttonComps;
@@ -50,12 +36,13 @@ export default class ObjectInfo extends Component {
 			classNameProps = [],
 			title,
 			type = 'property',
+			imageUrl,
 			mode,
 			display = 'large',
 			id
 		} = this.props;
 		let classes;
-
+		console.log(imageUrl);
 		classes = classNameProps.slice();
 		classes = classes.concat(display || '');
 		classes = classes
@@ -69,7 +56,11 @@ export default class ObjectInfo extends Component {
 					classes,
 					globalStyles.row)} >
 				<div className={styles.iconWrap}>
+				{type === 'custom' ?
+					<img src={imageUrl} alt={title} />
+				:
 					<Icon icon={type} color={!mode === 'Inactive' ? 'grey' : 'lightGrey'} />
+				}
 				</div>
 				<div className={styles.titleWrap}>
 					<div className={styles.buttonWrap}>
@@ -77,18 +68,41 @@ export default class ObjectInfo extends Component {
 					</div>
 					<h3>{title}{mode === 'Inactive' ? ' (Inactive)' : null}</h3>
 					<h4 className={styles.subtitle}>
-						<span className={styles.objectId}>
-							<span className={styles.bold}>ID:</span> {id}
-						</span>
-						<span className={styles.objectType}>
-							<span className={styles.bold}> Type:</span> {type}
-						</span>
-						<span className={styles.objectType}>
-							<span className={styles.bold}> Mode:</span> {mode}
-						</span>
+						{id ?
+							<span className={styles.objectId}>
+								<span className={styles.bold}>ID:</span> {id}
+							</span>
+						: null
+						}
+						{type ?
+							<span className={styles.objectType}>
+								<span className={styles.bold}> Type:</span> {type}
+							</span>
+						: null
+						}
+						{mode ?
+							<span className={styles.objectType}>
+								<span className={styles.bold}> Mode:</span> {mode}
+							</span>
+						: null
+						}
 					</h4>
 				</div>
 			</div>
 		);
+	}
+	static propTypes = {
+		title: React.PropTypes.string,
+		id: React.PropTypes.string,
+		type: React.PropTypes.string,
+		imageUrl: React.PropTypes.string,
+		mode: React.PropTypes.string,
+		display: React.PropTypes.string,
+		buttons: React.PropTypes.array,
+		children: React.PropTypes.oneOfType([
+			React.PropTypes.arrayOf(React.PropTypes.node),
+			React.PropTypes.node
+		]),
+		classNameProps: React.PropTypes.array
 	}
 }
