@@ -24,11 +24,18 @@ export default class ConnectionSection extends Component {
 	render() {
 		return (
 			<div>
-				<h3>{'Connection Section'}</h3>
-				<div>{'Here goes the connection section'}</div>
+				<h3>{'Connection'}</h3>
+				<div className="">
+					<p>1. This will open up a login screen for you to access to your {'{ TITLE }'} account.</p>
+					<p>2. Select the scope this connection will apply to.</p>
+					<p>3. Once confirmed, you will be redirected here and see that the connection is enabled.</p>
+					<p>4. Close this window and return to the nomos one application.</p>
+				</div>
 				<Button
 					content={'Connect to Xero'}
-					onClickProps={this.onClick} />
+					onClickProps={this.onClick}
+					classNameProps={['large', 'round', 'highlighted']}
+				/>
 			</div>
 		);
 	}

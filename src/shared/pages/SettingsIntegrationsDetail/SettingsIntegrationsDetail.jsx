@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import { Link } from 'react-router';
 import { View } from 'layouts';
-import { SubNavWrap } from 'components';
+import { Button, Column, HorizontalRule, Row, SubNavWrap } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 import {
@@ -8,6 +9,8 @@ import {
 	EntitySection,
 	InvoiceSection
 } from './containers';
+
+const globalStyles = require('../App/App.scss');
 
 @connect('store')
 export default class SettingsIntegrationsDetail extends Component {
@@ -36,9 +39,26 @@ export default class SettingsIntegrationsDetail extends Component {
 
 		return (
 			<View>
-				<Header key={'layoutHeader'} title={'PUT TITLE HERE'} />
-				<div key={'layoutHero'}>
-					<p>Gareth will put the xero logo here?</p>
+				<Header key={'layoutHeader'} title={'Integration Detail'} />
+				<div key={'layoutHero'} className={globalStyles.padding}>
+					<Row>
+						<Column occupy={3}>
+							<h4>Integration</h4>
+							<p>Xero</p>
+						</Column>
+						<Column occupy={3}>
+							<h4>Type</h4>
+							<p>Accounting Software</p>
+						</Column>
+						<Column occupy={3}>
+							<h4>Status</h4>
+							<p>{'{ CONNECTION STATUS }'}</p>
+						</Column>
+					</Row>
+						<Link to={'/integrations'}>
+							<Button classNameProps={['text']} content="Back to integrations" />
+						</Link>
+						<HorizontalRule />
 				</div>
 				<SubNavWrap
 					key={'layoutNav'}
@@ -61,7 +81,7 @@ export default class SettingsIntegrationsDetail extends Component {
 						}
 					]}
 				/>
-				<div key={'layoutMain'} >
+				<div key={'layoutMain'} className={globalStyles.padding}>
 					{this.getMainComp()}
 				</div>
 				<div key={'layoutSecondary'} >
