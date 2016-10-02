@@ -36,7 +36,9 @@ export default class SettingsIntegrations extends Component {
 					<Link to={`/${currentOrg}/integrations/xero`}>
 						<span>{'Xero'}</span>
 					</Link>
-					<ObjectInfo title="Xero" type="custom" imageUrl={xeroLogo} />
+					<Link to={`/${currentOrg}/integrations/xero`}>
+						<ObjectInfo title="Xero" type="custom" imageUrl={xeroLogo} />
+					</Link>
 				</div>
 				<div key={'layoutSecondary'} >
 					Temporary text to remind Gareth about this space

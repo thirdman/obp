@@ -19,11 +19,14 @@
 	p{	}
 }
 
-a:link{
+a{
 	color: $nomosBlue;
 	outline: none;
+	text-decoration: none;
 }
-
+p a{
+	text-decoration: underline;
+}
 
 /*
 * MEDIA OBJECT
