@@ -65,6 +65,18 @@
 			}
 		}
 	}
+	//FORCED LOADING
+	&.isLoading{
+		border-bottom: none;
+		.saving{
+			opacity: 0;
+		}
+		.iconWrap{
+			animation: spin 1s linear;
+			animation-fill-mode: forwards;
+			animation-iteration-count: infinite;
+		}
+	}
 }
 
 

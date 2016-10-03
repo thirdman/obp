@@ -1,7 +1,8 @@
 UiBrandLogo
 
 *****title*****
-Handles the experimental background image in the /status page. Somewhat standalone, using a custom image dataset of the unslash.com api.
+the logo at top left.
+
 
 ####props
 |Prop		|	Type		|	Default		|	Description

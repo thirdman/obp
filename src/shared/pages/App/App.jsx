@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Helmet from 'react-helmet';
-import { MainNavWrap } from 'components';
+import { MainNavWrap, UiBrandLogo } from 'components';
 
 import config from '../../../config';
 
@@ -22,10 +22,46 @@ export default class App extends Component {
 		children: PropTypes.object.isRequired
 	};
 
+	state={
+		isConnecting: false,
+		isLoading: true
+	}
+	componentDidMount() {
+		setTimeout(() => {
+			this.setState({
+				isConnecting: true,
+				isLoading: false
+				});
+			}, 3000);
+		setTimeout(() => {
+			this.setState({
+				isConnecting: false,
+				isLoading: false
+				});
+			}, 6000);
+	}
 	render() {
 		return (
-			<div className={styles.app}>
+			<div
+			className={styles.app
+			+ ' ' + (this.state.isLoading ? styles.isLoading : '')
+			+ ' ' + (this.state.isConnecting ? styles.isConnecting : '')
+			}
+			>
 				<Helmet {...config.app.head} />
+				<div className={styles.appLoading + ' ' + styles.centered} >
+					<UiBrandLogo isSmall isLoading />
+						<div className={styles.loadingMessage}>
+							{this.state.isConnecting ?
+								<span>Connecting ...</span>
+								: null
+							}
+							{this.state.isLoading ?
+								<span>Loading Interface ...</span>
+								: null
+							}
+						</div>
+				</div>
 				<MainNavWrap />
 				<div className={styles.appContent}>
 					{this.props.children}
