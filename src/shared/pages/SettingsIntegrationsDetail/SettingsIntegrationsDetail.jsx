@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint max-len: off */
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { View } from 'layouts';
@@ -52,7 +52,7 @@ export default class SettingsIntegrationsDetail extends Component {
 			returnUrl: '',
 			categories: ['accounting', 'invoicing']
 		};
-		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl} = defaultConnection;
+		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
 
 		if (currentOrg.accessTokens.xero &&
@@ -63,9 +63,10 @@ export default class SettingsIntegrationsDetail extends Component {
 		return (
 			<View>
 				<Header key={'layoutHeader'} title={`Integration Detail: ${title}`} />
-				<div key={'layoutHero'} className={globalStyles.padding} subtitle={'sdfds'}>
+				<div key={'layoutHero'} className={globalStyles.padding}>
+					<div>{subtitle}</div>
 					<Row>
-					<img src={logoUrl} width={100} height={100} />
+					<img src={logoUrl} width={100} height={100} alt={title} />
 					</Row>
 					<Row>
 						<Column occupy={3}>
