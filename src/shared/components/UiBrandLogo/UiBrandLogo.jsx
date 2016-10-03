@@ -5,8 +5,14 @@ import cx from 'classnames';
 
 const styles = require('./UiBrandLogo.scss');
 
-const UiBrandLogo = ({ isSmall }) => (
-	<div className={cx(styles.UiBrandLogo, (isSmall ? styles.isSmall : ''))}>
+const UiBrandLogo = ({ isSmall, isLoading }) => (
+	<div
+		className={
+			cx(styles.UiBrandLogo,
+			(isSmall ? styles.isSmall : ''),
+			(isLoading ? styles.isLoading : ''))
+		}
+	>
 		<IndexLink to="/" className={styles.brandLink}>
 			<span className={styles.iconWrap}>
 				<Icon source="nomos/" icon="logo_colour" color="default" />
