@@ -13,18 +13,17 @@ const xeroLogo = 'http://www.stoneconsulting.com.au/wp-content/uploads/2016/04/x
 @connect('store')
 export default class SettingsIntegrations extends Component {
 
-	/*
-	componentWillMount() {
-		const { routeParams } = this.props;
-		console.log(routeParams);
-	}
-	*/
-
 	render() {
 		const { app, auth } = this.context.store;
 		const { currentOrg = null } = app;
-		const org = auth.getOrg(currentOrg);
+		const org = auth.getOrg(currentOrg.id);
 		let orgName = org && org.attributes.name;
+		let connected;
+
+		if (currentOrg.accessTokens.xero &&
+			currentOrg.accessTokens.xero.connectedAt) {
+			connected = true;
+		}
 
 		return (
 			<Summary>
@@ -33,9 +32,9 @@ export default class SettingsIntegrations extends Component {
 					<p>Select the integration you wish to activate or edit</p>
 				</div>
 				<div key={'layoutMain'} >
-					<Link to={`/${currentOrg}/integrations/xero`}>
+					<Link to={`/${currentOrg.id}/integrations/xero`}>
 						<ObjectInfo
-							title="Xero"
+							title={`Xero ${connected ? ' - connected' : ''}`}
 							type="custom"
 							subType="Financial Software"
 							imageUrl={xeroLogo}

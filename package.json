@@ -57,7 +57,7 @@
       "command": "node webpack/webpack-dev-server.js",
       "env": {
         "MODE": "remote",
-        "WEBPACK_HOST": "https://dev-app.nomosone.com",
+        "WEBPACK_HOST": "https://test-app.nomosone.com",
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "PORT": 8080,

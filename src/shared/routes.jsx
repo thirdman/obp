@@ -29,10 +29,11 @@ import routeHelper from '../helpers/RouteHelper';
 
 export default (store) => {
 	const requireLogin = (nextState, replace, cb) => {
-		const { auth } = store;
+		const { auth, app } = store;
 		// Kick you back to login page if have not logged in
 		auth.checkLoggedIn()
 		.then(() => {
+			app.refreshOrgDetails();
 			cb();
 		})
 		.catch(() => {
