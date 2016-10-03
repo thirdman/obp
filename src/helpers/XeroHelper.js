@@ -61,7 +61,7 @@ module.exports = {
 				resolve(res);
 			})
 			.catch((err) => {
-				reject(err.errors[0].details);
+				reject(err.errors[0].detail);
 				// throw err;
 			});
 		});

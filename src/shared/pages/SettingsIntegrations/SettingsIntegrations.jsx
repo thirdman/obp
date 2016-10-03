@@ -8,7 +8,7 @@ import { connect } from '../../../utils/state';
 // Khanh we need to abstract this for future flexibility:
 // const xeroLogo = '/images/assets/xero.png';
 // Faked logo url because png won't work:
-const xeroLogo = 'http://www.stoneconsulting.com.au/wp-content/uploads/2016/04/xero-logo.png';
+const xeroLogo = 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png';
 
 @connect('store')
 export default class SettingsIntegrations extends Component {

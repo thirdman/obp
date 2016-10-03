@@ -36,6 +36,12 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
+		let connected;
+
+		if (currentOrg.accessTokens.xero &&
+			currentOrg.accessTokens.xero.connectedAt) {
+			connected = true;
+		}
 
 		return (
 			<View>
@@ -52,7 +58,7 @@ export default class SettingsIntegrationsDetail extends Component {
 						</Column>
 						<Column occupy={3}>
 							<h4>Status</h4>
-							<p>{'{ CONNECTION STATUS }'}</p>
+							<p>{`${connected ? '*Connected*' : '- Not Connected -'}`}</p>
 						</Column>
 					</Row>
 						<Link to={'/integrations'}>

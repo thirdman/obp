@@ -32,13 +32,13 @@ export default class App extends Component {
 				isConnecting: true,
 				isLoading: false
 				});
-			}, 3000);
+			}, 500);
 		setTimeout(() => {
 			this.setState({
 				isConnecting: false,
 				isLoading: false
 				});
-			}, 6000);
+			}, 1000);
 	}
 	render() {
 		return (

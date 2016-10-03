@@ -20,7 +20,7 @@
 		z-index: 152;
 		transition: opacity .3s ease;
 		&.centered{
-			display: flex;
+			display: none;
 		  align-items: center;
 		  justify-content: center;
 		}
@@ -60,6 +60,9 @@
 	&.isConnecting{
 		.appLoading{
 			opacity: 1;
+			&.centered{
+				display: flex;
+			}
 		}
 		.appContent{
 			opacity: 0;
@@ -68,6 +71,9 @@
 	&.isLoading{
 		.appLoading{
 			opacity: 1;
+			&.centered{
+				display: flex;
+			}
 		}
 		.appContent{
 			opacity: 0;

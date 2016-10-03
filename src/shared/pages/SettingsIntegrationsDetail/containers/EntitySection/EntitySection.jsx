@@ -86,7 +86,10 @@ class EntitySection extends Component {
 			this.setState({ loaded: true });
 		})
 		.catch((err) => {
-			this.loading(err, true);
+			console.log(err);
+			this.loading(`Please contact support,
+				the error is: ${decodeURI(err)}`,
+				true);
 		});
 	}
 
