@@ -1,15 +1,19 @@
 import { Component } from 'react';
 import { Summary } from 'layouts';
-import { ObjectInfo } from 'components';
+import { Breadcrumbs, ObjectInfo } from 'components';
 import { Header, Placeholder, Secondary} from 'containers';
 import { connect } from '../../../utils/state';
 
 @connect('store')
 export default class AgreementsSummary extends Component {
 	render() {
+		const { routeParams, route} = this.props;
 		return (
 			<Summary>
-				<Header key={'layoutHeader'} title="Agreements Summary" />
+				<div key={'layoutHeader'} >
+					<Breadcrumbs params={routeParams} route={route} />
+					<Header title="Agreements Summary" />
+				</div>
 				<div key={'layoutMain'}>
 					<Placeholder content="A list of agreements will be here when we make it..." />
 					<ObjectInfo type="agreement" title="Dave is here" />

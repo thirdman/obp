@@ -8,6 +8,13 @@
 	.section{
 		display: inline-block;
 		vertical-align: middle;
+		a{
+			text-transform: capitalize;	
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
 		&.isActive{
 			color: $nomosBlack;
 			cursor: default;

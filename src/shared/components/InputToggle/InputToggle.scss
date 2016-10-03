@@ -1,0 +1,233 @@
+@import "../../globals/styles/_global.scss";
+@import "../Button/Button.scss";
+
+.InputToggle{
+		background: #fff;
+		padding: 0;
+		margin: 1px 4px 1px 1px;			
+		font-size: 12px;
+		cursor: pointer;
+		display: inline-block;
+		text-decoration: none;
+		border-radius: 2px;
+		padding: 0;
+		padding-left: 8px;
+		padding-right: 8px;
+		position: relative;
+		color: $nomosGrey;
+		box-shadow: none;
+		// --- variables modified in other classes
+		background: transparent;
+		border: 1px solid rgba(0,0,0,.05);
+		// v4: border: 1px solid $nomosLightGrey;
+		// v4: background: rgba(0,0,0,.015);
+		.selectContent{
+			padding: 2px 4px;
+		}
+		.selectIcon{
+			visibility: hidden;
+			opacity: 0;
+			left: 0;
+	    top: 0;
+			right: inherit;
+			border-left: none;
+			border-right: none;
+			padding: 6px;
+			background: transparent;
+			width: 18px;
+			height: 100%;
+			padding: 4px;
+			position: absolute;
+			line-height: 16px;
+			height: 100%;
+/*
+			height: 24px;
+			height: 100%;
+			display: block;
+			visibility: visible;		
+*/
+			.iconWrap{
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+/*
+		&.filter{
+			.selectIcon{
+				visibility: hidden;
+				opacity: 0;
+				left: 0;
+				right: inherit;
+				border-left: none;
+				border-right: none;
+				padding: 6px;
+				background: transparent;
+				width: 18px;
+				height: 100%;
+				padding: 4px;
+				line-height: 16px;
+			}
+			&:hover{
+				border-color: rgba(175, 47, 47, 0.1);
+			}
+		}
+*/
+
+
+		//MODIFIERS
+		&.isSelected{
+			padding-left: 16px;
+			padding-right: 4px;
+			border-color: rgba(175, 47, 47, 0.2);
+			border: 1px solid #ccc;
+			background: rgba(255,255,255,.5);
+	    box-shadow: 1px 1px 0 rgba(255,255,255,.4);
+			.selectIcon{
+				visibility: visible;
+				opacity: 1;
+				background: transparent;
+			}
+		}
+
+		//LEGACY
+		&.left{
+			border: 1px solid $nomosLightGrey;
+			padding: 0;
+			padding-left: 24px;
+			.selectIcon{
+				visibility: visible;
+				opacity: 1;
+
+		    top: 0;
+				position: absolute;
+				padding: 4px;
+				width: 24px;
+				height: 24px;
+				height: 100%;
+				border-left: 1px solid rgba(0,0,0, 0.05);
+				background: rgba(0,0,0,.05);
+				background-size: 12px;
+		    border-radius: 0 2px 2px 0;
+				display: block;
+				visibility: visible;		
+
+				left: 0;
+				right: inherit;
+				border-left: none;
+				border-right: 1px solid rgba(0,0,0, 0.05);
+			}
+			&.isSelected{
+				border: 1px solid $nomosGreen;
+				background: #fff;
+				color: $nomosBlack;
+				.selectIcon{
+					border-left: none;
+					border-right: 1px solid lighten($nomosGreen, 25%);
+					background: lighten($nomosGreen, 50%);
+				}
+			}
+		}
+		&.v4{
+			border: 1px solid $nomosLightGrey;
+			background: rgba(0,0,0,.015);
+			border: 1px solid $nomosLightGrey;
+			color: #77653D;
+			padding-right: 24px;
+			.selectIcon{
+					visibility: visible;
+					opacity: 1;
+			    right: 0;
+			    top: 0;
+			    left: inherit;
+					position: absolute;
+					padding: 4px;
+					width: 24px;
+					height: 24px;
+					height: 100%;
+					border-left: 1px solid rgba(0,0,0, 0.05);
+					visibility: visible;
+					opacity: 1;
+				background: $nomosLightLightGrey;
+				border-left: 1px solid lighten($nomosLightGrey, 5%);
+			}
+			&.isSelected{
+				border: 1px solid $nomosGreen;
+				background: #fff;
+				color: $nomosBlack;
+				.selectIcon{
+					visibility: visible;
+					opacity: 1;
+			    right: 0;
+			    top: 0;
+			    left: inherit;
+					position: absolute;
+					padding: 4px;
+					width: 24px;
+					height: 24px;
+					height: 100%;
+					border-left: 1px solid rgba(0,0,0, 0.05);
+					background: rgba(0,0,0,.05);
+					background-size: 12px;
+			    border-radius: 0 2px 2px 0;
+					display: block;
+					visibility: visible;		
+
+					background: lighten($nomosGreen, 50%);
+					border-left: none;
+					border-left: 1px solid lighten($nomosGreen, 7%);
+				}
+			}
+		}
+		&.custom{
+			//background: #F7DC9F;
+			background: lighten($nomosYellow, 15%);
+			border: 1px solid lighten(#D8B25B, 10%);
+			color: #77653D;
+			padding-right: 24px;
+			.selectIcon{
+				visibility: visible;
+				opacity: 1;
+		    right: 0;
+		    top: 0;
+		    left: inherit;
+				position: absolute;
+				padding: 4px;
+				width: 24px;
+				height: 24px;
+				height: 100%;
+				border-left: 1px solid rgba(0,0,0, 0.05);
+				background: rgba(0,0,0,.05);
+				background-size: 12px;
+		    border-radius: 0 2px 2px 0;
+				display: block;
+				visibility: visible;		
+
+				background: lighten($nomosYellow, 10%);
+				border-left: 1px solid lighten($nomosYellow, 5%);
+			}
+			&.isSelected{
+				background: #fff;
+				color: $nomosBlack;
+				background: lighten($nomosYellow, 20%);
+				border: 1px solid #D8B25B;
+				.selectIcon{
+			    left: inherit;
+					background: $nomosYellow;
+					border-left: none;
+					border-left: 1px solid lighten($nomosYellow, 7%);
+					background: lighten($nomosYellow, 15%);
+				}
+			}
+		}
+		&:hover{
+			background: #fff;
+			box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+			cursor: pointer;
+			border: 1px solid $nomosLightGrey;
+		}
+
+	+ .Button{
+		margin-left: 4px; //adds a little gap for when the edit btn comes after it.
+	}
+}
