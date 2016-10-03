@@ -1,0 +1,80 @@
+@import "../../globals/styles/_global.scss";
+
+.InputSwitch{
+  position: relative; 
+  width: 80px;
+  display: inline-block;
+  -webkit-user-select:none; 
+  -moz-user-select:none; 
+  -ms-user-select: none;
+
+	input[type="checkbox"] { 
+	 display: none; 
+		}
+	label, input[type="checkbox"] + label{
+		&:before{
+			display: none !important;
+		}
+	}
+	.switchLabel {
+    display: block; 
+    overflow: hidden; 
+    cursor: pointer;
+    border: 0px solid $nomosGrey; 
+    border-radius: 6px;
+	}
+	.switchInner {
+    width: 200%; 
+    margin-left: -100%;
+    transition: margin 0.1s ease-in 0s;
+	}
+	.switchInner .contentLeft, .switchInner .contentRight{
+    float: left; 
+    width: 50%; 
+    height: 32px; 
+    padding: 0; 
+    line-height: 32px;
+    font-size: 16px; color: white; 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;		
+    text-transform: uppercase;
+	}
+
+	.switchInner .contentLeft{
+    padding-left: 15px;
+    background-color: $nomosGreen;
+    background-color: #94cd5a;
+    color: #FFFFFF;
+	}
+	.switchInner .contentRight{
+    padding-right: 15px;
+    background-color: #D9D9D9; 
+    color: #666666;
+    text-align: right;
+	}
+
+	.switchInner:before, .switchInner:after {
+		display: none;
+	}
+	
+	.switchSwitch {
+	  width: 28px;
+		height: 28px;
+		margin: 2px;
+		background: #FFFFFF;
+	  border: 0px solid $nomosGrey; 
+	  border-radius: 4px;
+	  position: absolute; top: 0; bottom: 0; 
+	  right: 48px;
+	  -moz-transition: all 0.1s ease-in 0s; -webkit-transition: all 0.1s ease-in 0s;
+	  -o-transition: all 0.1s ease-in 0s; transition: all 0.1s ease-in 0s; 
+	}
+	.switchCheckbox:checked + .switchLabel .switchInner {
+	    margin-left: 0;
+	}
+	.switchCheckbox:checked + .switchLabel .switchSwitch {
+	    right: 0px; 
+	}
+
+}
