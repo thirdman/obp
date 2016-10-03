@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import { autobind } from 'core-decorators';
 import { ApiClient as client } from 'helpers';
+import { Link } from 'react-router';
 import { Button, Section } from 'components';
 
 import { connect } from '../../../../../utils/state';
@@ -88,8 +89,14 @@ export default class ConnectionSection extends Component {
 				<div>
 					<h3>{'Connection Section'}</h3>
 					<div>{'This organisation is connected to Xero'}</div>
-					<Section title={'Entities'} hasDivider>
-						{'Complete this bit with links'}
+					<Section title={'What next?'} hasDivider subtitle={'Now that you have connected your [xero] account, there\'s some things to check'}>
+						<h4>Integration Settings</h4>
+						<Link to={'/{currentOrg.id}/integrations/xero/invoice-settings'}>
+							{'1. Check your settings to ensure this integration will work as you expect.'}
+						</Link>
+						<Link to={'/{currentOrg.id}/integrations/xero/match-entity'}>
+							{'2. Make sure your `[currentOrg.id]` contacts and nomos one Entites match up.'}
+						</Link>
 					</Section>
 				</div>
 			);

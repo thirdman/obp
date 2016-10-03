@@ -41,7 +41,7 @@ export default class SettingsIntegrationsDetail extends Component {
 			connectionDetail: null,
 			provider: 'xero',
 			title: 'Xero',
-			subtitle: 'beautiful accounting software',
+			subtitle: 'Beautiful accounting software',
 			shortDescription: `Beautiful cloud-based accounting software
 				that connects people with the right numbers anytime,
 				anywhere, on any device.`,
@@ -70,36 +70,33 @@ export default class SettingsIntegrationsDetail extends Component {
 			<View>
 				<Header key={'layoutHeader'} title={`Integration Detail: ${title}`} />
 				<div key={'layoutHero'} className={globalStyles.padding}>
-					<div>{subtitle}</div>
 					<Row>
-					<img src={logoUrl} width={100} height={100} alt={title} />
-					</Row>
-					<Row>
-						<Column occupy={3}>
-							<h4>Integration</h4>
-							<p>{title}</p>
+						<Column occupy={2}>
+							<img src={logoUrl} width={100} height={100} alt={title} />
 						</Column>
-						<Column occupy={3}>
-							<h4>Type</h4>
-							<p>Accounting Software</p>
+						<Column occupy={6}>
+							<h4>Integration</h4>
+							<h3>{title}</h3>
+							<span>{subtitle}</span>
 						</Column>
 						<Column occupy={3}>
 							<h4>Status</h4>
-							<p>{`${connected ? '*Connected*' : '- Not Connected -'}`}</p>
-						</Column>
-						<Column occupy={3}>
-							<h4>Further Information</h4>
-							<span><a href={websiteUrl}>{websiteUrl}</a></span>
+							<div>{`${connected ? '*Connected*' : '- Not Connected -'}`}</div>
 						</Column>
 					</Row>
 					<Row>
+						<Column occupy={2} />
 						<Column occupy={6}>
 							<h4>What is {`${title}`}</h4>
 								{longDescription}
-						</Column>
-						<Column occupy={6}>
 							<h4>What Can You Do With It?</h4>
-							<p>{whatYouCanDo}</p>
+							<div>{whatYouCanDo}</div>
+						</Column>
+						<Column occupy={3}>
+							<h4>Type</h4>
+							<div>Accounting Software</div>
+							<h4>Further Information</h4>
+							<span><a href={websiteUrl}>{websiteUrl}</a></span>
 						</Column>
 					</Row>
 						<Link to={'/integrations'}>

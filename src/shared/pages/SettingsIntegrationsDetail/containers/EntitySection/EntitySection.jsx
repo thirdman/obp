@@ -6,7 +6,7 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
-import { Button, Column, Icon, Row, Section } from 'components';
+import { Button, ButtonGroup, Column, Icon, Row, Section } from 'components';
 import { connect } from '../../../../../utils/state';
 
 @connect('store')
@@ -38,6 +38,31 @@ class EntitySection extends Component {
 			xeroContacts,
 			xeroCodes
 		} = this.state;
+		const buttonGroupData = [{
+				name: 'match',
+				title: 'Match Entities',
+				subtitle: '(between Xero and Nomos One)',
+				showButton: 'true',
+				descriptionTitle: 'Best For',
+				description: 'Users who have been using both Xero and Nomos for a while and have existing entities in each.', // eslint-disable-line max-len
+				classes: ['hero']
+			}, {
+				name: 'import',
+				title: 'Import Xero Contacts',
+				subtitle: '(from Xero to Nomos one)',
+				showButton: 'true',
+				descriptionTitle: 'Best For',
+				description: 'Users are new to Nomos One and have been using Xero for a while',
+				classes: ['hero']
+			}, {
+				name: 'export',
+				title: 'Export Nomos One Entities',
+				subtitle: '(from Nomos One to Xero)',
+				showButton: 'true',
+				descriptionTitle: 'Best For',
+				description: 'users are new to Nomos One and have been using Xero for a while',
+				classes: ['hero']
+			}];
 		return (
 			<div>
 				<h3>{'Entity Section'}</h3>
@@ -72,6 +97,7 @@ class EntitySection extends Component {
 				}
 
 				<div>{ loading }</div>
+				<ButtonGroup type={'hero'} hasData optionData={buttonGroupData} />
 			</div>
 		);
 	}
