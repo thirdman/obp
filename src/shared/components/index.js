@@ -8,6 +8,7 @@
 export Avatar from './Avatar/Avatar';
 export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
+export ButtonGroup from './ButtonGroup/ButtonGroup';
 export Column from './Column/Column';
 export ContentItem from './ContentItem/ContentItem';
 export HorizontalRule from './HorizontalRule/HorizontalRule';
@@ -18,6 +19,7 @@ export InputText from './InputText/InputText';
 export InputCheckbox from './InputCheckbox/InputCheckbox';
 export InputRadio from './InputRadio/InputRadio';
 export InputSelect from './InputSelect/InputSelect';
+export InputSwitch from './InputSwitch/InputSwitch';
 export InputToggle from './InputToggle/InputToggle';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
 export ObjectInfo from './ObjectInfo/ObjectInfo';

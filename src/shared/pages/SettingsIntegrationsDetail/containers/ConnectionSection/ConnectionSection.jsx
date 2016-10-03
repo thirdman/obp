@@ -1,8 +1,9 @@
 /* eslint max-len: off */
 import React, {Component} from 'react';
-import { Button } from 'components';
 import { autobind } from 'core-decorators';
 import { ApiClient as client } from 'helpers';
+import { Button, Section } from 'components';
+
 import { connect } from '../../../../../utils/state';
 
 @connect('store')
@@ -87,6 +88,9 @@ export default class ConnectionSection extends Component {
 				<div>
 					<h3>{'Connection Section'}</h3>
 					<div>{'This organisation is connected to Xero'}</div>
+					<Section title={'Entities'} hasDivider>
+						{'Complete this bit with links'}
+					</Section>
 				</div>
 			);
 		}
