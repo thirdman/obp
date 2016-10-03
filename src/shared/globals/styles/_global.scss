@@ -17,25 +17,28 @@
 	}
 	h1{}
 	p{	}
-	a{
-		color: $nomosBlue;
-	}
-/*
-	div.container {
-		width: 66em;
-		margin-left: auto;
-		margin-right: auto;
-	}
-*/
+}
+
+a{
+	color: $nomosBlue;
+	outline: none;
+	text-decoration: none;
+}
+p a{
+	text-decoration: underline;
+}
+.padding{
+	padding: 8px;
 }
 
 /*
-* TOOLTIPS
+* MEDIA OBJECT
 */
 
 	.media{
 	  display: flex;
 	  align-items: flex-start;
+	  text-decoration: none;
 		.figure{
 			width: 24px;
 			display: block;
@@ -45,6 +48,7 @@
 			flex: 1;
 			h5{
 				font-weight: normal;
+				text-decoration: none;
 			}
 		}
 	}

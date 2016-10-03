@@ -7,20 +7,6 @@ const globalStyles = require('../../pages/App/App.scss');
 
 export default class ObjectInfo extends Component {
 
-	static propTypes = {
-		title: React.PropTypes.string,
-		id: React.PropTypes.string,
-		type: React.PropTypes.string,
-		mode: React.PropTypes.string,
-		display: React.PropTypes.string,
-		buttons: React.PropTypes.array,
-		children: React.PropTypes.oneOfType([
-			React.PropTypes.arrayOf(React.PropTypes.node),
-			React.PropTypes.node
-		]),
-		classNameProps: React.PropTypes.array
-	}
-
 	getButtonComps() {
 		const { buttons = null } = this.props;
 		let buttonComps;
@@ -28,9 +14,12 @@ export default class ObjectInfo extends Component {
 		if (buttons) {
 			buttonComps = buttons.map((button, index) => {
 				return (
-					<div className={styles.iconWrapper}>
+					<div
+						className={styles.iconWrapper}
+						key={`theBtnIcon-${index}`}
+					>
 						<IconButton
-							key={`thebutton-${index}`}
+							key={`btn-${index}`}
 							id={`thebtn-${index}`}
 							icon={button.icon.icon}
 							text={button.text}
@@ -50,18 +39,18 @@ export default class ObjectInfo extends Component {
 			classNameProps = [],
 			title,
 			type = 'property',
+			subType,
+			imageUrl,
 			mode,
 			display = 'large',
 			id
 		} = this.props;
 		let classes;
-
 		classes = classNameProps.slice();
 		classes = classes.concat(display || '');
 		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
-
 		return (
 			<div
 				className={cx(
@@ -69,7 +58,11 @@ export default class ObjectInfo extends Component {
 					classes,
 					globalStyles.row)} >
 				<div className={styles.iconWrap}>
+				{type === 'custom' ?
+					<img src={imageUrl} alt={title} />
+				:
 					<Icon icon={type} color={!mode === 'Inactive' ? 'grey' : 'lightGrey'} />
+				}
 				</div>
 				<div className={styles.titleWrap}>
 					<div className={styles.buttonWrap}>
@@ -77,18 +70,48 @@ export default class ObjectInfo extends Component {
 					</div>
 					<h3>{title}{mode === 'Inactive' ? ' (Inactive)' : null}</h3>
 					<h4 className={styles.subtitle}>
-						<span className={styles.objectId}>
-							<span className={styles.bold}>ID:</span> {id}
-						</span>
-						<span className={styles.objectType}>
-							<span className={styles.bold}> Type:</span> {type}
-						</span>
-						<span className={styles.objectType}>
-							<span className={styles.bold}> Mode:</span> {mode}
-						</span>
+						{id ?
+							<span className={styles.objectId}>
+								<span className={styles.bold}>ID:</span> {id}
+							</span>
+						: null
+						}
+						{type && type !== 'custom' ?
+							<span className={styles.objectType}>
+								<span className={styles.bold}> Type:</span> {type}
+							</span>
+						: null
+						}
+						{subType ?
+							<span className={styles.objectSubType}>
+								{subType}
+							</span>
+						: null
+						}
+						{mode ?
+							<span className={styles.objectType}>
+								<span className={styles.bold}> Mode:</span> {mode}
+							</span>
+						: null
+						}
 					</h4>
 				</div>
 			</div>
 		);
+	}
+	static propTypes = {
+		title: React.PropTypes.string,
+		id: React.PropTypes.string,
+		type: React.PropTypes.string,
+		subType: React.PropTypes.string,
+		imageUrl: React.PropTypes.string,
+		mode: React.PropTypes.string,
+		display: React.PropTypes.string,
+		buttons: React.PropTypes.array,
+		children: React.PropTypes.oneOfType([
+			React.PropTypes.arrayOf(React.PropTypes.node),
+			React.PropTypes.node
+		]),
+		classNameProps: React.PropTypes.array
 	}
 }

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import { Icon, QuickView } from 'components';
+import ReactTooltip from 'react-tooltip';
+
+import { Icon } from 'components';
+// , QuickView
 import cx from 'classnames';
 
 const styles = require('./IconButton.scss');
@@ -31,12 +34,14 @@ export default class IconButton extends Component {
 		isHovered: this.props.isHovered
 	}
 
+/*
 	doMouseOver() {
 		this.setState({isHovered: true});
 	}
 	doMouseOut() {
 		this.setState({isHovered: false});
 	}
+*/
 
 	render() {
 		const {
@@ -83,10 +88,11 @@ export default class IconButton extends Component {
 						(isHovered ? styles.isHovered : null)
 				)}
 				onClick={onClickProps}
-				onMouseOver={this.doMouseOver}
-				onMouseOut={this.doMouseOut}
+				// onMouseOver={this.doMouseOver}
+				// onMouseOut={this.doMouseOut}
+				data-tip={helpText}
+				data-class={styles.tooltip}
 				>
-				<QuickView content={helpText} size={200}>
 					<span
 						className={styles.iconWrap}
 						style={iconWrapStyles}
@@ -101,7 +107,7 @@ export default class IconButton extends Component {
 						/>
 					</span>
 					<span className={styles.btnLabel}><span>{text}</span></span>
-				</QuickView>
+					<ReactTooltip type="light" />
 			</span>
 		);
 	}

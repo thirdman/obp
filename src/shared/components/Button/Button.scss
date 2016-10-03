@@ -278,6 +278,9 @@
 	  padding: 0;
 	  margin: 0;
 		background: transparent;
+		.btnContent{
+			text-decoration: underline;
+		}
 		&:before, &:after{
 			display: inline-block;
 			text-decoration: none;

@@ -10,10 +10,12 @@ ObjectInfo
 :-----------------------|:----------|:----------|:--------------------------------
 title										|	`string`	|	-					|	title text
 id											|	`string`	|	-					|	object id
-type										|	`string`	|	-					|	object type (subtype)
+type										|	`string`	|	-					|	object type (subtype), or 'custom'
+subType									|	`string`	|	-					|	secondary level type to be displayed
+imageUrl								|	`string`	|	-					|	url to use if type = 'custom'
 mode										|	`string`	|	-					|	object mode (active/inactive)
 display									|	`string`	|	'large'		|	sets the display type of the output. (oneOf: 'large', 'small', ''flat)
-classNameProps					|	`array`		| []				|	array of buttons to display (see example below)
+objectButtons						|	`array`		| []				|	array of buttons to display (see example below)
 classNameProps					|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
 
 
@@ -51,7 +53,8 @@ classNameProps					|	`array`		| ['normal']|	array of classes to apply to the com
 :-----------------------|:--------------------------------
 `normal`		| default style (optional)
 `small`			| smaller size for manipulation (= display: 'small')
-`flat`		| removes the border (equiv. to: display: 'flat')
+`flat`			| removes the box-shadow (equiv. to: display: 'flat')
+`hasBorder`	| adds a single line border
 
 
 #### TODO

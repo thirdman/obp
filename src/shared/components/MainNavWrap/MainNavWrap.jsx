@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { Avatar, UiBrandLogo } from 'components';
+import { Avatar, Icon, UiBrandLogo } from 'components';
 import cx from 'classnames';
 import { connect } from '../../../utils/state';
 
@@ -59,7 +59,15 @@ export default class MainNavWrap extends Component {
 						/>
 					</span>
 					<span className={styles.body}>
-						<h5>{org.attributes.name}</h5>
+						<h5>
+							{org.attributes.name}
+							{currentOrg === org.id ?
+								<div className={styles.iconWrap}>
+									<Icon icon="chevron-right" color="lightGrey" size={12} />
+								</div>
+								: null
+							}
+						</h5>
 					</span>
 				</div>
 			</Link>

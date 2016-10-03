@@ -58,6 +58,11 @@ $sizeSmall: 32px;
 					content: " ";
 				}
 			}
+			span.objectSubType{
+				&:after{
+					content: " ";
+				}
+			}
 		}
 		span.objectType + span:before {
 		    content: " / "; 
@@ -109,5 +114,8 @@ $sizeSmall: 32px;
 	}
 	&.flat{
 		box-shadow: none;
+	}
+	&.hasBorder{
+		border: 1px solid $nomosLine;
 	}
 }
