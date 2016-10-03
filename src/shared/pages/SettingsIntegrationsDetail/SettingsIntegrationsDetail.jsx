@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { View } from 'layouts';
@@ -36,6 +37,22 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
+		const defaultConnection = {
+			id: 1,
+			connectionDetail: null,
+			provider: 'xero',
+			title: 'Xero',
+			subtitle: 'beautiful accounting software',
+			shortDescription: 'Beautiful cloud-based accounting software that connects people with the right numbers anytime, anywhere, on any device.',
+			longDescription: 'Improve cashflow and get paid quickly and easily when you send online invoices. You\'ll have a better connection with your customers – and know when they\'ve opened your invoice.',
+			whatYouCanDo: 'Using Xero integration, you can send invoices directly to your xero account. In nomos one, you will see the status of invoices for quick and easy monitoring.',
+			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png',
+			websiteUrl: 'https://www.xero.com',
+			connectionUrl: '',
+			returnUrl: '',
+			categories: ['accounting', 'invoicing']
+		};
+		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl} = defaultConnection;
 		let connected;
 
 		if (currentOrg.accessTokens.xero &&
@@ -45,12 +62,12 @@ export default class SettingsIntegrationsDetail extends Component {
 
 		return (
 			<View>
-				<Header key={'layoutHeader'} title={'Integration Detail'} />
-				<div key={'layoutHero'} className={globalStyles.padding}>
+				<Header key={'layoutHeader'} title={`Integration Detail: ${title}`} />
+				<div key={'layoutHero'} className={globalStyles.padding} subtitle={'sdfds'}>
 					<Row>
 						<Column occupy={3}>
 							<h4>Integration</h4>
-							<p>Xero</p>
+							<p>{title}</p>
 						</Column>
 						<Column occupy={3}>
 							<h4>Type</h4>
@@ -59,6 +76,20 @@ export default class SettingsIntegrationsDetail extends Component {
 						<Column occupy={3}>
 							<h4>Status</h4>
 							<p>{`${connected ? '*Connected*' : '- Not Connected -'}`}</p>
+						</Column>
+						<Column occupy={3}>
+							<h4>Further Information</h4>
+							<span><a href={websiteUrl}>{websiteUrl}</a></span>
+						</Column>
+					</Row>
+					<Row>
+						<Column occupy={6}>
+							<h4>What is {`${title}`}</h4>
+								{longDescription}
+						</Column>
+						<Column occupy={6}>
+							<h4>What Can You Do With It?</h4>
+							<p>{whatYouCanDo}</p>
 						</Column>
 					</Row>
 						<Link to={'/integrations'}>
@@ -81,7 +112,7 @@ export default class SettingsIntegrationsDetail extends Component {
 							name: 'match-entity'
 						},
 						{
-							label: 'Invoice',
+							label: 'Settings',
 							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
 							name: 'invoice-settings'
 						}
