@@ -6,7 +6,7 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
-// import { Button } from 'components';
+import { Button, Column, Icon, Row, Section } from 'components';
 import { connect } from '../../../../../utils/state';
 
 @connect('store')
@@ -49,6 +49,45 @@ class EntitySection extends Component {
 							.xeroAccountCodes.Account.length}`}</div>
 					</div>}
 				<div>{ loading }</div>
+				<Section hasDivider title="Existing Entities">
+					<Row>
+						<Column occupy={5}>
+							{'Name'}
+						</Column>
+						<Column occupy={4}>
+							{'Provider'}
+						</Column>
+						<Column occupy={1}>
+							{'Link Icon'}
+						</Column>
+						<Column occupy={2}>
+							{'Action'}
+						</Column>
+					</Row>
+					{
+						// @khanh repeat this row in the matched entities:
+						// This will give errors until you hook it up
+					}
+					<Row>
+						<Column occupy={5}>
+							{`${pair.nomosContact.entityName}`}
+						</Column>
+						<Column occupy={4}>
+							{`${pair.providerContact.Name}`}
+						</Column>
+						<Column occupy={1}>
+							{<Icon icon="link" classNameProps={['grey']} size={16} />}
+						</Column>
+						<Column occupy={2}>
+							<Button
+								content="Unlink"
+								onClickProps={unlink(pair.nomosContact, pair.providerContact)}
+								classNameProps={['text', 'delete']}
+								/>
+						</Column>
+					</Row>
+
+				</Section>
 			</div>
 		);
 	}
