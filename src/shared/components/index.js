@@ -8,6 +8,7 @@
 export Avatar from './Avatar/Avatar';
 export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
+export ButtonGroup from './ButtonGroup/ButtonGroup';
 export Column from './Column/Column';
 export ContentItem from './ContentItem/ContentItem';
 export HorizontalRule from './HorizontalRule/HorizontalRule';
