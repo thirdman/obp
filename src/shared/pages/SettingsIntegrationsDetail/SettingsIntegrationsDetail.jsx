@@ -65,6 +65,9 @@ export default class SettingsIntegrationsDetail extends Component {
 				<Header key={'layoutHeader'} title={`Integration Detail: ${title}`} />
 				<div key={'layoutHero'} className={globalStyles.padding} subtitle={'sdfds'}>
 					<Row>
+					<img src={logoUrl} width={100} height={100} />
+					</Row>
+					<Row>
 						<Column occupy={3}>
 							<h4>Integration</h4>
 							<p>{title}</p>
