@@ -18,6 +18,7 @@ export Info from './Info/Info';
 export InputText from './InputText/InputText';
 export InputCheckbox from './InputCheckbox/InputCheckbox';
 export InputRadio from './InputRadio/InputRadio';
+export InputSelect from './InputSelect/InputSelect';
 export InputSwitch from './InputSwitch/InputSwitch';
 export InputToggle from './InputToggle/InputToggle';
 export MainNavWrap from './MainNavWrap/MainNavWrap';

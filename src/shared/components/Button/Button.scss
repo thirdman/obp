@@ -322,6 +322,10 @@
 			padding: 8px;
 			cursor: pointer;
 			width: 100%;
+			display: block;
+			.btnContent{
+				text-decoration: none;
+			}
 			&:hover{
 				color: #000 !important;
 				background: #f9f9f9 !important;

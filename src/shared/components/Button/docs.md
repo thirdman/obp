@@ -8,6 +8,7 @@ Generates a button
 |Property					|	Type					|	Default	|	Description
 :-----------------|:--------------|:--------|:--------------------------------
 content						|	`string`			|	-				|	the text to appear in the button, 
+helpContent				|	`string`			|	-				|	the text to appear in the tooltip, 
 type							|	`string`			|	-				|	one of select, wrapper, hollow (proposed) [others to come] 
 color							|	`string`			|	-				|	defines the color of the button (from: normal, grey, blue, green, red, orange, white)
 icon							|	`string`			|					|	generates an icon for the button. Icon name matches the file name of a file in the images/icons/interface folder
@@ -79,20 +80,23 @@ children					|	`oneOfType...`|	 				|	when button wraps text, the children appea
 [{
 	"component":"Button",
 	"props": {
-		"classNameProps": ["normal"]
+		"classNameProps": ["normal"],
+		"helpContent": "A normal button"
 	}
 },{
 	"component":"Button",
 	"props": {
 		"content": "text",
-		"classNameProps": ["highlighted"]
+		"classNameProps": ["highlighted"],
+		"helpContent": "A highlighted button"
 	}
 },{
 	"component":"Button",
 	"props": {
 		"content": "text",
 		"icon": "view",
-		"classNameProps": ["green"]
+		"classNameProps": ["green"],
+		"helpContent": "A coloured button with icon"
 	}
 },{
 	"component":"Button",
@@ -116,13 +120,15 @@ children					|	`oneOfType...`|	 				|	when button wraps text, the children appea
 	"component":"Button",
 	"props": {
 		"content": "text",
-		"classNameProps": ["text", "delete"]
+		"classNameProps": ["text", "delete"],
+		"helpContent": "A text button"
 	}
 },{
 	"component":"Button",
 	"props": {
 		"content": "'right' class",
-		"classNameProps": ["text", "red", "right"]
+		"classNameProps": ["text", "red", "right"],
+		"helpContent": "text button on the right"
 	}
 },{
 	"component":"Button",
@@ -134,31 +140,36 @@ children					|	`oneOfType...`|	 				|	when button wraps text, the children appea
 	"component":"Button",
 	"props": {
 		"content": "expand",
-		"classNameProps": ["expand", "green"]
+		"classNameProps": ["expand", "green"],
+		"helpContent": "A button that expands to fill its container"
 	}	
 },{
 	"component":"Button",
 	"props": {
 		"content": "large",
-		"classNameProps": ["normal", "large"]
+		"classNameProps": ["normal", "large"],
+		"helpContent": "A large button"
 	}	
 },{
 	"component":"Button",
 	"props": {
 		"content": "round",
-		"classNameProps": ["highlighted", "round"]
+		"classNameProps": ["highlighted", "round"],
+		"helpContent": "A Round button"
 	}	
 },{
 	"component":"Button",
 	"props": {
 		"content": "disabled",
-		"classNameProps": ["highlighted", "disabled"]
+		"classNameProps": ["highlighted", "disabled"],
+		"helpContent": "A disabled button"
 	}	
 },{
 	"component":"Button",
 	"props": {
 		"content": "active",
 		"isActive": true,
-		"classNameProps": ["highlighted"]
+		"classNameProps": ["highlighted"],
+		"helpContent": "An active button"
 	}	
 }]
