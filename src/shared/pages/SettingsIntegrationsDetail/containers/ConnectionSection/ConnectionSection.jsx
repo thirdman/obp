@@ -89,26 +89,7 @@ export default class ConnectionSection extends Component {
 					<h3>{'Connection Section'}</h3>
 					<div>{'This organisation is connected to Xero'}</div>
 					<Section title={'Entities'} hasDivider>
-					{
-						/*
-												{matchedContacts.length ?
-													(<EntityMatched
-															matchedContacts={matchedContacts}
-															unlink={this.unlinkEntity.bind(this)} />
-													) : null
-												}
-						*/
-						/*
-												<EntityMatcher
-													currentSection={currentSection}
-													provider={title}
-													nomosEntities={nomosEntities}
-													providerContacts={providerContacts}
-													matchedArray={matchedArray}
-													link={this.linkEntity.bind(this)}
-													createEntityInNomos={this.createEntityInNomos.bind(this)} />
-						*/
-					}
+						{'Complete this bit with links'}
 					</Section>
 				</div>
 			);

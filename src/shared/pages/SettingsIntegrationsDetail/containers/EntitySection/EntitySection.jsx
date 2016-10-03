@@ -1,5 +1,5 @@
-/* eslint max-len: off */
 import React, {Component} from 'react';
+import FuzzySet from 'fuzzyset.js';
 import {
 	ApiClient as client,
 	XeroHelper as xeroClient,
@@ -18,7 +18,9 @@ class EntitySection extends Component {
 		error: false,
 		nomosEntities: [],
 		xeroContacts: [],
-		xeroCodes: []
+		xeroCodes: [],
+		lkedEntities: [],
+		matchedArray: []
 	}
 
 	componentDidMount() {
@@ -43,53 +45,107 @@ class EntitySection extends Component {
 				{loaded &&
 					<div>
 						<div>{`Nomos entities: ${nomosEntities.length}`}</div>
-						<div>{`Xero contacts: ${xeroContacts
-							.contacts.Contacts.Contact.length}`}</div>
+						<div>{`Xero contacts: ${xeroContacts.length}`}</div>
 						<div>{`Xero codes: ${xeroCodes
 							.xeroAccountCodes.Account.length}`}</div>
-					</div>}
-				<div>{ loading }</div>
-				<Section hasDivider title="Existing Entities">
-					<Row>
-						<Column occupy={5}>
-							{'Name'}
-						</Column>
-						<Column occupy={4}>
-							{'Provider'}
-						</Column>
-						<Column occupy={1}>
-							{'Link Icon'}
-						</Column>
-						<Column occupy={2}>
-							{'Action'}
-						</Column>
-					</Row>
-					{
-						// @khanh repeat this row in the matched entities:
-						// This will give errors until you hook it up
-					}
-					<Row>
-						<Column occupy={5}>
-							{`${pair.nomosContact.entityName}`}
-						</Column>
-						<Column occupy={4}>
-							{`${pair.providerContact.Name}`}
-						</Column>
-						<Column occupy={1}>
-							{<Icon icon="link" classNameProps={['grey']} size={16} />}
-						</Column>
-						<Column occupy={2}>
-							<Button
-								content="Unlink"
-								onClickProps={unlink(pair.nomosContact, pair.providerContact)}
-								classNameProps={['text', 'delete']}
-								/>
-						</Column>
-					</Row>
 
-				</Section>
+						<Section hasDivider title="Existing Entities">
+							<Row>
+								<Column occupy={5}>{'Name'}</Column>
+								<Column occupy={4}>{'Provider'}</Column>
+								<Column occupy={1}>{'Link Icon'}</Column>
+								<Column occupy={2}>{'Action'}</Column>
+							</Row>
+							{ this.getLinkedRows() }
+						</Section>
+
+						<Section hasDivider title="Suggesting Matches">
+							<Row>
+								<Column occupy={4}>{'NOMOS ONE'}</Column>
+								<Column occupy={4}>{'XERO'}</Column>
+								<Column occupy={1}>{'PROXIMITY'}</Column>
+								<Column occupy={3}>{''}</Column>
+							</Row>
+							{ this.getSuggestedMatchingRows() }
+						</Section>
+					</div>
+				}
+
+				<div>{ loading }</div>
 			</div>
 		);
+	}
+
+	getSuggestedMatchingRows() {
+		const { matchedArray } = this.state;
+		if (!matchedArray.length) {
+			return (
+				<Row>
+					<Column occupy={12}>
+						{`No matches found.
+						Try importing contacts from Xero,
+						or exporting entities form nomos one`}
+					</Column>
+				</Row>
+			);
+		}
+
+		return matchedArray
+			.sort((pairA, pairB) => {
+				return pairB.degree - pairA.degree;
+			})
+			.map((pair, pairIndex) => {
+				return (
+					<Row key={`pair-match-${pairIndex}`}>
+						<Column occupy={4}>
+							{`${pair.entity.entityName}`}
+						</Column>
+						<Column occupy={4}>
+							{`${pair.contact.Name}`}
+						</Column>
+						<Column occupy={1}>
+							{pair.degree}
+						</Column>
+						<Column occupy={3}>
+							<Button
+								content="Connect"
+								onClickProps={this.link(
+									pair.entity,
+									pair.contact
+								)}
+								classNameProps={['green']} />
+						</Column>
+					</Row>
+				);
+			});
+	}
+
+	getLinkedRows() {
+		const { lkedEntities } = this.state;
+		if (!lkedEntities.length) { return null; }
+
+		return lkedEntities.map((pair, pairIndex) => (
+			<Row key={`pairing-${pairIndex}`}>
+				<Column occupy={5}>
+					{`${pair.entity.entityName}`}
+				</Column>
+				<Column occupy={4}>
+					{`${pair.contact.Name}`}
+				</Column>
+				<Column occupy={1}>
+					{<Icon icon="link" classNameProps={['grey']} size={16} />}
+				</Column>
+				<Column occupy={2}>
+					<Button
+						content="Unlink"
+						onClickProps={this.unlink(
+							pair.entity,
+							pair.contact
+						)}
+						classNameProps={['text', 'delete']} />
+				</Column>
+			</Row>
+		));
 	}
 
 	@autobind
@@ -122,6 +178,7 @@ class EntitySection extends Component {
 		.then((res) => {
 			this.setState({ xeroCodes: res.data[0] });
 			this.loading('Matching entities with contacts ....');
+			this.filterLinkedEntities();
 			this.setState({ loaded: true });
 		})
 		.catch((err) => {
@@ -129,7 +186,112 @@ class EntitySection extends Component {
 			this.loading(`Please contact support,
 				the error is: ${decodeURI(err)}`,
 				true);
+			throw err;
 		});
+	}
+
+	filterLinkedEntities() {
+		const nomosEntitiesState = this.state.nomosEntities;
+		const xeroContactsState = this.state.xeroContacts
+			.contacts.Contacts.Contact;
+		let entities = [];
+		let contacts = [];
+		let lkedEntities = [];
+		let lkedXeroEntities = [];
+		let linkedInfo = null;
+
+		entities = nomosEntitiesState.filter((entity) => {
+			linkedInfo = this.entityIsLinked(entity.entityJson);
+			if (linkedInfo) {
+				lkedEntities.push({
+					entity,
+					contact: linkedInfo
+				});
+				lkedXeroEntities.push(linkedInfo.ContactID);
+				return false;
+			}
+			return true;
+		});
+
+		contacts = xeroContactsState.filter((xeroEntity) => {
+			if (lkedXeroEntities.indexOf(xeroEntity.ContactID) > -1) {
+				return false;
+			} else {
+				return true;
+			}
+		});
+
+		this.calculateMatching(entities, contacts, lkedEntities);
+	}
+
+	calculateMatching(entities = [], contacts = [], lkedEntities = []) {
+		let matchedArray = [];
+		let tryMatch;
+		let match;
+
+		entities.map((entity) => {
+			tryMatch = [];
+			match = null;
+
+			contacts.map((contact, contactIndex) => {
+				if (entity.entityEmail === contact.EmailAddress) {
+					match = {
+						position: contactIndex,
+						degree: 1
+					};
+				} else {
+					tryMatch = FuzzySet([entity.entityName]).get(contact.Name);
+					if (tryMatch && tryMatch.length) {
+						if ((!match
+							|| match.degree < tryMatch[0][0])
+							&& tryMatch[0][0] > 0.5) {
+							match = {
+								position: contactIndex,
+								degree: tryMatch[0][0]
+							};
+							// console.log(tryMatch[0]);
+						}
+					}
+				}
+			});
+			if (match) {
+				matchedArray.push({
+					entity,
+					contact: contacts[match.position],
+					degree: match.degree * 100
+				});
+			}
+		});
+		// console.log(matchedArray);
+		this.setState({
+			nomosEntities: entities,
+			xeroContacts: contacts,
+			matchedArray,
+			lkedEntities
+		});
+	}
+
+	entityIsLinked(entityJson) {
+		if (!entityJson
+			|| !entityJson.integration
+			|| !entityJson.integration.xero) {
+			return false;
+		}
+		return entityJson.integration.xero || false;
+	}
+
+	@autobind
+	link() {
+		return () => {
+			console.log('kennek unlink me now');
+		};
+	}
+
+	@autobind
+	unlink() {
+		return () => {
+			console.log('kennek unlink me now');
+		};
 	}
 
 	isConnected() {

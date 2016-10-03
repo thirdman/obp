@@ -1,4 +1,3 @@
-/* eslint max-len: off */
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { View } from 'layouts';
@@ -43,9 +42,16 @@ export default class SettingsIntegrationsDetail extends Component {
 			provider: 'xero',
 			title: 'Xero',
 			subtitle: 'beautiful accounting software',
-			shortDescription: 'Beautiful cloud-based accounting software that connects people with the right numbers anytime, anywhere, on any device.',
-			longDescription: 'Improve cashflow and get paid quickly and easily when you send online invoices. You\'ll have a better connection with your customers – and know when they\'ve opened your invoice.',
-			whatYouCanDo: 'Using Xero integration, you can send invoices directly to your xero account. In nomos one, you will see the status of invoices for quick and easy monitoring.',
+			shortDescription: `Beautiful cloud-based accounting software
+				that connects people with the right numbers anytime,
+				anywhere, on any device.`,
+			longDescription: `Improve cashflow and get paid quickly
+				and easily when you send online invoices.
+				You\'ll have a better connection with your customers
+				– and know when they\'ve opened your invoice.`,
+			whatYouCanDo: `Using Xero integration, you can send invoices
+				directly to your xero account. In nomos one, you will see
+				the status of invoices for quick and easy monitoring.`,
 			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png',
 			websiteUrl: 'https://www.xero.com',
 			connectionUrl: '',
