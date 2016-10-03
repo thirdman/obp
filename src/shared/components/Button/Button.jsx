@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { Icon } from 'components';
 import classSet from 'react-classset';
 import cx from 'classnames';
@@ -6,30 +7,24 @@ import cx from 'classnames';
 const styles = require('./Button.scss');
 
 export default class Button extends Component {
+	state = {
+		tooltip: this.makeId()
+	}
 
-	static propTypes = {
-		content: React.PropTypes.string,
-		type: React.PropTypes.string,
-		icon: React.PropTypes.string,
-		color: React.PropTypes.string,
-		iconColor: React.PropTypes.string,
-		iconPosition: React.PropTypes.string,
-		iconSize: React.PropTypes.number,
-		isActive: React.PropTypes.bool,
-		isHighlighted: React.PropTypes.bool,
-		isDisabled: React.PropTypes.bool,
-		classNameProps: React.PropTypes.array,
-		onClickProps: React.PropTypes.func,
-		children: React.PropTypes.oneOfType([
-			React.PropTypes.arrayOf(React.PropTypes.node),
-			React.PropTypes.node
-		]),
-	};
+	makeId() {
+		let text = '';
+		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for (let i = 0; i < 5; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return text;
+	}
 
 	render() {
 		const {
 			classNameProps = ['normal'],
 			content,
+			helpContent,
 			type,
 			color,
 			onClickProps,
@@ -42,6 +37,7 @@ export default class Button extends Component {
 			isHighlighted = false
 		} = this.props;
 
+		const { tooltip } = this.state;
 		let toggleClasses;
 		let classes;
 		let iconWrapStyles;
@@ -71,7 +67,11 @@ export default class Button extends Component {
 		return (
 			<span
 				onClick={onClickProps}
-				className={cx(styles.Button, classes, toggleClasses)} >
+				className={cx(styles.Button, classes, toggleClasses)}
+				data-tip={helpContent || null}
+				data-class={styles.tooltip}
+				data-for={`ButtonTooltip${tooltip}`}
+				>
 				{isActive ?
 					<span className={styles.isActive}>
 						<Icon
@@ -109,7 +109,31 @@ export default class Button extends Component {
 					</span>
 					: null
 				}
+				<ReactTooltip id={`ButtonTooltip${tooltip}`} type="light">
+					{helpContent}
+				</ReactTooltip>
 			</span>
 		);
 	}
+
+	static propTypes = {
+		content: React.PropTypes.string,
+		helpContent: React.PropTypes.string,
+		type: React.PropTypes.string,
+		icon: React.PropTypes.string,
+		color: React.PropTypes.string,
+		iconColor: React.PropTypes.string,
+		iconPosition: React.PropTypes.string,
+		iconSize: React.PropTypes.number,
+		isActive: React.PropTypes.bool,
+		isHighlighted: React.PropTypes.bool,
+		isDisabled: React.PropTypes.bool,
+		classNameProps: React.PropTypes.array,
+		onClickProps: React.PropTypes.func,
+		children: React.PropTypes.oneOfType([
+			React.PropTypes.arrayOf(React.PropTypes.node),
+			React.PropTypes.node
+		]),
+	};
+
 }
