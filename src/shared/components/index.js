@@ -22,6 +22,7 @@ export InputSelect from './InputSelect/InputSelect';
 export InputSwitch from './InputSwitch/InputSwitch';
 export InputToggle from './InputToggle/InputToggle';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
+export Message from './Message/Message';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
 export ProgressBar from './ProgressBar/ProgressBar';
 export QuickView from './QuickView/QuickView';
