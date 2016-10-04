@@ -10,6 +10,7 @@ import {
 	InvoiceSection
 } from './containers';
 
+const styles = require('./SettingsIntegrationsDetail.scss');
 const globalStyles = require('../App/App.scss');
 
 @connect('store')
@@ -81,7 +82,9 @@ export default class SettingsIntegrationsDetail extends Component {
 						</Column>
 						<Column occupy={3}>
 							<h4>Status</h4>
-							<div>{`${connected ? '*Connected*' : '- Not Connected -'}`}</div>
+							<div className={styles.connectedStatus + ' ' + (connected ? styles.isConnected : '')}>
+								{`${connected ? 'Connected' : '- Not Connected -'}`}
+							</div>
 						</Column>
 					</Row>
 					<Row>
