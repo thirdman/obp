@@ -1,22 +1,18 @@
 import { Component, PropTypes } from 'react';
 import CountTo from 'react-count-to';
 import cx from 'classnames';
+import _ from 'lodash';
 
 const styles = require('./Statistic.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class Statistic extends Component {
 
-	countDecimals(value) {
-		if (Math.floor(value) !== value) {
-			return value.toString().split('.')[1].length || 0;
-			} else {
-		return 0;
+	shouldComponentUpdate(nextProps) {
+		if (_.isEqual(this.props, nextProps)) {
+			return false;
 		}
-	}
-
-	isNumber(number) {
-		return !isNaN(parseFloat(number)) && isFinite(number);
+		return true;
 	}
 
 	render() {
@@ -32,9 +28,6 @@ export default class Statistic extends Component {
 		let contentNumber;
 		let digitCount = 0;
 		let trimContent;
-		// let isNumber;
-
-		// To be reviewed later
 
 		if (this.isNumber(parseFloat(content))) {
 			contentNumber = parseFloat(content);
@@ -76,6 +69,18 @@ export default class Statistic extends Component {
 				</div>
 			</div>
 		);
+	}
+
+	countDecimals(value) {
+		if (Math.floor(value) !== value) {
+			return value.toString().split('.')[1].length || 0;
+			} else {
+		return 0;
+		}
+	}
+
+	isNumber(number) {
+		return !isNaN(parseFloat(number)) && isFinite(number);
 	}
 
 	static propTypes = {

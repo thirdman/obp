@@ -10,7 +10,6 @@ import {
 	Button,
 	ButtonGroup,
 	Column,
-	HorizontalRule,
 	Icon,
 	Row,
 	Section,
@@ -57,7 +56,6 @@ class EntitySection extends Component {
 		error: false,
 		nomosEntities: [],
 		xeroContacts: [],
-		xeroCodes: [],
 		lkedEntities: [],
 		matchedArray: []
 	}
@@ -75,7 +73,7 @@ class EntitySection extends Component {
 			loading,
 			nomosEntities,
 			xeroContacts,
-			xeroCodes
+			lkedEntities
 		} = this.state;
 
 		return (
@@ -109,7 +107,7 @@ class EntitySection extends Component {
 							<Column occupy={3}>
 								<Statistic
 									title="Linked"
-									content={xeroCodes.xeroAccountCodes.Account.length}
+									content={lkedEntities.length}
 									isAnimated
 									classNameProps={['isHorizontal', 'hasDivider']}
 								/>
@@ -319,16 +317,6 @@ class EntitySection extends Component {
 		})
 		.then((res) => {
 			this.setState({ xeroContacts: res.data[0] });
-			this.loading('Getting Xero account codes ....');
-			return this.safePromise(xeroClient.request(
-				'post',
-				`organisations/${currentOrg.id}/xero/accountCodes`,
-				currentOrg.accessTokens.xero,
-				currentOrg
-			));
-		})
-		.then((res) => {
-			this.setState({ xeroCodes: res.data[0] });
 			this.loading('Matching entities with contacts ....');
 			this.filterLinkedEntities();
 			this.loading('');
