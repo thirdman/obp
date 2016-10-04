@@ -103,6 +103,10 @@ class EntitySection extends Component {
 			case 'match':
 				return (
 					<Section hasDivider title="Suggesting Matches">
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['green']} />
 						<Row>
 							<Column occupy={4}>{'NOMOS ONE'}</Column>
 							<Column occupy={4}>{'XERO'}</Column>
@@ -410,8 +414,8 @@ class EntitySection extends Component {
 
 	isConnected() {
 		const { currentOrg = {} } = this.context.store.app;
-		if (currentOrg.accessTokens ||
-			currentOrg.accessTokens.xero ||
+		if (currentOrg.accessTokens &&
+			currentOrg.accessTokens.xero &&
 			currentOrg.accessTokens.xero.connectedAt) {
 			return true;
 		} else {
@@ -429,8 +433,6 @@ class EntitySection extends Component {
 	@autobind
 	switchSection(currentEntitySection) {
 		return () => {
-			console.log('clicked');
-			console.log(currentEntitySection);
 			this.setState({ currentEntitySection });
 		};
 	}

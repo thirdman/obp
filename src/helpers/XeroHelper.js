@@ -42,7 +42,7 @@ module.exports = {
 		});
 	},
 
-	request(type, url, xeroToken, org) {
+	request(type, url, xeroToken, org, data = {}) {
 		return new Promise((resolve, reject) => {
 			this.checkAndRefreshToken(xeroToken, org)
 			.then((checkedToken) => {
@@ -53,6 +53,7 @@ module.exports = {
 
 				return client[type](url, {
 					data: {
+						...data,
 						accessToken: JSON.parse(JSON.stringify(checkedToken))
 					}
 				});
