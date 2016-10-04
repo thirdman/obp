@@ -1,0 +1,15 @@
+@import "../../globals/styles/_global.scss";
+
+.SettingsIntegrationsDetail{
+
+}
+.connectedStatus{
+	color: $nomosGrey;
+	.isConnected{
+		color: #fff;
+		background: $nomosGreen;
+		padding: 2px;
+		border-radius: 2px;
+		text-align: center;
+	}
+}
