@@ -6,7 +6,16 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
-import { Button, ButtonGroup, Column, Icon, Row, Section, Statistic } from 'components';
+import {
+	Button,
+	ButtonGroup,
+	Column,
+	HorizontalRule,
+	Icon,
+	Row,
+	Section,
+	Statistic
+	} from 'components';
 import { connect } from '../../../../../utils/state';
 
 @connect('store')
@@ -65,7 +74,6 @@ class EntitySection extends Component {
 			}];
 		return (
 			<div>
-				<h3>{'Entity Section'}</h3>
 				{loaded &&
 					<div>
 					<Row>
@@ -97,20 +105,20 @@ class EntitySection extends Component {
 					</Row>
 						<Section hasDivider title="Existing Entities">
 							<Row>
-								<Column occupy={5}>{'Name'}</Column>
-								<Column occupy={4}>{'Provider'}</Column>
-								<Column occupy={1}>{'Link Icon'}</Column>
-								<Column occupy={2}>{'Action'}</Column>
+								<Column occupy={5}><h4>{'Name'}</h4></Column>
+								<Column occupy={4}><h4>{'Provider'}</h4></Column>
+								<Column occupy={1}>{''}</Column>
+								<Column occupy={2}><h4>{'Action'}</h4></Column>
 							</Row>
 							{ this.getLinkedRows() }
 						</Section>
 
 						<Section hasDivider title="Suggesting Matches">
 							<Row>
-								<Column occupy={4}>{'NOMOS ONE'}</Column>
-								<Column occupy={4}>{'XERO'}</Column>
-								<Column occupy={1}>{'PROXIMITY'}</Column>
-								<Column occupy={3}>{''}</Column>
+								<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
+								<Column occupy={4}><h4>{'XERO'}</h4></Column>
+								<Column occupy={1}><h4>{'PROXIMITY'}</h4></Column>
+								<Column occupy={3}><h4>{''}</h4></Column>
 							</Row>
 							{ this.getSuggestedMatchingRows() }
 						</Section>
@@ -118,6 +126,7 @@ class EntitySection extends Component {
 				}
 
 				<div>{ loading }</div>
+				<HorizontalRule />
 				<ButtonGroup type={'hero'} hasData optionData={buttonGroupData} />
 			</div>
 		);
