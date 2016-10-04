@@ -6,7 +6,16 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
-import { Button, ButtonGroup, Column, Icon, Row, Section, Statistic } from 'components';
+import {
+	Button,
+	ButtonGroup,
+	Column,
+	HorizontalRule,
+	Icon,
+	Row,
+	Section,
+	Statistic
+	} from 'components';
 import { connect } from '../../../../../utils/state';
 
 const buttonGroupData = [{
@@ -71,42 +80,47 @@ class EntitySection extends Component {
 
 		return (
 			<div>
-				<h3>{'Entity Section'}</h3>
 				{loaded &&
 					<div>
-					<Row>
-						<Column occupy={3}>
-							<h4>Status</h4>
-							<span>{'Connected'}</span>
-						</Column>
-						<Column occupy={3}>
-							<h4>Nomos Entities</h4>
-							<Statistic
-								title="Nomos Entities"
-								content={nomosEntities.length}
-								isAnimated
-								classNameProps={['isHorizontal', 'hasDivider']}
-							/>
-						</Column>
-						<Column occupy={3}>
-							<h4>Xero Contacts</h4>
-							<span>
-								{`${xeroContacts.length}`}
-							</span>
-						</Column>
-						<Column occupy={3}>
-							<h4>Xero Codes</h4>
-							<span>
-								{`${xeroCodes.xeroAccountCodes.Account.length}`}
-							</span>
-						</Column>
-					</Row>
+						<Row>
+							<Column occupy={3}>
+								<Statistic
+									title="Status"
+									content={'Connected'}
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Nomos Entities"
+									content={nomosEntities.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Xero Contacts"
+									content={xeroContacts.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Linked"
+									content={xeroCodes.xeroAccountCodes.Account.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+						</Row>
 						<Section hasDivider title="Existing Entities">
 							<Row>
-								<Column occupy={5}>{'Name'}</Column>
-								<Column occupy={4}>{'Provider'}</Column>
-								<Column occupy={1}>{'Link Icon'}</Column>
-								<Column occupy={2}>{'Action'}</Column>
+								<Column occupy={5}><h4>{'Name'}</h4></Column>
+								<Column occupy={4}><h4>{'Provider'}</h4></Column>
+								<Column occupy={1}>{''}</Column>
+								<Column occupy={2}><h4>{'Action'}</h4></Column>
 							</Row>
 							{ this.getLinkedRows() }
 						</Section>
