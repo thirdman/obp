@@ -18,10 +18,40 @@ import {
 	} from 'components';
 import { connect } from '../../../../../utils/state';
 
+const buttonGroupData = [{
+	name: 'match',
+	title: 'Match Entities',
+	subtitle: '(between Xero and Nomos One)',
+	showButton: 'true',
+	descriptionTitle: 'Best For',
+	description: 'Users who have been using both Xero and Nomos for a while and have existing entities in each.', // eslint-disable-line max-len
+	classes: ['hero'],
+	onClickReturn: 'match'
+}, {
+	name: 'import',
+	title: 'Import Xero Contacts',
+	subtitle: '(from Xero to Nomos one)',
+	showButton: 'true',
+	descriptionTitle: 'Best For',
+	description: 'Users are new to Nomos One and have been using Xero for a while',
+	classes: ['hero'],
+	onClickReturn: 'import'
+}, {
+	name: 'export',
+	title: 'Export Nomos One Entities',
+	subtitle: '(from Nomos One to Xero)',
+	showButton: 'true',
+	descriptionTitle: 'Best For',
+	description: 'users are new to Nomos One and have been using Xero for a while',
+	classes: ['hero'],
+	onClickReturn: 'export'
+}];
+
 @connect('store')
 class EntitySection extends Component {
 
 	state = {
+		currentEntitySection: null,
 		loaded: false,
 		loading: '',
 		error: false,
@@ -47,68 +77,44 @@ class EntitySection extends Component {
 			xeroContacts,
 			xeroCodes
 		} = this.state;
-		const buttonGroupData = [{
-				name: 'match',
-				title: 'Match Entities',
-				subtitle: '(between Xero and Nomos One)',
-				showButton: 'true',
-				descriptionTitle: 'Best For',
-				description: 'Users who have been using both Xero and Nomos for a while and have existing entities in each.', // eslint-disable-line max-len
-				classes: ['hero']
-			}, {
-				name: 'import',
-				title: 'Import Xero Contacts',
-				subtitle: '(from Xero to Nomos one)',
-				showButton: 'true',
-				descriptionTitle: 'Best For',
-				description: 'Users are new to Nomos One and have been using Xero for a while',
-				classes: ['hero']
-			}, {
-				name: 'export',
-				title: 'Export Nomos One Entities',
-				subtitle: '(from Nomos One to Xero)',
-				showButton: 'true',
-				descriptionTitle: 'Best For',
-				description: 'users are new to Nomos One and have been using Xero for a while',
-				classes: ['hero']
-			}];
+
 		return (
 			<div>
 				{loaded &&
 					<div>
-					<Row>
-						<Column occupy={3}>
-							<Statistic
-								title="Status"
-								content={'Connected'}
-								classNameProps={['isHorizontal', 'hasDivider']}
-							/>
-						</Column>
-						<Column occupy={3}>
-							<Statistic
-								title="Nomos Entities"
-								content={nomosEntities.length}
-								isAnimated
-								classNameProps={['isHorizontal', 'hasDivider']}
-							/>
-						</Column>
-						<Column occupy={3}>
-							<Statistic
-								title="Xero Contacts"
-								content={xeroContacts.length}
-								isAnimated
-								classNameProps={['isHorizontal', 'hasDivider']}
-							/>
-						</Column>
-						<Column occupy={3}>
-							<Statistic
-								title="Linked"
-								content={xeroCodes.xeroAccountCodes.Account.length}
-								isAnimated
-								classNameProps={['isHorizontal', 'hasDivider']}
-							/>
-						</Column>
-					</Row>
+						<Row>
+							<Column occupy={3}>
+								<Statistic
+									title="Status"
+									content={'Connected'}
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Nomos Entities"
+									content={nomosEntities.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Xero Contacts"
+									content={xeroContacts.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+							<Column occupy={3}>
+								<Statistic
+									title="Linked"
+									content={xeroCodes.xeroAccountCodes.Account.length}
+									isAnimated
+									classNameProps={['isHorizontal', 'hasDivider']}
+								/>
+							</Column>
+						</Row>
 						<Section hasDivider title="Existing Entities">
 							<Row>
 								<Column occupy={5}><h4>{'Name'}</h4></Column>
@@ -118,24 +124,108 @@ class EntitySection extends Component {
 							</Row>
 							{ this.getLinkedRows() }
 						</Section>
-
-						<Section hasDivider title="Suggesting Matches">
-							<Row>
-								<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
-								<Column occupy={4}><h4>{'XERO'}</h4></Column>
-								<Column occupy={1}><h4>{'PROXIMITY'}</h4></Column>
-								<Column occupy={3}><h4>{''}</h4></Column>
-							</Row>
-							{ this.getSuggestedMatchingRows() }
-						</Section>
+						{ this.getCurrentEntitySection() }
 					</div>
 				}
-
 				<div>{ loading }</div>
-				<HorizontalRule />
-				<ButtonGroup type={'hero'} hasData optionData={buttonGroupData} />
 			</div>
 		);
+	}
+
+	getCurrentEntitySection() {
+		const { currentEntitySection } = this.state;
+		switch (currentEntitySection) {
+			case 'match':
+				return (
+					<Section hasDivider title="Suggesting Matches">
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['green']} />
+						<Row>
+							<Column occupy={4}>{'NOMOS ONE'}</Column>
+							<Column occupy={4}>{'XERO'}</Column>
+							<Column occupy={1}>{'PROXIMITY'}</Column>
+							<Column occupy={3}>{''}</Column>
+						</Row>
+						{ this.getSuggestedMatchingRows() }
+					</Section>
+				);
+			case 'export':
+				return (
+					<Section hasDivider title="Export to Xero">
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['green']} />
+						<Row>
+							<Column occupy={9}>{'NOMOS ONE ENTITY'}</Column>
+							<Column occupy={3}>{''}</Column>
+						</Row>
+						{ this.getExportRows() }
+					</Section>
+				);
+			case 'import':
+				return (
+					<Section hasDivider title="Import to nomos one">
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['green']} />
+						<Row>
+							<Column occupy={9}>{'XERO CONTACT'}</Column>
+							<Column occupy={3}>{''}</Column>
+						</Row>
+						{ this.getImportRows() }
+					</Section>
+				);
+			default:
+				return (
+					<ButtonGroup
+						type={'hero'}
+						hasData
+						optionData={buttonGroupData}
+						onClickProps={this.switchSection} />
+				);
+		}
+	}
+
+	getExportRows() {
+		const { nomosEntities } = this.state;
+		return nomosEntities.map((entity, index) => {
+			return (
+				<Row key={`export-${index}`}>
+					<Column occupy={9}>
+						{entity.entityName}
+					</Column>
+					<Column occupy={3}>
+						<Button
+							content="Export"
+							onClickProps={this.link(entity)}
+							classNameProps={['green']} />
+					</Column>
+				</Row>
+			);
+		});
+	}
+
+	getImportRows() {
+		const { xeroContacts } = this.state;
+		return xeroContacts.map((contact, index) => {
+			return (
+				<Row key={`import-${index}`}>
+					<Column occupy={9}>
+						{contact.Name}
+					</Column>
+					<Column occupy={3}>
+						<Button
+							content="Import"
+							onClickProps={this.link(contact)}
+							classNameProps={['green']} />
+					</Column>
+				</Row>
+			);
+		});
 	}
 
 	getSuggestedMatchingRows() {
@@ -241,6 +331,7 @@ class EntitySection extends Component {
 			this.setState({ xeroCodes: res.data[0] });
 			this.loading('Matching entities with contacts ....');
 			this.filterLinkedEntities();
+			this.loading('');
 			this.setState({ loaded: true });
 		})
 		.catch((err) => {
@@ -358,8 +449,8 @@ class EntitySection extends Component {
 
 	isConnected() {
 		const { currentOrg = {} } = this.context.store.app;
-		if (currentOrg.accessTokens ||
-			currentOrg.accessTokens.xero ||
+		if (currentOrg.accessTokens &&
+			currentOrg.accessTokens.xero &&
 			currentOrg.accessTokens.xero.connectedAt) {
 			return true;
 		} else {
@@ -372,6 +463,13 @@ class EntitySection extends Component {
 			loading,
 			error
 		});
+	}
+
+	@autobind
+	switchSection(currentEntitySection) {
+		return () => {
+			this.setState({ currentEntitySection });
+		};
 	}
 }
 

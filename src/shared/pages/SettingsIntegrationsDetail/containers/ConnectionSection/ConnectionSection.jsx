@@ -81,8 +81,12 @@ export default class ConnectionSection extends Component {
 	}
 
 	getAuthSection() {
+		const { app, auth } = this.context.store;
+		const { currentOrg = null } = app;
+		const org = auth.getOrg(currentOrg.id);
 		const { doneAuth, token } = this.props;
 		const { connecting } = this.state;
+		let orgName = org && org.attributes.name;
 
 		if (token && token.xero && token.xero.connectedAt) {
 			return (
@@ -91,11 +95,11 @@ export default class ConnectionSection extends Component {
 					<div>{'This organisation is connected to Xero'}</div>
 					<Section title={'What next?'} hasDivider subtitle={'Now that you have connected your [xero] account, there\'s some things to check'}>
 						<h4>Integration Settings</h4>
-						<Link to={'/{currentOrg.id}/integrations/xero/invoice-settings'}>
+						<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
 							{'1. Check your settings to ensure this integration will work as you expect.'}
 						</Link>
-						<Link to={'/{currentOrg.id}/integrations/xero/match-entity'}>
-							{'2. Make sure your `[currentOrg.id]` contacts and nomos one Entites match up.'}
+						<Link to={`/${currentOrg.id}/integrations/xero/match-entity`}>
+							{`2. Make sure your ${orgName} contacts and nomos one Entites match up.`}
 						</Link>
 					</Section>
 				</div>

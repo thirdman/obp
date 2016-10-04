@@ -60,4 +60,20 @@ export default class AppStore {
 			this.fetchOrgToken();
 		}
 	}
+
+	promiseRefreshOrgDetails() {
+		return new Promise((resolve, reject) => {
+			if (client.jwt && this.currentOrg.id) {
+				client.get(`/organisations/${this.currentOrg.id}/accessTokens`)
+				.then((res) => {
+					this.updateCurrentOrg('accessTokens',
+						res.data[0].attributes.accessTokens || {});
+					resolve();
+				})
+				.catch((err) => {
+					reject(err);
+				});
+			}
+		});
+	}
 }

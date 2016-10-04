@@ -117,14 +117,14 @@ export default class SettingsIntegrationsDetail extends Component {
 							name: 'connect'
 						},
 						{
-							label: 'Match',
-							link: `/${currentOrg.id}/integrations/xero/match-entity`,
-							name: 'match-entity'
-						},
-						{
 							label: 'Settings',
 							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
 							name: 'invoice-settings'
+						},
+						{
+							label: 'Match',
+							link: `/${currentOrg.id}/integrations/xero/match-entity`,
+							name: 'match-entity'
 						}
 					]}
 				/>

@@ -33,7 +33,9 @@ export default (store) => {
 		// Kick you back to login page if have not logged in
 		auth.checkLoggedIn()
 		.then(() => {
-			app.refreshOrgDetails();
+			return app.promiseRefreshOrgDetails();
+		})
+		.then(() => {
 			cb();
 		})
 		.catch(() => {
