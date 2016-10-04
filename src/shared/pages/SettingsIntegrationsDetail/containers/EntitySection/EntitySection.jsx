@@ -6,7 +6,7 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
-import { Button, ButtonGroup, Column, Icon, Row, Section } from 'components';
+import { Button, ButtonGroup, Column, Icon, Row, Section, Statistic } from 'components';
 import { connect } from '../../../../../utils/state';
 
 @connect('store')
@@ -66,14 +66,35 @@ class EntitySection extends Component {
 		return (
 			<div>
 				<h3>{'Entity Section'}</h3>
-				<div>{'Here goes the entities matching section'}</div>
 				{loaded &&
 					<div>
-						<div>{`Nomos entities: ${nomosEntities.length}`}</div>
-						<div>{`Xero contacts: ${xeroContacts.length}`}</div>
-						<div>{`Xero codes: ${xeroCodes
-							.xeroAccountCodes.Account.length}`}</div>
-
+					<Row>
+						<Column occupy={3}>
+							<h4>Status</h4>
+							<span>{'Connected'}</span>
+						</Column>
+						<Column occupy={3}>
+							<h4>Nomos Entities</h4>
+							<Statistic
+								title="Nomos Entities"
+								content={nomosEntities.length}
+								isAnimated
+								classNameProps={['isHorizontal', 'hasDivider']}
+							/>
+						</Column>
+						<Column occupy={3}>
+							<h4>Xero Contacts</h4>
+							<span>
+								{`${xeroContacts.length}`}
+							</span>
+						</Column>
+						<Column occupy={3}>
+							<h4>Xero Codes</h4>
+							<span>
+								{`${xeroCodes.xeroAccountCodes.Account.length}`}
+							</span>
+						</Column>
+					</Row>
 						<Section hasDivider title="Existing Entities">
 							<Row>
 								<Column occupy={5}>{'Name'}</Column>
