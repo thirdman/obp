@@ -1,6 +1,6 @@
 /* eslint max-len: off */
 import React, {Component} from 'react';
-import { ContentItem, Section } from 'components';
+import { ContentItem, InputSelect, InputSwitch, Section } from 'components';
 
 export default class InvoiceSection extends Component {
 
@@ -15,7 +15,10 @@ export default class InvoiceSection extends Component {
 						// description="By default, nomos one will keep your invoices in sync with external applications."
 						helpContent="By default, nomos one will send your invoices to connected applications."
 						>
-							{'BUTTON SWITCH COMPONENT'}
+							<InputSwitch
+								content={['Yes', 'No']}
+								isSelected
+							/>
 					</ContentItem>
 					<ContentItem
 						type="ButtonSwitch"
@@ -25,7 +28,10 @@ export default class InvoiceSection extends Component {
 						// description="By default, nomos one will keep your invoices in sync with external applications."
 						helpContent="Repeating invoices allow you to creat an invoice once, and have it automatically generate each rent period."
 						>
-							{'BUTTON SWITCH COMPONENT'}
+							<InputSwitch
+								content={['Yes', 'No']}
+								isSelected={false}
+								/>
 					</ContentItem>
 					<ContentItem
 						type="Select"
@@ -35,7 +41,21 @@ export default class InvoiceSection extends Component {
 						// description="By default, nomos one will keep your invoices in sync with external applications."
 						helpContent="The default category invoices ill be created in. You can change this individually in your accounting app."
 						>
-							{'DROPDOWN COMPONENT'}
+							<InputSelect
+							content="Select..."
+							options={[
+								{
+									title: '200 - sales',
+									value: 200
+								}, {
+									title: '201 - something else',
+									value: 201
+								}, {
+									title: '203 - another thing',
+									value: 203
+								},
+								]}
+							/>
 					</ContentItem>
 				</Section>
 
