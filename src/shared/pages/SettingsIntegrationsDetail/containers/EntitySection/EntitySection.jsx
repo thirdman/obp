@@ -135,29 +135,31 @@ class EntitySection extends Component {
 		switch (currentEntitySection) {
 			case 'match':
 				return (
-					<Section hasDivider title="Suggesting Matches">
+					<Section hasDivider title="Suggested Matches" description={'These entities exist in both systems and appear
+						similar. The proximity measure indicates how similar they are.'}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['green']} />
+							classNameProps={['highlighted']} />
 						<Row>
-							<Column occupy={4}>{'NOMOS ONE'}</Column>
-							<Column occupy={4}>{'XERO'}</Column>
-							<Column occupy={1}>{'PROXIMITY'}</Column>
-							<Column occupy={3}>{''}</Column>
+							<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
+							<Column occupy={4}><h4>{'XERO'}</h4></Column>
+							<Column occupy={1}><h4>{'PROXIMITY'}</h4></Column>
+							<Column occupy={3}><h4>{''}</h4></Column>
 						</Row>
 						{ this.getSuggestedMatchingRows() }
 					</Section>
 				);
 			case 'export':
 				return (
-					<Section hasDivider title="Export to Xero">
+					<Section hasDivider title="Export to Xero" description={'These entities exist in nomos one. You can create
+						them in Xero by cicking the export button'}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['green']} />
+							classNameProps={['highlighted']} />
 						<Row>
-							<Column occupy={9}>{'NOMOS ONE ENTITY'}</Column>
+							<Column occupy={9}><h4>{'NOMOS ONE ENTITY'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
 						</Row>
 						{ this.getExportRows() }
@@ -165,13 +167,15 @@ class EntitySection extends Component {
 				);
 			case 'import':
 				return (
+					<Section hasDivider title="Import to nomos one" description={`These contacts exist in Xero but don't appear
+						in nomos one. You can create them as entities in nomos one by cicking the import button`}>
 					<Section hasDivider title="Import to nomos one">
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['green']} />
+							classNameProps={['highlighted']} />
 						<Row>
-							<Column occupy={9}>{'XERO CONTACT'}</Column>
+							<Column occupy={9}><h4>{'XERO CONTACT'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
 						</Row>
 						{ this.getImportRows() }
