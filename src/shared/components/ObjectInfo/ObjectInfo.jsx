@@ -33,6 +33,14 @@ export default class ObjectInfo extends Component {
 		}
 		return buttonComps;
 	}
+	getAdditionalContent() {
+		const { additionalContent } = this.props;
+		if (additionalContent) {
+			return (
+				<div>{additionalContent}</div>
+			);
+		}
+	}
 
 	render() {
 		const {
@@ -67,6 +75,9 @@ export default class ObjectInfo extends Component {
 				<div className={styles.titleWrap}>
 					<div className={styles.buttonWrap}>
 						{this.getButtonComps()}
+					</div>
+					<div className={styles.additionalContent}>
+						{this.getAdditionalContent()}
 					</div>
 					<h3>{title}{mode === 'Inactive' ? ' (Inactive)' : null}</h3>
 					<h4 className={styles.subtitle}>
@@ -108,6 +119,12 @@ export default class ObjectInfo extends Component {
 		mode: React.PropTypes.string,
 		display: React.PropTypes.string,
 		buttons: React.PropTypes.array,
+		// additionalContent: React.PropTypes.string,
+		additionalContent: React.PropTypes.oneOfType([
+			React.PropTypes.arrayOf(React.PropTypes.node),
+			React.PropTypes.node,
+			React.PropTypes.string
+		]),
 		children: React.PropTypes.oneOfType([
 			React.PropTypes.arrayOf(React.PropTypes.node),
 			React.PropTypes.node

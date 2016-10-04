@@ -67,6 +67,7 @@ classNameProps					|	`array`		| ['normal']|	array of classes to apply to the com
 *****description*****
 
 <ObjectInfo classNameProps={['normal']} title="1 Bath St" />
+<ObjectInfo type="flat" title="1 Bath St" additionalContent="Additonal Content here" />
 
 *****example*****
 [
@@ -88,7 +89,8 @@ classNameProps					|	`array`		| ['normal']|	array of classes to apply to the com
 	"props": {
 		"title": "Bromley Co",
 		"type" : "entity",
-		"display": "flat"
+		"display": "flat",
+		"additionalContent": "Additional Content"
 		}
 }
 ]
