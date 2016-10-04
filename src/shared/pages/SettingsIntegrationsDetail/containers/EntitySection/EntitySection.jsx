@@ -289,8 +289,7 @@ class EntitySection extends Component {
 					<Button
 						content="Unlink"
 						onClickProps={this.unlink(
-							pair.entity,
-							pair.contact
+							pair.entity
 						)}
 						classNameProps={['text', 'delete']} />
 				</Column>
@@ -422,16 +421,43 @@ class EntitySection extends Component {
 	}
 
 	@autobind
-	link() {
+	link(entity, contact) {
 		return () => {
-			console.log('kennek unlink me now');
+			const userObject = {
+				...entity,
+				entityJson: {
+					...(entity.entityJson || {}),
+					integration: {
+						...(entity.entityJson &&
+							entity.entityJson.integration ||
+							{}),
+						xero: {
+							...contact
+						}
+					}
+				}
+			};
+			console.log(userObject);
+			// makes call to update entity
+			// update array state
 		};
 	}
 
 	@autobind
-	unlink() {
+	unlink(entity) {
 		return () => {
-			console.log('kennek unlink me now');
+			const userObject = {
+				...entity,
+				entityJson: {
+					...(entity.entityJson || {}),
+					integration: {
+						xero: ''
+					}
+				}
+			};
+			console.log(userObject);
+			// makes call to update entity
+			// update array state
 		};
 	}
 
