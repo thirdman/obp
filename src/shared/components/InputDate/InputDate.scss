@@ -1,0 +1,28 @@
+@import "../../globals/styles/_global.scss";
+@import "./react-datetime.css";
+
+.InputDate {
+	.rtd{
+		input{
+			border: 1px solid red;
+		}	
+	}
+	.dateTime{
+		// utility class passed to the date time
+	}
+	
+	.rdtPicker {
+	  display: none;
+	  position: absolute;
+	  width: 250px;
+	  padding: 4px;
+	  margin-top: 1px;
+	  z-index: 99999 !important;
+	  background: #fff;
+	  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+	  border: 1px solid $nomosLine;
+	}
+	.form-control{
+		background: red;
+	}
+}
