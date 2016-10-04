@@ -1,0 +1,36 @@
+@import "../../globals/styles/_global.scss";
+
+.SparkPercentage {
+	display: inline-block;
+	line-height: 1em;
+	height: 1em;
+	margin-left: $padding;
+	margin-right: $padding;
+	min-width: 55px;
+	.colorBar{
+    width: 8px;
+    height: 100%;
+    margin-right: 4px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+		background-image: linear-gradient(-179deg, #21C4D7 0%, #6FD12E 50%, #F3D110 100%);
+	}
+	.mask{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		display: block;
+		background: #fff;
+		height: 10%;
+	}
+	&.blue{
+		.colorBar{
+			background: $nomosBlue;
+		}
+		.mask{
+			background: $nomosLightGrey;
+		}
+	}
+}
