@@ -1,0 +1,97 @@
+@import "../../globals/styles/_global.scss";
+.Message{
+	font-style: normal;
+	padding-left: 48px !important;
+	border-radius: 4px;	 
+	background: $nomosGrey;
+	padding: 4px;
+	padding-left: 50px;
+	color: #fff;
+	position: relative;
+	margin-bottom: 8px;
+	min-height: 32px;
+	.iconWrap{
+		height: 100%;
+	  background: darken($nomosGrey, 5%);
+	  width: 32px;
+	  display: table-cell;
+	  position: absolute;
+	  text-align: center;
+	  border-radius: 4px 0 0 4px;
+	  padding: 4px;
+		left: 0;
+		top: 0;
+		line-height: 1.5em;
+		border-right:1px solid rgba(255, 255, 255, 0.36); 
+	}
+	.theContent{
+		color: #fff;
+	}
+	&.large{
+		min-height: 48px;
+		padding: 8px;
+		padding-left: 56px !important;
+		.iconWrap{
+			width: 48px;
+			padding: 8px;
+			background-size: 40px !important;
+		}
+	}
+	.closeButton{
+		position: absolute;
+		right: 4px; 
+		top: 4px;
+		width: 16px;
+		height: 16px;
+		padding: 2px;
+		text-decoration: right;
+		cursor: pointer;
+	}
+	&.contentItem{
+		//for when appears inside a content item. this pushes it down to sit right above the input.
+		margin-bottom: 0px;
+		margin-top: -8px;
+		margin-left: -8px;
+		margin-right: -8px;
+		border-radius: 4px 4px 0 0;
+	}
+	
+	&.info{
+		//this is the default style
+	}
+	&.warning, &.error{
+		background: $nomosRed;
+		.iconWrap{
+		  background: darken($nomosRed, 5%);
+/*
+			background-image: url(../../images/icons/interface/alert-triangle.svg);
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-position: center center;
+*/
+		}
+	}
+	&.question{
+		background: $nomosOrange;
+		.iconWrap{
+		  background: darken($nomosOrange, 5%);
+/*
+			background-image: url(../../images/icons/interface/question.svg);
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-position: center center;
+*/
+		}
+	}
+	&.success{
+		background: $nomosGreen;
+		.iconWrap{
+		  background: darken($nomosGreen, 5%);
+			svg{}
+			//background-image: url(../../images/icons/interface/tick-circle.svg);
+			//background-size: 20px;
+			//background-repeat: no-repeat;
+			//background-position: center center;
+		}
+	}
+}
