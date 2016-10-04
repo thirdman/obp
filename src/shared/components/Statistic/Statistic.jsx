@@ -6,14 +6,6 @@ const styles = require('./Statistic.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class Statistic extends Component {
-	static propTypes = {
-		content: PropTypes.string,
-		title: PropTypes.string,
-		units: PropTypes.string,
-		isAnimated: PropTypes.bool,
-		countTime: PropTypes.number,
-		classNameProps: PropTypes.array
-	}
 
 	countDecimals(value) {
 		if (Math.floor(value) !== value) {
@@ -84,5 +76,13 @@ export default class Statistic extends Component {
 				</div>
 			</div>
 		);
+	}
+
+	static propTypes = {
+		title: PropTypes.string,
+		units: PropTypes.string,
+		isAnimated: PropTypes.bool,
+		countTime: PropTypes.number,
+		classNameProps: PropTypes.array
 	}
 }

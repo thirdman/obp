@@ -78,11 +78,13 @@ class EntitySection extends Component {
 					<div>
 					<Row>
 						<Column occupy={3}>
-							<h4>Status</h4>
-							<span>{'Connected'}</span>
+							<Statistic
+								title="Status"
+								content={'Connected'}
+								classNameProps={['isHorizontal', 'hasDivider']}
+							/>
 						</Column>
 						<Column occupy={3}>
-							<h4>Nomos Entities</h4>
 							<Statistic
 								title="Nomos Entities"
 								content={nomosEntities.length}
@@ -91,16 +93,20 @@ class EntitySection extends Component {
 							/>
 						</Column>
 						<Column occupy={3}>
-							<h4>Xero Contacts</h4>
-							<span>
-								{`${xeroContacts.length}`}
-							</span>
+							<Statistic
+								title="Xero Contacts"
+								content={xeroContacts.length}
+								isAnimated
+								classNameProps={['isHorizontal', 'hasDivider']}
+							/>
 						</Column>
 						<Column occupy={3}>
-							<h4>Xero Codes</h4>
-							<span>
-								{`${xeroCodes.xeroAccountCodes.Account.length}`}
-							</span>
+							<Statistic
+								title="Linked"
+								content={xeroCodes.xeroAccountCodes.Account.length}
+								isAnimated
+								classNameProps={['isHorizontal', 'hasDivider']}
+							/>
 						</Column>
 					</Row>
 						<Section hasDivider title="Existing Entities">
