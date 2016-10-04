@@ -12,50 +12,46 @@ export default class InvoiceSection extends Component {
 						type="ButtonSwitch"
 						classNameProps={['normal']}
 						title="Automatically send invoices to Xero when created"
-						// description="By default, nomos one will keep your invoices in sync with external applications."
-						helpContent="By default, nomos one will send your invoices to connected applications."
-						>
+						helpContent={`By default, nomos one will send your
+							invoices to connected applications.`} >
 							<InputSwitch
 								content={['Yes', 'No']}
-								isSelected
-							/>
+								isSelected />
 					</ContentItem>
 					<ContentItem
 						type="ButtonSwitch"
 						classNameProps={['normal']}
 						title="Allow repeating invoices"
 						hasDivider
-						// description="By default, nomos one will keep your invoices in sync with external applications."
-						helpContent="Repeating invoices allow you to creat an invoice once, and have it automatically generate each rent period."
-						>
+						helpContent={`Repeating invoices allow you to create an
+							invoice once, and have it automatically generate each
+							rent period.`} >
 							<InputSwitch
 								content={['Yes', 'No']}
-								isSelected={false}
-								/>
+								isSelected={false} />
 					</ContentItem>
 					<ContentItem
 						type="Select"
 						classNameProps={['normal']}
 						title="Default Accounting category"
 						hasDivider
-						// description="By default, nomos one will keep your invoices in sync with external applications."
-						helpContent="The default category invoices ill be created in. You can change this individually in your accounting app."
-						>
+						helpContent={`The default category invoices will be
+							created in. You can change this individually in your
+							accounting app.`} >
 							<InputSelect
-							content="Select..."
-							options={[
-								{
-									title: '200 - sales',
-									value: 200
-								}, {
-									title: '201 - something else',
-									value: 201
-								}, {
-									title: '203 - another thing',
-									value: 203
-								},
-								]}
-							/>
+								content="Select..."
+								options={[
+									{
+										title: '200 - sales',
+										value: 200
+									}, {
+										title: '201 - something else',
+										value: 201
+									}, {
+										title: '203 - another thing',
+										value: 203
+									},
+								]} />
 					</ContentItem>
 				</Section>
 

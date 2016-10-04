@@ -12,10 +12,12 @@ export default class ButtonGroup extends Component {
 			options,
 			selected,
 			hasData = false,
-			onClickProps = function () {
-				console.log('Hey! NULL ButtonGroup onclickProps. you should probably do something about that.'); // eslint-disable-line max-len
+			onClickProps = () => {
+				return () => {
+					console.log('Hey! NULL ButtonGroup onclickProps.');
+				};
 			},
-			classNameProps,
+			classNameProps = [],
 			optionData = [{
 				name: 'match',
 				title: 'Match Entities',
@@ -41,7 +43,7 @@ export default class ButtonGroup extends Component {
 				description: 'users are new to Nomos One and have been using Xero for a while',
 				classes: ['hero']
 			}],
-			} = this.props;
+		} = this.props;
 
 		let theData;
 		let classes = classNameProps;
@@ -53,10 +55,9 @@ export default class ButtonGroup extends Component {
 		if (hasData && optionData) {
 			theData = optionData.map((option, index) => (
 				<div
-				key={`option-${index}`}
-				className={styles.optionItem}
-				onClick={onClickProps(option.onClickReturn)}
-				>
+					key={`option-${index}`}
+					className={styles.optionItem}
+					onClick={onClickProps(option.onClickReturn)} >
 					<Button classNameProps={['large', 'highlighted']} content={option.title}>
 						<span className={styles.subcontent}>{option.subcontent}</span>
 					</Button>
@@ -85,7 +86,7 @@ export default class ButtonGroup extends Component {
 								cx(styles.Button,
 								`icon-${lowerCasedOption}`,
 								(selected === option ? styles.selected : ''))
-								}>
+							}>
 							<span>{option}</span>
 						</span>
 					);

@@ -13,10 +13,10 @@ export default class InputSelect extends Component {
 
 	render() {
 		const {
-			options,
+			options = [],
 			color,
 			onClickProps,
-			classNameProps,
+			classNameProps = [],
 			// btnClassNameProps = [],
 			content,
 			position
