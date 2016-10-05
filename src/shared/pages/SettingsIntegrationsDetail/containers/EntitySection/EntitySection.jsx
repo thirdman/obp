@@ -152,7 +152,8 @@ class EntitySection extends Component {
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']} />
+							classNameProps={['highlighted']}
+							icon="chevron-left" />
 						<Row>
 							<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
 							<Column occupy={4}><h4>{'XERO'}</h4></Column>
@@ -265,22 +266,23 @@ class EntitySection extends Component {
 					</Column>
 					{match &&
 						<Column occupy={4}>
+							<div style={'display: block'} >
 							{entityTypes.map((type, tIndex) => {
 								typeMatch = type === importType;
 								return (
-									<div
+									<span
 										key={`type-${tIndex}`}
 										onClick={this.setImport(contact, type)}>
 										<InputToggle
 											isSelected={typeMatch}
 											content={type}
 											isButton={false}
-											classNameProps={typeMatch ? 'blue' : ''}
+											classNameProps={typeMatch ? ['blue'] : []}
 										/>
-										{/* typeMatch ? ` ((${type})) ` : ` ${type} ` */}
-									</div>
+									</span>
 								);
 							})}
+							</div>
 						</Column>
 					}
 					<Column occupy={3}>
