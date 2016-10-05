@@ -9,6 +9,7 @@ for toggling things on and off.
 :-------------------|:------------|:----------|:--------------------------------
 content							|	`string`		|	-					|	text inside the button
 color								|	`string`		|	-					|	at this point, only 'green' works other than the normal.
+isButton						|	`bool`			|	true			|	is it read only
 isSelected					|	`bool`			|	-					|	if it is in the 'selected' state
 children						|	`oneOfType` | - 				| You may wrap this component around child content - it SHOULD work :-)
 onClickProps				|	`func`			|	-					|	a function to call when the button is clicked

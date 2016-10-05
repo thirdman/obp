@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { autobind } from 'core-decorators';
 import { ApiClient as client } from 'helpers';
 import { Link } from 'react-router';
-import { Button, Section } from 'components';
+import { Button, Message, Section } from 'components';
 
 import { connect } from '../../../../../utils/state';
 
@@ -92,15 +92,24 @@ export default class ConnectionSection extends Component {
 			return (
 				<div>
 					<h3>{'Connection Section'}</h3>
-					<div>{'This organisation is connected to Xero'}</div>
-					<Section title={'What next?'} hasDivider subtitle={'Now that you have connected your [xero] account, there\'s some things to check'}>
-						<h4>Integration Settings</h4>
-						<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
-							{'1. Check your settings to ensure this integration will work as you expect.'}
-						</Link>
-						<Link to={`/${currentOrg.id}/integrations/xero/match-entity`}>
-							{`2. Make sure your ${orgName} contacts and nomos one Entites match up.`}
-						</Link>
+					<Message type="success" content="Successfully connected to Xero" />
+					<Section title={'What next?'} description={'Now that you have connected your [xero] account, there\'s some things to check'}>
+						<ol>
+							<li>
+								<h4>Configure your entities</h4>
+								<Link to={`/${currentOrg.id}/integrations/xero/match-entity`}>
+									{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}
+									<Button content="View Entities" />
+								</Link>
+							</li>
+							<li>
+								<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
+									<h4>Integration Settings</h4>
+									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
+									<Button content="View Settings" />
+								</Link>
+							</li>
+						</ol>
 					</Section>
 				</div>
 			);

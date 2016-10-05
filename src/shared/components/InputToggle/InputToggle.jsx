@@ -11,6 +11,7 @@ export default class InputToggle extends Component {
 		const {
 			classNameProps = [],
 			onClickProps,
+			isButton = true,
 			isSelected,
 			content,
 			color
@@ -19,7 +20,8 @@ export default class InputToggle extends Component {
 		let classes;
 
 		toggleClasses = classSet({
-			[styles.isSelected]: isSelected
+			[styles.isSelected]: isSelected,
+			[styles.isButton]: isButton
 		});
 
 		classes = classNameProps.slice();
@@ -46,6 +48,7 @@ export default class InputToggle extends Component {
 	static propTypes = {
 		content: React.PropTypes.string,
 		color: React.PropTypes.string,
+		isButton: React.PropTypes.bool,
 		isSelected: React.PropTypes.bool,
 		children: React.PropTypes.oneOfType([
 			React.PropTypes.arrayOf(React.PropTypes.node),
