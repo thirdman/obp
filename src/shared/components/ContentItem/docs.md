@@ -26,7 +26,7 @@ validationMessageError		|	`string`	|	-	|	message to appear if input is invalid
 validationMessageMissing		|	`string`	|	-	|	message to appear if input is missing (ie. required)
 helpContent			|	`string`	|	-	|	message to appear on help hover
 helpId					|	`string`	|	-	|	(anticipated) id of further help content in knowledgebase
-helpSize				|	`number`	|	-	|	size of quickview component
+helpSize				|	`number`	|	-	|	(unused) size of quickview component
 columnSize			|	`number`	|	12	|	number of colums to take up (out of 12). 12 = 100%
 children				|	`oneOfType` | - | (required) this component is designed to wrap around a child content
 classNameProps	|	`array`	| ['normal']	|	array of classes to apply to the component (see below for available classes)

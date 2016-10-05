@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import { Icon, QuickView, Message } from 'components';
+import { Icon, Message } from 'components';
 import classSet from 'react-classset';
 import cx from 'classnames';
+import ReactTooltip from 'react-tooltip';
 
 const styles = require('./ContentItem.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class ContentItem extends Component {
+	state = {
+		tooltip: this.makeId()
+	}
 
 	static propTypes = {
 		type: React.PropTypes.string,
@@ -38,6 +42,16 @@ export default class ContentItem extends Component {
 		classNameProps: React.PropTypes.array
 	};
 
+	makeId() {
+		let text = '';
+		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		for (let i = 0; i < 5; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+		return text;
+	}
+
+
 	render() {
 		const {
 			classNameProps = [],
@@ -49,7 +63,6 @@ export default class ContentItem extends Component {
 			icon,
 			helpContent,
 			// helpId,  // for use when we link to a help api
-			helpSize = 300,
 			columnSize = 12,
 			hasValidation = false,
 			isRequired = false,
@@ -62,6 +75,7 @@ export default class ContentItem extends Component {
 			} = this.props;
 
 		const theContent = '';
+		const { tooltip } = this.state;
 		let toggleClasses;
 		let classes;
 		let theMessageType;
@@ -131,10 +145,16 @@ export default class ContentItem extends Component {
 					: null
 				}
 				{	helpContent ?
-					<div className={styles.helpIconWrap}>
-						<QuickView content={helpContent} size={helpSize} align="right">
+					<div
+					className={styles.helpIconWrap}
+						data-tip={helpContent || null}
+						data-class={styles.tooltip}
+						data-for={`ButtonTooltip${tooltip}`}
+					>
 							<Icon icon="question" classNameProps={['grey']} size={16} />
-						</QuickView>
+							<ReactTooltip id={`ButtonTooltip${tooltip}`} type="light">
+								{helpContent}
+							</ReactTooltip>
 					</div>
 					: null
 				}
