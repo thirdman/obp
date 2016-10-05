@@ -6,6 +6,7 @@ import {
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
+import _ from 'lodash';
 import {
 	Button,
 	ButtonGroup,
@@ -13,6 +14,7 @@ import {
 	Icon,
 	Row,
 	Section,
+	SparkPercentage,
 	Statistic
 	} from 'components';
 import { connect } from '../../../../../utils/state';
@@ -23,7 +25,7 @@ const buttonGroupData = [{
 	subtitle: '(between Xero and Nomos One)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'Users who have been using both Xero and Nomos for a while and have existing entities in each.', // eslint-disable-line max-len
+	description: 'Users who have been using both Xero and nomos one for a while and have existing entities in each.', // eslint-disable-line max-len
 	classes: ['hero'],
 	onClickReturn: 'match'
 }, {
@@ -32,7 +34,7 @@ const buttonGroupData = [{
 	subtitle: '(from Xero to Nomos one)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'Users are new to Nomos One and have been using Xero for a while',
+	description: 'Users are new to nomos one and have been using Xero for a while',
 	classes: ['hero'],
 	onClickReturn: 'import'
 }, {
@@ -41,7 +43,7 @@ const buttonGroupData = [{
 	subtitle: '(from Nomos One to Xero)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'users are new to Nomos One and have been using Xero for a while',
+	description: 'users are new to Xero and have been using nomos one for a while',
 	classes: ['hero'],
 	onClickReturn: 'export'
 }];
@@ -54,10 +56,15 @@ class EntitySection extends Component {
 		loaded: false,
 		loading: '',
 		error: false,
+		nomosEntitiesCopy: [],
+		xeroContactsCopy: [],
 		nomosEntities: [],
 		xeroContacts: [],
 		lkedEntities: [],
-		matchedArray: []
+		matchedArray: [],
+		exporting: null,
+		importing: null,
+		importType: null
 	}
 
 	componentDidMount() {
@@ -135,8 +142,12 @@ class EntitySection extends Component {
 		switch (currentEntitySection) {
 			case 'match':
 				return (
-					<Section hasDivider title="Suggested Matches" description={'These entities exist in both systems and appear
-						similar. The proximity measure indicates how similar they are.'}>
+					<Section
+						hasDivider
+						title="Suggested Matches"
+						description={`These entities exist in both
+							systems and appear similar. The proximity
+							measure indicates how similar they are.`}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
@@ -152,8 +163,12 @@ class EntitySection extends Component {
 				);
 			case 'export':
 				return (
-					<Section hasDivider title="Export to Xero" description={'These entities exist in nomos one. You can create
-						them in Xero by cicking the export button'}>
+					<Section
+						hasDivider
+						title="Export to Xero"
+						description={`These entities exist in nomos one.
+							You can create them in Xero by cicking the
+							export button`}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
@@ -167,9 +182,13 @@ class EntitySection extends Component {
 				);
 			case 'import':
 				return (
-					<Section hasDivider title="Import to nomos one" description={`These contacts exist in Xero but don't appear
-						in nomos one. You can create them as entities in nomos one by cicking the import button`}>
-					<Section hasDivider title="Import to nomos one">
+					<Section
+						hasDivider
+						title="Import to nomos one"
+						description={`These contacts exist in Xero
+							but don't appear in nomos one. You can
+							create them as entities in nomos one by
+							clicking the import button`}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
@@ -193,18 +212,32 @@ class EntitySection extends Component {
 	}
 
 	getExportRows() {
-		const { nomosEntities } = this.state;
+		const { nomosEntities, exporting } = this.state;
+		let match;
 		return nomosEntities.map((entity, index) => {
+			match = _.isEqual(exporting, entity);
 			return (
 				<Row key={`export-${index}`}>
 					<Column occupy={9}>
 						{entity.entityName}
 					</Column>
 					<Column occupy={3}>
-						<Button
-							content="Export"
-							onClickProps={this.link(entity)}
-							classNameProps={['green']} />
+						{!match ?
+							<Button
+								content="Export"
+								onClickProps={this.setExport(entity)}
+								classNameProps={['green']} /> :
+							<div>
+								<Button
+									content="Confirm"
+									onClickProps={this.doExport}
+									classNameProps={['green']} />
+								<Button
+									content="Cancel"
+									onClickProps={this.setExport(null)}
+									classNameProps={['green']} />
+							</div>
+						}
 					</Column>
 				</Row>
 			);
@@ -212,18 +245,52 @@ class EntitySection extends Component {
 	}
 
 	getImportRows() {
-		const { xeroContacts } = this.state;
+		const entityTypes = ['Individual', 'Company', 'Trust', 'Other'];
+		const {
+			xeroContacts,
+			importing,
+			importType
+		} = this.state;
+		let match;
+		let typeMatch;
 		return xeroContacts.map((contact, index) => {
+			match = _.isEqual(importing, contact);
 			return (
 				<Row key={`import-${index}`}>
-					<Column occupy={9}>
+					<Column occupy={match ? 5 : 9}>
 						{contact.Name}
 					</Column>
+					{match &&
+						<Column occupy={4}>
+							{entityTypes.map((type, tIndex) => {
+								typeMatch = type === importType;
+								return (
+									<div
+										key={`type-${tIndex}`}
+										onClick={this.setImport(contact, type)}>
+										{typeMatch ? ` ((${type})) ` : ` ${type} `}
+									</div>
+								);
+							})}
+						</Column>
+					}
 					<Column occupy={3}>
-						<Button
-							content="Import"
-							onClickProps={this.link(contact)}
-							classNameProps={['green']} />
+						{!match ?
+							<Button
+								content="Import"
+								onClickProps={this.setImport(contact)}
+								classNameProps={['green']} /> :
+							<div>
+								<Button
+									content="Confirm"
+									onClickProps={this.doImport}
+									classNameProps={['green']} />
+								<Button
+									content="Cancel"
+									onClickProps={this.setImport(null)}
+									classNameProps={['green']} />
+							</div>
+						}
 					</Column>
 				</Row>
 			);
@@ -258,7 +325,8 @@ class EntitySection extends Component {
 							{`${pair.contact.Name}`}
 						</Column>
 						<Column occupy={1}>
-							{pair.degree}
+							<SparkPercentage
+								percentage={Math.round(pair.degree)} />
 						</Column>
 						<Column occupy={3}>
 							<Button
@@ -309,7 +377,9 @@ class EntitySection extends Component {
 		this.safePromise(
 			client.get(`organisations/${currentOrg.id}/entities`))
 		.then((res) => {
-			this.setState({ nomosEntities: res.data });
+			this.setState({
+				nomosEntitiesCopy: res.data
+			});
 			this.loading('Getting Xero contacts ....');
 			return this.safePromise(xeroClient.request(
 				'post',
@@ -319,7 +389,9 @@ class EntitySection extends Component {
 			));
 		})
 		.then((res) => {
-			this.setState({ xeroContacts: res.data[0] });
+			this.setState({
+				xeroContactsCopy: res.data[0]
+			});
 			this.loading('Matching entities with contacts ....');
 			this.filterLinkedEntities();
 			this.loading('');
@@ -335,8 +407,8 @@ class EntitySection extends Component {
 	}
 
 	filterLinkedEntities() {
-		const nomosEntitiesState = this.state.nomosEntities;
-		const xeroContactsState = this.state.xeroContacts
+		const nomosEntitiesState = this.state.nomosEntitiesCopy;
+		const xeroContactsState = this.state.xeroContactsCopy
 			.contacts.Contacts.Contact;
 		let entities = [];
 		let contacts = [];
@@ -427,6 +499,7 @@ class EntitySection extends Component {
 	@autobind
 	link(entity, contact) {
 		return () => {
+			const { currentOrg = {} } = this.context.store.app;
 			const userObject = {
 				...entity,
 				entityJson: {
@@ -441,15 +514,25 @@ class EntitySection extends Component {
 					}
 				}
 			};
-			console.log(userObject);
-			// makes call to update entity
-			// update array state
+
+			this.safePromise(client.put(
+				`organisations/${currentOrg.id}/entities`,
+				{ data: { userObject } }
+			))
+			.then(() => {
+				this.updateEntityState(entity, userObject);
+				this.filterLinkedEntities();
+			})
+			.catch((err) => {
+				throw err;
+			});
 		};
 	}
 
 	@autobind
 	unlink(entity) {
 		return () => {
+			const { currentOrg = {} } = this.context.store.app;
 			const userObject = {
 				...entity,
 				entityJson: {
@@ -459,10 +542,188 @@ class EntitySection extends Component {
 					}
 				}
 			};
-			console.log(userObject);
-			// makes call to update entity
-			// update array state
+
+			this.safePromise(client.put(
+				`organisations/${currentOrg.id}/entities`,
+				{ data: { userObject } }
+			))
+			.then(() => {
+				this.updateEntityState(entity, userObject);
+				this.filterLinkedEntities();
+			})
+			.catch((err) => {
+				throw err;
+			});
 		};
+	}
+
+	@autobind
+	setImport(importing, importType = 'Individual') {
+		return () => {
+			this.setState({ importing, importType });
+		};
+	}
+
+	@autobind
+	doImport() {
+		const { currentOrg = {} } = this.context.store.app;
+		const { importing, importType } = this.state;
+		let userObject = {
+			entityName: importing.Name,
+			entityType: importType,
+			entityFirmId: currentOrg.id,
+			entityJson: {
+				integration: {
+					xero: {
+						...importing
+					}
+				}
+			}
+		};
+
+		this.import(userObject)
+		.then((res) => {
+			this.updateEntityState(null, {
+				...userObject,
+				entityId: res.entityId
+			});
+			this.filterLinkedEntities();
+		})
+		.catch((err) => {
+			this.loading('Failed to import contact');
+			throw err;
+		});
+	}
+
+	@autobind
+	import(userObject) {
+		const { currentOrg = {} } = this.context.store.app;
+		return this.safePromise(client.post(
+			`organisations/${currentOrg.id}/entities`,
+			{ data: { userObject } }
+		));
+	}
+
+	@autobind
+	setExport(exporting) {
+		return () => {
+			this.setState({ exporting });
+		};
+	}
+
+	@autobind
+	doExport() {
+		const { exporting } = this.state;
+		let {
+			entityEmail,
+			entityName,
+			entityFirstName,
+			entityLastName
+		} = exporting;
+		let linkedEntity;
+
+		let contactObject = {
+			Contacts: {
+				Contact: {
+					Name: entityName,
+					FirstName: entityFirstName,
+					LastName: entityLastName,
+					EmailAddress: entityEmail
+				}
+			}
+		};
+
+		this.export(contactObject)
+		.then((res) => {
+			contactObject = res &&
+								res.data &&
+								res.data[0] &&
+								res.data[0].response &&
+								res.data[0].response.Contacts.Contact;
+			linkedEntity = {
+				...exporting,
+				entityJson: {
+					...(exporting.entityJson || {}),
+					integration: {
+						...(exporting.entityJson &&
+							exporting.entityJson.integration ||
+							{}),
+						xero: {
+							...contactObject
+						}
+					}
+				}
+			};
+			this.updateEntityState(null, linkedEntity);
+			this.updateContactState(null, contactObject);
+			this.filterLinkedEntities();
+		})
+		.catch((err) => {
+			this.loading('Failed to export entity to Xero');
+			throw err;
+		});
+	}
+
+	@autobind
+	export(contactObject) {
+		const { currentOrg = {} } = this.context.store.app;
+		return this.safePromise(xeroClient.request(
+			'post',
+			`organisations/${currentOrg.id}/xero/contactsPost`,
+			currentOrg.accessTokens.xero,
+			currentOrg,
+			{ contactObject }
+		));
+	}
+
+	updateEntityState(old, updated) {
+		let entities = this.state.nomosEntitiesCopy;
+		let updatedNomosEntitiesCopy;
+		if (old) {
+			updatedNomosEntitiesCopy = entities.map((entity) => {
+				if (entity.entityId === old.entityId) {
+					return updated;
+				}
+				return entity;
+			});
+		} else {
+			updatedNomosEntitiesCopy = entities.slice();
+			updatedNomosEntitiesCopy.push(updated);
+		}
+
+		this.setState({ nomosEntitiesCopy: updatedNomosEntitiesCopy });
+	}
+
+	updateContactState(old, updated) {
+		const xeroContactsCopy = this.state.xeroContactsCopy;
+		let contacts = xeroContactsCopy &&
+						xeroContactsCopy.contacts &&
+						xeroContactsCopy.contacts.Contacts.Contact ||
+						[];
+		let updatedXeroContactsCopy;
+		if (old) {
+			updatedXeroContactsCopy = contacts.map((contact) => {
+				if (contact.ContactID === old.ContactID) {
+					return updated;
+				}
+				return contact;
+			});
+		} else {
+			updatedXeroContactsCopy = contacts.slice();
+			updatedXeroContactsCopy.push(updated);
+			updatedXeroContactsCopy = {
+				...xeroContactsCopy,
+				contacts: {
+					...xeroContactsCopy.contacts,
+					Contacts: {
+						...xeroContactsCopy.contacts.Contacts,
+						Contact: updatedXeroContactsCopy
+					}
+				}
+			};
+		}
+
+		this.setState({ xeroContactsCopy: updatedXeroContactsCopy });
 	}
 
 	isConnected() {

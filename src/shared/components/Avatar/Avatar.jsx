@@ -9,28 +9,8 @@ const iconOrg = require('../../images/icons/interface/company.svg');
 
 export default class Avatar extends Component {
 
-	static propTypes = {
-		type: React.PropTypes.string,
-		size: React.PropTypes.string,
-		imageUrl: React.PropTypes.string,
-		title: React.PropTypes.string,
-		sourceFolder: React.PropTypes.string,
-		classNameProps: React.PropTypes.array
-	}
-
 	state = {
 		tooltip: this.makeId()
-	}
-
-	makeId() {
-		let text = '';
-		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-		for (let i = 0; i < 5; i++) {
-			text += possible.charAt(Math.floor(Math.random() * possible.length));
-		}
-
-		return text;
 	}
 
 	render() {
@@ -39,6 +19,7 @@ export default class Avatar extends Component {
 			classNameProps = [],
 			type = 'user',
 			size = 'small',
+			base64,
 			imageUrl,
 			title
 		} = this.props;
@@ -64,10 +45,12 @@ export default class Avatar extends Component {
 				className={cx(styles.Avatar, classes)}
 				data-tip={title}
 				data-for={`AvatarTooltip${tooltip}`}
-				data-class={styles.tooltip}
-			>
-				{imageUrl ?
-					<img src={imageUrl} alt={title} className={styles.avatarImage} />
+				data-class={styles.tooltip} >
+				{imageUrl || base64 ?
+					<img
+						src={this.getImgSrc()}
+						alt={title}
+						className={styles.avatarImage} />
 					:
 					<span
 						className={styles.iconWrap}
@@ -77,5 +60,37 @@ export default class Avatar extends Component {
 				<ReactTooltip id={`AvatarTooltip${tooltip}`} type="light" />
 			</div>
 		);
+	}
+
+	getImgSrc() {
+		const {
+			base64,
+			imageUrl
+		} = this.props;
+		if (base64) {
+			return `data:image/png;base64,${base64}`;
+		} else {
+			return imageUrl;
+		}
+	}
+
+	makeId() {
+		let text = '';
+		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		for (let i = 0; i < 5; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+
+		return text;
+	}
+
+	static propTypes = {
+		type: React.PropTypes.string,
+		size: React.PropTypes.string,
+		imageUrl: React.PropTypes.string,
+		title: React.PropTypes.string,
+		sourceFolder: React.PropTypes.string,
+		classNameProps: React.PropTypes.array
 	}
 }
