@@ -10,6 +10,7 @@ Basic date select component
 |Property				|	Type			|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
 value						|	`date`	|	new Date()	| This prop is parsed by Moment.js, so it is possible to use a date string or a moment object.
+dateFormat			|	`string`	|	'DD-MM-YYYY'	| format of the date visible in the input
 input						|	`bool`	|	true	| Whether to show an input field to edit the date manually.
 open						|	`bool`	|	-	| If not set react-datetime will open the datepicker on input focus and close it on click outside.
 onChange						|	`func`	|	-	| Callback trigger when the date changes

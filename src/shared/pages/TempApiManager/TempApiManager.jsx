@@ -1,8 +1,11 @@
 import { Component } from 'react';
 import { Summary } from 'layouts';
-// import { ObjectInfo } from 'components';
+import { InputDate, InputText } from 'components';
 import { Header } from 'containers';
+// import Datetime from 'react-datetime';
 import { connect } from '../../../utils/state';
+
+// const css = require("css!./../../components/InputDate/react-datetime.css");
 
 @connect('store')
 export default class TempApiManager extends Component {
@@ -22,6 +25,8 @@ export default class TempApiManager extends Component {
 				</div>
 				<div key={'layoutSecondary'} >
 					{' '}
+					<InputDate />
+					<InputText />
 				</div>
 			</Summary>
 		);

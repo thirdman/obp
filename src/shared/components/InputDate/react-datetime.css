@@ -1,10 +1,6 @@
-
-	/*!
-	 * https://github.com/arqex/react-datetime
-	 */
-	
 	.rdt {
 	  position: relative;
+	  background:red;
 	}
 	.rdtPicker {
 	  display: none;
