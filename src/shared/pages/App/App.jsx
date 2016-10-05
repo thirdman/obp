@@ -43,11 +43,9 @@ export default class App extends Component {
 	render() {
 		return (
 			<div
-			className={styles.app
-			+ ' ' + (this.state.isLoading ? styles.isLoading : '')
-			+ ' ' + (this.state.isConnecting ? styles.isConnecting : '')
-			}
-			>
+				className={`${styles.app}
+					${this.state.isLoading ? styles.isLoading : ''}
+					${this.state.isConnecting ? styles.isConnecting : ''}`}>
 				<Helmet {...config.app.head} />
 				<div className={styles.appLoading + ' ' + styles.centered} >
 					<UiBrandLogo isSmall isLoading />

@@ -73,6 +73,8 @@ export default class AppStore {
 				.catch((err) => {
 					reject(err);
 				});
+			} else {
+				resolve();
 			}
 		});
 	}

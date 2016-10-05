@@ -102,7 +102,7 @@ export default class SettingsIntegrationsDetail extends Component {
 							<span><a href={websiteUrl}>{websiteUrl}</a></span>
 						</Column>
 					</Row>
-						<Link to={'/integrations'}>
+						<Link to={`/${currentOrg.id}/integrations`}>
 							<Button classNameProps={['text']} content="Back to integrations" />
 						</Link>
 						<HorizontalRule />

@@ -55,7 +55,7 @@ export default class MainNavWrap extends Component {
 							type="org"
 							size="small"
 							title={org.attributes.name}
-							imageUrl="https://pbs.twimg.com/profile_images/668279339838935040/8sUE9d4C.jpg"
+							base64={org.attributes.firmLogo}
 						/>
 					</span>
 					<span className={styles.body}>
