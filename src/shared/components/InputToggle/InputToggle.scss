@@ -89,7 +89,13 @@
 				background: transparent;
 			}
 		}
-
+		&.isButton{
+			cursor: none;
+		}
+		&.blue{
+			border: 1px solid $nomosBlue;
+			color: $nomosBlue;
+		}
 		//LEGACY
 		&.left{
 			border: 1px solid $nomosLightGrey;

@@ -12,6 +12,7 @@ import {
 	ButtonGroup,
 	Column,
 	Icon,
+	InputToggle,
 	Row,
 	Section,
 	SparkPercentage,
@@ -202,11 +203,13 @@ class EntitySection extends Component {
 				);
 			default:
 				return (
-					<ButtonGroup
-						type={'hero'}
-						hasData
-						optionData={buttonGroupData}
-						onClickProps={this.switchSection} />
+					<Section hasDivider title={'Manage Entities & Contacts'} >
+						<ButtonGroup
+							type={'hero'}
+							hasData
+							optionData={buttonGroupData}
+							onClickProps={this.switchSection} />
+					</Section>
 				);
 		}
 	}
@@ -268,7 +271,13 @@ class EntitySection extends Component {
 									<div
 										key={`type-${tIndex}`}
 										onClick={this.setImport(contact, type)}>
-										{typeMatch ? ` ((${type})) ` : ` ${type} `}
+										<InputToggle
+											isSelected={typeMatch}
+											content={type}
+											isButton={false}
+											classNameProps={typeMatch ? 'blue' : ''}
+										/>
+										{/* typeMatch ? ` ((${type})) ` : ` ${type} ` */}
 									</div>
 								);
 							})}
@@ -284,11 +293,11 @@ class EntitySection extends Component {
 								<Button
 									content="Confirm"
 									onClickProps={this.doImport}
-									classNameProps={['green']} />
+									classNameProps={['highlighted']} />
 								<Button
 									content="Cancel"
 									onClickProps={this.setImport(null)}
-									classNameProps={['green']} />
+									classNameProps={['grey']} />
 							</div>
 						}
 					</Column>
