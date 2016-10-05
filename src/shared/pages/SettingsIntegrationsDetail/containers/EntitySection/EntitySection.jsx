@@ -620,7 +620,6 @@ class EntitySection extends Component {
 			entityFirstName,
 			entityLastName
 		} = exporting;
-		let linkedEntity;
 
 		let contactObject = {
 			Contacts: {
@@ -640,23 +639,8 @@ class EntitySection extends Component {
 								res.data[0] &&
 								res.data[0].response &&
 								res.data[0].response.Contacts.Contact;
-			linkedEntity = {
-				...exporting,
-				entityJson: {
-					...(exporting.entityJson || {}),
-					integration: {
-						...(exporting.entityJson &&
-							exporting.entityJson.integration ||
-							{}),
-						xero: {
-							...contactObject
-						}
-					}
-				}
-			};
-			this.updateEntityState(null, linkedEntity);
 			this.updateContactState(null, contactObject);
-			this.filterLinkedEntities();
+			this.link(exporting, contactObject)();
 		})
 		.catch((err) => {
 			this.loading('Failed to export entity to Xero');
