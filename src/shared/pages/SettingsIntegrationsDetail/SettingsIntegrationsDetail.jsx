@@ -132,7 +132,7 @@ export default class SettingsIntegrationsDetail extends Component {
 					{this.getMainComp()}
 				</div>
 				<div key={'layoutSecondary'} >
-					Temporary text to remind Gareth about this space
+					{' '}
 				</div>
 			</View>
 		);

@@ -51,6 +51,10 @@ export default class View extends Component {
 								{mappedChildren.layoutMain || null}
 							</div>}
 					</div>
+				{mappedChildren.layoutSecondary &&
+					<div className={styles.secondary} id="layoutSecondary">
+						{mappedChildren.layoutSecondary || null}
+					</div>}
 				</Row>
 				{mappedChildren.layoutFooter &&
 					<Row>
