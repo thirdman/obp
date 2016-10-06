@@ -96,17 +96,17 @@ export default class ConnectionSection extends Component {
 					<Section title={'What next?'} description={'Now that you have connected your [xero] account, there\'s some things to check'}>
 						<ol>
 							<li>
-								<h4>Configure your entities</h4>
+								<p>Configure your entities</p>
+									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
 								<Link to={`/${currentOrg.id}/integrations/xero/match-entity`}>
-									{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}
-									<Button content="View Entities" />
+									<Button content="View Entities" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 							<li>
-								<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
-									<h4>Integration Settings</h4>
+									<p>Integration Settings</p>
 									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
-									<Button content="View Settings" />
+								<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
+									<Button content="View Settings" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 						</ol>

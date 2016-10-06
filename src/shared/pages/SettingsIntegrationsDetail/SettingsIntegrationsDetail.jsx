@@ -122,7 +122,7 @@ export default class SettingsIntegrationsDetail extends Component {
 							name: 'invoice-settings'
 						},
 						{
-							label: 'Match',
+							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/xero/match-entity`,
 							name: 'match-entity'
 						}
