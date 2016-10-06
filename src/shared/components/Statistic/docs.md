@@ -16,6 +16,8 @@ title						|	`string`	|	-					|	title above the text
 units						|	`string`	|	-					|	text to display after the statistic
 countTime				|	`number`	|	700				|	time to animate the stat.
 isAnimated			|	`bool`		|	false			|	turns on the animation
+ishorizontal		|	`bool`		|	false			|	puts the units along side
+hasDivider			|	`bool`		|	false			|	puts a divider above it
 classNameProps	|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
 
 

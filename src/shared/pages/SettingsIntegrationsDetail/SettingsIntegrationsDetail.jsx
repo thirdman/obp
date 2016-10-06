@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { View } from 'layouts';
-import { Button, Column, HorizontalRule, Row, SubNavWrap } from 'components';
+import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 import {
@@ -132,7 +132,20 @@ export default class SettingsIntegrationsDetail extends Component {
 					{this.getMainComp()}
 				</div>
 				<div key={'layoutSecondary'} >
-					{' '}
+					<Statistic
+						content="180"
+						units="Countries"
+						hasDivider
+						isHorizontal
+						title="Xero is used in"
+						/>
+					<Statistic
+						content="700,000"
+						units="Subscribers"
+						hasDivider
+						isHorizontal
+						title="Xero has over"
+						/>
 				</div>
 			</View>
 		);
