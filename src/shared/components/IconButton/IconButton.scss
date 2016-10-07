@@ -43,11 +43,10 @@
 		// transition: transform .3s ease,  opacity .3s  ease;
 		// transform: perspective(500px) translateY(0px);
 		// opacity: 1 !important;
-		.span{
-			font-size: $font-size-small;
 			color: $nomosGrey;
 			text-transform: uppercase;
 			font-weight: bold;
+		.span{
 			opacity: 1;
 		}
 	}
