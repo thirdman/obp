@@ -14,12 +14,13 @@
 	}
 	&.isHovered{
 		.iconWrap{
-			transform: scale(0.75);
+			// transform: scale(0.75); // handeld in moiton
 		}
 		.btnLabel{
-			transform: perspective(500px)  translateY(- $font-size-small);
-			opacity: 1;
-			label{
+			// transform: perspective(500px)  translateY(- $font-size-small);
+			// opacity: 1;
+			span{
+				opacity: 1;
 			}
 		}	
 	}
@@ -31,7 +32,7 @@
 		height: 40px;
 		display: block;
 		transform-origin: top center;
-		transition: transform .3s ease;
+		// transition: transform .3s ease;
 	}
 	
 	// LABEL
@@ -39,14 +40,15 @@
 		position: relative;
 		display: block;
 		line-height: $font-size-small;
-		transition: transform .3s ease,  opacity .3s  ease;
-		transform: perspective(500px) translateY(0px);
-		opacity: 0;
-		.btnLabel{
+		// transition: transform .3s ease,  opacity .3s  ease;
+		// transform: perspective(500px) translateY(0px);
+		// opacity: 1 !important;
+		.span{
 			font-size: $font-size-small;
 			color: $nomosGrey;
 			text-transform: uppercase;
 			font-weight: bold;
+			opacity: 1;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactTooltip from 'react-tooltip';
+import {Motion, spring} from 'react-motion';
 
 import { Icon } from 'components';
 // , QuickView
@@ -33,15 +34,16 @@ export default class IconButton extends Component {
 	state = {
 		isHovered: this.props.isHovered
 	}
-
-/*
 	doMouseOver() {
-		this.setState({isHovered: true});
+		return () => {
+			this.setState({isHovered: true});
+		};
 	}
 	doMouseOut() {
-		this.setState({isHovered: false});
+		return () => {
+			this.setState({isHovered: false});
+		};
 	}
-*/
 
 	render() {
 		const {
@@ -60,6 +62,9 @@ export default class IconButton extends Component {
 		let iconWrapStyles;
 		let iconSizeStyles;
 		let tempSize;
+		let motionIconStyle;
+		let motionLabelStyle;
+		const springConfig = {stiffness: 290, damping: 23};
 		let newClassNameProps = classNameProps;
 		if (isDisabled) {
 			newClassNameProps = newClassNameProps.concat(isDisabled ? 'disabled' : '');
@@ -79,6 +84,14 @@ export default class IconButton extends Component {
 			iconSizeStyles
 		};
 
+		motionIconStyle = {
+			x: spring((this.state.isHovered ? 0.75 : 1), springConfig),
+			y: spring((this.state.isHovered ? 0.75 : 1), springConfig),
+		};
+		motionLabelStyle = {
+			y: spring(this.state.isHovered ? -8 : 8),
+			op: spring(this.state.isHovered ? 1 : 0)
+		};
 		return (
 			<span
 				className={cx(
@@ -88,16 +101,23 @@ export default class IconButton extends Component {
 						(isHovered ? styles.isHovered : null)
 				)}
 				onClick={onClickProps}
-				// onMouseOver={this.doMouseOver}
-				// onMouseOut={this.doMouseOut}
+				onMouseOver={this.doMouseOver('fsg')}
+				onMouseOut={this.doMouseOut()}
 				data-tip={helpText}
 				data-class={styles.tooltip}
 				>
+				<Motion style={motionIconStyle}>
+					{({y, x}) => (
 					<span
 						className={styles.iconWrap}
 						style={iconWrapStyles}
 						ref={(c) => { this.btnIcon = c; }}
 						key={1}
+						style={{
+								WebkitTransform: `scale3d(${x}, ${y}, 1)`,
+								transform: `scale3d(${x}, ${y}, 1)`,
+								display: 'block'
+							}}
 						>
 						<Icon
 							icon={icon || 'view'}
@@ -106,7 +126,23 @@ export default class IconButton extends Component {
 							classNameProps={['normal']}
 						/>
 					</span>
-					<span className={styles.btnLabel}><span>{text}</span></span>
+					)}
+				</Motion>
+					<Motion
+						style={motionLabelStyle}
+						>
+						{({y, op}) => (
+						<span
+							className={styles.btnLabel}
+							style={{
+								opacity: `${op}`,
+								WebkitTransform: `translate3d(0, ${y}px, 0)`,
+								transform: `translate3d(0, ${y}px, 0)`,
+							}}>
+								<span>{text}</span>
+              </span>
+						)}
+					</Motion>
 					<ReactTooltip type="light" />
 			</span>
 		);

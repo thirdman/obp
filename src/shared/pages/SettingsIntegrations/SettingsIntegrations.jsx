@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { Summary } from 'layouts';
-import { ObjectInfo } from 'components';
+import { IconButton, ObjectInfo } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 
@@ -70,6 +70,7 @@ export default class SettingsIntegrations extends Component {
 							functionality of nomos one with related software you use. For example, if you
 							use Xero accounting software, you can view invoice information right with your
 							entities inside nomos one. </p>
+					<IconButton icon="view" text="ggg" helpContent="hover" />
 				</div>
 			</Summary>
 		);
