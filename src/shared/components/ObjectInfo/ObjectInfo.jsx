@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import { Icon, IconButton } from 'components';
 import cx from 'classnames';
+import {Motion, spring} from 'react-motion';
 
 const styles = require('./ObjectInfo.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class ObjectInfo extends Component {
+	state = {
+		isHovered: false
+	}
 
 	getButtonComps() {
 		const { buttons = null } = this.props;
@@ -41,7 +45,16 @@ export default class ObjectInfo extends Component {
 			);
 		}
 	}
-
+	doMouseOver() {
+		return () => {
+			this.setState({isHovered: true});
+		};
+	}
+	doMouseOut() {
+		return () => {
+			this.setState({isHovered: false});
+		};
+	}
 	render() {
 		const {
 			classNameProps = [],
@@ -54,17 +67,33 @@ export default class ObjectInfo extends Component {
 			id
 		} = this.props;
 		let classes;
+		let motionStyle;
+		const springConfig = {stiffness: 300, damping: 23};
+
 		classes = classNameProps.slice();
 		classes = classes.concat(display || '');
 		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
+
+		motionStyle = {
+			y: spring((this.state.isHovered ? -4 : 0), springConfig),
+		};
 		return (
+		<Motion style={motionStyle}>
+			{({y}) => (
 			<div
 				className={cx(
 					styles.ObjectInfo,
 					classes,
-					globalStyles.row)} >
+					globalStyles.row)}
+				onMouseOver={this.doMouseOver()}
+				onMouseOut={this.doMouseOut()}
+				style={{
+						WebkitTransform: `translate3d(0, ${y}px, 0)`,
+						transform: `translate3d(0, ${y}px, 0)`
+					}}
+				>
 				<div className={styles.iconWrap}>
 				{type === 'custom' ?
 					<img src={imageUrl} alt={title} />
@@ -108,6 +137,8 @@ export default class ObjectInfo extends Component {
 					</h4>
 				</div>
 			</div>
+			)}
+			</Motion>
 		);
 	}
 	static propTypes = {

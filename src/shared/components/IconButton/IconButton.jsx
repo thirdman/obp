@@ -101,7 +101,7 @@ export default class IconButton extends Component {
 						(isHovered ? styles.isHovered : null)
 				)}
 				onClick={onClickProps}
-				onMouseOver={this.doMouseOver('fsg')}
+				onMouseOver={this.doMouseOver()}
 				onMouseOut={this.doMouseOut()}
 				data-tip={helpText}
 				data-class={styles.tooltip}
