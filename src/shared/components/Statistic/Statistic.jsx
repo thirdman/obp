@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react';
+import classSet from 'react-classset';
 import CountTo from 'react-count-to';
 import cx from 'classnames';
 import _ from 'lodash';
@@ -21,10 +22,23 @@ export default class Statistic extends Component {
 			units,
 			title,
 			isAnimated = false,
+			hasDivider = false,
+			isHorizontal = false,
 			countTime = 700
 		} = this.props;
 		let { content } = this.props;
-		const classes = classNameProps.map((classV) => styles[classV]).join(' ');
+		let classes;
+		let toggleClasses;
+
+		toggleClasses = classSet({
+			[styles.hasDivider]: hasDivider,
+			[styles.isHorizontal]: isHorizontal
+		});
+
+		classes = classNameProps
+			.filter((cName) => { return !!cName; })
+			.map((classV) => styles[classV]).join(' ');
+
 		let contentNumber;
 		let digitCount = 0;
 		let trimContent;
@@ -49,7 +63,8 @@ export default class Statistic extends Component {
 			<div
 				className={cx(
 					styles.Statistic,
-					classes
+					classes,
+					toggleClasses
 				)} >
 				<div className={styles.divider} />
 				<h4 className={globalStyles.subtitle}>{title}</h4>
@@ -87,6 +102,8 @@ export default class Statistic extends Component {
 		title: PropTypes.string,
 		units: PropTypes.string,
 		isAnimated: PropTypes.bool,
+		hasDivider: PropTypes.bool,
+		isHorizontal: PropTypes.bool,
 		countTime: PropTypes.number,
 		classNameProps: PropTypes.array
 	}
