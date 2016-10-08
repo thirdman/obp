@@ -24,6 +24,7 @@ export InputToggle from './InputToggle/InputToggle';
 export MainNavWrap from './MainNavWrap/MainNavWrap';
 export Message from './Message/Message';
 export ObjectInfo from './ObjectInfo/ObjectInfo';
+export Placeholder from './Placeholder/Placeholder';
 export ProgressBar from './ProgressBar/ProgressBar';
 export QuickView from './QuickView/QuickView';
 export Row from './Row/Row';

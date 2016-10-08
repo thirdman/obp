@@ -1,0 +1,149 @@
+
+$heightUnit: 16px;
+$lightColor: rgba(0,0,0,.05);
+$darkColor: rgba(0,0,0,.1);
+
+.Placeholder{
+
+	.backgroundAnimation{
+		width: 100%;
+	}
+	
+	.backgroundAnimation {
+	    animation-duration: 1s;
+	    animation-fill-mode: forwards;
+	    animation-iteration-count: infinite;
+	    animation-name: placeHolderShimmer;
+	    animation-timing-function: linear;
+	    background: #f6f7f8;
+	    // background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+	    background: linear-gradient(to right, $lightColor 8%, $darkColor 18%, $lightColor 33%);
+	    background-size: 800px 104px;
+	    // height: 96px;
+	    position: relative;
+	}
+}
+.Paragraph{
+	background: #fff;
+	border: 8px solid #fff;
+	border-radius: 2px;
+	margin-bottom: 4px;
+	.leftSection{
+		width: 80px;
+		height: 80px;
+		position: absolute;
+	}
+	.rightSection{
+		text-align: left;
+		margin-left: 72px
+	}
+}
+.Text{
+	width: 100%;
+	min-height: $heightUnit + $heightUnit/2;
+	background: transparent;
+	position: relative;
+	display: block;
+	.dividers{
+		top: $heightUnit/2;
+		left: 0;
+		width: 100%;
+		margin-left: $heightUnit;
+		height: $heightUnit;
+		position: absolute;
+		z-index: 2;
+		.divider{
+			background: red;
+			height: 100%;
+			display: block;
+			//margin-left: 8px;
+			width: 8px;
+			position: absolute;
+		}
+	}
+}
+.Square{
+	width: $heightUnit*5;
+	height: $heightUnit*5;
+	display: block;
+	position: relative;
+	.backgroundAnimation{
+		height: 100%;
+	}
+	.MaskTop{
+		
+	}
+	.MaskLeft{
+		width: $heightUnit/2;
+		height: 100%;
+		top: 0;
+	}
+	.MaskRight{
+		width: $heightUnit/2;		
+		height: 100%;
+		top: 0;
+	}
+	.MaskSolo{
+		bottom: 0;
+		top: inherit;
+		width: 100%;
+		left: 0;
+		position: absolute;
+		display: block;
+	}
+}
+.Circle{
+	width: $heightUnit*5;
+	height: $heightUnit*5;
+	.circleMask{
+			border-radius: $heightUnit*5;
+			width: 100%;
+			height: 100%;
+	}
+	&.hasMargins{
+		padding: 8px;
+	}
+}
+
+//MASKS
+.Mask{
+	background: white;
+	height: $heightUnit;
+	position: relative;
+	position: absolute;
+}
+.MaskTop{
+	background: white;
+	width: 100%;
+	height: $heightUnit/2;
+	top: 0;
+	left: 0;
+}
+.MaskLeft{
+	top: $heightUnit/2;
+	left: 0;
+	width: $heightUnit;
+	height: $heightUnit;
+	position: relative;
+}
+.MaskRight{
+	width: 30px;
+	height: $heightUnit;
+	position: absolute;
+	top: $heightUnit/2;
+	right: 0;
+}
+.MaskSolo{
+	display: block;
+	position: relative;
+	height: $heightUnit/2;
+}
+
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
