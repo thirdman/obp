@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Summary } from 'layouts';
-import { Placeholder } from 'components';
+// import { Placeholder } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 
