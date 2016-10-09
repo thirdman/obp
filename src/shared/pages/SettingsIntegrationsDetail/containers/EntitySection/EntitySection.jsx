@@ -266,7 +266,7 @@ class EntitySection extends Component {
 					</Column>
 					{match &&
 						<Column occupy={4}>
-							<div style={'display: block'} >
+							<div style={{display: 'block'}} >
 							{entityTypes.map((type, tIndex) => {
 								typeMatch = type === importType;
 								return (

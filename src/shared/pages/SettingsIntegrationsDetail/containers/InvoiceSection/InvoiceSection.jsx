@@ -193,6 +193,7 @@ class InvoiceSection extends Component {
 		});
 	}
 
+	@autobind
 	handleError(err) {
 		this.loading(`Please contact support,
 			the error is: ${decodeURI(err)}`,
