@@ -23,28 +23,28 @@ import { connect } from '../../../../../utils/state';
 const buttonGroupData = [{
 	name: 'match',
 	title: 'Match Entities',
-	subtitle: '(between Xero and Nomos One)',
+	subtitle: '(between QuickBooks and Nomos One)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'Users who have been using both Xero and nomos one for a while and have existing entities in each.', // eslint-disable-line max-len
+	description: 'Users who have been using both QuickBooks and nomos one for a while and have existing entities in each.', // eslint-disable-line max-len
 	classes: ['hero'],
 	onClickReturn: 'match'
 }, {
 	name: 'import',
-	title: 'Import Xero Contacts',
-	subtitle: '(from Xero to Nomos one)',
+	title: 'Import QuickBooks Contacts',
+	subtitle: '(from QuickBooks to Nomos one)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'Users are new to nomos one and have been using Xero for a while',
+	description: 'Users are new to nomos one and have been using QuickBooks for a while',
 	classes: ['hero'],
 	onClickReturn: 'import'
 }, {
 	name: 'export',
 	title: 'Export Nomos One Entities',
-	subtitle: '(from Nomos One to Xero)',
+	subtitle: '(from Nomos One to QuickBooks)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'Users are new to Xero and have been using nomos one for a while',
+	description: 'users are new to QuickBooks and have been using nomos one for a while',
 	classes: ['hero'],
 	onClickReturn: 'export'
 }];
@@ -106,7 +106,7 @@ class EntitySection extends Component {
 							</Column>
 							<Column occupy={3}>
 								<Statistic
-									title="Xero Contacts"
+									title="QuickBooks Contacts"
 									content={xeroContacts.length}
 									isAnimated
 									classNameProps={['isHorizontal', 'hasDivider']}
@@ -153,11 +153,10 @@ class EntitySection extends Component {
 							content="Back"
 							onClickProps={this.switchSection(null)}
 							classNameProps={['highlighted']}
-							icon="chevron-left"
-							iconSize={12} />
+							icon="chevron-left" />
 						<Row>
 							<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
-							<Column occupy={4}><h4>{'XERO'}</h4></Column>
+							<Column occupy={4}><h4>{'QuickBooks'}</h4></Column>
 							<Column occupy={1}><h4>{'PROXIMITY'}</h4></Column>
 							<Column occupy={3}><h4>{''}</h4></Column>
 						</Row>
@@ -168,16 +167,14 @@ class EntitySection extends Component {
 				return (
 					<Section
 						hasDivider
-						title="Export to Xero"
+						title="Export to QuickBooks"
 						description={`These entities exist in nomos one.
-							You can create them in Xero by cicking the
+							You can create them in QuickBooks by cicking the
 							export button`}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']}
-							icon="chevron-left"
-							iconSize={12} />
+							classNameProps={['highlighted']} />
 						<Row>
 							<Column occupy={9}><h4>{'NOMOS ONE ENTITY'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
@@ -190,19 +187,16 @@ class EntitySection extends Component {
 					<Section
 						hasDivider
 						title="Import to nomos one"
-						description={`These contacts exist in Xero
+						description={`These contacts exist in QuickBooks
 							but don't appear in nomos one. You can
 							create them as entities in nomos one by
 							clicking the import button`}>
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']}
-							icon="chevron-left"
-							iconSize={12}
-							/>
+							classNameProps={['highlighted']} />
 						<Row>
-							<Column occupy={9}><h4>{'XERO CONTACT'}</h4></Column>
+							<Column occupy={9}><h4>{'QuickBooks CONTACT'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
 						</Row>
 						{ this.getImportRows() }
@@ -320,7 +314,7 @@ class EntitySection extends Component {
 				<Row>
 					<Column occupy={12}>
 						{`No matches found.
-						Try importing contacts from Xero,
+						Try importing contacts from QuickBooks,
 						or exporting entities form nomos one`}
 					</Column>
 				</Row>
@@ -396,10 +390,10 @@ class EntitySection extends Component {
 			this.setState({
 				nomosEntitiesCopy: res.data
 			});
-			this.loading('Getting Xero contacts ....');
+			this.loading('Getting QuickBooks contacts ....');
 			return this.safePromise(xeroClient.request(
 				'post',
-				`organisations/${currentOrg.id}/xero/contacts`,
+				`organisations/${currentOrg.id}/qb/contacts`,
 				currentOrg.accessTokens.xero,
 				currentOrg
 			));
@@ -659,7 +653,7 @@ class EntitySection extends Component {
 			this.link(exporting, contactObject)();
 		})
 		.catch((err) => {
-			this.loading('Failed to export entity to Xero');
+			this.loading('Failed to export entity to QuickBooks');
 			throw err;
 		});
 	}
@@ -669,7 +663,7 @@ class EntitySection extends Component {
 		const { currentOrg = {} } = this.context.store.app;
 		return this.safePromise(xeroClient.request(
 			'post',
-			`organisations/${currentOrg.id}/xero/contactsPost`,
+			`organisations/${currentOrg.id}/qb/contactsPost`,
 			currentOrg.accessTokens.xero,
 			currentOrg,
 			{ contactObject }

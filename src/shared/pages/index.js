@@ -12,4 +12,8 @@ export Login from './Login/Login';
 export NotFound from './NotFound/NotFound';
 export SettingsIntegrations from './SettingsIntegrations/SettingsIntegrations';
 export SettingsIntegrationsDetail from './SettingsIntegrationsDetail/SettingsIntegrationsDetail';
+export SettingsIntegrationsFB from './SettingsIntegrationsFB/SettingsIntegrationsFB';
+export SettingsIntegrationsMYOB from './SettingsIntegrationsMYOB/SettingsIntegrationsMYOB';
+export SettingsIntegrationsQB from './SettingsIntegrationsQB/SettingsIntegrationsQB';
+export SettingsIntegrationsSage from './SettingsIntegrationsSage/SettingsIntegrationsSage';
 export TempApiManager from './TempApiManager/TempApiManager';
