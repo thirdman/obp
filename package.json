@@ -11,11 +11,17 @@
   "main": "bin/server.js",
   "scripts": {
     "dev-local": "concurrent --kill-others \"npm run watch-client-local\" \"npm run start-dev-local\"",
-    "dev-remote": "concurrent --kill-others \"npm run watch-client-remote\" \"npm run start-dev-remote\"",
+    "dev-remote": "concurrent --kill-others \"npm run watch-dev-remote\" \"npm run start-dev-remote\"",
+    "test-remote": "concurrent --kill-others \"npm run watch-test-remote\" \"npm run start-test-remote\"",
+    "app-remote": "concurrent --kill-others \"npm run watch-prod-remote\" \"npm run start-prod-remote\"",
     "start-dev-local": "better-npm-run start-dev-local",
     "start-dev-remote": "better-npm-run start-dev-remote",
+    "start-test-remote": "better-npm-run start-test-remote",
+    "start-prod-remote": "better-npm-run start-prod-remote",
     "watch-client-local": "better-npm-run watch-client-local",
-    "watch-client-remote": "better-npm-run watch-client-remote"
+    "watch-dev-remote": "better-npm-run watch-dev-remote",
+    "watch-test-remote": "better-npm-run watch-test-remote",
+    "watch-prod-remote": "better-npm-run watch-prod-remote"
   },
   "betterScripts": {
     "start-dev-local": {
@@ -35,7 +41,31 @@
       "env": {
         "MODE": "remote",
         "APP_HOST": "http://localhost",
+        "API_HOST": "https://dev-api.nomosone.com/v0",
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "PORT": 8080,
+        "APIPORT": 8080
+      }
+    },
+    "start-test-remote": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "MODE": "remote",
+        "APP_HOST": "http://localhost",
         "API_HOST": "https://test-api.nomosone.com/v0",
+        "NODE_PATH": "./src",
+        "NODE_ENV": "development",
+        "PORT": 8080,
+        "APIPORT": 8080
+      }
+    },
+    "start-prod-remote": {
+      "command": "node ./bin/server.js",
+      "env": {
+        "MODE": "remote",
+        "APP_HOST": "http://localhost",
+        "API_HOST": "https://api.nomosone.com/v0",
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
         "PORT": 8080,
@@ -53,11 +83,33 @@
         "APIPORT": 3030
       }
     },
-    "watch-client-remote": {
+    "watch-dev-remote": {
+      "command": "node webpack/webpack-dev-server.js",
+      "env": {
+        "MODE": "remote",
+        "WEBPACK_HOST": "https://dev-app.nomosone.com",
+        "UV_THREADPOOL_SIZE": 100,
+        "NODE_PATH": "./src",
+        "PORT": 8080,
+        "APIPORT": 8080
+      }
+    },
+    "watch-test-remote": {
       "command": "node webpack/webpack-dev-server.js",
       "env": {
         "MODE": "remote",
         "WEBPACK_HOST": "https://test-app.nomosone.com",
+        "UV_THREADPOOL_SIZE": 100,
+        "NODE_PATH": "./src",
+        "PORT": 8080,
+        "APIPORT": 8080
+      }
+    },
+    "watch-prod-remote": {
+      "command": "node webpack/webpack-dev-server.js",
+      "env": {
+        "MODE": "remote",
+        "WEBPACK_HOST": "https://app.nomosone.com",
         "UV_THREADPOOL_SIZE": 100,
         "NODE_PATH": "./src",
         "PORT": 8080,
