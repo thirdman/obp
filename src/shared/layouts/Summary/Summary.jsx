@@ -33,12 +33,12 @@ export default class Summary extends Component {
 		const mappedChildren = this.mapChildren(this.props.children);
 		const springConfig = {stiffness: 100, damping: 23};
 		let motionStyle = {
-			// y: spring(PositionY1, springConfig),
+			y: spring((this.state.isVisible ? 0 : -40), springConfig),
 			objectOpacity: spring((this.state.isVisible ? 1 : 0), springConfig),
 		};
 		return (
 		<Motion style={motionStyle}>
-			{({objectOpacity}) => (
+			{({y, objectOpacity}) => (
 			<div
 				className={cx(
 					styles.Layout,
@@ -46,6 +46,8 @@ export default class Summary extends Component {
 					// styles.editMode,
 					globalStyles.layoutWrap)}
 					style={{
+						WebkitTransform: `translate3d(0, ${y}px, 0)`,
+						transform: `translate3d(0, ${y}px, 0)`,
 						opacity: objectOpacity
 					}}
 				>
