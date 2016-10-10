@@ -11,6 +11,8 @@ const styles = require('./SettingsIntegrations.scss');
 // const xeroLogo = '/images/assets/xero.png';
 // Faked logo url because png won't work:
 const xeroLogo = 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png';
+const myobLogo = 'https://4mation.com.au/wp-content/uploads/2015/02/myob-logo.png';
+const qbLogo = 'https://quickbooks-au-s3.intuitstatic.com/showroom_cms/image/content/dam/intuit/quickbooks/i18n/en/Australia/homepage/logo-qbo.png';
 
 @connect('store')
 export default class SettingsIntegrations extends Component {
@@ -48,6 +50,48 @@ export default class SettingsIntegrations extends Component {
 							type="custom"
 							subType="Financial Software"
 							imageUrl={xeroLogo}
+							buttons={[
+								{	text: 'View',
+									helpText: 'View this Integration',
+									icon: {
+										icon: 'view',
+										color: 'lightGrey',
+										classNameProps: ['normal']
+										},
+									classNameProps: ['normal']
+								}
+							]}
+							classNameProps={['hasBorder']}
+							additionalContent={connected ? this.getAdditionalContent() : null}
+						/>
+					</Link>
+					<Link to={`/${currentOrg.id}/integrations/myob`}>
+						<ObjectInfo
+							title={`MYOB ${connected ? ' - connected' : ''}`}
+							type="custom"
+							subType="Financial Software"
+							imageUrl={myobLogo}
+							buttons={[
+								{	text: 'View',
+									helpText: 'View this Integration',
+									icon: {
+										icon: 'view',
+										color: 'lightGrey',
+										classNameProps: ['normal']
+										},
+									classNameProps: ['normal']
+								}
+							]}
+							classNameProps={['hasBorder']}
+							additionalContent={connected ? this.getAdditionalContent() : null}
+						/>
+					</Link>
+					<Link to={`/${currentOrg.id}/integrations/qb`}>
+						<ObjectInfo
+							title={`QuickBooks ${connected ? ' - connected' : ''}`}
+							type="custom"
+							subType="Financial Software"
+							imageUrl={qbLogo}
 							buttons={[
 								{	text: 'View',
 									helpText: 'View this Integration',

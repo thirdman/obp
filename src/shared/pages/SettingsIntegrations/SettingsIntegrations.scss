@@ -4,4 +4,9 @@
 	.connectedStatus{
 		color: $nomosGreen;
 	}
+	// hack to make the links space
+	> a{
+		margin-bottom: 8px;
+		display: block;
+	}
 }
