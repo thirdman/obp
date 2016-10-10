@@ -55,42 +55,42 @@ export default class Section extends Component {
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 		return (
-			<div className={cx(styles.Section, classes, toggleClasses)} style={styleProps}>
-					<div className={styles.loadingContent}>
-						<div className={styles.loadingIconWrap}>
-							<Icon icon="loading" color="grey" size={18} />
+				<div className={cx(styles.Section, classes, toggleClasses)} style={styleProps}>
+						<div className={styles.loadingContent}>
+							<div className={styles.loadingIconWrap}>
+								<Icon icon="loading" color="grey" size={18} />
+							</div>
 						</div>
-					</div>
-				{isError ?
-					<div className={styles.iconWrap + ' ' + styles.errorIcon}>
-						<Icon icon="alert" color="red" />
-					</div>
-					: null
-				}
-				{loadingMessage ?
-					<div className={styles.loadingMessage}>
-						{loadingMessage }
-					</div>
-					: null
-				}
-				{hasDivider ?
-					<HorizontalRule classNameProps={['normal']} />
-					: null
-				}
-				{title ?
-					<h3 className={styles.contentTitle}>{title}</h3>
-					: null
-				}
-				{subtitle ?
-					<h4 className={styles.contentSubtitle}>{subtitle}</h4>
-					: null
-				}
-				{description ?
-					<div className={styles.contentDescription}>{description}</div>
-					: null
-				}
-				{!isError ? children : null}
-			</div>
+					{isError ?
+						<div className={styles.iconWrap + ' ' + styles.errorIcon}>
+							<Icon icon="alert" color="red" />
+						</div>
+						: null
+					}
+					{loadingMessage ?
+						<div className={styles.loadingMessage}>
+							{loadingMessage }
+						</div>
+						: null
+					}
+					{hasDivider ?
+						<HorizontalRule classNameProps={['normal']} />
+						: null
+					}
+					{title ?
+						<h3 className={styles.contentTitle}>{title}</h3>
+						: null
+					}
+					{subtitle ?
+						<h4 className={styles.contentSubtitle}>{subtitle}</h4>
+						: null
+					}
+					{description ?
+						<div className={styles.contentDescription}>{description}</div>
+						: null
+					}
+					{!isError ? children : null}
+				</div>
 		);
 	}
 }

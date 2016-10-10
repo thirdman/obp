@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router';
 import { Summary } from 'layouts';
-import { ObjectInfo } from 'components';
+import { Button, HorizontalRule, ObjectInfo } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 
@@ -14,7 +14,9 @@ const xeroLogo = 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-
 
 @connect('store')
 export default class SettingsIntegrations extends Component {
-
+	state = {
+		insert: []
+	}
 	getAdditionalContent() {
 		return (
 			<div className={styles.connectedStatus}>
@@ -22,6 +24,23 @@ export default class SettingsIntegrations extends Component {
 				<div>Connected</div>
 			</div>
 		);
+	}
+	doAddObject() {
+		let newCount = this.state.insert.length + 1;
+		let newObj = {title: `title ${newCount}`};
+		return () => {
+			this.setState((state) => (
+			{ insert: state.insert.concat(newObj)}
+			));
+		};
+	}
+	doRemoveObject() {
+		let theCount = this.state.insert.length - 1;
+		return () => {
+			let data = this.state.insert;
+			data = data.splice(data, theCount);
+			this.setState({insert: data});
+		};
 	}
 
 	render() {
@@ -42,6 +61,9 @@ export default class SettingsIntegrations extends Component {
 					<p>Select the integration you wish to activate or edit</p>
 				</div>
 				<div key={'layoutMain'} className={styles.SettingsIntegrations}>
+					<Button onClickProps={this.doAddObject()} content="Add another" />
+					<Button onClickProps={this.doRemoveObject()} content="Remove another" />
+					<HorizontalRule />
 					<Link to={`/${currentOrg.id}/integrations/xero`}>
 						<ObjectInfo
 							title={`Xero ${connected ? ' - connected' : ''}`}
@@ -63,6 +85,11 @@ export default class SettingsIntegrations extends Component {
 							additionalContent={connected ? this.getAdditionalContent() : null}
 						/>
 					</Link>
+					{this.state.insert && this.state.insert.map((obj, index) => {
+                return (
+									<ObjectInfo key={index} title={`${obj.title}`}classNameProps={['hasBorder']} />
+                );
+            })}
 				</div>
 				<div key={'layoutSecondary'} >
 					<h4>What is an integration?</h4>

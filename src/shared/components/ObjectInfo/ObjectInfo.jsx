@@ -8,7 +8,18 @@ const globalStyles = require('../../pages/App/App.scss');
 
 export default class ObjectInfo extends Component {
 	state = {
-		isHovered: false
+		isHovered: false,
+		isVisible: false
+		}
+	componentDidMount() {
+		setTimeout(() => {
+		this.doVisible();
+/*
+			this.setState({
+				isVisible: true
+			});
+*/
+		}, 10);
 	}
 
 	getButtonComps() {
@@ -47,13 +58,23 @@ export default class ObjectInfo extends Component {
 	}
 	doMouseOver() {
 		return () => {
-			this.setState({isHovered: true});
+			this.setState({
+				isHovered: true
+			});
 		};
 	}
 	doMouseOut() {
 		return () => {
-			this.setState({isHovered: false});
+			this.setState({
+				isHovered: false
+			});
 		};
+	}
+	doVisible() {
+			this.setState({
+				isVisible: true,
+				isLeaving: true
+			});
 	}
 	render() {
 		const {
@@ -69,19 +90,29 @@ export default class ObjectInfo extends Component {
 		let classes;
 		let motionStyle;
 		const springConfig = {stiffness: 300, damping: 23};
+		// const springConfigVisible = {stiffness: 100, damping: 13};
 
 		classes = classNameProps.slice();
 		classes = classes.concat(display || '');
 		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
+		let PositionY1;
+		if (!this.state.isVisible) {
+				PositionY1 = -12;
+				} else if (this.state.isVisible && this.state.isHovered) {
+					PositionY1 = -4;
+				} else {
+					PositionY1 = 0;
+				}
 
 		motionStyle = {
-			y: spring((this.state.isHovered ? -4 : 0), springConfig),
+			y: spring(PositionY1, springConfig),
+			objectOpacity: spring((this.state.isVisible ? 1 : 0), springConfig),
 		};
 		return (
 		<Motion style={motionStyle}>
-			{({y}) => (
+			{({y, objectOpacity}) => (
 			<div
 				className={cx(
 					styles.ObjectInfo,
@@ -91,7 +122,8 @@ export default class ObjectInfo extends Component {
 				onMouseOut={this.doMouseOut()}
 				style={{
 						WebkitTransform: `translate3d(0, ${y}px, 0)`,
-						transform: `translate3d(0, ${y}px, 0)`
+						transform: `translate3d(0, ${y}px, 0)`,
+						opacity: objectOpacity
 					}}
 				>
 				<div className={styles.iconWrap}>

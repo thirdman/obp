@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Summary } from 'layouts';
-// import { ObjectInfo } from 'components';
+// import { Section } from 'components';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 
