@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import { Row } from 'components';
+import {Motion, spring} from 'react-motion';
 
 const styles = require('./Summary.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class Summary extends Component {
+	state = {
+		isVisible: false
+	}
+	componentDidMount() {
+		setTimeout(() => {
+		this.doVisible();
+		}, 10);
+	}
+
 	mapChildren(children) {
 		let result = {};
 		children.map((child) => {
@@ -14,17 +24,31 @@ export default class Summary extends Component {
 
 		return result;
 	}
-
+	doVisible() {
+			this.setState({
+				isVisible: true
+			});
+	}
 	render() {
 		const mappedChildren = this.mapChildren(this.props.children);
-
+		const springConfig = {stiffness: 100, damping: 23};
+		let motionStyle = {
+			// y: spring(PositionY1, springConfig),
+			objectOpacity: spring((this.state.isVisible ? 1 : 0), springConfig),
+		};
 		return (
+		<Motion style={motionStyle}>
+			{({objectOpacity}) => (
 			<div
 				className={cx(
 					styles.Layout,
 					styles.Summary,
 					// styles.editMode,
-					globalStyles.layoutWrap)} >
+					globalStyles.layoutWrap)}
+					style={{
+						opacity: objectOpacity
+					}}
+				>
 				{mappedChildren.layoutHeader &&
 					<Row>
 						<div className={styles.header} id="layoutHeader">
@@ -56,6 +80,8 @@ export default class Summary extends Component {
 						</div>
 					</Row>}
 			</div>
+			)}
+			</Motion>
 		);
 	}
 }
