@@ -235,12 +235,11 @@ class EntitySection extends Component {
 								<Button
 									content="Confirm"
 									onClickProps={this.doExport}
-									classNameProps={['green']} />
+									classNameProps={['highlighted']} />
 								<Button
 									content="Cancel"
 									onClickProps={this.setExport(null)}
-									classNameProps={['green']} />
-							</div>
+									classNameProps={['grey']} />							</div>
 						}
 					</Column>
 				</Row>
