@@ -87,12 +87,18 @@ export default class ConnectionSection extends Component {
 		const { doneAuth, token } = this.props;
 		const { connecting } = this.state;
 		let orgName = org && org.attributes.name;
+		let showMessage;
 
 		if (token && token.xero && token.xero.connectedAt) {
+			showMessage = token.xero.connectedAt + 15000 > new Date().getTime();
 			return (
 				<div>
 					<h3>{'Connection Section'}</h3>
-					<Message type="success" content="Successfully connected to Xero" />
+					{showMessage &&
+						<Message
+							type="success"
+							content="Successfully connected to Xero" />
+					}
 					<Section title={'What next?'} description={'Now that you have connected your [xero] account, there\'s some things to check'}>
 						<ol>
 							<li>

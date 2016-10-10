@@ -44,7 +44,7 @@ const buttonGroupData = [{
 	subtitle: '(from Nomos One to Xero)',
 	showButton: 'true',
 	descriptionTitle: 'Best For',
-	description: 'users are new to Xero and have been using nomos one for a while',
+	description: 'Users are new to Xero and have been using nomos one for a while',
 	classes: ['hero'],
 	onClickReturn: 'export'
 }];
