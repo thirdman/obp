@@ -153,7 +153,8 @@ class EntitySection extends Component {
 							content="Back"
 							onClickProps={this.switchSection(null)}
 							classNameProps={['highlighted']}
-							icon="chevron-left" />
+							icon="chevron-left"
+							iconSize={12} />
 						<Row>
 							<Column occupy={4}><h4>{'NOMOS ONE'}</h4></Column>
 							<Column occupy={4}><h4>{'XERO'}</h4></Column>
@@ -174,7 +175,9 @@ class EntitySection extends Component {
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']} />
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12} />
 						<Row>
 							<Column occupy={9}><h4>{'NOMOS ONE ENTITY'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
@@ -194,7 +197,10 @@ class EntitySection extends Component {
 						<Button
 							content="Back"
 							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']} />
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12}
+							/>
 						<Row>
 							<Column occupy={9}><h4>{'XERO CONTACT'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
