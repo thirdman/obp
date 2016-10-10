@@ -61,9 +61,9 @@ export default class MainNavWrap extends Component {
 					<span className={styles.body}>
 						<h5>
 							{org.attributes.name}
-							{currentOrg === org.id ?
+							{currentOrg.id === org.id ?
 								<div className={styles.iconWrap}>
-									<Icon icon="chevron-right" color="lightGrey" size={12} />
+									<Icon icon="chevron-right" color="lightGrey" size={12} color="blue" />
 								</div>
 								: null
 							}
