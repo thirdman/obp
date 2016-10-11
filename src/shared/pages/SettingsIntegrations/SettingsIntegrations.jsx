@@ -88,7 +88,7 @@ export default class SettingsIntegrations extends Component {
 							additionalContent={connected ? this.getAdditionalContent() : null}
 						/>
 					</Link>
-					<Link to={`/${currentOrg.id}/integrations/qb`}>
+					<Link to={`/${currentOrg.id}/integrations/quickbooks`}>
 						<ObjectInfo
 							title={`QuickBooks ${connected ? ' - connected' : ''}`}
 							type="custom"
@@ -130,7 +130,7 @@ export default class SettingsIntegrations extends Component {
 							additionalContent={connected ? this.getAdditionalContent() : null}
 						/>
 					</Link>
-					<Link to={`/${currentOrg.id}/integrations/fb`}>
+					<Link to={`/${currentOrg.id}/integrations/freshbooks`}>
 						<ObjectInfo
 							title={`FreshBooks ${connected ? ' - connected' : ''}`}
 							type="custom"

@@ -117,17 +117,17 @@ export default class SettingsIntegrationsDetail extends Component {
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg.id}/integrations/fb`,
+							link: `/${currentOrg.id}/integrations/freshbooks`,
 							name: 'connect'
 						},
 						{
 							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/fb/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/freshbooks/invoice-settings`,
 							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/fb/match-entity`,
+							link: `/${currentOrg.id}/integrations/freshbooks/match-entity`,
 							name: 'match-entity'
 						}
 					]}

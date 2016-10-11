@@ -120,17 +120,17 @@ collaboration with their accountants.`,
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg.id}/integrations/myob`,
+							link: `/${currentOrg.id}/integrations/quickbooks`,
 							name: 'connect'
 						},
 						{
 							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/quickbooks/invoice-settings`,
 							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/myob/match-entity`,
+							link: `/${currentOrg.id}/integrations/quickbooks/match-entity`,
 							name: 'match-entity'
 						}
 					]}
