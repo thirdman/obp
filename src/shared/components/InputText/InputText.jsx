@@ -25,7 +25,6 @@ export default class InputText extends Component {
 	}
 
 	doContentChange = () => {
-		// this in place of a potential prop
 		// along the lines of this.props.onChangeProps();
 		if (this.textInput.value.length > 0) {
 			this.setState({hasContent: true});

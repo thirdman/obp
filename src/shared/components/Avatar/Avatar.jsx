@@ -91,6 +91,7 @@ export default class Avatar extends Component {
 		size: React.PropTypes.string,
 		imageUrl: React.PropTypes.string,
 		title: React.PropTypes.string,
+		defaultIconColor: React.PropTypes.string,
 		sourceFolder: React.PropTypes.string,
 		classNameProps: React.PropTypes.array
 	}

@@ -108,6 +108,19 @@
 			}		
 		}		
 	}
+	.ScrollZone{
+		overflow-y: scroll;
+		height: 100%;
+		.gm-scrollbar .-vertical {
+			background: red;
+		}
+		.gm-scrollbar .-horizontal {
+			background: pink;
+		}
+		.gm-scrollbar .thumb {
+			background: blue;
+		}
+	}
 	&.navDocked{
 		.navigation{
 			.menuItem{

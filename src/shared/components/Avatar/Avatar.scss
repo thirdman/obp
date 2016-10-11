@@ -67,5 +67,55 @@ $sizeLarge: 100px;
 			border-radius: 3px;
 		}
 	}
-
+	// colors
+	&.black{
+		g{
+			fill: $nomosBlack;
+		}
+	}
+	&.darkGrey{
+		g{
+			fill: $nomosDarkGrey;
+		}
+	}
+	&.grey{
+		g{
+			fill: $nomosGrey;
+		}
+	}
+	&.lightGrey{
+		g{
+			fill: $nomosLightGrey;
+		}
+	}
+	&.lightLightGrey{
+		g{
+			fill: $nomosLightLightGrey;
+		}
+	}
+	&.white{
+		g, path{
+			fill: #fff;
+		}
+	}
+	&.blue{
+		g{
+			fill: $nomosBlue;
+		}
+	}
+	&.red{
+		g{
+			fill: $nomosRed;
+		}
+	}
+	&.orange{
+		g{
+			fill: $nomosOrange;
+		}
+	}
+	&.green{
+		g{
+			fill: $nomosGreen;
+		}
+	}
 }
