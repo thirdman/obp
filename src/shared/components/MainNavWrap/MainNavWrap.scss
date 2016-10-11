@@ -88,6 +88,8 @@
   lost-utility: clearfix;
 	.navigation{
     display: block;
+    overflow-y: scroll;
+    height: 100%;
 		.menuItem{
 			display: block;
 			padding: 0;

@@ -22,6 +22,7 @@ type						|	`string`	|	'user'	|	one of 'user' (round), 'organisation'/'org' (squ
 size						|	`string`	|	-	|	one of 'small' (24px), 'medium' (32px), 'large' (100px)
 imageUrl				|	`string`	|	see below	|	url of image
 title						|	`string`	|	-	|	title to appear in the quickview (on hover, and alt)
+defaultIconColor	|	`string`	|	-	|	option to pass through a custom icon color (nomos color codes)
 classNameProps	|	`array`	| ['black']	|	array of classes to apply to the component (see below for available classes)
 
 

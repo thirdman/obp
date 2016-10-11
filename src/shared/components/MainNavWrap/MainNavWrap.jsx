@@ -56,6 +56,7 @@ export default class MainNavWrap extends Component {
 							size="small"
 							title={org.attributes.name}
 							base64={org.attributes.firmLogo}
+							defaultIconColor={'blue'}
 						/>
 					</span>
 					<span className={styles.body}>
