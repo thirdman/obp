@@ -13,7 +13,11 @@ import {
 	Login,
 	NotFound,
 	SettingsIntegrations,
-	SettingsIntegrationsDetail,
+	XeroDetail,
+	MyobDetail,
+	QuickbooksDetail,
+	FreshbooksDetail,
+	SageDetail,
 	TempApiManager
 } from 'pages';
 import {
@@ -82,7 +86,11 @@ export default (store) => {
 				<Route path=":orgId/agreements/:agreementId/:sectionName" component={AgreementView} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
 				<Route path=":orgId/integrations" component={SettingsIntegrations} />
-				<Route path=":orgId/integrations/xero(/:section)" component={SettingsIntegrationsDetail} />
+				<Route path=":orgId/integrations/xero(/:section)" component={XeroDetail} />
+				<Route path=":orgId/integrations/myob(/:section)" component={MyobDetail} />
+				<Route path=":orgId/integrations/quickbooks(/:section)" component={QuickbooksDetail} />
+				<Route path=":orgId/integrations/freshbooks(/:section)" component={FreshbooksDetail} />
+				<Route path=":orgId/integrations/sage(/:section)" component={SageDetail} />
 			</Route>
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
