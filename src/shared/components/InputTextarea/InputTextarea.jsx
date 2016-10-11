@@ -1,63 +1,36 @@
 import React, {Component} from 'react';
-import { Icon } from 'components';
+import TextareaAutosize from 'react-textarea-autosize';
 import classSet from 'react-classset';
 import cx from 'classnames';
+import { Icon } from 'components';
 
-const styles = require('./InputText.scss');
+const styles = require('./InputTextarea.scss');
 
-export default class InputText extends Component {
+export default class InputTextarea extends Component {
 
 	state = {
-		error: null,
+		hasError: null,
+		rows: 3,
 		hasContent: (this.props.value && this.props.value.length > 0),
 		theId: this.makeId()
 	}
 
-	makeId() {
-		let text = '';
-		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-		for (let i = 0; i < 5; i++) {
-			text += possible.charAt(Math.floor(Math.random() * possible.length));
-		}
-
-		return text;
-	}
-
-	doContentChange = () => {
-		// along the lines of this.props.onChangeProps();
-		if (this.textInput.value.length > 0) {
-			this.setState({hasContent: true});
-		} else {
-			this.setState({hasContent: false});
-		}
-	}
-	validateInput = (textInput) => {
-		if (!textInput) {
-			this.setState({ error: 'Missing credential(s)' });
-			return false;
-		}
-		return true;
-	}
-
 	render() {
 		const {
-			classNameProps = ['clean'],
-			type = 'text',
+			classNameProps = [],
 			label,
 			value,
+			type,
+			rows = 3,
+			maxRows,
 			placeholder,
-			hasValidation = false,
 			isRequired = false,
+			hasValidation = false,
 			hasRequiredIcon = true,
 			hasError = false,
-			placeholderBelow = false,
-			onKeyDownProps
-			// onChangeProps = function() {
-			//	console.error('Input text component has no default
-			// function set for onCHangeProps');
-			// }
-		} = this.props;
+			onKeyDownProps,
+			// onChangeProps,
+			} = this.props;
 
 		let classes = classNameProps;
 		let toggleClasses;
@@ -76,30 +49,33 @@ export default class InputText extends Component {
 			[styles.hasValidation]: hasValidation,
 			[styles.isRequired]: isRequired,
 			[styles.hasError]: hasError,
-			[styles.placeholderBelow]: placeholderBelow
+			[styles.type]: type
 		});
-
 		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 
 		return (
 			<div
-			className={cx(styles.InputText,
+				className={cx(styles.InputTextarea,
 					classes,
 					toggleClasses,
 					(this.state.hasContent ? styles.hasContent : null))
 				}
 			>
-				<input
+				{/* for additional props, see https://github.com/andreypopp/react-textarea-autosize */}
+				<TextareaAutosize
 					id={this.state.theId}
 					type={type}
 					ref={(c) => { this.textInput = c; }}
 					required={isRequired}
 					defaultValue={value}
+					minRows={rows}
+					maxRows={maxRows}
+					className={styles.textarea}
 					onChange={this.doContentChange}
 					onKeyDown={onKeyDownProps}
-					/>
+				/>
 				<label htmlFor={this.state.theId}>{placeholder}</label>
 				{isRequired && hasRequiredIcon ?
 					<div className={styles.requiredMarker}>
@@ -116,17 +92,37 @@ export default class InputText extends Component {
 	}
 
 	static propTypes = {
-		type: React.PropTypes.string,
+		rows: React.PropTypes.number,
+		maxRows: React.PropTypes.number,
 		label: React.PropTypes.string,
+		type: React.PropTypes.string,
 		value: React.PropTypes.string,
 		placeholder: React.PropTypes.string,
-		placeholderBelow: React.PropTypes.bool,
 		hasValidation: React.PropTypes.bool,
 		isRequired: React.PropTypes.bool,
-		hasRequiredIcon: React.PropTypes.bool,
 		hasError: React.PropTypes.bool,
-		onChangeProps: React.PropTypes.func,
+		onResize: React.PropTypes.func,
+		classNameProps: React.PropTypes.array,
 		onKeyDownProps: React.PropTypes.func,
-		classNameProps: React.PropTypes.array
+		onChangeProps: React.PropTypes.func
+	};
+
+	doContentChange = () => {
+		if (this.textInput.value.length > 0) {
+			this.setState({hasContent: true});
+		} else {
+			this.setState({hasContent: false});
+		}
+	}
+
+	makeId() {
+		let text = '';
+		let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		for (let i = 0; i < 5; i++) {
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+		}
+
+		return text;
 	}
 }

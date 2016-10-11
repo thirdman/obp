@@ -1,0 +1,135 @@
+@import "../../globals/styles/_global.scss";
+
+.InputTextarea {
+	padding: $padding 0;
+	position: relative;
+	margin-bottom: $padding;
+	animation: slideUp .3s ease;
+	.textarea{
+		outline: none;
+		border: 1px solid #ccc;
+		padding-left: 8px;
+		border-radius: 4px;
+		width: 100%;
+		font-size: 100%;
+		padding: 4px;
+		color: $nomosGrey;
+		~ label{
+			position: absolute;
+			top: 8px;
+	    left: 0;
+	    color: #aaa;
+	    font-size: 1em;
+			font-style: italic;
+	    font-weight: normal;
+	    line-height: 1em;
+	    transition: 0.2s ease;
+	    padding: 8px 16px 8px 8px; 
+		}
+		&:focus{
+			outline: none;
+			border: 1px solid $nomosBlue;
+		color: $nomosBlack;
+	    ~ label {
+				top: 8px;
+	      color: #777;
+	      transform: none;
+	      font-style: italic;
+	      opacity: 0;
+			}
+		}
+		&:valid{
+			outline: none;
+	    ~ label {
+				top: 8px;
+	      color: #777;
+	      transform: none;
+	      font-style: italic;
+	      opacity: 0;
+			}
+		}
+	}
+	label{
+	}
+	
+	//MODIFIERS
+	&.clean{
+		margin-top: 8px;
+		input{
+			~ label{
+				position: absolute;
+				top: 0;
+		    left: 0;
+		    color: #aaa;
+		    font-size: 1em;
+				font-style: italic;
+		    font-weight: normal;
+		    line-height: 1em;
+		    transition: 0.2s ease;
+		    padding: 8px 16px 8px 0px; 
+			}
+			&:focus{
+				outline: none;
+				background: #fff;
+		    ~ label {
+		      color: #777;
+		      transform: translate(-12%, -50%) scale(0.75);
+		      font-style: inherit;
+				}
+			}
+		}
+	}
+	&.space{
+		margin: 24px 0;
+	}
+	&.small{
+		width: 100px;
+		display: inline-block;
+	}
+	&.medium{}
+	&.large{}
+	&.hasValidation{
+	}
+	&.hasError{
+		.textarea{
+			border: 1px solid $nomosRed;
+			background: #f9f9f9;
+			&:focus{
+				background: #fff;
+				border: 1px solid $nomosBlue;
+			}
+		}
+	}
+	&.contentItem{
+		//moves it up for when it is in a content item to make the error message touch.
+		margin-top: -8px;
+	}
+	.requiredMarker{
+    position: absolute;
+    top: 0;
+    right: -8px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    background: #fff;
+    background-size: 16px;
+    z-index: 4;
+	}
+	&.required{
+		input{
+		}
+		label{
+			&:after{
+				content: ' (Required)';
+				text-transform: capitalize;
+			}
+		}
+	}
+
+}
+
+
