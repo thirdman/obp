@@ -9,6 +9,7 @@ import {
 	// ComponentDocs,  // refactor out when cofirmed the new docs work
 	DevHome,
 	DevComponentDocs,
+	DevAnimationTest,
 	DevIcons,
 	Login,
 	NotFound,
@@ -63,20 +64,20 @@ export default (store) => {
 			{ /* Routes - do not require logged in*/ }
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
+			<Route onEnter={requireLogin}>
 				<IndexRoute component={TempApiManager} />
 				<Route path=":orgId" component={SettingsIntegrations} />
 				<Route path="docs" component={DevComponentDocs} />
 				<Route path="dev" component={DevHome} />
 				<Route path="dev/home" component={DevHome} />
+				<Route path="dev/animation" component={DevAnimationTest} />
 				<Route path="dev/docs" component={DevComponentDocs} />
 				<Route path="dev/icons" component={DevIcons} />
 				<Route path="create" component={Create} />
 				<Route path="edit" component={Edit} />
 				<Route path="overview" component={Overview} />
 				<Route path="report" component={Report} />
-			<Route onEnter={requireLogin}>
 				<Route path="summary" component={Summary} />
-			</Route>
 				<Route path="view" component={View} />
 				<Route path=":orgId/agreements" component={AgreementsSummary} />
 				<Route path=":orgId/agreements/:agreementId" component={AgreementOverview} />
@@ -84,6 +85,7 @@ export default (store) => {
 				<Route path=":orgId/agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
 				<Route path=":orgId/integrations" component={SettingsIntegrations} />
 				<Route path=":orgId/integrations/xero(/:section)" component={SettingsIntegrationsDetail} />
+			</Route>
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
 		</Route>

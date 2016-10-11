@@ -7,6 +7,7 @@ export AgreementsSummary from './AgreementsSummary/AgreementsSummary';
 export ComponentDocs from './ComponentDocs/ComponentDocs';
 export DevHome from './DevHome/DevHome';
 export DevComponentDocs from './DevComponentDocs/DevComponentDocs';
+export DevAnimationTest from './DevAnimationTest/DevAnimationTest';
 export DevIcons from './DevIcons/DevIcons';
 export Login from './Login/Login';
 export NotFound from './NotFound/NotFound';

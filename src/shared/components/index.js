@@ -5,6 +5,7 @@
  *	Please keep alphabetical
  */
 
+export Animate from './Animate/Animate';
 export Avatar from './Avatar/Avatar';
 export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
