@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
+import GeminiScrollbar from 'react-gemini-scrollbar';
 import { Avatar, Icon, UiBrandLogo } from 'components';
 import cx from 'classnames';
 import { connect } from '../../../utils/state';
@@ -30,9 +31,11 @@ export default class MainNavWrap extends Component {
 					[styles.animatable]: animatable})}>
 				<div className={styles.navBarContent}>
 					<UiBrandLogo isSmall={navDocked} />
+					<GeminiScrollbar className={styles.ScrollZone}>
 						<div className={styles.navigation}>
 							{ this.getOrgsComp() }
 						</div>
+					</GeminiScrollbar>
 				</div>
 			</div>
 		);

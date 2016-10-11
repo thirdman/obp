@@ -88,8 +88,6 @@
   lost-utility: clearfix;
 	.navigation{
     display: block;
-    overflow-y: scroll;
-    height: 100%;
 		.menuItem{
 			display: block;
 			padding: 0;
@@ -109,6 +107,19 @@
 				background: rgba(0,0,0,.5);
 			}		
 		}		
+	}
+	.ScrollZone{
+		overflow-y: scroll;
+		height: 100%;
+		.gm-scrollbar .-vertical {
+			background: red;
+		}
+		.gm-scrollbar .-horizontal {
+			background: pink;
+		}
+		.gm-scrollbar .thumb {
+			background: blue;
+		}
 	}
 	&.navDocked{
 		.navigation{
