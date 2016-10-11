@@ -18,7 +18,7 @@ import {
 	SparkPercentage,
 	Statistic
 	} from 'components';
-import { connect } from '../../../../../utils/state';
+import { connect } from 'state';
 
 const buttonGroupData = [{
 	name: 'match',

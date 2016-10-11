@@ -5,7 +5,7 @@ import { ApiClient as client } from 'helpers';
 import { Link } from 'react-router';
 import { Button, Message, Section } from 'components';
 
-import { connect } from '../../../../../utils/state';
+import { connect } from 'state';
 
 @connect('store')
 export default class ConnectionSection extends Component {

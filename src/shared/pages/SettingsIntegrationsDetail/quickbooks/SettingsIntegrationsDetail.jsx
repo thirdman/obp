@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 import { View } from 'layouts';
 import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
-import { connect } from '../../../utils/state';
+import { connect } from 'state';
 import {
 	ConnectionSection,
 	EntitySection,
 	InvoiceSection
 } from './containers';
 
-const styles = require('./SettingsIntegrationsFB.scss');
-const globalStyles = require('../App/App.scss');
+const styles = require('./SettingsIntegrationsDetail.scss');
+const globalStyles = require('../../App/App.scss');
 
 @connect('store')
-export default class SettingsIntegrationsFB extends Component {
+export default class SettingsIntegrationsDetail extends Component {
 
 	state = {
 		section: null
@@ -40,25 +40,28 @@ export default class SettingsIntegrationsFB extends Component {
 		const defaultConnection = {
 			id: 1,
 			connectionDetail: null,
-			provider: 'fb',
-			title: 'FreshBooks',
-			subtitle: 'Small Business Accounting Software That Makes Billing Painless',
-			shortDescription: `The all-new FreshBooks is accounting software that makes running your
-				small business easy, fast and secure. Spend less time on accounting and more time doing
-				the work you love.`,
-			longDescription: `FreshBooks is simple and intuitive, so you’ll spend less time on
-				paperwork and wow your clients with how professional you look.
-			
-			Automate time consuming tasks like organizing expenses, tracking your time, and
-			following up with clients with just a few clicks.
-			
-			FreshBooks lives in the cloud so you can securely access it from your desktop,
-			phone and tablet wherever you are.`,
-			whatYouCanDo: `Using the FreshBooks integration, you can send invoices
+			provider: 'qb',
+			title: 'QuickBooks',
+			subtitle: 'Easy Accounting Software',
+			shortDescription: 'Built for your small business. Approved by accountants.',
+			longDescription: `Intuit QuickBooks Online® is an easy-to-use, feature-rich online
+			version of America\’s most
+popular accounting software for small businesses. It helps small businesses save time
+organizing their financial data in one place – anytime, anywhere – with no accounting
+knowledge necessary. Users can access their data on any internet-connected PC or Mac
+computer via popular web browsers without having to install software. QuickBooks Mobile
+is a free companion app that makes QuickBooks Online data available on Apple and
+Android mobile devices. Small businesses can choose from three version options based on
+their businesses needs
+– QuickBooks Online Simple Start, QuickBooks Online Essentials and QuickBooks Online
+Plus. The service offers small business owners additional seats and permission controls to
+give multiple users access to the account for greater efficiency and to enable real-time
+collaboration with their accountants.`,
+			whatYouCanDo: `Using the QuickBooks integration, you can send invoices
 				directly to your account. In nomos one, you will see
 				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/FreshBooks_Cloud_Accounting_Logo.svg/203px-FreshBooks_Cloud_Accounting_Logo.svg.png',
-			websiteUrl: 'https://www.freshbooks.com',
+			logoUrl: 'https://quickbooks-au-s3.intuitstatic.com/showroom_cms/image/content/dam/intuit/quickbooks/i18n/en/Australia/homepage/logo-qbo.png',
+			websiteUrl: 'https://quickbooks.intuit.com/',
 			connectionUrl: '',
 			returnUrl: '',
 			categories: ['accounting', 'invoicing']
@@ -117,17 +120,17 @@ export default class SettingsIntegrationsFB extends Component {
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg.id}/integrations/fb`,
+							link: `/${currentOrg.id}/integrations/myob`,
 							name: 'connect'
 						},
 						{
 							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/fb/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
 							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/fb/match-entity`,
+							link: `/${currentOrg.id}/integrations/myob/match-entity`,
 							name: 'match-entity'
 						}
 					]}
@@ -137,16 +140,16 @@ export default class SettingsIntegrationsFB extends Component {
 				</div>
 				<div key={'layoutSecondary'} >
 					<Statistic
-						title="invoices paid using FreshBooks"
-						content="$60"
-						units="Billion"
+						title="Ranked"
+						content="#1"
+						units="worldwide"
 						hasDivider
 						isHorizontal
 						/>
 					<Statistic
-						title="Annual hours saved"
-						content="192"
-						units="per user"
+						title="Online subscribers"
+						content="1.4"
+						units="Million"
 						hasDivider
 						isHorizontal
 						/>

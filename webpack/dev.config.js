@@ -91,6 +91,7 @@ module.exports = {
 		modulesDirectories: [
 			'src',
 			'src/shared',
+			'src/utils',
 			'node_modules'
 		],
 		extensions: ['', '.json', '.js', '.jsx']

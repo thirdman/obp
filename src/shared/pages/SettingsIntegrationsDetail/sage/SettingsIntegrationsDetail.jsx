@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 import { View } from 'layouts';
 import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
-import { connect } from '../../../utils/state';
+import { connect } from 'state';
 import {
 	ConnectionSection,
 	EntitySection,
 	InvoiceSection
 } from './containers';
 
-const styles = require('./SettingsIntegrationsQB.scss');
-const globalStyles = require('../App/App.scss');
+const styles = require('./SettingsIntegrationsDetail.scss');
+const globalStyles = require('../../App/App.scss');
 
 @connect('store')
-export default class SettingsIntegrationsQB extends Component {
+export default class SettingsIntegrationsDetail extends Component {
 
 	state = {
 		section: null
@@ -40,28 +40,22 @@ export default class SettingsIntegrationsQB extends Component {
 		const defaultConnection = {
 			id: 1,
 			connectionDetail: null,
-			provider: 'qb',
-			title: 'QuickBooks',
-			subtitle: 'Easy Accounting Software',
-			shortDescription: 'Built for your small business. Approved by accountants.',
-			longDescription: `Intuit QuickBooks Online® is an easy-to-use, feature-rich online
-			version of America\’s most
-popular accounting software for small businesses. It helps small businesses save time
-organizing their financial data in one place – anytime, anywhere – with no accounting
-knowledge necessary. Users can access their data on any internet-connected PC or Mac
-computer via popular web browsers without having to install software. QuickBooks Mobile
-is a free companion app that makes QuickBooks Online data available on Apple and
-Android mobile devices. Small businesses can choose from three version options based on
-their businesses needs
-– QuickBooks Online Simple Start, QuickBooks Online Essentials and QuickBooks Online
-Plus. The service offers small business owners additional seats and permission controls to
-give multiple users access to the account for greater efficiency and to enable real-time
-collaboration with their accountants.`,
-			whatYouCanDo: `Using the QuickBooks integration, you can send invoices
+			provider: 'sage',
+			title: 'Sage',
+			subtitle: 'Online accounting helps simplify success',
+			shortDescription: `We give businesses around the world the information, insight and tools
+			they need to succeed today.`,
+			longDescription: `We provide small and medium
+sized organisations with a range of easy-to-use business management software and services -
+from accounting and payroll, to enterprise resource planning, customer relationship
+management and payments. Our customers receive continuous advice and support through our
+global network of local experts to help them solve their business problems, giving them the
+confidence to achieve their business ambitions.`,
+			whatYouCanDo: `Using the Sage integration, you can send invoices
 				directly to your account. In nomos one, you will see
 				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://quickbooks-au-s3.intuitstatic.com/showroom_cms/image/content/dam/intuit/quickbooks/i18n/en/Australia/homepage/logo-qbo.png',
-			websiteUrl: 'https://quickbooks.intuit.com/',
+			logoUrl: 'https://www.sage.co.uk/~/media/markets/uk/images/corporate/sage-green-logo.jpg',
+			websiteUrl: 'http://www.sage.com/company/solutions',
 			connectionUrl: '',
 			returnUrl: '',
 			categories: ['accounting', 'invoicing']
@@ -120,17 +114,17 @@ collaboration with their accountants.`,
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg.id}/integrations/myob`,
+							link: `/${currentOrg.id}/integrations/sage`,
 							name: 'connect'
 						},
 						{
 							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/sage/invoice-settings`,
 							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/myob/match-entity`,
+							link: `/${currentOrg.id}/integrations/sage/match-entity`,
 							name: 'match-entity'
 						}
 					]}
@@ -140,16 +134,14 @@ collaboration with their accountants.`,
 				</div>
 				<div key={'layoutSecondary'} >
 					<Statistic
-						title="Ranked"
-						content="#1"
-						units="worldwide"
+						title="Support Staff"
+						content="5000"
 						hasDivider
 						isHorizontal
 						/>
 					<Statistic
-						title="Online subscribers"
-						content="1.4"
-						units="Million"
+						title="Accountant Partners"
+						content="48500"
 						hasDivider
 						isHorizontal
 						/>

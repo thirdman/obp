@@ -10,7 +10,7 @@ import {
 	Section
 } from 'components';
 import { autobind } from 'core-decorators';
-import { connect } from '../../../../../utils/state';
+import { connect } from 'state';
 
 @connect('store')
 class InvoiceSection extends Component {

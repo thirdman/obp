@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 import { View } from 'layouts';
 import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
-import { connect } from '../../../utils/state';
+import { connect } from 'state';
 import {
 	ConnectionSection,
 	EntitySection,
 	InvoiceSection
 } from './containers';
 
-const styles = require('./SettingsIntegrationsSage.scss');
-const globalStyles = require('../App/App.scss');
+const styles = require('./SettingsIntegrationsDetail.scss');
+const globalStyles = require('../../App/App.scss');
 
 @connect('store')
-export default class SettingsIntegrationsSage extends Component {
+export default class SettingsIntegrationsDetail extends Component {
 
 	state = {
 		section: null
@@ -40,22 +40,25 @@ export default class SettingsIntegrationsSage extends Component {
 		const defaultConnection = {
 			id: 1,
 			connectionDetail: null,
-			provider: 'sage',
-			title: 'Sage',
-			subtitle: 'Online accounting helps simplify success',
-			shortDescription: `We give businesses around the world the information, insight and tools
-			they need to succeed today.`,
-			longDescription: `We provide small and medium
-sized organisations with a range of easy-to-use business management software and services -
-from accounting and payroll, to enterprise resource planning, customer relationship
-management and payments. Our customers receive continuous advice and support through our
-global network of local experts to help them solve their business problems, giving them the
-confidence to achieve their business ambitions.`,
-			whatYouCanDo: `Using the Sage integration, you can send invoices
+			provider: 'fb',
+			title: 'FreshBooks',
+			subtitle: 'Small Business Accounting Software That Makes Billing Painless',
+			shortDescription: `The all-new FreshBooks is accounting software that makes running your
+				small business easy, fast and secure. Spend less time on accounting and more time doing
+				the work you love.`,
+			longDescription: `FreshBooks is simple and intuitive, so you’ll spend less time on
+				paperwork and wow your clients with how professional you look.
+			
+			Automate time consuming tasks like organizing expenses, tracking your time, and
+			following up with clients with just a few clicks.
+			
+			FreshBooks lives in the cloud so you can securely access it from your desktop,
+			phone and tablet wherever you are.`,
+			whatYouCanDo: `Using the FreshBooks integration, you can send invoices
 				directly to your account. In nomos one, you will see
 				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://www.sage.co.uk/~/media/markets/uk/images/corporate/sage-green-logo.jpg',
-			websiteUrl: 'http://www.sage.com/company/solutions',
+			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/FreshBooks_Cloud_Accounting_Logo.svg/203px-FreshBooks_Cloud_Accounting_Logo.svg.png',
+			websiteUrl: 'https://www.freshbooks.com',
 			connectionUrl: '',
 			returnUrl: '',
 			categories: ['accounting', 'invoicing']
@@ -114,17 +117,17 @@ confidence to achieve their business ambitions.`,
 					listData={[
 						{
 							label: 'Connection',
-							link: `/${currentOrg.id}/integrations/sage`,
+							link: `/${currentOrg.id}/integrations/fb`,
 							name: 'connect'
 						},
 						{
 							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/sage/invoice-settings`,
+							link: `/${currentOrg.id}/integrations/fb/invoice-settings`,
 							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/sage/match-entity`,
+							link: `/${currentOrg.id}/integrations/fb/match-entity`,
 							name: 'match-entity'
 						}
 					]}
@@ -134,14 +137,16 @@ confidence to achieve their business ambitions.`,
 				</div>
 				<div key={'layoutSecondary'} >
 					<Statistic
-						title="Support Staff"
-						content="5000"
+						title="invoices paid using FreshBooks"
+						content="$60"
+						units="Billion"
 						hasDivider
 						isHorizontal
 						/>
 					<Statistic
-						title="Accountant Partners"
-						content="48500"
+						title="Annual hours saved"
+						content="192"
+						units="per user"
 						hasDivider
 						isHorizontal
 						/>

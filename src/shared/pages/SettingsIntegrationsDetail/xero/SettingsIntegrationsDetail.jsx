@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { View } from 'layouts';
 import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
-import { connect } from '../../../utils/state';
+import { connect } from 'state';
 import {
 	ConnectionSection,
 	EntitySection,
@@ -11,7 +11,7 @@ import {
 } from './containers';
 
 const styles = require('./SettingsIntegrationsDetail.scss');
-const globalStyles = require('../App/App.scss');
+const globalStyles = require('../../App/App.scss');
 
 @connect('store')
 export default class SettingsIntegrationsDetail extends Component {

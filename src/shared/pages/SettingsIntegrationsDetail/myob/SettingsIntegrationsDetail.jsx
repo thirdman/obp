@@ -3,18 +3,18 @@ import { Link } from 'react-router';
 import { View } from 'layouts';
 import { Button, Column, HorizontalRule, Row, Statistic, SubNavWrap } from 'components';
 import { Header } from 'containers';
-import { connect } from '../../../utils/state';
+import { connect } from 'state';
 import {
 	ConnectionSection,
 	EntitySection,
 	InvoiceSection
 } from './containers';
 
-const styles = require('./SettingsIntegrationsMYOB.scss');
-const globalStyles = require('../App/App.scss');
+const styles = require('./SettingsIntegrationsDetail.scss');
+const globalStyles = require('../../App/App.scss');
 
 @connect('store')
-export default class SettingsIntegrationsMYOB extends Component {
+export default class SettingsIntegrationsDetail extends Component {
 
 	state = {
 		section: null
