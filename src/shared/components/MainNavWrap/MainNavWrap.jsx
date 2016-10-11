@@ -52,6 +52,7 @@ export default class MainNavWrap extends Component {
 					}>
 					<span className={styles.figure}>
 						<Avatar
+							defaultIconColor="blue"
 							type="org"
 							size="small"
 							title={org.attributes.name}

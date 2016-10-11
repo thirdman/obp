@@ -21,6 +21,7 @@ export default class Avatar extends Component {
 			size = 'small',
 			base64,
 			imageUrl,
+			defaultIconColor,
 			title
 		} = this.props;
 
@@ -34,7 +35,7 @@ export default class Avatar extends Component {
 		}
 
 		classes = classNameProps.slice();
-		classes = classes.concat(type, size);
+		classes = classes.concat(type, size, defaultIconColor);
 
 		classes = classes
 			.filter((cName) => { return !!cName; })
