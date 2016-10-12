@@ -92,17 +92,20 @@ export default class SettingsIntegrationsDetail extends Component {
 						{
 							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/xero`,
-							name: 'connect'
+							name: 'connect',
+							disabled: !connected
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/xero/match-entity`,
-							name: 'match-entity'
+							name: 'match-entity',
+							disabled: !connected
 						},
 						{
 							label: 'Settings',
 							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
-							name: 'invoice-settings'
+							name: 'invoice-settings',
+							disabled: !connected
 						}
 					]}
 				/>
