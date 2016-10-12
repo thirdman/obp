@@ -93,23 +93,23 @@ export default class ConnectionSection extends Component {
 			showMessage = token.xero.connectedAt + 15000 > new Date().getTime();
 			return (
 				<div>
-					<h3>{'Connection Section'}</h3>
+					<h3>{'Connection Information'}</h3>
 					{showMessage &&
 						<Message
 							type="success"
 							content="Successfully connected to Xero" />
 					}
-					<Section title={'What next?'} description={'Now that you have connected your [xero] account, there\'s some things to check'}>
+					<Section title={'What next?'} description={'Now that you have connected your Xero account, there\'s some things to check'}>
 						<ol>
 							<li>
-								<p>Configure your entities</p>
+								<p>Configure your Entities</p>
 									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
 								<Link to={`/${currentOrg.id}/integrations/xero/match-entity`}>
 									<Button content="View Entities" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 							<li>
-									<p>Integration Settings</p>
+									<p>Check your Integration Settings</p>
 									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
 								<Link to={`/${currentOrg.id}/integrations/xero/invoice-settings`}>
 									<Button content="View Settings" classNameProps={['highlighted']} />
@@ -124,7 +124,7 @@ export default class ConnectionSection extends Component {
 		if (!doneAuth) {
 			return (
 				<div>
-					<h3>{'Connection Section'}</h3>
+					<h3>{'Connection Information'}</h3>
 					<div>{'Here goes the connection section'}</div>
 					<Button
 						content={connecting ? 'Loading ... ' : 'Connect to Xero'}
@@ -134,7 +134,7 @@ export default class ConnectionSection extends Component {
 		} else {
 			return (
 				<div>
-					<h3>{'Connection Section'}</h3>
+					<h3>{'Connection Information'}</h3>
 					<div>{'Verifying details ....'}</div>
 				</div>
 			);

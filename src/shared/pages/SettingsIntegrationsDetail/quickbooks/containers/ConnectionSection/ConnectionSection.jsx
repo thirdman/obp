@@ -96,14 +96,14 @@ export default class ConnectionSection extends Component {
 					<Section title={'What next?'} description={'Now that you have connected your QuickBooks account, there\'s some things to check'}>
 						<ol>
 							<li>
-								<p>Configure your entities</p>
+								<p>Configure your Entities</p>
 									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
 								<Link to={`/${currentOrg.id}/integrations/qb/match-entity`}>
 									<Button content="View Entities" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 							<li>
-									<p>Integration Settings</p>
+									<p>Check your Integration Settings</p>
 									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
 								<Link to={`/${currentOrg.id}/integrations/qb/invoice-settings`}>
 									<Button content="View Settings" classNameProps={['highlighted']} />
@@ -118,7 +118,7 @@ export default class ConnectionSection extends Component {
 		if (!doneAuth) {
 			return (
 				<div>
-					<h3>{'Connection Section'}</h3>
+					<h3>{'Connection Information'}</h3>
 					<div>{'Here goes the connection section'}</div>
 					<Button
 						content={connecting ? 'Loading ... ' : 'Connect to QuickBooks'}
@@ -128,7 +128,7 @@ export default class ConnectionSection extends Component {
 		} else {
 			return (
 				<div>
-					<h3>{'Connection Section'}</h3>
+					<h3>{'Connection Information'}</h3>
 					<div>{'Verifying details ....'}</div>
 				</div>
 			);

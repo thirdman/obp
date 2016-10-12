@@ -113,19 +113,19 @@ confidence to achieve their business ambitions.`,
 					selected={section}
 					listData={[
 						{
-							label: 'Connection',
+							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/sage`,
 							name: 'connect'
-						},
-						{
-							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/sage/invoice-settings`,
-							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/sage/match-entity`,
 							name: 'match-entity'
+						},
+						{
+							label: 'Settings',
+							link: `/${currentOrg.id}/integrations/sage/invoice-settings`,
+							name: 'invoice-settings'
 						}
 					]}
 				/>

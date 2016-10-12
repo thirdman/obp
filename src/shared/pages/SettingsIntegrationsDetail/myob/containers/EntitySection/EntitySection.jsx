@@ -123,8 +123,8 @@ class EntitySection extends Component {
 						</Row>
 						<Section hasDivider title="Existing Entities">
 							<Row>
-								<Column occupy={5}><h4>{'Name'}</h4></Column>
-								<Column occupy={4}><h4>{'Provider'}</h4></Column>
+								<Column occupy={5}><h4>{'nomos one'}</h4></Column>
+								<Column occupy={4}><h4>{'MYOB'}</h4></Column>
 								<Column occupy={1}>{''}</Column>
 								<Column occupy={2}><h4>{'Action'}</h4></Column>
 							</Row>
