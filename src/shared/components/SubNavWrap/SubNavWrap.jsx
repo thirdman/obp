@@ -12,15 +12,26 @@ export default class SubNavWrap extends Component {
 		children: PropTypes.oneOfType([
 			PropTypes.arrayOf(React.PropTypes.node),
 			PropTypes.node
-		])
+		]),
+		disabled: PropTypes.bool
 	}
 
 	render() {
-		const {listData, selected} = this.props;
+		const {
+			listData = [],
+			selected
+		} = this.props;
 		return (
 			<ul className={styles.SubNavWrap}>
-				{listData && listData.map(({link, name, label}, index) =>
-					(<Link to={link} key={`navitem${index}`}>
+				{listData && listData.map(({link, name, label, disabled}, index) =>
+					(<Link
+						to={link}
+						key={`navitem${index}`}
+						onClick={(event) => {
+							if (disabled) {
+								event.preventDefault();
+							}
+						}}>
 						<li
 							className={name === selected ? styles.isSelected : ''}>
 							{label}
