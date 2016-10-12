@@ -4,8 +4,8 @@ import { Summary } from 'layouts';
 import { Header } from 'containers';
 import { connect } from '../../../utils/state';
 
-const imgGettingStarted1 = 'https://dl.dropboxusercontent.com/s/1s1m11th57dh8dg/gettingstarted_1.jpg?dl=0';
-const imgGettingStarted2 = 'https://dl.dropboxusercontent.com/s/5x435dkchq8ddd1/gettingstarted_2.jpg?dl=0';
+const imgGettingStarted1 = 'https://dl.dropboxusercontent.com/s/1s1m11th57dh8dg/gettingstarted_2.jpg?dl=0';
+const imgGettingStarted2 = 'https://dl.dropboxusercontent.com/s/5x435dkchq8ddd1/gettingstarted_1.jpg?dl=0';
 @connect('store')
 export default class TempApiManager extends Component {
 
