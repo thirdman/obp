@@ -92,20 +92,19 @@ export default class SettingsIntegrationsDetail extends Component {
 						{
 							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/myob`,
-							name: 'connect',
-							disabled: !connected
+							name: 'connect'
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/myob/match-entity`,
 							name: 'match-entity',
-							disabled: !connected
+							isDisabled: !connected
 						},
 						{
 							label: 'Settings',
 							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
 							name: 'invoice-settings',
-							disabled: !connected
+							isDisabled: !connected
 						}
 					]}
 				/>

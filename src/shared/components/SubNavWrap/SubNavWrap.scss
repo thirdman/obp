@@ -30,6 +30,19 @@
 			transform: translateX(0);
 			transition: transform .3s ease, opacity .3s ease;
 		}
+		&.isDisabled{
+			color: $nomosLightGrey;
+			cursor: default;
+			.iconWrap{
+				display: none;
+			}
+			&:hover{
+				border-left: none;
+				.iconWrap{
+					display: none;
+				}
+			}
+		}
 		&.isSelected{
 			border-left: 4px solid $nomosBlue;
 			position: relative;
