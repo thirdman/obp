@@ -112,19 +112,19 @@ export default class SettingsIntegrationsDetail extends Component {
 					selected={section}
 					listData={[
 						{
-							label: 'Connection',
+							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/xero`,
 							name: 'connect'
-						},
-						{
-							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
-							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/xero/match-entity`,
 							name: 'match-entity'
+						},
+						{
+							label: 'Settings',
+							link: `/${currentOrg.id}/integrations/xero/invoice-settings`,
+							name: 'invoice-settings'
 						}
 					]}
 				/>

@@ -111,19 +111,19 @@ export default class SettingsIntegrationsDetail extends Component {
 					selected={section}
 					listData={[
 						{
-							label: 'Connection',
+							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/myob`,
 							name: 'connect'
-						},
-						{
-							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
-							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/myob/match-entity`,
 							name: 'match-entity'
+						},
+						{
+							label: 'Settings',
+							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
+							name: 'invoice-settings'
 						}
 					]}
 				/>

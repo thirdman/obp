@@ -119,19 +119,19 @@ collaboration with their accountants.`,
 					selected={section}
 					listData={[
 						{
-							label: 'Connection',
+							label: 'Connection Information',
 							link: `/${currentOrg.id}/integrations/quickbooks`,
 							name: 'connect'
-						},
-						{
-							label: 'Settings',
-							link: `/${currentOrg.id}/integrations/quickbooks/invoice-settings`,
-							name: 'invoice-settings'
 						},
 						{
 							label: 'Entities & Contacts',
 							link: `/${currentOrg.id}/integrations/quickbooks/match-entity`,
 							name: 'match-entity'
+						},
+						{
+							label: 'Settings',
+							link: `/${currentOrg.id}/integrations/quickbooks/invoice-settings`,
+							name: 'invoice-settings'
 						}
 					]}
 				/>
