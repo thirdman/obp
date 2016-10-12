@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
+import cx from 'classnames';
 import { Icon } from 'components';
 
 const styles = require('./SubNavWrap.scss');
@@ -12,8 +13,7 @@ export default class SubNavWrap extends Component {
 		children: PropTypes.oneOfType([
 			PropTypes.arrayOf(React.PropTypes.node),
 			PropTypes.node
-		]),
-		disabled: PropTypes.bool
+		])
 	}
 
 	render() {
@@ -23,17 +23,22 @@ export default class SubNavWrap extends Component {
 		} = this.props;
 		return (
 			<ul className={styles.SubNavWrap}>
-				{listData && listData.map(({link, name, label, disabled}, index) =>
+				{listData && listData.map(({link, name, label, isDisabled}, index) =>
 					(<Link
 						to={link}
 						key={`navitem${index}`}
 						onClick={(event) => {
-							if (disabled) {
+							if (isDisabled) {
 								event.preventDefault();
 							}
 						}}>
 						<li
-							className={name === selected ? styles.isSelected : ''}>
+						className={cx(
+							(name === selected ? styles.isSelected : ''),
+							(isDisabled ? styles.isDisabled : '')
+							)
+						}
+						>
 							{label}
 							<span className={styles.iconWrap}>
 								<Icon icon="chevron-right" color={name === selected ? 'blue' : 'grey'} />
