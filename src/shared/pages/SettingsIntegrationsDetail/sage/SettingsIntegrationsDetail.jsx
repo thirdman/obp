@@ -37,34 +37,11 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
-		const defaultConnection = {
-			id: 1,
-			connectionDetail: null,
-			provider: 'sage',
-			title: 'Sage',
-			subtitle: 'Online accounting helps simplify success',
-			shortDescription: `We give businesses around the world the information, insight and tools
-			they need to succeed today.`,
-			longDescription: `We provide small and medium
-sized organisations with a range of easy-to-use business management software and services -
-from accounting and payroll, to enterprise resource planning, customer relationship
-management and payments. Our customers receive continuous advice and support through our
-global network of local experts to help them solve their business problems, giving them the
-confidence to achieve their business ambitions.`,
-			whatYouCanDo: `Using the Sage integration, you can send invoices
-				directly to your account. In nomos one, you will see
-				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://www.sage.co.uk/~/media/markets/uk/images/corporate/sage-green-logo.jpg',
-			websiteUrl: 'http://www.sage.com/company/solutions',
-			connectionUrl: '',
-			returnUrl: '',
-			categories: ['accounting', 'invoicing']
-		};
 		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
 
-		if (currentOrg.accessTokens.myob &&
-			currentOrg.accessTokens.myob.connectedAt) {
+		if (currentOrg.accessTokens.sage &&
+			currentOrg.accessTokens.sage.connectedAt) {
 			connected = true;
 		}
 
@@ -178,3 +155,27 @@ confidence to achieve their business ambitions.`,
 		}
 	}
 }
+
+const defaultConnection = {
+	id: 1,
+	connectionDetail: null,
+	provider: 'sage',
+	title: 'Sage',
+	subtitle: 'Online accounting helps simplify success',
+	shortDescription: `We give businesses around the world the information, insight and tools
+	they need to succeed today.`,
+	longDescription: `We provide small and medium
+	sized organisations with a range of easy-to-use business management software and services -
+	from accounting and payroll, to enterprise resource planning, customer relationship
+	management and payments. Our customers receive continuous advice and support through our
+	global network of local experts to help them solve their business problems, giving them the
+	confidence to achieve their business ambitions.`,
+	whatYouCanDo: `Using the Sage integration, you can send invoices
+		directly to your account. In nomos one, you will see
+		the status of invoices for quick and easy monitoring.`,
+	logoUrl: 'https://www.sage.co.uk/~/media/markets/uk/images/corporate/sage-green-logo.jpg',
+	websiteUrl: 'http://www.sage.com/company/solutions',
+	connectionUrl: '',
+	returnUrl: '',
+	categories: ['accounting', 'invoicing']
+};

@@ -37,40 +37,11 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
-		const defaultConnection = {
-			id: 1,
-			connectionDetail: null,
-			provider: 'qb',
-			title: 'QuickBooks',
-			subtitle: 'Easy Accounting Software',
-			shortDescription: 'Built for your small business. Approved by accountants.',
-			longDescription: `Intuit QuickBooks Online® is an easy-to-use, feature-rich online
-			version of America\’s most
-popular accounting software for small businesses. It helps small businesses save time
-organizing their financial data in one place – anytime, anywhere – with no accounting
-knowledge necessary. Users can access their data on any internet-connected PC or Mac
-computer via popular web browsers without having to install software. QuickBooks Mobile
-is a free companion app that makes QuickBooks Online data available on Apple and
-Android mobile devices. Small businesses can choose from three version options based on
-their businesses needs
-– QuickBooks Online Simple Start, QuickBooks Online Essentials and QuickBooks Online
-Plus. The service offers small business owners additional seats and permission controls to
-give multiple users access to the account for greater efficiency and to enable real-time
-collaboration with their accountants.`,
-			whatYouCanDo: `Using the QuickBooks integration, you can send invoices
-				directly to your account. In nomos one, you will see
-				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://quickbooks-au-s3.intuitstatic.com/showroom_cms/image/content/dam/intuit/quickbooks/i18n/en/Australia/homepage/logo-qbo.png',
-			websiteUrl: 'https://quickbooks.intuit.com/',
-			connectionUrl: '',
-			returnUrl: '',
-			categories: ['accounting', 'invoicing']
-		};
 		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
 
-		if (currentOrg.accessTokens.myob &&
-			currentOrg.accessTokens.myob.connectedAt) {
+		if (currentOrg.accessTokens.quickbooks &&
+			currentOrg.accessTokens.quickbooks.connectedAt) {
 			connected = true;
 		}
 
@@ -186,3 +157,33 @@ collaboration with their accountants.`,
 		}
 	}
 }
+
+const defaultConnection = {
+	id: 1,
+	connectionDetail: null,
+	provider: 'qb',
+	title: 'QuickBooks',
+	subtitle: 'Easy Accounting Software',
+	shortDescription: 'Built for your small business. Approved by accountants.',
+	longDescription: `Intuit QuickBooks Online® is an easy-to-use, feature-rich online
+	version of America\’s most
+	popular accounting software for small businesses. It helps small businesses save time
+	organizing their financial data in one place – anytime, anywhere – with no accounting
+	knowledge necessary. Users can access their data on any internet-connected PC or Mac
+	computer via popular web browsers without having to install software. QuickBooks Mobile
+	is a free companion app that makes QuickBooks Online data available on Apple and
+	Android mobile devices. Small businesses can choose from three version options based on
+	their businesses needs
+	– QuickBooks Online Simple Start, QuickBooks Online Essentials and QuickBooks Online
+	Plus. The service offers small business owners additional seats and permission controls to
+	give multiple users access to the account for greater efficiency and to enable real-time
+	collaboration with their accountants.`,
+	whatYouCanDo: `Using the QuickBooks integration, you can send invoices
+		directly to your account. In nomos one, you will see
+		the status of invoices for quick and easy monitoring.`,
+	logoUrl: 'https://quickbooks-au-s3.intuitstatic.com/showroom_cms/image/content/dam/intuit/quickbooks/i18n/en/Australia/homepage/logo-qbo.png',
+	websiteUrl: 'https://quickbooks.intuit.com/',
+	connectionUrl: '',
+	returnUrl: '',
+	categories: ['accounting', 'invoicing']
+};

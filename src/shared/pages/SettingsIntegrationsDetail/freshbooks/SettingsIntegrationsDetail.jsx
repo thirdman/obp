@@ -37,37 +37,11 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
-		const defaultConnection = {
-			id: 1,
-			connectionDetail: null,
-			provider: 'fb',
-			title: 'FreshBooks',
-			subtitle: 'Small Business Accounting Software That Makes Billing Painless',
-			shortDescription: `The all-new FreshBooks is accounting software that makes running your
-				small business easy, fast and secure. Spend less time on accounting and more time doing
-				the work you love.`,
-			longDescription: `FreshBooks is simple and intuitive, so you’ll spend less time on
-				paperwork and wow your clients with how professional you look.
-			
-			Automate time consuming tasks like organizing expenses, tracking your time, and
-			following up with clients with just a few clicks.
-			
-			FreshBooks lives in the cloud so you can securely access it from your desktop,
-			phone and tablet wherever you are.`,
-			whatYouCanDo: `Using the FreshBooks integration, you can send invoices
-				directly to your account. In nomos one, you will see
-				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/FreshBooks_Cloud_Accounting_Logo.svg/203px-FreshBooks_Cloud_Accounting_Logo.svg.png',
-			websiteUrl: 'https://www.freshbooks.com',
-			connectionUrl: '',
-			returnUrl: '',
-			categories: ['accounting', 'invoicing']
-		};
 		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
 
-		if (currentOrg.accessTokens.myob &&
-			currentOrg.accessTokens.myob.connectedAt) {
+		if (currentOrg.accessTokens.freshbooks &&
+			currentOrg.accessTokens.freshbooks.connectedAt) {
 			connected = true;
 		}
 
@@ -183,3 +157,30 @@ export default class SettingsIntegrationsDetail extends Component {
 		}
 	}
 }
+
+const defaultConnection = {
+	id: 1,
+	connectionDetail: null,
+	provider: 'fb',
+	title: 'FreshBooks',
+	subtitle: 'Small Business Accounting Software That Makes Billing Painless',
+	shortDescription: `The all-new FreshBooks is accounting software that makes running your
+		small business easy, fast and secure. Spend less time on accounting and more time doing
+		the work you love.`,
+	longDescription: `FreshBooks is simple and intuitive, so you’ll spend less time on
+		paperwork and wow your clients with how professional you look.
+	
+	Automate time consuming tasks like organizing expenses, tracking your time, and
+	following up with clients with just a few clicks.
+	
+	FreshBooks lives in the cloud so you can securely access it from your desktop,
+	phone and tablet wherever you are.`,
+	whatYouCanDo: `Using the FreshBooks integration, you can send invoices
+		directly to your account. In nomos one, you will see
+		the status of invoices for quick and easy monitoring.`,
+	logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/FreshBooks_Cloud_Accounting_Logo.svg/203px-FreshBooks_Cloud_Accounting_Logo.svg.png',
+	websiteUrl: 'https://www.freshbooks.com',
+	connectionUrl: '',
+	returnUrl: '',
+	categories: ['accounting', 'invoicing']
+};

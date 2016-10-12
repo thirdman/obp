@@ -37,28 +37,6 @@ export default class SettingsIntegrationsDetail extends Component {
 	render() {
 		const { currentOrg = null } = this.context.store.app;
 		const { section } = this.state;
-		const defaultConnection = {
-			id: 1,
-			connectionDetail: null,
-			provider: 'xero',
-			title: 'Xero',
-			subtitle: 'Beautiful accounting software',
-			shortDescription: `Beautiful cloud-based accounting software
-				that connects people with the right numbers anytime,
-				anywhere, on any device.`,
-			longDescription: `Improve cashflow and get paid quickly
-				and easily when you send online invoices.
-				You\'ll have a better connection with your customers
-				– and know when they\'ve opened your invoice.`,
-			whatYouCanDo: `Using Xero integration, you can send invoices
-				directly to your xero account. In nomos one, you will see
-				the status of invoices for quick and easy monitoring.`,
-			logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png',
-			websiteUrl: 'https://www.xero.com',
-			connectionUrl: '',
-			returnUrl: '',
-			categories: ['accounting', 'invoicing']
-		};
 		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
 
@@ -179,3 +157,26 @@ export default class SettingsIntegrationsDetail extends Component {
 		}
 	}
 }
+
+const defaultConnection = {
+	id: 1,
+	connectionDetail: null,
+	provider: 'xero',
+	title: 'Xero',
+	subtitle: 'Beautiful accounting software',
+	shortDescription: `Beautiful cloud-based accounting software
+		that connects people with the right numbers anytime,
+		anywhere, on any device.`,
+	longDescription: `Improve cashflow and get paid quickly
+		and easily when you send online invoices.
+		You\'ll have a better connection with your customers
+		– and know when they\'ve opened your invoice.`,
+	whatYouCanDo: `Using Xero integration, you can send invoices
+		directly to your xero account. In nomos one, you will see
+		the status of invoices for quick and easy monitoring.`,
+	logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Xero-logo-hires-RGB.png',
+	websiteUrl: 'https://www.xero.com',
+	connectionUrl: '',
+	returnUrl: '',
+	categories: ['accounting', 'invoicing']
+};
