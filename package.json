@@ -153,6 +153,7 @@
     "react": "^15.3.1",
     "react-classset": "0.0.2",
     "react-count-to": "^0.4.2",
+    "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.3.1",
     "react-helmet": "^3.1.0",
     "react-router": "^2.7.0",
