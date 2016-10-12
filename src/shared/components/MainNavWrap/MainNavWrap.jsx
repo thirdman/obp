@@ -57,12 +57,11 @@ export default class MainNavWrap extends Component {
 					}>
 					<span className={styles.figure}>
 						<Avatar
-							defaultIconColor="blue"
 							type="org"
 							size="small"
 							title={org.attributes.name}
 							base64={org.attributes.firmLogo}
-							defaultIconColor={'blue'}
+							defaultIconColor={'grey'}
 						/>
 					</span>
 					<span className={styles.body}>
@@ -70,7 +69,7 @@ export default class MainNavWrap extends Component {
 							{org.attributes.name}
 							{currentOrg.id === org.id ?
 								<div className={styles.iconWrap}>
-									<Icon icon="chevron-right" color="lightGrey" size={12} color="lightGrey" />
+									<Icon icon="chevron-right" color="blue" size={12} />
 								</div>
 								: null
 							}
