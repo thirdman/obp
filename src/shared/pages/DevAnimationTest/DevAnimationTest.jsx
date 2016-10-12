@@ -26,6 +26,7 @@ export default class DevAnimationTest extends Component {
 
 	render() {
 		// const { location } = this.props;
+/*
 		let defaultStyle = {
 			opacity: 0.7
 		};
@@ -35,6 +36,7 @@ export default class DevAnimationTest extends Component {
 		let willLeaveStyle = {
 			opacity: 0.0
 		};
+*/
 		return (
 			<Overview>
 				<Header key={'layoutHeader'} title="Dev: Animation" />
@@ -55,12 +57,14 @@ export default class DevAnimationTest extends Component {
 					<Button content={'toggle visibility'} onClickProps={this.doVisible} />
 					<HorizontalRule />
 					<Animate
-						toggle={this.toggle}
-						doUnmount={this.state.renderChild}
 						isVisible={this.state.isVisible}
-						willEnterStyleProps={willEnterStyle}
-						willLeaveStyleProps={willLeaveStyle}
-						deafultStyleProps={defaultStyle}
+						toggle={this.toggle}
+						enterX={400}
+						leaveY={400}
+						enterScale={0.8}
+						// willEnterStyleProps={willEnterStyle}
+						// willLeaveStyleProps={willLeaveStyle}
+						// defaultStyleProps={defaultStyle}
 						/>
 				</div>
 				<div key={'layoutSecondary'}>

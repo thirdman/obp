@@ -8,7 +8,7 @@ a utility motion component
 #### props
 |Property								|	Type			|	Default		|	Description
 :-----------------------|:----------|:----------|:--------------------------------
-title										|	`string`	|	-					|	title text
+type										|	`string`	|	-					|	type of aniamtion oneOf('appear', 'slide')
 
 #### classNameProps
 |classNameProps		|	Description

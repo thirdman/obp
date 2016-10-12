@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { Row } from 'components';
+import { Animate, Row } from 'components';
 
 const styles = require('./Overview.scss');
 const globalStyles = require('../../pages/App/App.scss');
 
 export default class Overview extends Component {
+	state = {
+		showLayout: false
+	}
+	componentDidMount() {
+		this.toggleVisibility();
+	}
 	mapChildren(children) {
 		let result = {};
 		children.map((child) => {
@@ -15,10 +21,20 @@ export default class Overview extends Component {
 		return result;
 	}
 
+	toggleVisibility = () => {
+			this.setState({showLayout: true});
+	}
+
 	render() {
 		const mappedChildren = this.mapChildren(this.props.children);
 
 		return (
+		<Animate
+			isVisible={this.state.showLayout}
+			enterX={-80}
+			enterY={0}
+			// enterScale={0.9}
+		>
 			<div
 				className={cx(
 					styles.Layout,
@@ -63,6 +79,7 @@ export default class Overview extends Component {
 						</div>
 					</Row>}
 			</div>
+			</Animate>
 		);
 	}
 }
