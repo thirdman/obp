@@ -2,6 +2,12 @@
 
 .Layout{
 	padding: 16px 24px;
+	@include breakpoint('xlarge'){
+		padding: 16px 48px;
+	}
+	@include breakpoint('huge'){
+		padding: 16px 64px;
+	}
 	// STRUCTURAL DIVS
 	.header{
 		width: 100%;
