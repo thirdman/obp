@@ -65,7 +65,15 @@
 		.loadingMessage{
 			color: $nomosRed;
 		}
-	}	
+	}
+	&.hasBorder{
+		border: 1px solid $nomosLine;
+		padding-left: 8px;
+	}
+	&.hasBackground{
+		background: #f9f9f9;
+		padding: 8px;
+	}
 	//MISC PROPS
 	&.normal{
 		text-align: left;

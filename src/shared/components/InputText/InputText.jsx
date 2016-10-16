@@ -63,6 +63,7 @@ export default class InputText extends Component {
 		let toggleClasses;
 		let iconClasses = [];
 		let iconName;
+		let tempStyle;
 
 		if (hasError) {
 			iconClasses = ['alert', 'red'];
@@ -83,6 +84,10 @@ export default class InputText extends Component {
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 
+		tempStyle = {
+			backgroundColor: (this.props.backgroundColor || '')
+		};
+
 		return (
 			<div
 			className={cx(styles.InputText,
@@ -99,6 +104,7 @@ export default class InputText extends Component {
 					defaultValue={value}
 					onChange={this.doContentChange}
 					onKeyDown={onKeyDownProps}
+					style={tempStyle}
 					/>
 				<label htmlFor={this.state.theId}>{placeholder}</label>
 				{isRequired && hasRequiredIcon ?
@@ -122,6 +128,7 @@ export default class InputText extends Component {
 		placeholder: React.PropTypes.string,
 		placeholderBelow: React.PropTypes.bool,
 		hasValidation: React.PropTypes.bool,
+		backgroundColor: React.PropTypes.string,
 		isRequired: React.PropTypes.bool,
 		hasRequiredIcon: React.PropTypes.bool,
 		hasError: React.PropTypes.bool,

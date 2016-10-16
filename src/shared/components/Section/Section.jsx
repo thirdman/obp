@@ -14,6 +14,8 @@ export default class Section extends Component {
 		subtitle: React.PropTypes.string,
 		description: React.PropTypes.string,
 		hasDivider: React.PropTypes.bool,
+		hasBackground: React.PropTypes.bool,
+		hasBorder: React.PropTypes.bool,
 		isLoading: React.PropTypes.bool,
 		isError: React.PropTypes.bool,
 		loadingMessage: React.PropTypes.string,
@@ -32,6 +34,8 @@ export default class Section extends Component {
 			subtitle,
 			description,
 			hasDivider,
+			hasBackground,
+			hasBorder,
 			isLoading,
 			loadingMessage,
 			isError,
@@ -46,7 +50,9 @@ export default class Section extends Component {
 		toggleClasses = classSet({
 			[styles.isLoading]: isLoading,
 			[styles.isError]: isError,
-			[styles.hasDivider]: hasDivider
+			[styles.hasDivider]: hasDivider,
+			[styles.hasBackground]: hasBackground,
+			[styles.hasBorder]: hasBorder
 		});
 
 		classes = classNameProps.slice();

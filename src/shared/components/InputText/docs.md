@@ -11,6 +11,7 @@ type						|	`string`		|	'text'		|	oneOf ('text', 'password')
 label						|	`string`		|	'-'				|	label above the Input
 value						|	`string`		|	-					|	text inside the input. 
 placeholder			|	`string`		|	-					|	helper text that displays before there is any value 
+backgroundColor	|	`string`		|	-					|	forces a background color
 hasValidation		|	`bool`			|	-					|	if it has validation
 isRequired			|	`bool`			|	false			|	if it is required
 hasRequiredIcon	|	`bool`			|	true			|	allows you to turn off the 'required' icon (eg in login page, where it is assumed)

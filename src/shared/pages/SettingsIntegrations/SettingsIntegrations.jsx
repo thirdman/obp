@@ -35,7 +35,7 @@ export default class SettingsIntegrations extends Component {
 		const { currentOrg = null } = app;
 		const org = auth.getOrg(currentOrg.id);
 		let orgName = org && org.attributes.name;
-		let apiList = ['xero', 'myob', 'quickbooks', 'freshbooks', 'sage'];
+		let apiList = ['Xero', 'MYOB', 'QuickBooks', 'Freshbooks', 'Sage'];
 		let connected = {};
 		apiList.map((api) => { connected[api] = this.isConnected(api); });
 
@@ -50,12 +50,12 @@ export default class SettingsIntegrations extends Component {
 						return (
 							<Link
 								key={`api-${index}`}
-								to={`/${currentOrg.id}/integrations/${api}`}>
+								to={`/${currentOrg.id}/integrations/${api.toLowerCase()}`}>
 								<ObjectInfo
 									title={`${api} ${connected[api] ? ' - connected' : ''}`}
 									type="custom"
 									subType="Financial Software"
-									imageUrl={logos[api]}
+									imageUrl={logos[api.toLowerCase()]}
 									buttons={[
 										{	text: 'View',
 											helpText: 'View this Integration',

@@ -16,6 +16,8 @@ loadingMessage	|	`string`	|	-					|	text to appear while loading. If has content
 isLoading				|	`bool`		|	false			|	shows the loading icon
 isError					|	`bool`		|	false			|	error styling. Use loadingMessage to display text
 hasDivider			|	`bool`		|	false			|	show a dividing line abov this component
+hasBackground		|	`bool`		|	false			|	show a grey background
+hasborder				|	`bool`		|	false			|	show a border
 styleProps			|	`object` 	| - 				| Object of styles to use
 classNameProps	|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
 children				|	`oneOfType` | - 			| (required) this component is designed to wrap around child content
