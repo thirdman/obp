@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { autobind } from 'core-decorators';
 import { ApiClient as client } from 'helpers';
 import { Link } from 'react-router';
-import { Button, Message, Section } from 'components';
+import { Button, ContentItem, InputSelect, InputText, Message, Row, Section } from 'components';
 
 import { connect } from 'state';
 
@@ -119,10 +119,47 @@ export default class ConnectionSection extends Component {
 			return (
 				<div>
 					<h3>{'Connection Information'}</h3>
-					<div>{'Here goes the connection section'}</div>
 					<Button
 						content={connecting ? 'Loading ... ' : 'Connect to MYOB'}
 						onClickProps={this.onClick} />
+					<Section
+						title="Select your Company File"
+						hasBackground
+						hasBorder
+						description="The company file represents the MYOB company that nomos one will interact with. You will need to authorise using your admin username and password"
+					>
+						<ContentItem
+							title="company file"
+						>
+							<InputSelect
+								color="white"
+								classNameProps={['wide']}
+								options={[
+									{title: 'The one', value: 'one', helpContent: 'Selects the value of one'},
+									{title: 'Dos', value: 'two', helpContent: 'In Spanish the word for two is \'dos'},
+									{title: 'Toru', value: 'three', helpContent: 'Toru is three'}
+								]}
+							/>
+						</ContentItem>
+						<ContentItem title="Username" hasPadding={false} >
+							<InputText
+								type="text"
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+							/>
+						</ContentItem>
+						<ContentItem title="Password" hasPadding={false}>
+							<InputText
+								type="password"
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+							/>
+						</ContentItem>
+						<Row>
+							<Button classNameProps={['highlighted']} content="connect" />
+							<Button classNameProps={['grey']} content="cancel" />
+						</Row>
+				</Section>
 				</div>
 			);
 		} else {
