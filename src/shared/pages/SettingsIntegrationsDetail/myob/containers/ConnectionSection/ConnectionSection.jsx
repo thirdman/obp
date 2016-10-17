@@ -19,17 +19,11 @@ export default class ConnectionSection extends Component {
 		const { app } = this.context.store;
 		const { currentOrg = null } = app;
 		// https://gist.github.com/jlong/2428561
-		let oauthToken = this.getQueryVar('oauth_token');
-		let oauthVerifier = this.getQueryVar('oauth_verifier');
-		let org = this.getQueryVar('org');
-
-		if (doneAuth && oauthToken && oauthVerifier) {
-			client.post(`/organisations/${currentOrg.id}/myob/doneAuth`, {
-				data: {
-					oauth_token: oauthToken,
-					oauth_verifier: oauthVerifier,
-					org
-				}
+		let code = this.getQueryVar('code');
+		console.log(code);
+		if (doneAuth && code) {
+			client.post(`/organisations/${currentOrg.id}/myob/doneAuthMyob`, {
+				data: { code }
 			})
 			.then(() => {
 				app.fetchOrgToken();
@@ -61,7 +55,7 @@ export default class ConnectionSection extends Component {
 	onClick() {
 		const { currentOrg = null } = this.context.store.app;
 		this.connecting(true);
-		client.post(`/organisations/${currentOrg.id}/myob/generateToken`)
+		client.post(`/organisations/${currentOrg.id}/myob/generateTokenMyob`)
 		.then((res) => {
 			let link = res && res.data && res.data[0].url;
 			window.location = link;

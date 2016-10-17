@@ -98,14 +98,14 @@ export default class ConnectionSection extends Component {
 							<li>
 								<p>Configure your Entities</p>
 									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
-								<Link to={`/${currentOrg.id}/integrations/qb/match-entity`}>
+								<Link to={`/${currentOrg.id}/integrations/quickbooks/match-entity`}>
 									<Button content="View Entities" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 							<li>
 									<p>Check your Integration Settings</p>
 									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
-								<Link to={`/${currentOrg.id}/integrations/qb/invoice-settings`}>
+								<Link to={`/${currentOrg.id}/integrations/quickbooks/invoice-settings`}>
 									<Button content="View Settings" classNameProps={['highlighted']} />
 								</Link>
 							</li>
