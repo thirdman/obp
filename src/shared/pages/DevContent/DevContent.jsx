@@ -68,7 +68,9 @@ export default class DevContent extends Component {
 							type={'hero'}
 							hasData
 							optionData={buttonGroupData}
-							onClickProps={this.switchSection} />
+							onClickProps={this.switchSection}
+							classNameProps={['buttonCount4']}
+							/>
 					</Section>
 				</div>
 			</View>
