@@ -1,6 +1,7 @@
 import { Component } from 'react';
+// import { browserHistory } from 'react-router';
 import { View } from 'layouts';
-import { ButtonGroup, Section, SubNavWrap } from 'components';
+import { Button, ButtonGroup, Section, SubNavWrap } from 'components';
 import { Header } from 'containers';
 
 const styles = require('./DevContent.scss');
@@ -13,7 +14,7 @@ const buttonGroupData = [{
 	descriptionTitle: 'Usage',
 	description: 'Primary high level objects, such as Agreements and property. Contains Pages.', // eslint-disable-line max-len
 	classes: ['hero'],
-	onClickReturn: 'match'
+	onClickReturn: 'object'
 }, {
 	name: 'page',
 	title: 'Page',
@@ -22,29 +23,33 @@ const buttonGroupData = [{
 	descriptionTitle: 'Usage',
 	description: 'Sub navigation tabs within an object. Contains sections and Items.',
 	classes: ['hero'],
-	onClickReturn: 'import'
+	onClickReturn: 'page'
 }, {
-	name: 'Section',
-	title: 'divisions within a page',
-	subtitle: '(from Nomos One to MYOB)',
+	name: 'section',
+	title: 'Sections',
+	subtitle: 'divisions within a page',
 	showButton: 'true',
 	descriptionTitle: 'Usage',
 	description: 'Logical sections of a page of data. Contains Items',
 	classes: ['hero'],
-	onClickReturn: 'export'
+	onClickReturn: 'section'
 }, {
-	name: 'Item',
-	title: 'single piece of data',
-	subtitle: '(from Nomos One to MYOB)',
+	name: 'item',
+	title: 'Items',
+	subtitle: 'single piece of data',
 	showButton: 'true',
 	descriptionTitle: 'Usage',
 	description: 'InputText, InputSelect, InputDate etc',
 	classes: ['hero'],
-	onClickReturn: 'export'
+	onClickReturn: 'item'
 }];
 
 
 export default class DevContent extends Component {
+
+	state = {
+		activeSection: null
+	}
 
 	render() {
 		// const { location } = this.props;
@@ -62,8 +67,70 @@ export default class DevContent extends Component {
 					]}
 				/>
 				<div key={'layoutMain'} className={styles.DevContent}>
-					<h2>Content Creation</h2>
-					<Section hasDivider title={'Manage Entities & Contacts'} >
+					<h2>Content Creation
+						{this.state.activeSection ? (': ' + this.state.activeSection) : null }
+					</h2>
+					{ this.getActiveContentSection() }
+					</div>
+			</View>
+		);
+	}
+
+	getActiveContentSection() {
+		const { activeSection } = this.state;
+		console.log(activeSection);
+		switch (activeSection) {
+			case 'object':
+				return (
+					<Section title={'Objects'} hasPadding >
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12}
+						/>
+					</Section>
+				);
+			case 'page':
+				return (
+					<Section title={'Pages'} hasPadding >
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12}
+						/>
+					</Section>
+				);
+			case 'section':
+				return (
+					<Section title={'Sections'} hasPadding >
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12}
+						/>
+					</Section>
+				);
+			case 'item':
+				return (
+					<Section title={'Items'} hasPadding >
+						<Button
+							content="Back"
+							onClickProps={this.switchSection(null)}
+							classNameProps={['highlighted']}
+							icon="chevron-left"
+							iconSize={12}
+						/>
+					</Section>
+				);
+			default:
+				return (
+					<Section hasPadding >
 						<ButtonGroup
 							type={'hero'}
 							hasData
@@ -72,8 +139,23 @@ export default class DevContent extends Component {
 							classNameProps={['buttonCount4']}
 							/>
 					</Section>
-				</div>
-			</View>
-		);
+				);
+		}
 	}
+
+	switchSection = (currentSection) => {
+		return () => {
+			this.setState({ activeSection: currentSection });
+		};
+	}
+
+/*
+	onNavigate = (link) => {
+		console.log(this);
+		console.log(link);
+		return () => {
+			browserHistory.push('/dev/content/' + link);
+		};
+	}
+*/
 }
