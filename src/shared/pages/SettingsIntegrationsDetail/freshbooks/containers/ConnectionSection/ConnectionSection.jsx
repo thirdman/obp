@@ -24,7 +24,7 @@ export default class ConnectionSection extends Component {
 		let org = this.getQueryVar('org');
 
 		if (doneAuth && oauthToken && oauthVerifier) {
-			client.post(`/organisations/${currentOrg.id}/fb/doneAuth`, {
+			client.post(`/organisations/${currentOrg.id}/freshbooks/doneAuthFreshbooks`, {
 				data: {
 					oauth_token: oauthToken,
 					oauth_verifier: oauthVerifier,
@@ -61,7 +61,7 @@ export default class ConnectionSection extends Component {
 	onClick() {
 		const { currentOrg = null } = this.context.store.app;
 		this.connecting(true);
-		client.post(`/organisations/${currentOrg.id}/fb/generateToken`)
+		client.post(`/organisations/${currentOrg.id}/freshbooks/generateTokenFreshbooks`)
 		.then((res) => {
 			let link = res && res.data && res.data[0].url;
 			window.location = link;
@@ -88,7 +88,7 @@ export default class ConnectionSection extends Component {
 		const { connecting } = this.state;
 		let orgName = org && org.attributes.name;
 
-		if (token && token.myob && token.myob.connectedAt) {
+		if (token && token.freshbooks && token.freshbooks.connectedAt) {
 			return (
 				<div>
 					<h3>{'Connection Information'}</h3>
@@ -98,14 +98,14 @@ export default class ConnectionSection extends Component {
 							<li>
 								<p>Configure your Entities</p>
 									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
-								<Link to={`/${currentOrg.id}/integrations/fb/match-entity`}>
+								<Link to={`/${currentOrg.id}/integrations/freshbooks/match-entity`}>
 									<Button content="View Entities" classNameProps={['highlighted']} />
 								</Link>
 							</li>
 							<li>
 									<p>Check your Integration Settings</p>
 									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
-								<Link to={`/${currentOrg.id}/integrations/fb/invoice-settings`}>
+								<Link to={`/${currentOrg.id}/integrations/freshbooks/invoice-settings`}>
 									<Button content="View Settings" classNameProps={['highlighted']} />
 								</Link>
 							</li>

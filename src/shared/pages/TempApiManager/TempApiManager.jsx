@@ -19,7 +19,7 @@ export default class TempApiManager extends Component {
 						<li>
 							<p>To get started click on an Organisation from the list</p>
 							<img
-								src={imgGettingStarted1}
+								src={imgGettingStarted2}
 								alt={'Getting started screenshot 1'}
 								style={{border: '1px solid #ddd', borderRadius: '3px'}}
 							/>
@@ -27,7 +27,7 @@ export default class TempApiManager extends Component {
 						<li>
 							<p>Then click on the integration you would like to use</p>
 							<img
-								src={imgGettingStarted2}
+								src={imgGettingStarted1}
 								alt={'Getting started screenshot 2'}
 								style={{border: '1px solid #ddd', borderRadius: '3px'}}
 							/>

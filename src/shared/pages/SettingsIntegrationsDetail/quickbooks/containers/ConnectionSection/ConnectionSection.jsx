@@ -21,14 +21,14 @@ export default class ConnectionSection extends Component {
 		// https://gist.github.com/jlong/2428561
 		let oauthToken = this.getQueryVar('oauth_token');
 		let oauthVerifier = this.getQueryVar('oauth_verifier');
-		let org = this.getQueryVar('org');
+		let realmId = this.getQueryVar('realmId');
 
 		if (doneAuth && oauthToken && oauthVerifier) {
-			client.post(`/organisations/${currentOrg.id}/qb/doneAuth`, {
+			client.post(`/organisations/${currentOrg.id}/quickbooks/doneAuthQuickbooks`, {
 				data: {
 					oauth_token: oauthToken,
 					oauth_verifier: oauthVerifier,
-					org
+					realmId
 				}
 			})
 			.then(() => {
@@ -61,7 +61,7 @@ export default class ConnectionSection extends Component {
 	onClick() {
 		const { currentOrg = null } = this.context.store.app;
 		this.connecting(true);
-		client.post(`/organisations/${currentOrg.id}/qb/generateToken`)
+		client.post(`/organisations/${currentOrg.id}/quickbooks/generateTokenQuickbooks`)
 		.then((res) => {
 			let link = res && res.data && res.data[0].url;
 			window.location = link;
@@ -88,7 +88,7 @@ export default class ConnectionSection extends Component {
 		const { connecting } = this.state;
 		let orgName = org && org.attributes.name;
 
-		if (token && token.myob && token.myob.connectedAt) {
+		if (token && token.quickbooks && token.quickbooks.connectedAt) {
 			return (
 				<div>
 					<h3>{'Connection Section'}</h3>
