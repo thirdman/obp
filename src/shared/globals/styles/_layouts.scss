@@ -122,6 +122,36 @@
 			lost-column: 12/12;
 		}
 	}
+	.content.hasSecondary{
+		lost-column: 9/12;
+	}
+	@media screen and (max-width: 1700px){
+		.content.hasSecondary{
+			lost-column: 10/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.content.hasSecondary{
+			lost-column: 12/12;
+		}
+	}
+	
+	.content.noSecondary{
+		lost-column: 12/12;
+	}
+	@media screen and (max-width: 1700px){
+		.content.noSecondary{
+			lost-column: 12/12;
+		}
+	}
+	@media screen and (max-width: 1500px){
+		.content.noSecondary{
+			lost-column: 12/12;
+		}
+	}
+
+		
+	
 	// SECONDARY
 	.secondary{
 		lost-column: 3/12;

@@ -17,7 +17,6 @@ export default class View extends Component {
 
 	render() {
 		const mappedChildren = this.mapChildren(this.props.children);
-
 		return (
 			<div
 				className={cx(
@@ -31,7 +30,11 @@ export default class View extends Component {
 						</div>
 					</Row>}
 				<Row>
-					<div className={styles.content}>
+					<div
+						className={cx(
+							styles.content,
+							(mappedChildren.layoutSecondary ? styles.hasSecondary : styles.noSecondary)
+							)}>
 						{mappedChildren.layoutHero &&
 							<div className={styles.hero} id="layoutHero">
 								{mappedChildren.layoutHero || null}

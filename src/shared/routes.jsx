@@ -7,6 +7,7 @@ import {
 	AgreementEdit,
 	AgreementsSummary,
 	// ComponentDocs,  // refactor out when cofirmed the new docs work
+	DevContent,
 	DevHome,
 	DevComponentDocs,
 	DevIcons,
@@ -71,10 +72,11 @@ export default (store) => {
 			<Route onEnter={requireLogin}>
 				<IndexRoute component={TempApiManager} />
 				<Route path="docs" component={DevComponentDocs} />
-				<Route path="dev" component={DevHome} />
 				<Route path="dev/home" component={DevHome} />
 				<Route path="dev/docs" component={DevComponentDocs} />
 				<Route path="dev/icons" component={DevIcons} />
+				<Route path="dev/content" component={DevContent} />
+				<Route path="dev" component={DevHome} />
 				<Route path="create" component={Create} />
 				<Route path="edit" component={Edit} />
 				<Route path="overview" component={Overview} />

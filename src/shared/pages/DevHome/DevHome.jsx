@@ -28,7 +28,8 @@ export default class DevHome extends Component {
 					listData={[
 						{label: 'Dev Home', href: '/dev'},
 						{label: 'Documentation', href: '/dev/docs'},
-						{label: 'Icons', href: '/dev/icons'}
+						{label: 'Icons', href: '/dev/icons'},
+						{label: 'Content Creation', link: '/dev/content'}
 					]}
 				/>
 				<div key={'layoutMain'} className={styles.DevHome}>
