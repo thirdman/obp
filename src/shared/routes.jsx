@@ -12,6 +12,7 @@ import {
 	DevIcons,
 	Login,
 	NotFound,
+	Redirect,
 	SettingsIntegrations,
 	XeroDetail,
 	MyobDetail,
@@ -69,7 +70,6 @@ export default (store) => {
 			{ /* Routes - do require logged in*/ }
 			<Route onEnter={requireLogin}>
 				<IndexRoute component={TempApiManager} />
-				<Route path=":orgId" component={SettingsIntegrations} />
 				<Route path="docs" component={DevComponentDocs} />
 				<Route path="dev" component={DevHome} />
 				<Route path="dev/home" component={DevHome} />
@@ -81,6 +81,8 @@ export default (store) => {
 				<Route path="report" component={Report} />
 				<Route path="summary" component={Summary} />
 				<Route path="view" component={View} />
+				<Route path="redirect" component={Redirect} />
+				<Route path=":orgId" component={SettingsIntegrations} />
 				<Route path=":orgId/agreements" component={AgreementsSummary} />
 				<Route path=":orgId/agreements/:agreementId" component={AgreementOverview} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName" component={AgreementView} />

@@ -37,7 +37,7 @@ export default class SettingsIntegrations extends Component {
 		let orgName = org && org.attributes.name;
 		let apiList = ['Xero', 'MYOB', 'QuickBooks', 'Freshbooks', 'Sage'];
 		let connected = {};
-		apiList.map((api) => { connected[api] = this.isConnected(api); });
+		apiList.map((api) => { connected[api] = this.isConnected(api.toLowerCase()); });
 
 		return (
 			<Summary>
@@ -87,7 +87,6 @@ export default class SettingsIntegrations extends Component {
 
 	isConnected(api) {
 		const { currentOrg = null } = this.context.store.app;
-
 		return currentOrg.accessTokens[api] &&
 			currentOrg.accessTokens[api].connectedAt;
 	}

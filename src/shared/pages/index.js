@@ -10,6 +10,7 @@ export DevComponentDocs from './DevComponentDocs/DevComponentDocs';
 export DevIcons from './DevIcons/DevIcons';
 export Login from './Login/Login';
 export NotFound from './NotFound/NotFound';
+export Redirect from './Redirect/Redirect';
 export SettingsIntegrations from './SettingsIntegrations/SettingsIntegrations';
 export XeroDetail from './SettingsIntegrationsDetail/xero/SettingsIntegrationsDetail';
 export MyobDetail from './SettingsIntegrationsDetail/myob/SettingsIntegrationsDetail';
