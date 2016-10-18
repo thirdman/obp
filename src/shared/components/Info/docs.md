@@ -31,14 +31,14 @@ classNameProps	|	`array`		| ['normal']	|	array of classes to apply to the compon
 {
 	"component": "Info",
 	"props": {
-		"value": "Gareth is cool",
+		"content": "Gareth is cool",
 		"classNameProps": ["normal"]
 	}
 },
 {
 	"component": "Info",
 	"props": {
-		"value": "Gareth is very cool",
+		"content": "Gareth is very cool",
 		"classNameProps": ["highlighted"]
 	}
 }

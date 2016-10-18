@@ -1,5 +1,46 @@
 @import "../../globals/styles/_global.scss";
 
 .DevContent{
+	.item{
+		// background: #f9f9f9;
+		padding: 8px;
+		list-style-type: none;
+		border-bottom: 1px solid #ddd;
+		&.isSelected{
+			border-left: 4px solid $nomosBlue;
+			background: #f9f9f9;
+		}
+		&:hover{
+			cursor: pointer;
+			background: $nomosLightLightGrey;
+		}
+	}	
 	
+	.detail{
+		//border: 1px solid #ddd;
+		// padding: 0 16px 16px;
+		background: #fff;
+		border-radius: 3px;
+		box-shadow: 0 0 6px -2px rgba(0,0,0,.2);
+		.tag{
+	    border: 1px solid #ddd;
+	    padding: 2px 4px;
+	    margin-right: 4px;
+	    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+	    font-size: $font-size-small;
+		}
+		.sectionItem{
+			border-bottom: 1px dotted #ddd;
+		}
+		.preview{
+			padding: 32px;
+			background: #f3f3f3;
+		}
+		.code{
+			background: $nomosBlack;
+			color: #eee;
+			border-radius: 0 0 3px 3px;
+			padding: 24px;
+		}
+	}
 }
