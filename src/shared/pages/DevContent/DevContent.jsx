@@ -67,7 +67,7 @@ const objectData = [
 	createdByName: 'David Bromley',
 	createdDate: 1476759075104,
 	tags: ['Lease', 'New Zealand'],
-	sections: [
+	pages: [
 		{
 			title: 'Parties'
 		}, {
@@ -94,7 +94,7 @@ const objectData = [
 	provider: 'PCNZ',
 	createdDate: 1476759075104,
 	tags: ['PCNX', 'Lease', 'New Zealand'],
-	sections: [
+	pages: [
 		{
 			title: 'Parties',
 			templateName: 'Parties Selection'
@@ -124,7 +124,7 @@ const objectData = [
 	provider: 'Nomos',
 	createdDate: 1476753073104,
 	tags: ['Retail'],
-	sections: [
+	pages: [
 		{
 			title: 'Location',
 			templateName: 'default Location'
@@ -377,7 +377,7 @@ export default class DevContent extends Component {
 						</Row>
 						<HorizontalRule />
 						<Row>
-						<h4>Sections</h4>
+						<h4>pages</h4>
 							<Row>
 								<Column occupy={3}>
 									{<h4>Name</h4>}
@@ -390,7 +390,7 @@ export default class DevContent extends Component {
 								</Column>
 							</Row>
 							{
-								item.sections.map((section, index) => {
+								item.pages.map((section, index) => {
 									return (
 											<Row key={index}>
 												<Column occupy={3}>
@@ -409,10 +409,24 @@ export default class DevContent extends Component {
 						</Row>
 						<div className={styles.preview} style={{margin: '0 -8px'}}>
 							<ObjectInfo
-								title={'TITLE HERE'}
+								title={'{OBJECT KNOWNAS WILL APPEAR}'}
 								type={item.type.toLowerCase()}
 								subType={'lease'}
 							/>
+							<Section hasBackground backgroundColor="#eee">
+								<div className={styles.previewNav}>
+									<SubNavWrap
+									key={'layoutNav1'}
+									listData={[
+										{label: item.pages[0].title},
+										{label: item.pages[1].title},
+										{label: item.pages[2].title},
+										{label: item.pages[3].title},
+										{label: item.pages[4].title}
+									]}
+								/>
+								</div>
+							</Section>
 						</div>
 						<div className={styles.code} style={{margin: '0px -8px -24px'}}>
 							<pre>{ JSON.stringify(item, null, 2) }</pre>

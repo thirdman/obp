@@ -15,10 +15,10 @@
 			background: $nomosLightLightGrey;
 		}
 	}	
-	
 	.detail{
 		//border: 1px solid #ddd;
 		// padding: 0 16px 16px;
+		z-index: 4;
 		background: #fff;
 		border-radius: 3px;
 		box-shadow: 0 0 6px -2px rgba(0,0,0,.2);
@@ -35,6 +35,9 @@
 		.preview{
 			padding: 32px;
 			background: #f3f3f3;
+			.previewNav{
+				width: 20%;
+			}
 		}
 		.code{
 			background: $nomosBlack;
