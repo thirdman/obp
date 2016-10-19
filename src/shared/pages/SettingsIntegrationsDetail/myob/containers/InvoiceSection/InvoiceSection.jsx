@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
+import _ from 'lodash';
 import {
-	XeroHelper as xeroClient,
+	MyobHelper as myobClient,
 	ReactSafePromise as safePromise
 } from 'helpers';
 import {
+	Button,
 	ContentItem,
+	Info,
 	InputSelect,
-	InputSwitch,
+	InputText,
+	Row,
 	Section
 } from 'components';
 import { autobind } from 'core-decorators';
@@ -19,11 +23,18 @@ class InvoiceSection extends Component {
 		loaded: false,
 		loading: '',
 		error: false,
-		xeroCodes: []
+		companyFiles: [],
+		companyFilesOptions: [],
+		selectedFile: null,
+		cfCredentials: {
+			username: 'Administrator',
+			password: ''
+		},
+		showEdit: null
 	}
 
 	componentDidMount() {
-		xeroClient.appStore = this.context.store.app;
+		myobClient.appStore = this.context.store.app;
 		if (this.isConnected()) {
 			this.fetchData();
 		}
@@ -34,47 +45,92 @@ class InvoiceSection extends Component {
 		const {
 			loaded,
 			loading,
-			xeroCodes
+			companyFilesOptions = [],
+			selectedFile = '',
+			cfCredentials,
+			showEdit = !token.companyfile
 		} = this.state;
 
 		let token = currentOrg.accessTokens &&
-			currentOrg.accessTokens.xero || null;
+			currentOrg.accessTokens.myob || null;
 		return (
 			<div>
-				{loaded &&
-					<Section title={'Settings'}>
-						<ContentItem
-							type="ButtonSwitch"
-							classNameProps={['normal']}
-							title="Automatically send invoices to MYOB when created"
-							helpContent={`By default, nomos one will send your
-								invoices to connected applications.`} >
-								<InputSwitch
-									content={['Yes', 'No']}
-									onChange={this.toggleSync}
-									isSelected={
-										token &&
-										token.syncInvoice} />
+				<div>{ loading }</div>
+				{loaded && !token.companyfile || showEdit ?
+					<Section
+						hasBorder
+						hasBackground
+						title="Select your Company File"
+						description={`The company file represents the MYOB company
+							that nomos one will interact with. You will need to
+							authorise using your admin username and password`}>
+						<ContentItem title="company file">
+							<InputSelect
+								color="white"
+								classNameProps={['wide']}
+								onClickProps={this.changeCf}
+								options={companyFilesOptions}
+								content={
+									selectedFile || ''} />
 						</ContentItem>
-						<ContentItem
-							type="Select"
-							classNameProps={['normal']}
-							title="Default Accounting category"
-							hasDivider
-							helpContent={`The default category invoices will be
-								created in. You can change this individually in your
-								accounting app.`} >
-								<InputSelect
-									options={xeroCodes}
-									onClickProps={this.changeCode}
-									content={
-										token &&
-										token.accountToInvoice ||
-										''} />
+						<ContentItem title="Username" hasPadding={false} >
+							<InputText
+								type="text"
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+								value={cfCredentials.username}
+								onChangeProps={this.setCfUsername} />
 						</ContentItem>
+						<ContentItem title="Password" hasPadding={false}>
+							<InputText
+								type="password"
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+								value={cfCredentials.password}
+								onChangeProps={this.setCfPassword} />
+						</ContentItem>
+						<Row>
+							<Button
+								classNameProps={['highlighted']}
+								content="connect"
+								onClickProps={this.checkAndSaveCf} />
+						</Row>
+					</Section> : null
+				}
+				{token.companyfile && !showEdit &&
+					<Section
+						hasBorder
+						hasBackground
+						title="Selected Company File"
+						description={`The company file represents the MYOB company
+							that nomos one will interact with. ${token.companyfile.Name}
+							has been selected.`}>
+						<ContentItem title="company file" isDisabled>
+							<Info
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+								content={token.companyfile.Name} />
+						</ContentItem>
+						<ContentItem title="Country" hasPadding={false} isDisabled>
+							<Info
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+								content={token.companyfile.Country} />
+						</ContentItem>
+						<ContentItem title="Uri" hasPadding={false} isDisabled>
+							<Info
+								classNameProps={['normal']}
+								backgroundColor="#fff"
+								content={token.companyfile.Uri} />
+						</ContentItem>
+						<Row>
+							<Button
+								classNameProps={['grey']}
+								content="Change"
+								onClickProps={this.toggleEditCf} />
+						</Row>
 					</Section>
 				}
-				<div>{ loading }</div>
 			</div>
 		);
 	}
@@ -82,74 +138,125 @@ class InvoiceSection extends Component {
 	@autobind
 	fetchData() {
 		const { currentOrg = {} } = this.context.store.app;
-		this.loading('Getting MYOB accounting codes ....');
-		this.safePromise(xeroClient.request(
+		this.loading('Getting MYOB company files ....');
+		this.safePromise(myobClient.request(
 			'post',
-			`organisations/${currentOrg.id}/myob/accountCodes`,
-			currentOrg.accessTokens.xero,
+			`organisations/${currentOrg.id}/myob/companyfilesGet`,
+			currentOrg.accessTokens.myob,
 			currentOrg
 		))
 		.then((res) => {
-			this.filterRelevantCode(
-				res.data[0] &&
-				res.data[0].xeroAccountCodes &&
-				res.data[0].xeroAccountCodes.Account);
+			this.setCompanyFiles(res.companyfiles || []);
 			this.loading('');
 			this.setState({ loaded: true });
 		})
 		.catch(this.handleError);
 	}
 
-	filterRelevantCode(xeroCodes = []) {
-		let filteredCode;
-		filteredCode = xeroCodes.filter((code) => {
-			return code.Type === 'REVENUE';
-		}).map((code) => {
+	setCompanyFiles(companyFiles = []) {
+		let mappedFiles;
+		mappedFiles = companyFiles.map((file) => {
 			return {
-				title: `${code.Code} - ${code.Name}`,
-				value: code.Code
+				title: file.Name,
+				value: file.Id
 			};
 		});
-
-		this.setState({ xeroCodes: filteredCode });
+		this.setState({
+			companyFiles,
+			companyFilesOptions: mappedFiles
+		});
 	}
 
 	@autobind
-	changeCode(code) {
-		return () => {
-			const { app } = this.context.store;
-			const { currentOrg = {} } = app;
-			let newToken;
-			let token =
-				currentOrg.accessTokens &&
-				currentOrg.accessTokens.xero || null;
+	checkAndSaveCf() {
+		const { cfCredentials, selectedFile, companyFiles } = this.state;
+		const { currentOrg = {} } = this.context.store.app;
 
-			if (token) {
-				newToken = {
-					...token,
-					accountToInvoice: code
-				};
-				this.updateToken(newToken);
+		let company = _.find(companyFiles, (comp) => {
+			return comp.Id === selectedFile;
+		});
+
+		this.loading('Checking company file credentials ....');
+		this.safePromise(myobClient.request(
+			'post',
+			`organisations/${currentOrg.id}/myob/companyfilesTest`,
+			currentOrg.accessTokens.myob,
+			currentOrg,
+			{
+				companyfile: {
+					...company,
+					username: cfCredentials.username,
+					password: cfCredentials.password
+				}
 			}
+		))
+		.then((res) => {
+			if (res && res.companyfilesTest === 'Passed') {
+				this.loading('Saving company file credentials ....');
+				return this.safePromise(myobClient.request(
+					'post',
+					`organisations/${currentOrg.id}/myob/companyfilesPost`,
+					currentOrg.accessTokens.myob,
+					currentOrg,
+					{
+						companyfile: {
+							...company,
+							username: cfCredentials.username,
+							password: cfCredentials.password
+						}
+					}
+				));
+			} else {
+				return new Promise((resolve, reject) => { reject('Access Denied'); });
+			}
+		})
+		.then((res) => {
+			console.log(res);
+			this.context.store.app.updateCurrentOrg('accessTokens', {
+					...currentOrg.accessTokens,
+					myob: {
+						...currentOrg.accessTokens.myob,
+						companyfile: {
+							...res.companyfile
+						}
+					}
+				});
+			this.loading('');
+			this.setState({ showEdit: false });
+		})
+		.catch((err) => {
+			this.loading(`Please recheck your credentials,
+				the error is: ${decodeURI(err)}`,
+				true);
+			throw err;
+		});
+	}
+
+	@autobind
+	changeCf(code) {
+		return () => {
+			this.setState({ selectedFile: code });
 		};
 	}
 
 	@autobind
-	toggleSync() {
-		const { app } = this.context.store;
-		const { currentOrg = {} } = app;
-		let newToken;
-		let token =
-			currentOrg.accessTokens &&
-			currentOrg.accessTokens.xero || null;
+	setCfPassword(password) {
+		this.setState({
+			cfCredentials: {
+				...this.state.cfCredentials,
+				password
+			}
+		});
+	}
 
-		if (token) {
-			newToken = {
-				...token,
-				syncInvoice: !token.syncInvoice
-			};
-			this.updateToken(newToken);
-		}
+	@autobind
+	setCfUsername(username) {
+		this.setState({
+			cfCredentials: {
+				...this.state.cfCredentials,
+				username
+			}
+		});
 	}
 
 	updateToken(newToken) {
@@ -159,7 +266,7 @@ class InvoiceSection extends Component {
 			currentOrg.accessTokens &&
 			currentOrg.accessTokens.xero || null;
 
-		this.safePromise(xeroClient.request(
+		this.safePromise(myobClient.request(
 			'put',
 			`organisations/${currentOrg.id}/accessTokens?api=myob`,
 			token,
@@ -175,11 +282,16 @@ class InvoiceSection extends Component {
 		.catch(this.handleError);
 	}
 
+	@autobind
+	toggleEditCf() {
+		this.setState({ showEdit: !this.state.showEdit });
+	}
+
 	isConnected() {
 		const { currentOrg = {} } = this.context.store.app;
 		if (currentOrg.accessTokens &&
-			currentOrg.accessTokens.xero &&
-			currentOrg.accessTokens.xero.connectedAt) {
+			currentOrg.accessTokens.myob &&
+			currentOrg.accessTokens.myob.connectedAt) {
 			return true;
 		} else {
 			return false;

@@ -24,7 +24,7 @@ export default class ConnectionSection extends Component {
 		let org = this.getQueryVar('org');
 
 		if (doneAuth && oauthToken && oauthVerifier) {
-			client.post(`/organisations/${currentOrg.id}/sage/doneAuth`, {
+			client.post(`/organisations/${currentOrg.id}/sage/doneAuthSage`, {
 				data: {
 					oauth_token: oauthToken,
 					oauth_verifier: oauthVerifier,
@@ -61,7 +61,7 @@ export default class ConnectionSection extends Component {
 	onClick() {
 		const { currentOrg = null } = this.context.store.app;
 		this.connecting(true);
-		client.post(`/organisations/${currentOrg.id}/sage/generateToken`)
+		client.post(`/organisations/${currentOrg.id}/sage/generateTokenSage`)
 		.then((res) => {
 			let link = res && res.data && res.data[0].url;
 			window.location = link;
@@ -88,7 +88,7 @@ export default class ConnectionSection extends Component {
 		const { connecting } = this.state;
 		let orgName = org && org.attributes.name;
 
-		if (token && token.myob && token.myob.connectedAt) {
+		if (token && token.sage && token.sage.connectedAt) {
 			return (
 				<div>
 					<h3>{'Connection Information'}</h3>

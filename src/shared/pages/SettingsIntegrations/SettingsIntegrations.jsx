@@ -35,7 +35,7 @@ export default class SettingsIntegrations extends Component {
 		const { currentOrg = null } = app;
 		const org = auth.getOrg(currentOrg.id);
 		let orgName = org && org.attributes.name;
-		let apiList = ['Xero', 'MYOB', 'QuickBooks', 'Freshbooks', 'Sage'];
+		let apiList = ['Xero', 'MYOB', 'QuickBooks', 'Freshbooks'];
 		let connected = {};
 		apiList.map((api) => { connected[api] = this.isConnected(api.toLowerCase()); });
 

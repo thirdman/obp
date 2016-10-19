@@ -39,9 +39,11 @@ export default class SettingsIntegrationsDetail extends Component {
 		const { section } = this.state;
 		const {logoUrl, title, longDescription, whatYouCanDo, websiteUrl, subtitle} = defaultConnection;
 		let connected;
+		let token = {};
 
 		if (currentOrg.accessTokens.myob &&
 			currentOrg.accessTokens.myob.connectedAt) {
+			token = currentOrg.accessTokens.myob;
 			connected = true;
 		}
 
@@ -95,16 +97,16 @@ export default class SettingsIntegrationsDetail extends Component {
 							name: 'connect'
 						},
 						{
-							label: 'Entities & Contacts',
-							link: `/${currentOrg.id}/integrations/myob/match-entity`,
-							name: 'match-entity',
-							isDisabled: !connected
-						},
-						{
 							label: 'Settings',
 							link: `/${currentOrg.id}/integrations/myob/invoice-settings`,
 							name: 'invoice-settings',
 							isDisabled: !connected
+						},
+						{
+							label: 'Entities & Contacts',
+							link: `/${currentOrg.id}/integrations/myob/match-entity`,
+							name: 'match-entity',
+							isDisabled: !connected || !token.companyfile
 						}
 					]}
 				/>

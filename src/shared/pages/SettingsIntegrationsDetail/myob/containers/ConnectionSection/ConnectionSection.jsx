@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { autobind } from 'core-decorators';
 import { ApiClient as client } from 'helpers';
 import { Link } from 'react-router';
-import { Button, ContentItem, InputSelect, InputText, Message, Row, Section } from 'components';
+import { Button, Message, Section } from 'components';
 
 import { connect } from 'state';
 
@@ -81,27 +81,49 @@ export default class ConnectionSection extends Component {
 		const { doneAuth, token } = this.props;
 		const { connecting } = this.state;
 		let orgName = org && org.attributes.name;
+		let showMessage;
 
 		if (token && token.myob && token.myob.connectedAt) {
+			showMessage = token.myob.connectedAt + 15000 > new Date().getTime();
 			return (
 				<div>
 					<h3>{'Connection Information'}</h3>
-					<Message type="success" content="Successfully connected to MYOB" />
+					{showMessage &&
+						<Message type="success" content="Successfully connected to MYOB" />
+					}
 					<Section title={'What next?'} description={'Now that you have connected your MYOB account, there\'s some things to check'}>
 						<ol>
 							<li>
-								<p>Configure your Entities</p>
-									<p>{`It's important to make sure your ${orgName} contacts are matched to the relevant nomos one Entites. This will ensure that data will be assigned to the correct things.`}</p>
-								<Link to={`/${currentOrg.id}/integrations/myob/match-entity`}>
-									<Button content="View Entities" classNameProps={['highlighted']} />
-								</Link>
+								<p>{`Configure MYOB company file ${token.myob.companyfile && '- Completed' || ''}`}</p>
+								{token.myob.companyfile &&
+									<p>
+										{`Connected to: ${token.myob.companyfile.Name} company file.`}
+									</p>
+								}
+								{!token.myob.companyfile &&
+									<p>
+										{`Set up MYOB company file to ensure this integration will
+										work as you expect.`}
+									</p>
+								}
+								{!token.myob.companyfile &&
+									<Link to={`/${currentOrg.id}/integrations/myob/invoice-settings`}>
+										<Button content="Edit Settings" classNameProps={['highlighted']} />
+									</Link>
+								}
 							</li>
 							<li>
-									<p>Check your Integration Settings</p>
-									<p>{'Check your settings to ensure this integration will work as you expect.'}</p>
-								<Link to={`/${currentOrg.id}/integrations/myob/invoice-settings`}>
-									<Button content="View Settings" classNameProps={['highlighted']} />
-								</Link>
+								<p>Configure your Entities</p>
+								<p>
+									{`It's important to make sure your ${orgName}
+									contacts are matched to the relevant nomos one Entites.
+									This will ensure that data will be assigned to the correct things.`}
+								</p>
+								{token.myob.companyfile ?
+									<Link to={`/${currentOrg.id}/integrations/myob/match-entity`}>
+										<Button content="View Entities" classNameProps={['highlighted']} />
+									</Link> :
+									<p>{'This will be enabled after step 1 is done.'}</p>}
 							</li>
 						</ol>
 					</Section>
@@ -116,44 +138,6 @@ export default class ConnectionSection extends Component {
 					<Button
 						content={connecting ? 'Loading ... ' : 'Connect to MYOB'}
 						onClickProps={this.onClick} />
-					<Section
-						title="Select your Company File"
-						hasBackground
-						hasBorder
-						description="The company file represents the MYOB company that nomos one will interact with. You will need to authorise using your admin username and password"
-					>
-						<ContentItem
-							title="company file"
-						>
-							<InputSelect
-								color="white"
-								classNameProps={['wide']}
-								options={[
-									{title: 'The one', value: 'one', helpContent: 'Selects the value of one'},
-									{title: 'Dos', value: 'two', helpContent: 'In Spanish the word for two is \'dos'},
-									{title: 'Toru', value: 'three', helpContent: 'Toru is three'}
-								]}
-							/>
-						</ContentItem>
-						<ContentItem title="Username" hasPadding={false} >
-							<InputText
-								type="text"
-								classNameProps={['normal']}
-								backgroundColor="#fff"
-							/>
-						</ContentItem>
-						<ContentItem title="Password" hasPadding={false}>
-							<InputText
-								type="password"
-								classNameProps={['normal']}
-								backgroundColor="#fff"
-							/>
-						</ContentItem>
-						<Row>
-							<Button classNameProps={['highlighted']} content="connect" />
-							<Button classNameProps={['grey']} content="cancel" />
-						</Row>
-				</Section>
 				</div>
 			);
 		} else {

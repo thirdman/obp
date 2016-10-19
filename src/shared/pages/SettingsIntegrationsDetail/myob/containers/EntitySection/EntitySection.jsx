@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import FuzzySet from 'fuzzyset.js';
 import {
 	ApiClient as client,
-	XeroHelper as xeroClient,
+	MyobHelper as myobClient,
 	ReactSafePromise as safePromise
 } from 'helpers';
 import { autobind } from 'core-decorators';
@@ -11,8 +11,11 @@ import {
 	Button,
 	ButtonGroup,
 	Column,
+	ContentItem,
 	Icon,
 	InputToggle,
+	InputSelect,
+	Message,
 	Row,
 	Section,
 	SparkPercentage,
@@ -57,19 +60,24 @@ class EntitySection extends Component {
 		loaded: false,
 		loading: '',
 		error: false,
+		exportError: false,
 		nomosEntitiesCopy: [],
-		xeroContactsCopy: [],
+		myobContactsCopy: [],
+		myobTaxCodes: [],
 		nomosEntities: [],
-		xeroContacts: [],
+		myobContacts: [],
 		lkedEntities: [],
 		matchedArray: [],
 		exporting: null,
 		importing: null,
-		importType: null
+		importType: null,
+		exportingType: 'company',
+		taxCode: null,
+		freightTaxCode: null
 	}
 
 	componentDidMount() {
-		xeroClient.appStore = this.context.store.app;
+		myobClient.appStore = this.context.store.app;
 		if (this.isConnected()) {
 			this.fetchData();
 		}
@@ -80,7 +88,7 @@ class EntitySection extends Component {
 			loaded,
 			loading,
 			nomosEntities,
-			xeroContacts,
+			myobContacts,
 			lkedEntities
 		} = this.state;
 
@@ -107,7 +115,7 @@ class EntitySection extends Component {
 							<Column occupy={3}>
 								<Statistic
 									title="MYOB Contacts"
-									content={xeroContacts.length}
+									content={myobContacts.length}
 									isAnimated
 									classNameProps={['isHorizontal', 'hasDivider']}
 								/>
@@ -139,7 +147,7 @@ class EntitySection extends Component {
 	}
 
 	getCurrentEntitySection() {
-		const { currentEntitySection } = this.state;
+		const { currentEntitySection, exportError } = this.state;
 		switch (currentEntitySection) {
 			case 'match':
 				return (
@@ -179,6 +187,16 @@ class EntitySection extends Component {
 							<Column occupy={9}><h4>{'NOMOS ONE ENTITY'}</h4></Column>
 							<Column occupy={3}>{''}</Column>
 						</Row>
+						{exportError &&
+							<Row>
+								<Column occupy={9}>
+									<Message
+										type="error"
+										content={exportError}
+										timeout={this.clearError} />
+								</Column>
+							</Row>
+						}
 						{ this.getExportRows() }
 					</Section>
 				);
@@ -216,8 +234,16 @@ class EntitySection extends Component {
 	}
 
 	getExportRows() {
-		const { nomosEntities, exporting } = this.state;
+		const {
+			nomosEntities,
+			exporting,
+			myobTaxCodes,
+			taxCode = '',
+			freightTaxCode = '',
+			exportingType
+		} = this.state;
 		let match;
+
 		return nomosEntities.map((entity, index) => {
 			match = _.isEqual(exporting, entity);
 			return (
@@ -225,6 +251,43 @@ class EntitySection extends Component {
 					<Column occupy={9}>
 						{entity.entityName}
 					</Column>
+					{match &&
+						<Column occupy={4}>
+							<ContentItem title="Type*">
+								<div style={{display: 'block'}} >
+									<InputSelect
+										color="white"
+										classNameProps={['wide']}
+										onClickProps={this.setExportType}
+										options={[
+											{ title: 'Company', value: 'company' },
+											{ title: 'Individual', value: 'individual' }
+										]}
+										content={exportingType || ''} />
+								</div>
+							</ContentItem>
+							<ContentItem title="Tax Code*">
+								<div style={{display: 'block'}} >
+									<InputSelect
+										color="white"
+										classNameProps={['wide']}
+										onClickProps={this.setTaxCode}
+										options={myobTaxCodes}
+										content={taxCode || ''} />
+								</div>
+							</ContentItem>
+							<ContentItem title="Freight Tax Code*">
+								<div style={{display: 'block'}} >
+									<InputSelect
+										color="white"
+										classNameProps={['wide']}
+										onClickProps={this.setFreightCode}
+										options={myobTaxCodes}
+										content={freightTaxCode || ''} />
+								</div>
+							</ContentItem>
+						</Column>
+					}
 					<Column occupy={3}>
 						{!match ?
 							<Button
@@ -239,7 +302,8 @@ class EntitySection extends Component {
 								<Button
 									content="Cancel"
 									onClickProps={this.setExport(null)}
-									classNameProps={['grey']} />							</div>
+									classNameProps={['grey']} />
+							</div>
 						}
 					</Column>
 				</Row>
@@ -250,18 +314,19 @@ class EntitySection extends Component {
 	getImportRows() {
 		const entityTypes = ['Individual', 'Company', 'Trust', 'Other'];
 		const {
-			xeroContacts,
+			myobContacts,
 			importing,
 			importType
 		} = this.state;
 		let match;
 		let typeMatch;
-		return xeroContacts.map((contact, index) => {
+		return myobContacts.map((contact, index) => {
 			match = _.isEqual(importing, contact);
+			let { IsIndividual, CompanyName, FirstName, LastName } = contact;
 			return (
 				<Row key={`import-${index}`}>
 					<Column occupy={match ? 5 : 9}>
-						{contact.Name}
+						{!IsIndividual ? decodeURI(CompanyName) : decodeURI(`${FirstName} ${LastName}`)}
 					</Column>
 					{match &&
 						<Column occupy={4}>
@@ -326,13 +391,14 @@ class EntitySection extends Component {
 				return pairB.degree - pairA.degree;
 			})
 			.map((pair, pairIndex) => {
+				let { IsIndividual, CompanyName, FirstName, LastName } = pair.contact;
 				return (
 					<Row key={`pair-match-${pairIndex}`}>
 						<Column occupy={4}>
 							{`${pair.entity.entityName}`}
 						</Column>
 						<Column occupy={4}>
-							{`${pair.contact.Name}`}
+							{!IsIndividual ? decodeURI(CompanyName) : decodeURI(`${FirstName} ${LastName}`)}
 						</Column>
 						<Column occupy={1}>
 							<SparkPercentage
@@ -356,27 +422,30 @@ class EntitySection extends Component {
 		const { lkedEntities } = this.state;
 		if (!lkedEntities.length) { return null; }
 
-		return lkedEntities.map((pair, pairIndex) => (
-			<Row key={`pairing-${pairIndex}`}>
-				<Column occupy={5}>
-					{`${pair.entity.entityName}`}
-				</Column>
-				<Column occupy={4}>
-					{`${pair.contact.Name}`}
-				</Column>
-				<Column occupy={1}>
-					{<Icon icon="link" classNameProps={['grey']} size={16} />}
-				</Column>
-				<Column occupy={2}>
-					<Button
-						content="Unlink"
-						onClickProps={this.unlink(
-							pair.entity
-						)}
-						classNameProps={['text', 'delete']} />
-				</Column>
-			</Row>
-		));
+		return lkedEntities.map((pair, pairIndex) => {
+			let { IsIndividual, CompanyName, FirstName, LastName } = pair.contact;
+			return (
+				<Row key={`pairing-${pairIndex}`}>
+					<Column occupy={5}>
+						{`${pair.entity.entityName}`}
+					</Column>
+					<Column occupy={4}>
+						{!IsIndividual ? decodeURI(CompanyName) : decodeURI(`${FirstName} ${LastName}`)}
+					</Column>
+					<Column occupy={1}>
+						{<Icon icon="link" classNameProps={['grey']} size={16} />}
+					</Column>
+					<Column occupy={2}>
+						<Button
+							content="Unlink"
+							onClickProps={this.unlink(
+								pair.entity
+							)}
+							classNameProps={['text', 'delete']} />
+					</Column>
+				</Row>
+			);
+		});
 	}
 
 	@autobind
@@ -390,17 +459,35 @@ class EntitySection extends Component {
 			this.setState({
 				nomosEntitiesCopy: res.data
 			});
-			this.loading('Getting MYOB contacts ....');
-			return this.safePromise(xeroClient.request(
+			this.loading('Getting MYOB tax codes ....');
+			return this.safePromise(myobClient.request(
 				'post',
-				`organisations/${currentOrg.id}/myob/contacts`,
-				currentOrg.accessTokens.xero,
+				`organisations/${currentOrg.id}/myob/taxCodesMyob`,
+				currentOrg.accessTokens.myob,
+				currentOrg
+			));
+		})
+		.then((res) => {
+			console.log(res.taxCodes);
+			this.setState({
+				myobTaxCodes: res.taxCodes && res.taxCodes.Items.map((code) => {
+					return {
+						title: `${code.Code} - ${code.Description}`,
+						value: code.UID
+					};
+				})
+			});
+			this.loading('Getting MYOB contacts ....');
+			return this.safePromise(myobClient.request(
+				'post',
+				`organisations/${currentOrg.id}/myob/contactsMyob`,
+				currentOrg.accessTokens.myob,
 				currentOrg
 			));
 		})
 		.then((res) => {
 			this.setState({
-				xeroContactsCopy: res.data[0]
+				myobContactsCopy: res.contacts.Items
 			});
 			this.loading('Matching entities with contacts ....');
 			this.filterLinkedEntities();
@@ -418,12 +505,11 @@ class EntitySection extends Component {
 
 	filterLinkedEntities() {
 		const nomosEntitiesState = this.state.nomosEntitiesCopy;
-		const xeroContactsState = this.state.xeroContactsCopy
-			.contacts.Contacts.Contact;
+		const myobContactsState = this.state.myobContactsCopy;
 		let entities = [];
 		let contacts = [];
 		let lkedEntities = [];
-		let lkedXeroEntities = [];
+		let lkedMyobEntities = [];
 		let linkedInfo = null;
 
 		entities = nomosEntitiesState.filter((entity) => {
@@ -433,14 +519,14 @@ class EntitySection extends Component {
 					entity,
 					contact: linkedInfo
 				});
-				lkedXeroEntities.push(linkedInfo.ContactID);
+				lkedMyobEntities.push(linkedInfo.UID);
 				return false;
 			}
 			return true;
 		});
 
-		contacts = xeroContactsState.filter((xeroEntity) => {
-			if (lkedXeroEntities.indexOf(xeroEntity.ContactID) > -1) {
+		contacts = myobContactsState.filter((myobEntity) => {
+			if (lkedMyobEntities.indexOf(myobEntity.UID) > -1) {
 				return false;
 			} else {
 				return true;
@@ -460,13 +546,24 @@ class EntitySection extends Component {
 			match = null;
 
 			contacts.map((contact, contactIndex) => {
-				if (entity.entityEmail === contact.EmailAddress) {
+				let {
+					Addresses,
+					IsIndividual,
+					CompanyName,
+					FirstName,
+					LastName
+				} = contact;
+				if (entity.entityEmail ===
+						Addresses &&
+						Addresses[0] &&
+						Addresses[0].Email) {
 					match = {
 						position: contactIndex,
 						degree: 1
 					};
 				} else {
-					tryMatch = FuzzySet([entity.entityName]).get(contact.Name);
+					tryMatch = FuzzySet([entity.entityName])
+						.get(!IsIndividual ? CompanyName : `${FirstName} ${LastName}`);
 					if (tryMatch && tryMatch.length) {
 						if ((!match
 							|| match.degree < tryMatch[0][0])
@@ -491,7 +588,7 @@ class EntitySection extends Component {
 		// console.log(matchedArray);
 		this.setState({
 			nomosEntities: entities,
-			xeroContacts: contacts,
+			myobContacts: contacts,
 			matchedArray,
 			lkedEntities
 		});
@@ -500,10 +597,10 @@ class EntitySection extends Component {
 	entityIsLinked(entityJson) {
 		if (!entityJson
 			|| !entityJson.integration
-			|| !entityJson.integration.xero) {
+			|| !entityJson.integration.myob) {
 			return false;
 		}
-		return entityJson.integration.xero || false;
+		return entityJson.integration.myob || false;
 	}
 
 	@autobind
@@ -518,7 +615,7 @@ class EntitySection extends Component {
 						...(entity.entityJson &&
 							entity.entityJson.integration ||
 							{}),
-						xero: {
+						myob: {
 							...contact
 						}
 					}
@@ -548,7 +645,7 @@ class EntitySection extends Component {
 				entityJson: {
 					...(entity.entityJson || {}),
 					integration: {
-						xero: ''
+						myob: ''
 					}
 				}
 			};
@@ -578,13 +675,15 @@ class EntitySection extends Component {
 	doImport() {
 		const { currentOrg = {} } = this.context.store.app;
 		const { importing, importType } = this.state;
+		let { IsIndividual, CompanyName, FirstName, LastName } = importing;
+
 		let userObject = {
-			entityName: importing.Name,
+			entityName: !IsIndividual ? decodeURI(CompanyName) : decodeURI(`${FirstName} ${LastName}`),
 			entityType: importType,
 			entityFirmId: currentOrg.id,
 			entityJson: {
 				integration: {
-					xero: {
+					myob: {
 						...importing
 					}
 				}
@@ -622,33 +721,67 @@ class EntitySection extends Component {
 	}
 
 	@autobind
+	setTaxCode(taxCode = '') {
+		return () => {
+			this.setState({ taxCode });
+		};
+	}
+
+	@autobind
+	setFreightCode(freightTaxCode = '') {
+		return () => {
+			this.setState({ freightTaxCode });
+		};
+	}
+
+	@autobind
+	setExportType(exportingType) {
+		return () => {
+			this.setState({ exportingType });
+		};
+	}
+
+	@autobind
 	doExport() {
-		const { exporting } = this.state;
+		const { exporting, taxCode, freightTaxCode, exportingType } = this.state;
 		let {
 			entityEmail,
 			entityName,
 			entityFirstName,
+			entityMiddleNames,
 			entityLastName
 		} = exporting;
-
+		if (!taxCode || !freightTaxCode) {
+			return this.setState({exportError: 'Please select the required fields.'});
+		}
+		entityFirstName = `${entityFirstName}${entityMiddleNames ? ' ' + entityMiddleNames : ''}`;
+		let isIndividual = exportingType === 'individual';
 		let contactObject = {
-			Contacts: {
-				Contact: {
-					Name: entityName,
-					FirstName: entityFirstName,
-					LastName: entityLastName,
-					EmailAddress: entityEmail
+			CompanyName: isIndividual ? '' : entityName,
+			FirstName: isIndividual ? entityFirstName : '',
+			LastName: isIndividual ? entityLastName : '',
+			IsIndividual: isIndividual,
+			Addresses: [{
+				Email: entityEmail
+			}],
+			SellingDetails: {
+				SaleLayout: 'NoDefault',
+				TaxCode: {
+					UID: taxCode
+				},
+				FreightTaxCode: {
+					UID: freightTaxCode
 				}
 			}
 		};
 
 		this.export(contactObject)
 		.then((res) => {
-			contactObject = res &&
-								res.data &&
-								res.data[0] &&
-								res.data[0].response &&
-								res.data[0].response.Contacts.Contact;
+			console.log(res);
+			contactObject = {
+				...contactObject,
+				UID: res && res.contacts
+			};
 			this.updateContactState(null, contactObject);
 			this.link(exporting, contactObject)();
 		})
@@ -659,14 +792,14 @@ class EntitySection extends Component {
 	}
 
 	@autobind
-	export(contactObject) {
+	export(contact) {
 		const { currentOrg = {} } = this.context.store.app;
-		return this.safePromise(xeroClient.request(
+		return this.safePromise(myobClient.request(
 			'post',
-			`organisations/${currentOrg.id}/myob/contactsPost`,
-			currentOrg.accessTokens.xero,
+			`organisations/${currentOrg.id}/myob/contactsPostMyob`,
+			currentOrg.accessTokens.myob,
 			currentOrg,
-			{ contactObject }
+			{ contact }
 		));
 	}
 
@@ -689,42 +822,29 @@ class EntitySection extends Component {
 	}
 
 	updateContactState(old, updated) {
-		const xeroContactsCopy = this.state.xeroContactsCopy;
-		let contacts = xeroContactsCopy &&
-						xeroContactsCopy.contacts &&
-						xeroContactsCopy.contacts.Contacts.Contact ||
-						[];
-		let updatedXeroContactsCopy;
+		const myobContactsCopy = this.state.myobContactsCopy;
+		let contacts = myobContactsCopy || [];
+		let updatedMyobContactsCopy;
 		if (old) {
-			updatedXeroContactsCopy = contacts.map((contact) => {
-				if (contact.ContactID === old.ContactID) {
+			updatedMyobContactsCopy = contacts.map((contact) => {
+				if (contact.UID === old.UID) {
 					return updated;
 				}
 				return contact;
 			});
 		} else {
-			updatedXeroContactsCopy = contacts.slice();
-			updatedXeroContactsCopy.push(updated);
-			updatedXeroContactsCopy = {
-				...xeroContactsCopy,
-				contacts: {
-					...xeroContactsCopy.contacts,
-					Contacts: {
-						...xeroContactsCopy.contacts.Contacts,
-						Contact: updatedXeroContactsCopy
-					}
-				}
-			};
+			updatedMyobContactsCopy = contacts.slice();
+			updatedMyobContactsCopy.push(updated);
 		}
 
-		this.setState({ xeroContactsCopy: updatedXeroContactsCopy });
+		this.setState({ myobContactsCopy: updatedMyobContactsCopy });
 	}
 
 	isConnected() {
 		const { currentOrg = {} } = this.context.store.app;
 		if (currentOrg.accessTokens &&
-			currentOrg.accessTokens.xero &&
-			currentOrg.accessTokens.xero.connectedAt) {
+			currentOrg.accessTokens.myob &&
+			currentOrg.accessTokens.myob.connectedAt) {
 			return true;
 		} else {
 			return false;
@@ -743,6 +863,11 @@ class EntitySection extends Component {
 		return () => {
 			this.setState({ currentEntitySection });
 		};
+	}
+
+	@autobind
+	clearError() {
+		this.setState({ exportError: '' });
 	}
 }
 

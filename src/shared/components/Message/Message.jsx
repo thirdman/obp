@@ -7,6 +7,13 @@ const styles = require('./Message.scss');
 
 export default class Message extends Component {
 
+	componentDidMount() {
+		const { timeout } = this.props;
+		if (typeof timeout === 'function') {
+			setTimeout(() => { timeout(); }, 5000);
+		}
+	}
+
 	render() {
 		const {
 			classNameProps = [],

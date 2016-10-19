@@ -25,6 +25,10 @@ export default class InputText extends Component {
 	}
 
 	doContentChange = () => {
+		const { onChangeProps } = this.props;
+		if (typeof onChangeProps === 'function') {
+			onChangeProps(this.textInput.value || '');
+		}
 		// along the lines of this.props.onChangeProps();
 		if (this.textInput.value.length > 0) {
 			this.setState({hasContent: true});
@@ -90,12 +94,11 @@ export default class InputText extends Component {
 
 		return (
 			<div
-			className={cx(styles.InputText,
+				className={cx(
+					styles.InputText,
 					classes,
 					toggleClasses,
-					(this.state.hasContent ? styles.hasContent : null))
-				}
-			>
+					(this.state.hasContent ? styles.hasContent : null))}>
 				<input
 					id={this.state.theId}
 					type={type}
@@ -106,7 +109,9 @@ export default class InputText extends Component {
 					onKeyDown={onKeyDownProps}
 					style={tempStyle}
 					/>
-				<label htmlFor={this.state.theId}>{placeholder}</label>
+				<label htmlFor={this.state.theId}>
+					{placeholder}
+				</label>
 				{isRequired && hasRequiredIcon ?
 					<div className={styles.requiredMarker}>
 						<Icon
