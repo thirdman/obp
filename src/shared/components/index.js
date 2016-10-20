@@ -34,5 +34,6 @@ export SlideToggle from './SlideToggle/SlideToggle';
 export SparkPercentage from './SparkPercentage/SparkPercentage';
 export Statistic from './Statistic/Statistic';
 export SubNavWrap from './SubNavWrap/SubNavWrap';
+export Tabs from './Tabs/Tabs';
 export UiBrandLogo from './UiBrandLogo/UiBrandLogo';
 export UiUserMenu from './UiUserMenu/UiUserMenu';
