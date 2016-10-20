@@ -163,6 +163,9 @@
 	&.isRequired{
 
 	}
+	&.templateMode{
+		border: 1px dashed #ccc; 
+	}
 	&.validationError{
 		border: 1px solid $nomosRed;
 		border-radius: 4px 4px 0 0;

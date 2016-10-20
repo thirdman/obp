@@ -19,6 +19,7 @@ hasDivider			|	`bool`		|	false			|	show a dividing line abov this component
 hasBackground		|	`bool`		|	false			|	show a grey background
 hasBorder				|	`bool`		|	false			|	show a border
 hasPadding			|	`bool`		|	false			|	adds a padding
+templateMode		|	`bool`		|	false			|	shows dotted borders etc when setting up
 styleProps			|	`object` 	| - 				| Object of styles to use
 classNameProps	|	`array`		| ['normal']|	array of classes to apply to the component (see below for available classes)
 children				|	`oneOfType` | - 			| (required) this component is designed to wrap around child content

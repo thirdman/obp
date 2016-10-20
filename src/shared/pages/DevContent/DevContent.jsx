@@ -3,175 +3,73 @@ import moment from 'moment';
 // import { browserHistory } from 'react-router';
 import { Summary } from 'layouts';
 import {
+	Breadcrumbs,
 	Button,
 	ButtonGroup,
 	Column,
+	ContentItem,
 	HorizontalRule,
 	Icon,
+	Info,
+	InputText,
+	InputSwitch,
 	ObjectInfo,
 	Row,
 	Section,
 	SubNavWrap
 	} from 'components';
 import { Header } from 'containers';
+import theData from './containers/dataObjects.jsx';
+import dataButtons from './containers/dataButtons.jsx';
+
+const buttonGroupData = dataButtons.buttonGroupData2;
+const objectData = theData.objectData;
+const sectionsData = theData.sectionsData;
+const itemsData = theData.itemsData;
 
 const styles = require('./DevContent.scss');
-
-const buttonGroupData = [{
-	name: 'object',
-	title: 'Object',
-	subtitle: 'High level Objects',
-	showButton: 'true',
-	descriptionTitle: 'Usage',
-	description: 'Primary high level objects, such as Agreements and property. Contains Pages.', // eslint-disable-line max-len
-	classes: ['hero'],
-	onClickReturn: 'object'
-}, {
-	name: 'page',
-	title: 'Page',
-	subtitle: 'tabs in an object',
-	showButton: 'true',
-	descriptionTitle: 'Usage',
-	description: 'Sub navigation tabs within an object. Contains sections and Items.',
-	classes: ['hero'],
-	onClickReturn: 'page'
-}, {
-	name: 'section',
-	title: 'Sections',
-	subtitle: 'divisions within a page',
-	showButton: 'true',
-	descriptionTitle: 'Usage',
-	description: 'Logical sections of a page of data. Contains Items',
-	classes: ['hero'],
-	onClickReturn: 'section'
-}, {
-	name: 'item',
-	title: 'Items',
-	subtitle: 'single piece of data',
-	showButton: 'true',
-	descriptionTitle: 'Usage',
-	description: 'InputText, InputSelect, InputDate etc',
-	classes: ['hero'],
-	onClickReturn: 'item'
-}];
-
-const objectData = [
-{
-	id: 1234,
-	type: 'Agreement',
-	subType: 'Lease',
-	subSubType: '',
-	title: 'Nomos Lease',
-	subtitle: 'High level Objects',
-	version: '1.0',
-	createdByName: 'David Bromley',
-	createdDate: 1476759075104,
-	tags: ['Lease', 'New Zealand'],
-	pages: [
-		{
-			title: 'Parties'
-		}, {
-			title: 'Property'
-		}, {
-			title: 'Rent'
-		}, {
-			title: 'Payments'
-		}, {
-			title: 'Events'
-		}
-	],
-	description: 'Standard nomos one lease agreement' // eslint-disable-line max-len
-}, {
-	id: 1235,
-	type: 'Agreement',
-	subType: 'Lease',
-	subSubType: '',
-	title: 'PCNZ Property Lease Agereement',
-	subtitle: 'Property Version',
-	version: '1.4',
-	versionDate: 'October 2015',
-	createdByName: 'PCNZ',
-	provider: 'PCNZ',
-	createdDate: 1476759075104,
-	tags: ['PCNX', 'Lease', 'New Zealand'],
-	pages: [
-		{
-			title: 'Parties',
-			templateName: 'Parties Selection'
-		}, {
-			title: 'Property',
-			templateName: 'Agreement Property Template'
-		}, {
-			title: 'Rent',
-			templateName: 'default Rent template'
-		}, {
-			title: 'Payments',
-		}, {
-			title: 'Events',
-			templateName: 'Standard Events template'
-		}
-	],
-	description: 'Standard office lease as created by Propsrty Council New Zealand' // eslint-disable-line max-len
-}, {
-	id: 1236,
-	type: 'Property',
-	subType: 'Space',
-	subSubType: 'Retail',
-	title: 'Standard Retail Space',
-	version: '1',
-	versionDate: 'Jan 2016',
-	createdByName: 'nomos',
-	provider: 'Nomos',
-	createdDate: 1476753073104,
-	tags: ['Retail'],
-	pages: [
-		{
-			title: 'Location',
-			templateName: 'default Location'
-		}, {
-			title: 'Address',
-			templateName: 'default Address Template'
-		}, {
-			title: 'Area & Size',
-			templateName: 'default Area/Size template'
-		}, {
-			title: 'Events',
-			templateName: 'Property Events template'
-		}
-	]
-}
-];
-
+const iconObject = require('./images/object.svg');
+const iconPage = require('./images/page.svg');
+const iconSection = require('./images/section.svg');
+const iconItem = require('./images/item.svg');
 
 export default class DevContent extends Component {
 
 	state = {
+		activeType: null,
+		activeObject: null,
+		activePage: null,
 		activeSection: null,
-		activeObject: null
+		activeItem: null
 	}
 
 	render() {
 		// const { location } = this.props;
+		// const {routeParams, route} = this.props;
 		return (
 			<Summary>
-				<Header key={'layoutHeader'} title="Dev: Content" />
-				<SubNavWrap
-					key={'layoutNav'}
-					currentlySelected={3}
-					listData={[
-						{label: 'Dev Home', link: '/dev'},
-						{label: 'Documentation', link: '/dev/docs'},
-						{label: 'Icons', link: '/dev/icons'},
-						{label: 'Content Creation', link: '/dev/content'}
-					]}
+				<Header
+					key={'layoutHeader'}
+					title={
+						`Dev: Content Creation
+							${this.state.activeType ? (': ' + this.state.activeType) + 's' : ''}
+							${this.state.activeObject ? (': ' + this.state.activeObject) : ''}
+						`}
 				/>
+				<div key={'layoutHero'} className={styles.Devggg}>
+					<Breadcrumbs
+						// params={routeParams}
+						// route={route}
+						breadcrumbData={[
+							{ text: 'Dev', link: 'dev' },
+							{ text: 'Content Creation', link: 'content' },
+							{ text: (this.state.activeType ? (this.state.activeType) + 's' : '') },
+							{ text: (this.state.activeObject ? (this.state.activeObject) : '') }
+						]
+					}
+					/>
+				</div>
 				<div key={'layoutMain'} className={styles.DevContent}>
-					<h2>Content Creation
-						{this.state.activeSection ? (': ' + this.state.activeSection) : null }
-						{this.state.activeObject ?
-							(': ' + this.state.activeObject) : null
-						}
-					</h2>
 					{ this.getActiveContentSection() }
 					</div>
 			</Summary>
@@ -179,25 +77,41 @@ export default class DevContent extends Component {
 	}
 
 	getActiveContentSection() {
-		const { activeSection, activeObject } = this.state;
-		switch (activeSection) {
+		const { activeType, activeObject } = this.state;
+		let hasDetailSectionOpen;
+		let hasDetailObjectOpen;
+		switch (activeType) {
 			case 'object':
+				if (this.state.activeType
+					&& !(this.state.activeObject)
+					&& !(this.state.activeObject < 0)
+					) {
+						hasDetailObjectOpen = false;
+					} else {
+						hasDetailObjectOpen = true;
+					}
 				return (
 					<span>
 						<Button
 						content="Back"
-						onClickProps={this.switchSection(null)}
+						onClickProps={this.switchType(null)}
 						classNameProps={['highlighted']}
 						icon="chevron-left"
 						iconSize={12}
 					/>
 					<Section title={'Objects'}>
 						<Row>
-						{ this.state.activeSection
-							&& !(this.state.activeObject)
-							&& !(this.state.activeObject < 0) ?
-						<Column occupy={12}>
+						<Column occupy={hasDetailObjectOpen ? 3 : 12}>
 							<div>
+								<Row>
+									<Column occupy={6}>
+										<h4>Name</h4>
+									</Column>
+									<Column occupy={3}>
+										<h4>Type/Subtype</h4>
+									</Column>
+									<Column occupy={3} />
+								</Row>
 							{
 								objectData.map((item, index) => {
 								return (
@@ -210,27 +124,33 @@ export default class DevContent extends Component {
 											(index === activeObject ? styles.isSelected : '')
 											}
 										>
-											<h5>{item.title}</h5>
-											<h4>{item.type} {item.subType ? '/ ' + item.subType : ''}</h4>
-											<Button
-												type="text"
-												content="View detail"
-												onClickProps={this.switchObject(index)}
-												/>
+										<Row>
+											<Column occupy={6}>
+												<span>{item.title}</span>
+											</Column>
+											<Column occupy={3}>
+												<h4>{item.type} {item.subType ? '/ ' + item.subType : ''}</h4>
+											</Column>
+											<Column occupy={3}>
+												<Button
+													type="text"
+													content="View"
+													onClickProps={this.switchObject(index)}
+													/>
+											</Column>
+										</Row>
 									</div>
 								);
 							})
 							}
 							</div>
 						</Column>
-						: null
-						}
 						{
 							this.state.activeObject && (this.state.activeObject > -1) ?
-							<Column occupy={12}>
+							<Column occupy={9}>
 								<div className={styles.detail}>
 									{this.getActiveObjectDetail()}
-									</div>
+								</div>
 							</Column>
 						: null
 						}
@@ -244,7 +164,7 @@ export default class DevContent extends Component {
 					<Section title={'Pages'} hasPadding >
 						<Button
 							content="Back"
-							onClickProps={this.switchSection(null)}
+							onClickProps={this.switchType(null)}
 							classNameProps={['highlighted']}
 							icon="chevron-left"
 							iconSize={12}
@@ -252,37 +172,183 @@ export default class DevContent extends Component {
 					</Section>
 				);
 			case 'section':
+				if (this.state.activeType
+						&& !(this.state.activeSection)
+						&& !(this.state.activeSection < 0)
+						) {
+							hasDetailSectionOpen = false;
+						} else {
+							hasDetailSectionOpen = true;
+						}
 				return (
-					<Section title={'Sections'} hasPadding >
+					<span>
 						<Button
-							content="Back"
-							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']}
-							icon="chevron-left"
-							iconSize={12}
-						/>
+						content="Back"
+						onClickProps={this.switchType(null)}
+						classNameProps={['highlighted']}
+						icon="chevron-left"
+						iconSize={12}
+					/>
+					<Section title={'Sections'}>
+						<Row>
+						{
+							// this.state.activeType
+							// && !(this.state.activeSection)
+							// && !(this.state.activeSection < 0) ?
+						<Column occupy={hasDetailSectionOpen ? 3 : 12}>
+							<div>
+								<Row>
+									<Column occupy={6}>
+										<h4>Name</h4>
+									</Column>
+									<Column occupy={4}>
+										<h4>Type/Subtype</h4>
+									</Column>
+									<Column occupy={2} />
+								</Row>
+							{
+								sectionsData.map((item, index) => {
+								return (
+									<div
+										id={`test${index}`}
+										key={index}
+										onClick={this.switchSection(`${index}`)}
+										className={
+											styles.item + ' ' +
+											(index === activeObject ? styles.isSelected : '')
+											}
+										>
+										<Row>
+											<Column occupy={6}>
+												<span>{item.title}</span>
+											</Column>
+											<Column occupy={3}>
+												<h4>{item.type} {item.subType ? '/ ' + item.subType : ''}</h4>
+											</Column>
+											<Column occupy={3}>
+												<Button
+													type="text"
+													content="View"
+													onClickProps={this.switchSection(index)}
+													/>
+											</Column>
+										</Row>
+									</div>
+								);
+							})
+							}
+							</div>
+						</Column>
+						// : null
+						}
+						{
+							this.state.activeSection && (this.state.activeSection > -1) ?
+							<Column occupy={hasDetailSectionOpen ? 9 : 0}>
+								<div className={styles.detail}>
+									{this.getActiveSectionDetail()}
+									</div>
+							</Column>
+						: null
+						}
+					</Row>
+
 					</Section>
+					</span>
 				);
 			case 'item':
 				return (
-					<Section title={'Items'} hasPadding >
+					<span>
 						<Button
-							content="Back"
-							onClickProps={this.switchSection(null)}
-							classNameProps={['highlighted']}
-							icon="chevron-left"
-							iconSize={12}
-						/>
+						content="Back"
+						onClickProps={this.switchType(null)}
+						classNameProps={['highlighted']}
+						icon="chevron-left"
+						iconSize={12}
+					/>
+					<Section title={'Sections'}>
+						<Row>
+						<Column occupy={3}>
+							<div>
+								<Row>
+									<Column occupy={6}>
+										<h4>Name</h4>
+									</Column>
+									<Column occupy={4}>
+										<h4>Type/Subtype</h4>
+									</Column>
+									<Column occupy={2} />
+								</Row>
+							{
+								itemsData.map((item, index) => {
+								return (
+									<div
+										id={`test${index}`}
+										key={index}
+										onClick={this.switchItem(`${index}`)}
+										className={
+											styles.item + ' ' +
+											(index === activeObject ? styles.isSelected : '')
+											}
+										>
+										<Row>
+											<Column occupy={6}>
+												<span>{item.title}</span>
+											</Column>
+											<Column occupy={3}>
+												<h4>{item.type} {item.subType ? '/ ' + item.subType : ''}</h4>
+											</Column>
+											<Column occupy={3}>
+												<Button
+													type="text"
+													content="View"
+													onClickProps={this.switchItem(index)}
+													/>
+											</Column>
+										</Row>
+									</div>
+								);
+							})
+							}
+							</div>
+						</Column>
+							<Column occupy={9}>
+									{this.getActiveItemDetail()}
+							</Column>
+					</Row>
+
 					</Section>
+					</span>
 				);
 			default:
 				return (
 					<Section hasPadding >
+							<Row>
+								<Column occupy={3}>
+									<div className={styles.largeIconWrap}>
+										<span dangerouslySetInnerHTML={{__html: iconObject}} />
+									</div>
+								</Column>
+								<Column occupy={3}>
+									<div className={styles.largeIconWrap}>
+										<span dangerouslySetInnerHTML={{__html: iconPage}} />
+									</div>
+								</Column>
+								<Column occupy={3}>
+									<div className={styles.largeIconWrap}>
+										<span dangerouslySetInnerHTML={{__html: iconSection}} />
+									</div>
+								</Column>
+								<Column occupy={3}>
+									<div className={styles.largeIconWrap}>
+										<span dangerouslySetInnerHTML={{__html: iconItem}} />
+									</div>
+								</Column>
+							</Row>
 						<ButtonGroup
 							type={'hero'}
 							hasData
 							optionData={buttonGroupData}
-							onClickProps={this.switchSection}
+							onClickProps={this.switchType}
 							classNameProps={['buttonCount4']}
 							/>
 					</Section>
@@ -307,16 +373,29 @@ export default class DevContent extends Component {
 		}
 		let item = objectData[objectRef];
 		if (item) {
+			let pageListData = item.pages.map((page) => {
+						return (
+							{label: page.title}
+						);
+					});
+			console.log(pageListData);
 			return (
 					<Section hasPadding>
-						<Button
-							content="Close"
-							onClickProps={this.switchObject('null')}
-							classNameProps={['hollow']}
-							icon="cross"
-							iconColor={'black'}
-							iconSize={12}
-						/>
+						<Row>
+							<Column occupy={9}>
+								<h2>{item.title}</h2>
+							</Column>
+							<Column occupy={3}>
+								<Button
+									content="Close"
+									onClickProps={this.switchObject('null')}
+									classNameProps={['hollow']}
+									icon="cross"
+									iconColor={'black'}
+									iconSize={12}
+								/>
+							</Column>
+						</Row>
 						<HorizontalRule />
 						<Row>
 							<Column occupy={3}>
@@ -331,17 +410,16 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text', 'actionItem']} />
+											<Button type="text" content="edit" classNameProps={['text']} />
 										</div>
 										<Button
 											type="text"
 											content="Copy to New..."
-											classNameProps={['text', 'actionItem']}
+											classNameProps={['text']}
 										/>
 								</div>
 							</Column>
 						</Row>
-						<HorizontalRule />
 						<Row>
 							<Column occupy={3} />
 							<Column occupy={3}>
@@ -366,7 +444,7 @@ export default class DevContent extends Component {
 										item.tags.map((tag, index) => {
 											console.log(index);
 											return (
-											<span className={styles.tag}>
+											<span className={styles.tag} key={index}>
 												{tag}
 											</span>
 											);
@@ -392,22 +470,22 @@ export default class DevContent extends Component {
 							{
 								item.pages.map((section, index) => {
 									return (
-											<Row key={index}>
-												<Column occupy={3}>
-														{section.title}
-												</Column>
-												<Column occupy={6}>
-														{section.templateName || ''}
-												</Column>
-												<Column occupy={3}>
-														<Button type="text" content="view" />
-												</Column>
-											</Row>
+										<Row key={index}>
+											<Column occupy={3}>
+													{section.title}
+											</Column>
+											<Column occupy={6}>
+													{section.templateName || ''}
+											</Column>
+											<Column occupy={3}>
+													<Button type="text" content="view" />
+											</Column>
+										</Row>
 									);
 								})
 							}
 						</Row>
-						<div className={styles.preview} style={{margin: '0 -8px'}}>
+						<div className={styles.preview}>
 							<ObjectInfo
 								title={'{OBJECT KNOWNAS WILL APPEAR}'}
 								type={item.type.toLowerCase()}
@@ -417,15 +495,175 @@ export default class DevContent extends Component {
 								<div className={styles.previewNav}>
 									<SubNavWrap
 									key={'layoutNav1'}
-									listData={[
-										{label: item.pages[0].title},
-										{label: item.pages[1].title},
-										{label: item.pages[2].title},
-										{label: item.pages[3].title},
-										{label: item.pages[4].title}
-									]}
+									listData={pageListData}
 								/>
 								</div>
+							</Section>
+						</div>
+						<div className={styles.code} >
+							<pre>{ JSON.stringify(item, null, 2) }</pre>
+						</div>
+					</Section>
+			);
+		} else {
+			return (
+				<Section hasPadding>
+					<p className={styles.description}>
+						No content Loaded. Select a template item.
+					</p>
+				</Section>
+			);
+		}
+	}
+
+	getActiveSectionDetail = () => {
+		const { activeSection } = this.state;
+		console.log(sectionsData);
+		console.log('activeSection is: ', activeSection);
+		let sectionRef;
+		if (isNaN(activeSection)) {
+			console.log('Nan');
+			return false;
+			}
+		if (activeSection) {
+			sectionRef = activeSection.replace('object', '');
+			console.log('ref is: ', sectionRef);
+		}
+		let item = sectionsData[sectionRef];
+		if (item) {
+			let itemListData = item.items.map((thisItem) => {
+						return (
+							{label: thisItem.title}
+						);
+					});
+			console.log(itemListData);
+			return (
+					<Section hasPadding>
+						<Row>
+							<Column occupy={9}>
+								<h2>{item.title}</h2>
+							</Column>
+							<Column occupy={3}>
+								<Button
+									content="Close"
+									onClickProps={this.switchSection('null')}
+									classNameProps={['hollow']}
+									icon="cross"
+									iconColor={'black'}
+									iconSize={12}
+								/>
+							</Column>
+						</Row>
+						<HorizontalRule />
+						<Row>
+							<Column occupy={3}>
+								<h4>Type</h4>
+								<span>Content Section</span>
+							</Column>
+							<Column occupy={6}>
+								<h4>title</h4>
+								<span>{item.title}</span>
+								<h4>Description</h4>
+								<span>{item.description}</span>
+							</Column>
+							<Column occupy={2}>
+								<div>
+										<div>
+											<Button type="text" content="edit" classNameProps={['text', 'actionItem']} />
+										</div>
+										<Button
+											type="text"
+											content="Copy to New..."
+											classNameProps={['text', 'actionItem']}
+										/>
+								</div>
+							</Column>
+						</Row>
+						<Row>
+							<Column occupy={3} />
+							<Column occupy={3}>
+								<h4>Type</h4>
+								<div>{item.type}</div>
+								<h4>Sub-Type</h4>
+								<div>{item.subType}</div>
+							</Column>
+							<Column occupy={3}>
+								<h4>Version</h4>
+								<div>{item.version}</div>
+								<h4>CREATED</h4>
+								<div>{moment(Number(item.createdDate)).format('DD MMM, YYYY')}</div>
+
+								<h4>BY</h4>
+								<div>{item.createdByName}</div>
+							</Column>
+							<Column occupy={3}>
+								<h4>tags</h4>
+								<div>
+									{
+										item.tags && item.tags.map((tag, index) => {
+											console.log(index);
+											return (
+											<span className={styles.tag} key={index}>
+												{tag}
+											</span>
+											);
+										})
+									}
+								</div>
+							</Column>
+						</Row>
+						<HorizontalRule />
+						<Row>
+						<h4>pages</h4>
+							<Row>
+								<Column occupy={3}>
+									{<h4>Name</h4>}
+								</Column>
+								<Column occupy={6}>
+									{<h4>Template</h4>}
+								</Column>
+								<Column occupy={3}>
+									{<h4>View</h4>}
+								</Column>
+							</Row>
+							{
+								item.items.map((section, index) => {
+									return (
+										<Row key={index}>
+											<Column occupy={3}>
+													{section.title}
+											</Column>
+											<Column occupy={6}>
+													{section.templateName || ''}
+											</Column>
+											<Column occupy={3}>
+													<Button type="text" content="view" />
+											</Column>
+										</Row>
+									);
+								})
+							}
+						</Row>
+						<div className={styles.preview} style={{margin: '0 -8px'}}>
+							<Section
+								hasBorder
+								hasPadding
+								title={item.title}
+								description={item.description}
+								templateMode
+							>
+							{
+								item.items.map((thisItem) => {
+									return (
+										<ContentItem
+											title={thisItem.title}
+											description={thisItem.description}
+											templateMode
+											hasBackground
+											/>
+									);
+								})
+							}
 							</Section>
 						</div>
 						<div className={styles.code} style={{margin: '0px -8px -24px'}}>
@@ -444,9 +682,148 @@ export default class DevContent extends Component {
 		}
 	}
 
-	switchSection = (currentSection) => {
+	getActiveItemDetail = () => {
+		const { activeItem } = this.state;
+		let itemRef;
+		if (isNaN(activeItem)) {
+			console.log('Nan');
+			return false;
+			}
+		if (activeItem) {
+			itemRef = activeItem.replace('object', '');
+			console.log('ref is: ', itemRef);
+		}
+		let item = itemsData[itemRef];
+		if (item) {
+			console.log(item);
+			return (
+				<div className={styles.detail}>
+					<Section hasPadding>
+						<Row>
+							<Column occupy={9}>
+								<h2>{item.title}</h2>
+							</Column>
+							<Column occupy={3}>
+							<Button
+								content="Close"
+								onClickProps={this.switchItem('null')}
+								classNameProps={['hollow']}
+								icon="cross"
+								iconColor={'black'}
+								iconSize={12}
+							/>
+							</Column>
+						</Row>
+						<HorizontalRule />
+						<Row>
+							<Column occupy={3}>
+								<h4>Type</h4>
+								<span>Content Section</span>
+							</Column>
+							<Column occupy={6}>
+								<h4>title</h4>
+								<span>{item.title}</span>
+								<h4>Description</h4>
+								<span>{item.description}</span>
+							</Column>
+							<Column occupy={2}>
+								<div>
+										<div>
+											<Button type="text" content="edit" classNameProps={['text', 'actionItem']} />
+										</div>
+										<Button
+											type="text"
+											content="Copy to New..."
+											classNameProps={['text', 'actionItem']}
+										/>
+								</div>
+							</Column>
+						</Row>
+						<Row>
+							<Column occupy={3} />
+							<Column occupy={3}>
+								<h4>Type</h4>
+								<div>{item.type}</div>
+								<h4>Sub-Type</h4>
+								<div>{item.subType}</div>
+							</Column>
+							<Column occupy={3}>
+								<h4>Version</h4>
+								<div>{item.version}</div>
+								<h4>CREATED</h4>
+								<div>{moment(Number(item.createdDate)).format('DD MMM, YYYY')}</div>
+
+								<h4>BY</h4>
+								<div>{item.createdByName}</div>
+							</Column>
+							<Column occupy={3}>
+								<h4>tags</h4>
+								<div>
+									{
+										item.tags && item.tags.map((tag, index) => {
+											console.log(index);
+											return (
+											<span className={styles.tag} key={index}>
+												{tag}
+											</span>
+											);
+										})
+									}
+								</div>
+							</Column>
+						</Row>
+						<HorizontalRule />
+						<h4>pages</h4>
+						<Row>
+							<Column occupy={3}>
+								{<h4>Name</h4>}
+							</Column>
+							<Column occupy={6}>
+								{<h4>Template</h4>}
+							</Column>
+							<Column occupy={3}>
+								{<h4>View</h4>}
+							</Column>
+						</Row>
+						<div className={styles.preview} style={{margin: '0 -8px'}}>
+							{
+								item.components.map((component, index) => {
+									console.log(component);
+									return (
+										<ContentItem
+											title={item.title || null}
+											description={item.description || null}
+											helpContent={item.helpContent || null}
+											key={index}
+											hasBorder
+											templateMode
+											>
+											{this.rehydrateJSON(component.component, component.props)}
+										</ContentItem>
+									);
+								})
+							}
+						</div>
+						<div className={styles.code} style={{margin: '0px -8px -24px'}}>
+							<pre>{ JSON.stringify(item, null, 2) }</pre>
+						</div>
+					</Section>
+				</div>
+			);
+		} else {
+			return (
+				<Section hasPadding>
+					<p className={styles.description}>
+						No content Loaded. Select a template item.
+					</p>
+				</Section>
+			);
+		}
+	}
+
+	switchType = (currentSection) => {
 		return () => {
-			this.setState({ activeSection: currentSection });
+			this.setState({ activeType: currentSection });
 		};
 	}
 	switchObject = (currentObject) => {
@@ -461,6 +838,65 @@ export default class DevContent extends Component {
 				console.log('setting activeObject = ', currentObject);
 				this.setState({ activeObject: currentObject });
 			};
+		}
+	}
+
+	switchSection = (currentSection) => {
+		if (currentSection === 'null') {
+			return () => {
+				console.log('setting activeSection = ', currentSection);
+				this.setState({ activeSection: null });
+			};
+		}
+		if (currentSection) {
+			return () => {
+				console.log('setting activeSection = ', currentSection);
+				this.setState({ activeSection: currentSection });
+			};
+		}
+	}
+
+	switchItem = (currentItem) => {
+		if (currentItem === 'null') {
+			return () => {
+				console.log('setting activeSection = ', currentItem);
+				this.setState({ activeItem: null });
+			};
+		}
+		if (currentItem) {
+			return () => {
+				console.log('setting activeSection = ', currentItem);
+				this.setState({ activeItem: currentItem });
+			};
+		}
+	}
+
+	rehydrateJSON = (obj, props) => {
+		// const ComponentTypes = {InputText, InputSwitch, Info};
+		// let Type = ComponentTypes[obj.component];
+		console.log(props);
+		console.log(props.value);
+		console.log(obj);
+		switch (obj) {
+			case 'Info':
+				return (
+					<Info content={props.value} />
+				);
+			case 'InputText' :
+			return (
+				<InputText
+					placeholder={props.placeholder}
+					classnameProps={props.classNameProps}
+				/>
+			);
+			case 'InputSwitch' :
+			return (
+				<InputSwitch />
+			);
+			default:
+				return (
+				<span>xxx</span>
+			);
 		}
 	}
 

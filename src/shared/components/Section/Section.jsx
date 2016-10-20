@@ -17,6 +17,7 @@ export default class Section extends Component {
 		hasBackground: React.PropTypes.bool,
 		hasBorder: React.PropTypes.bool,
 		hasPadding: React.PropTypes.bool,
+		templateMode: React.PropTypes.bool,
 		isLoading: React.PropTypes.bool,
 		isError: React.PropTypes.bool,
 		loadingMessage: React.PropTypes.string,
@@ -38,6 +39,7 @@ export default class Section extends Component {
 			hasBackground,
 			hasBorder,
 			hasPadding,
+			templateMode,
 			isLoading,
 			loadingMessage,
 			isError,
@@ -55,7 +57,8 @@ export default class Section extends Component {
 			[styles.hasDivider]: hasDivider,
 			[styles.hasBackground]: hasBackground,
 			[styles.hasBorder]: hasBorder,
-			[styles.hasPadding]: hasPadding
+			[styles.hasPadding]: hasPadding,
+			[styles.templateMode]: templateMode
 		});
 
 		classes = classNameProps.slice();

@@ -20,6 +20,7 @@ isValid					|	`bool`		|	false	|	indicated this contentItem is valid and complete
 hasDivider			|	`bool`		|	false	|	puts a line above the contentItem
 hasBackground		|	`bool`		|	false	|	controls whether a background is to be shown
 hasPadding			|	`bool`		|	true	|	adds 8px padding above & below. (set to false when running contentItems without titles)
+templateMode		|	`bool`		|	false	|	adss dashed border etc for when setting up
 validationError	|	`bool`		|	false	|	when true the component will show the content error message
 validationMissing	|	`bool`		|	false	|	when true the component will show the missing content error
 validationMessageError		|	`string`	|	-	|	message to appear if input is invalid

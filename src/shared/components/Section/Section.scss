@@ -88,6 +88,9 @@
 	&.hasDivider{
 		margin-top: 40px;
 	}
+	&.templateMode{
+		border: 1px dashed #ccc;
+	}
 	// SECTION PROPS
 	&.notSelected{
 		opacity: 0;

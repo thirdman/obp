@@ -31,8 +31,20 @@ export default class Summary extends Component {
 							{mappedChildren.layoutHeader || null}
 						</div>
 					</Row>}
+				{mappedChildren.layoutHero &&
 				<Row>
-					<div className={styles.content}>
+					<div className={styles.hero} id="layoutHero">
+						{mappedChildren.layoutHero || null}
+					</div>
+				</Row>}
+
+				<Row>
+					<div
+						className={cx(
+							styles.content,
+							(mappedChildren.layoutSecondary ? styles.hasSecondary : styles.noSecondary)
+							)}
+					>
 						{mappedChildren.layoutNav &&
 							<div className={styles.navWrap}>
 								<div className={styles.nav} id="layoutNav">
