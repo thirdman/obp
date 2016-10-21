@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import cx from 'classnames';
 // import { Breadcrumbs } from 'components';
-// import Tab from './components/Tab';
+import Tab from './components/Tab';
+
+// import Tab from './tab';
+// import * as util from '../js/lib/util';
 
 const PropTypes = React.PropTypes;
+// const tabsBarClass = 'tabsBar';
+// const tabsBarJustifiedClass = 'tabsBarJustified';
+// const tabsPaneClass = 'tabsPane';
+// const isActiveClass = 'isActive';
+
 const styles = require('./Tabs.scss');
 
-export default class Tabs extends Component {
-/*
+class Tabs extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {currentSelectedIndex: props.initialSelectedIndex};
+    this.state = {currentSelectedIndex: props.initialSelectedIndex};
   }
-*/
 
   static propTypes = {
     initialSelectedIndex: PropTypes.number,
@@ -22,17 +28,16 @@ export default class Tabs extends Component {
 
   static defaultProps = {
     className: '',
+    initialSelectedIndex: 0,
     justified: false,
     onChange: null
   };
-	state ={
-		currentSelectedIndex: this.props.initialSelectedIndex
-	}
+
   onClick(i, tab, ev) {
-		// console.log('tab was clicked');
-		// console.log('this: ', this);
-		// console.log(i, tab, ev);
-		// console.log('this.state.currentSelectedIndex: ', this.state.currentSelectedIndex);
+		console.log('tab was clicked');
+		console.log('this: ', this);
+		console.log(i, tab, ev);
+		console.log('this.state.currentSelectedIndex: ', this.state.currentSelectedIndex);
     if (i !== this.state.currentSelectedIndex) {
       this.setState({currentSelectedIndex: i});
 
@@ -49,35 +54,38 @@ export default class Tabs extends Component {
   }
 
   render() {
-		const {
-			children,
-			initialSelectedIndex,
-			justified,
-			...reactProps
-			} = this.props;
+	const {
+		children,
+		initialSelectedIndex,
+		justified,
+		...reactProps
+		} = this.props;
 
+		console.log(initialSelectedIndex);
+		let tabEls = [];
+    let paneEls = [];
 		let m = children.length;
     let selectedIndex = this.state.currentSelectedIndex % m;
+		// let selectedIndex = this.state.currentSelectedIndex;
+    // let selectedIndex = 0;
 		let isActive;
-		// let item;
+		let item;
 		// let cls;
-		// let i;
-		console.log('does it havea initialSelectedIndex? ', initialSelectedIndex);
-		if (initialSelectedIndex) {
-			selectedIndex = initialSelectedIndex;
-		}
+		let i;
+
 		let theTabs = children.map((child, index) => {
 			isActive = (index === selectedIndex) || false;
 			return (
 				<li key={index} className={(isActive ? styles.isActive : '')}>
-          <a onClick={() => this.onClick(index, child, event)}>
+          <a onClick={() => this.onClick(index, item, event)}>
 						{child.props.label}
           </a>
         </li>
 				);
 			});
-
+		console.log(theTabs);
 		let thePanels = children.map((child, index) => {
+			console.log(child);
 			isActive = (index === selectedIndex) || false;
 			return (
         <div key={index} className={cx(styles.tabsPane, (isActive ? styles.isActive : ''))}>
@@ -85,20 +93,50 @@ export default class Tabs extends Component {
         </div>
 				);
 			});
+		console.log(thePanels);
 
-/*
 		for (i = 0; i < m; i++) {
 			console.log('currently selected index is ', this.state.currentSelectedIndex);
 			item = children[i];
 			console.log(item);
-
-      // legacy wrning, refactor out? Needs to check if it's a real tab
+      // only accept MUITab elements
       if (item.type.displayName !== Tab) console.info('Expecting MUITab React Element');
 
       isActive = (i === selectedIndex) || false;
-    }
+
+      // tab element
+/*
+      tabEls.push(
+        <li key={i} className={(isActive ? styles.isActive : '')}>
+          <a onClick={this.onClick.bind(this, i, item)}>
+						{item.props.label}
+          </a>
+        </li>
+      );
 */
+
+      // pane element
+      // cls = tabsPaneClass + ' ';
+      // if (isActive) cls += isActiveClass;
+
+/*
+      paneEls.push(
+        <div key={i} className={cx(styles.tabsPane, (isActive ? styles.isActive : ''))}>
+          <span>{item.props.children}</span>
+        </div>
+      );
+*/
+    }
+console.log(tabEls, paneEls);
     return (
+/*
+      <div {...reactProps}>
+        <ul className={cx(styles.tabsBar, (justified ? styles.tabsBarJustified : ''))}>
+          {tabEls}
+        </ul>
+        {paneEls}
+      </div>
+*/
       <div {...reactProps}>
         <ul className={cx(styles.tabsBar, (justified ? styles.tabsBarJustified : ''))}>
           {theTabs}
@@ -108,3 +146,6 @@ export default class Tabs extends Component {
     );
   }
 }
+
+
+export default Tabs;

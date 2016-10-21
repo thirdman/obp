@@ -20,6 +20,4 @@ class Tab extends React.Component {
   }
 }
 
-
-/** Define module API */
 export default Tab;

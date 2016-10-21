@@ -1,0 +1,69 @@
+@import "../../globals/styles/_global.scss";
+
+.tabsBar {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  background-color: transparent;
+  white-space: nowrap;
+  overflow-x: auto;
+  margin-bottom: 8px;
+  border-bottom: 1px solid $nomosGrey;
+  margin-left: -24px;
+  margin-right: -24px;
+
+  > li {
+    display: inline-block;
+
+    > a {
+      display: block;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: default;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 24px;
+      padding-right: 24px;
+      user-select: none;
+			color: $nomosBlue;
+      &:hover {
+        text-decoration: none;
+      }
+      cursor: pointer;
+    }
+
+    &.isActive {
+      border-bottom: 2px solid $nomosGrey;
+
+      > a {
+         color: $nomosBlack;
+      }
+    }
+  }
+
+  &.tabsBarJustified {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+
+    > li {
+      display: table-cell;
+
+      > a {
+        text-align: center;
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+    }
+  }
+}
+
+.tabsPane {
+  display: none;
+
+  &.isActive {
+    display: block;
+  }
+}

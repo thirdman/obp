@@ -13,19 +13,26 @@ module.exports = {
 			tags: ['Lease', 'New Zealand'],
 			pages: [
 				{
-					title: 'Parties'
+					title: 'Parties',
+					templateId: 2221
 				}, {
-					title: 'Property'
+					title: 'Property',
+					templateId: 2222
 				}, {
-					title: 'Rent'
+					title: 'Rent',
+					templateId: 2222
 				}, {
-					title: 'Payments'
+					title: 'Payments',
+					templateId: 2222
 				}, {
-					title: 'Events'
+					title: 'Events',
+					templateId: 2222
 				}, {
-					title: 'Other Info'
+					title: 'Other Info',
+					templateId: 2223
 				}, {
-					title: 'Access'
+					title: 'Access',
+					templateId: 2222
 				}
 			],
 			description: 'Standard nomos one lease agreement' // eslint-disable-line max-len
@@ -45,18 +52,23 @@ module.exports = {
 			pages: [
 				{
 					title: 'Parties',
-					templateName: 'Parties Selection'
+					templateName: 'Parties Selection',
+					id: 2221
 				}, {
 					title: 'Property',
-					templateName: 'Agreement Property Template'
+					templateName: 'Agreement Property Template',
+					templateId: 2221
 				}, {
 					title: 'Rent',
-					templateName: 'default Rent template'
+					templateName: 'default Rent template',
+					templateId: 2222
 				}, {
 					title: 'Payments',
+					templateId: 2222
 				}, {
 					title: 'Events',
-					templateName: 'Standard Events template'
+					templateName: 'Standard Events template',
+					templateId: 2222
 				}
 			],
 			description: 'Standard office lease as created by Propsrty Council New Zealand' // eslint-disable-line max-len
@@ -75,16 +87,99 @@ module.exports = {
 			pages: [
 				{
 					title: 'Location',
-					templateName: 'default Location'
+					templateName: 'default Location',
+					templateId: 2223
 				}, {
 					title: 'Address',
-					templateName: 'default Address Template'
+					templateName: 'default Address Template',
+					templateId: 2221
 				}, {
 					title: 'Area & Size',
-					templateName: 'default Area/Size template'
+					templateName: 'default Area/Size template',
+					templateId: 2221
 				}, {
 					title: 'Events',
-					templateName: 'Property Events template'
+					templateName: 'Property Events template',
+					templateId: 2223
+				}
+			]
+		}
+	],
+	thePageData: [
+		{
+			id: 2221,
+			type: 'Page',
+			title: 'Parties',
+			description: 'Default parties selection screen', // eslint-disable-line max-len
+			version: '1.0',
+			createdByName: 'David Bromley',
+			createdDate: 1476759075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476759075104,
+			tags: ['Agreements', 'Parties', 'Component'],
+			sections: [
+				{
+					templateName: 'Component Loader',
+					title: 'Loader',
+					type: 'loader',
+					description: 'Section that loads the appropriate component',
+					component: 'PartiesSelect',
+					templateId: 119
+				}
+			]
+		}, {
+			id: 2222,
+			type: 'Page',
+			title: 'Rent',
+			description: 'Default Agreement Rent selection screen', // eslint-disable-line max-len
+			version: '1.0',
+			createdByName: 'David Bromley',
+			createdDate: 1476759045104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476459075104,
+			tags: ['Agreements', 'Rent', 'Component'],
+			sections: [
+				{
+					templateName: 'Component Loader',
+					title: 'Loader',
+					type: 'loader',
+					description: 'Section that loads the appropriate component',
+					component: 'RentSelect',
+					templateId: 120
+				}
+			]
+		}, {
+			id: 2223,
+			type: 'Page',
+			title: 'Other Info',
+			description: 'Default page for miscellaneous Info', // eslint-disable-line max-len
+			version: '1.0',
+			createdByName: 'David Bromley',
+			createdDate: 1476759075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476759075104,
+			tags: ['Agreements', 'Template'],
+			sections: [
+				{
+					templateName: 'Agreement Additional Information',
+					title: 'Additional Information',
+					type: 'section',
+					description: 'this first section of addtional information',
+					templateId: 119
+				},
+				{
+					templateName: 'Agreement Financial Information',
+					title: 'Financial Information',
+					type: 'section',
+					description: 'Allows users to enter financial information about their agreement (default)', // eslint-disable-line
+					templateId: 120
+				},
+				{
+					templateName: 'Agreement Author Information',
+					title: 'Additional Authors',
+					type: 'section',
+					description: 'Allows users to enter information about who drafted the agreement',
+					templateId: 122
 				}
 			]
 		}
@@ -111,19 +206,21 @@ module.exports = {
 			description: 'first section of the Event process',
 			createdByName: 'David Bromley',
 			createdDate: 1476759075104,
-			lastEditedName: 'David Bromley',
+			lastEditedName: 'Gareth Bedford',
 			lastEditedDate: 1476759075104,
 			items: [
 				{
 					templateName: 'Event Summary',
 					title: 'Summary',
 					type: 'Info',
-					description: 'Summary information for the process'
+					description: 'Summary information for the process',
+					templateId: 12
 				}, {
 					templateName: 'Event Summary Buttons',
 					title: 'Buttons',
 					type: 'Button',
-					description: 'buttons to dismiss the event'
+					description: 'buttons to dismiss the event',
+					templateId: 13
 				}
 			],
 		}, {
@@ -134,19 +231,21 @@ module.exports = {
 			description: 'Shows what has changed in the event',
 			createdByName: 'David Bromley',
 			createdDate: 1476759075104,
-			lastEditedName: 'David Bromley',
+			lastEditedName: 'Gareth Bedford',
 			lastEditedDate: 1476759075104,
 			items: [
 				{
 					templateName: 'Event Change title',
 					title: 'Summary',
 					type: 'Info',
+					templateId: 14
 				}, {
 					templateName: 'Event Summary List',
 					title: 'list',
 					type: 'container',
 					componentRef: 'eventListChanges',
-					description: 'Loads changes to the event'
+					description: 'Loads changes to the event',
+					templateId: 13
 				}
 			],
 		}, {
@@ -163,13 +262,15 @@ module.exports = {
 				{
 					templateName: 'Event Documentation title',
 					title: 'Documentation',
-					type: 'Info'
+					type: 'Info',
+					templateId: 13
 				}, {
 					templateName: 'Event Documentation',
 					title: 'event docs',
 					type: 'container',
 					componentRef: 'eventDocSelect',
-					description: 'loads the interface for selecting documents'
+					description: 'loads the interface for selecting documents',
+					templateId: 14
 				}
 			],
 		}
