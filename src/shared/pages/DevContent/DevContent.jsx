@@ -27,14 +27,18 @@ import dataButtons from './containers/dataButtons.jsx';
 const buttonGroupData = dataButtons.buttonGroupData2;
 const objectData = theData.objectData;
 const pagesData = theData.thePageData;
-const sectionsData = theData.sectionsData;
-const itemsData = theData.itemsData;
+// const sectionsData = theData.sectionsData;
+// const itemsData = theData.itemsData;
+const sectionsJson = theData.sectionsJson;
+const itemsJson = theData.itemsJson;
 
 const styles = require('./DevContent.scss');
 const iconObject = require('./images/object.svg');
 const iconPage = require('./images/page.svg');
 const iconSection = require('./images/section.svg');
 const iconItem = require('./images/item.svg');
+
+console.log(itemsJson);
 
 export default class DevContent extends Component {
 
@@ -81,6 +85,8 @@ export default class DevContent extends Component {
 
 	getActiveContentSection() {
 		const { activeType, activeObject } = this.state;
+		let itemsDataArray = Object.values(itemsJson);
+		let sectionsDataArray = Object.values(sectionsJson);
 		let hasDetailPageOpen;
 		let hasDetailSectionOpen;
 		let hasDetailObjectOpen;
@@ -271,12 +277,13 @@ export default class DevContent extends Component {
 									<Column occupy={2} />
 								</Row>
 							{
-								sectionsData.map((item, index) => {
+								sectionsDataArray.map((item, index) => {
 								return (
 									<div
 										id={`test${index}`}
 										key={index}
-										onClick={this.switchSection(`${index}`)}
+										// onClick={this.switchSection(`${index}`)}
+										onClick={() => this.onViewDetail('section', item.id)}
 										className={
 											styles.item + ' ' +
 											(index === activeObject ? styles.isSelected : '')
@@ -293,7 +300,8 @@ export default class DevContent extends Component {
 												<Button
 													type="text"
 													content="View"
-													onClickProps={this.switchSection(index)}
+													// onClickProps={this.switchSection(index)}
+													onClickProps={() => this.onViewDetail('section', item.id)}
 													/>
 											</Column>
 										</Row>
@@ -318,6 +326,8 @@ export default class DevContent extends Component {
 					</span>
 				);
 			case 'item':
+			// console.log(itemsData);
+			// console.log(itemsDataArray);
 				return (
 					<span>
 						<Button
@@ -341,12 +351,14 @@ export default class DevContent extends Component {
 									<Column occupy={2} />
 								</Row>
 							{
-								itemsData.map((item, index) => {
+								itemsDataArray.map((item, index) => {
+								// console.log(item, index);
 								return (
 									<div
 										id={`test${index}`}
 										key={index}
-										onClick={this.switchItem(`${index}`)}
+										// onClick={this.switchItem(`${index}`)}
+										onClick={() => this.onViewDetail('item', item.id)}
 										className={
 											styles.item + ' ' +
 											(index === activeObject ? styles.isSelected : '')
@@ -363,7 +375,8 @@ export default class DevContent extends Component {
 												<Button
 													type="text"
 													content="View"
-													onClickProps={this.switchItem(index)}
+													// onClickProps={this.switchItem(index)}
+													onClickProps={() => this.onViewDetail('item', item.id)}
 													/>
 											</Column>
 										</Row>
@@ -774,18 +787,7 @@ export default class DevContent extends Component {
 
 	getActiveSectionDetail = () => {
 		const { activeSection } = this.state;
-		console.log(sectionsData);
-		console.log('activeSection is: ', activeSection);
-		let sectionRef;
-		if (isNaN(activeSection)) {
-			console.log('Nan');
-			return false;
-			}
-		if (activeSection) {
-			sectionRef = activeSection.replace('object', '');
-			console.log('ref is: ', sectionRef);
-		}
-		let item = sectionsData[sectionRef];
+		let item = sectionsJson[activeSection];
 		if (item) {
 			let itemListData = item.items.map((thisItem) => {
 						return (
@@ -954,16 +956,9 @@ export default class DevContent extends Component {
 
 	getActiveItemDetail = () => {
 		const { activeItem } = this.state;
-		let itemRef;
-		if (isNaN(activeItem)) {
-			console.log('Nan');
-			return false;
-			}
-		if (activeItem) {
-			itemRef = activeItem.replace('object', '');
-			console.log('ref is: ', itemRef);
-		}
-		let item = itemsData[itemRef];
+		console.log(this.state);
+		console.log('activeItem is: ', activeItem);
+		let item = itemsJson[activeItem];
 		if (item) {
 			return (
 				<div className={styles.detail}>
@@ -1099,6 +1094,13 @@ export default class DevContent extends Component {
 	onViewDetail = (target, templateId) => {
 		console.log('target & templateId:', target, templateId);
 		console.log('the current section is', this.state);
+				this.setState({
+					activeType: null,
+					activeObject: null,
+					activePage: null,
+					activeSection: null,
+					activeItem: null
+				});
 
 	switch (target) {
 			case 'object':
@@ -1118,11 +1120,12 @@ export default class DevContent extends Component {
 				});
 				break;
 			case 'section':
+				console.log('case is section');
 				this.setState({
 					activeType: 'section',
 					activeObject: null,
 					activePage: null,
-					activeSection: '1',
+					activeSection: templateId,
 					activeItem: null
 				});
 				break;
@@ -1133,7 +1136,7 @@ export default class DevContent extends Component {
 					activeObject: null,
 					activePage: null,
 					activeSection: null,
-					activeItem: '1'
+					activeItem: templateId
 				});
 				break;
 			default:
@@ -1194,6 +1197,19 @@ export default class DevContent extends Component {
 	}
 
 	switchItem = (currentItem) => {
+		console.log(itemsJson[currentItem]);
+		console.log('currentItem is', currentItem);
+		console.log(this.state);
+			return () => {
+				this.setState({
+					activeType: 'item',
+					activeObject: null,
+					activePage: null,
+					activeSection: null,
+					activeItem: '13'
+				});
+			};
+			/*
 		if (currentItem === 'null') {
 			return () => {
 				console.log('setting activeSection = ', currentItem);
@@ -1206,6 +1222,7 @@ export default class DevContent extends Component {
 				this.setState({ activeItem: currentItem });
 			};
 		}
+*/
 	}
 
 	rehydrateJSON = (obj, props) => {

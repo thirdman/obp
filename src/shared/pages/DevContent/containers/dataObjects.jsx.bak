@@ -184,8 +184,8 @@ module.exports = {
 			]
 		}
 	],
-	sectionsJson: {
-		119: {
+	sectionsData: [
+		{
 			id: 119,
 			type: 'section',
 			page: 'all',
@@ -198,8 +198,7 @@ module.exports = {
 			lastEditedDate: 1476749075104,
 			items: [
 			],
-		},
-		120: {
+		}, {
 			id: 120,
 			type: 'section',
 			page: 'events',
@@ -224,8 +223,7 @@ module.exports = {
 					templateId: 13
 				}
 			],
-		},
-		122: {
+		}, {
 			id: 122,
 			type: 'section',
 			page: 'events',
@@ -250,8 +248,7 @@ module.exports = {
 					templateId: 13
 				}
 			],
-		},
-		123: {
+		}, {
 			id: 123,
 			type: 'section',
 			page: 'events',
@@ -276,6 +273,66 @@ module.exports = {
 					templateId: 14
 				}
 			],
+		}
+	],
+	itemsData: {
+		12: {
+			id: 12,
+			type: 'text',
+			title: 'Text Input',
+			description: 'Default text input',
+			createdByName: 'David Bromley',
+			createdDate: 1476759075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476759075104,
+			components: [
+				{
+					component: 'InputText',
+					props: {
+						label: 'Test Label',
+						value: 'existing text value',
+						placeholder: 'clean style',
+						classNameProps: ['normal', 'space']
+					}
+				}
+			]
+		},
+		13: {
+			id: 13,
+			type: 'info',
+			title: 'Heading',
+			description: 'Default heading Item',
+			createdByName: 'David Bromley',
+			createdDate: 1476759075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476759075104,
+			components: [
+				{
+					component: 'Info',
+					props: {
+						value: 'Member since Jan 2014'
+					}
+				}
+			]
+		},
+		14: {
+			id: 14,
+			type: 'switch',
+			title: 'toggle',
+			description: 'Default Switch Item',
+			helpContent: 'Use this to save your settings',
+			createdByName: 'David Bromley',
+			createdDate: 1476759075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476759075104,
+			components: [
+				{
+					component: 'InputSwitch',
+					props: {
+						value: 'Save my settings'
+					}
+				}
+			]
 		}
 	},
 	itemsJson: {
