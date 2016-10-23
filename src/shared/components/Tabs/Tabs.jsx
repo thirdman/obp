@@ -62,7 +62,6 @@ export default class Tabs extends Component {
 		// let item;
 		// let cls;
 		// let i;
-		console.log('does it havea initialSelectedIndex? ', initialSelectedIndex);
 		if (initialSelectedIndex) {
 			selectedIndex = initialSelectedIndex;
 		}

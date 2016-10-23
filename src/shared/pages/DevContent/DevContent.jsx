@@ -21,14 +21,17 @@ import {
 	} from 'components';
 import Tab from 'components/Tabs/components/Tab';
 import { Header } from 'containers';
+import TemplateLine from './containers/TemplateLine';
 import theData from './containers/dataObjects.jsx';
 import dataButtons from './containers/dataButtons.jsx';
 
 const buttonGroupData = dataButtons.buttonGroupData2;
-const objectData = theData.objectData;
-const pagesData = theData.thePageData;
+// const objectData = theData.objectData;
+// const pagesData = theData.thePageData;
 // const sectionsData = theData.sectionsData;
 // const itemsData = theData.itemsData;
+const objectsJson = theData.objectsJson;
+const pagesJson = theData.pagesJson;
 const sectionsJson = theData.sectionsJson;
 const itemsJson = theData.itemsJson;
 
@@ -37,8 +40,6 @@ const iconObject = require('./images/object.svg');
 const iconPage = require('./images/page.svg');
 const iconSection = require('./images/section.svg');
 const iconItem = require('./images/item.svg');
-
-console.log(itemsJson);
 
 export default class DevContent extends Component {
 
@@ -85,8 +86,10 @@ export default class DevContent extends Component {
 
 	getActiveContentSection() {
 		const { activeType, activeObject } = this.state;
-		let itemsDataArray = Object.values(itemsJson);
+		let objectsDataArray = Object.values(objectsJson);
 		let sectionsDataArray = Object.values(sectionsJson);
+		let pagesDataArray = Object.values(pagesJson);
+		let itemsDataArray = Object.values(itemsJson);
 		let hasDetailPageOpen;
 		let hasDetailSectionOpen;
 		let hasDetailObjectOpen;
@@ -123,14 +126,15 @@ export default class DevContent extends Component {
 									<Column occupy={3} />
 								</Row>
 							{
-								objectData.map((item, index) => {
+								objectsDataArray.map((item, index) => {
 								return (
 									<div
 										id={`test${index}`}
 										key={index}
-										onClick={this.switchObject(`${index}`)}
+										// onClick={this.switchObject(`${index}`)}
+										onClick={() => this.onViewDetail('object', item.id)}
 										className={
-											styles.item + ' ' +
+											styles.rowItem + ' ' +
 											(index === activeObject ? styles.isSelected : '')
 											}
 										>
@@ -145,7 +149,8 @@ export default class DevContent extends Component {
 												<Button
 													type="text"
 													content="View"
-													onClickProps={this.switchObject(index)}
+													// onClickProps={this.switchObject(index)}
+													onClickProps={() => this.onViewDetail('object', item.id)}
 													/>
 											</Column>
 										</Row>
@@ -198,20 +203,22 @@ export default class DevContent extends Component {
 									<Column occupy={2} />
 								</Row>
 							{
-								pagesData.map((item, index) => {
+								pagesDataArray.map((item, index) => {
 								return (
 									<div
 										id={`test${index}`}
 										key={index}
-										onClick={this.switchPage(`${index}`)}
+										// onClick={this.switchPage(`${index}`)}
+										onClick={() => this.onViewDetail('page', item.templateId)}
+
 										className={
-											styles.item + ' ' +
+											styles.rowItem + ' ' +
 											(index === activeObject ? styles.isSelected : '')
 											}
 										>
 										<Row>
 											<Column occupy={6}>
-												<span>{item.title}</span>
+												<span>{item.title || item.templateName}</span>
 											</Column>
 											<Column occupy={3}>
 												<h4>{item.type} {item.subType ? '/ ' + item.subType : ''}</h4>
@@ -220,7 +227,8 @@ export default class DevContent extends Component {
 												<Button
 													type="text"
 													content="View"
-													onClickProps={this.switchPage(index)}
+													// onClickProps={this.switchPage(index)}
+													onClickProps={() => this.onViewDetail('page', item.templateId)}
 													/>
 											</Column>
 										</Row>
@@ -285,7 +293,7 @@ export default class DevContent extends Component {
 										// onClick={this.switchSection(`${index}`)}
 										onClick={() => this.onViewDetail('section', item.id)}
 										className={
-											styles.item + ' ' +
+											styles.rowItem + ' ' +
 											(index === activeObject ? styles.isSelected : '')
 											}
 										>
@@ -352,15 +360,13 @@ export default class DevContent extends Component {
 								</Row>
 							{
 								itemsDataArray.map((item, index) => {
-								// console.log(item, index);
 								return (
 									<div
 										id={`test${index}`}
 										key={index}
-										// onClick={this.switchItem(`${index}`)}
 										onClick={() => this.onViewDetail('item', item.id)}
 										className={
-											styles.item + ' ' +
+											styles.rowItem + ' ' +
 											(index === activeObject ? styles.isSelected : '')
 											}
 										>
@@ -375,7 +381,6 @@ export default class DevContent extends Component {
 												<Button
 													type="text"
 													content="View"
-													// onClickProps={this.switchItem(index)}
 													onClickProps={() => this.onViewDetail('item', item.id)}
 													/>
 											</Column>
@@ -433,25 +438,15 @@ export default class DevContent extends Component {
 
 	getActiveObjectDetail = () => {
 		const { activeObject } = this.state;
-		// console.log(objectData);
-		// console.log('activeObject is: ', activeObject);
-		// console.log('activeObject is: ', activeObject.replace('object', ''));
-		// console.log('activeObject.length is: ', activeObject.length);
-		let objectRef;
-		if (isNaN(activeObject)) {
-			console.log('Nan');
-			return false;
-			}
-		if (activeObject) {
-			objectRef = activeObject.replace('object', '');
-		}
-		let item = objectData[objectRef];
+		let item = objectsJson[activeObject];
 		if (item) {
+		// creates map for the SubNavWrap:
 			let pageListData = item.pages.map((page) => {
-						return (
-							{label: page.title}
-						);
-					});
+				return (
+					{label: page.title
+					}
+				);
+			});
 			return (
 					<div className={styles.detail}>
 						<Row>
@@ -461,7 +456,8 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 								<Button
 									content="Close"
-									onClickProps={this.switchObject('null')}
+									// onClickProps={this.switchObject('null')}
+									onClickProps={() => this.onViewDetail('null', null)}
 									classNameProps={['hollow']}
 									icon="cross"
 									iconColor={'black'}
@@ -605,19 +601,11 @@ export default class DevContent extends Component {
 
 	getActivePageDetail = () => {
 		const { activePage } = this.state;
-		let pageRef;
-		if (isNaN(activePage)) {
-			console.log('Nan');
-			return false;
-			}
-		if (activePage) {
-			pageRef = activePage.replace('object', '');
-			console.log('ref is: ', pageRef);
-		}
-		let item = pagesData[pageRef];
+		let item = pagesJson[activePage];
 		if (item) {
+			let itemsListArray = Object.values(item.sections);
 /*
-			let itemListData = item.sections.map((thisItem) => {
+			let itemsListData = itemsListArray.map((thisItem) => {
 						return (
 							{label: thisItem.title}
 						);
@@ -632,7 +620,7 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 								<Button
 									content="Close"
-									onClickProps={this.switchSection('null')}
+									onClickProps={() => this.onViewDetail('null', null)}
 									classNameProps={['hollow']}
 									icon="cross"
 									iconColor={'black'}
@@ -689,7 +677,7 @@ export default class DevContent extends Component {
 							</Column>
 							<Column occupy={3}>
 								<h4>ID</h4>
-								<div>{item.id}</div>
+								<div>{item.templateId}</div>
 								<h4>Version</h4>
 								<div>{item.version}</div>
 							</Column>
@@ -705,40 +693,31 @@ export default class DevContent extends Component {
 						<Row>
 						<h4>pages</h4>
 							<Row>
-								<Column occupy={3}>
+								<Column occupy={4}>
 									{<h4>Name</h4>}
 								</Column>
-								<Column occupy={6}>
-									{<h4>Template</h4>}
+								<Column occupy={5}>
+									{<h4>Template Type</h4>}
 								</Column>
 								<Column occupy={3}>
 									{<h4>View</h4>}
 								</Column>
 							</Row>
-							{
-								item.sections.map((section, index) => {
-									return (
-										<Row key={index}>
-											<Column occupy={3}>
-													{section.title}
-											</Column>
-											<Column occupy={6}>
-													{section.templateName || ''}
-											</Column>
-											<Column occupy={3}>
-													{section.templateId ?
-														<Button
-															type="text"
-															content={`View Section ${section.templateId}`}
-															onClickProps={() => this.onViewDetail('section', section.templateId)}
-														/>
-														: null
-													}
-											</Column>
-										</Row>
-									);
-								})
-							}
+							<Row>
+							<Column occupy={12} hasPadding={false}>
+								{
+									itemsListArray.map((childItem, childIndex) => {
+										return (
+											<TemplateLine
+												item={childItem}
+												templateId={item.templateId}
+												key={childIndex}
+											/>
+										);
+									})
+								}
+							</Column>
+							</Row>
 						</Row>
 					</Tab>
 					<Tab value="pane3" label="Preview">
@@ -751,7 +730,7 @@ export default class DevContent extends Component {
 								templateMode
 							>
 							{
-								item.sections.map((thisItem, index) => {
+								itemsListArray.map((thisItem, index) => {
 									return (
 										<ContentItem
 											key={index}
@@ -789,7 +768,8 @@ export default class DevContent extends Component {
 		const { activeSection } = this.state;
 		let item = sectionsJson[activeSection];
 		if (item) {
-			let itemListData = item.items.map((thisItem) => {
+			let itemsListArray = Object.values(item.items);
+			let itemListData = itemsListArray.map((thisItem) => {
 						return (
 							{label: thisItem.title}
 						);
@@ -804,7 +784,7 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 								<Button
 									content="Close"
-									onClickProps={this.switchSection('null')}
+									onClickProps={() => this.onViewDetail('null', null)}
 									classNameProps={['hollow']}
 									icon="cross"
 									iconColor={'black'}
@@ -885,7 +865,7 @@ export default class DevContent extends Component {
 								</Column>
 							</Row>
 							{
-								item.items.map((section, index) => {
+								itemsListArray.map((section, index) => {
 									return (
 										<Row key={index}>
 											<Column occupy={3}>
@@ -920,7 +900,7 @@ export default class DevContent extends Component {
 								templateMode
 							>
 							{
-								item.items.map((thisItem, index) => {
+								itemsListArray.map((thisItem, index) => {
 									return (
 										<ContentItem
 											key={index}
@@ -956,8 +936,6 @@ export default class DevContent extends Component {
 
 	getActiveItemDetail = () => {
 		const { activeItem } = this.state;
-		console.log(this.state);
-		console.log('activeItem is: ', activeItem);
 		let item = itemsJson[activeItem];
 		if (item) {
 			return (
@@ -969,7 +947,7 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 							<Button
 								content="Close"
-								onClickProps={this.switchItem('null')}
+								onClickProps={() => this.onViewDetail('null', null)}
 								classNameProps={['hollow']}
 								icon="cross"
 								iconColor={'black'}
@@ -1092,35 +1070,26 @@ export default class DevContent extends Component {
 	}
 
 	onViewDetail = (target, templateId) => {
-		console.log('target & templateId:', target, templateId);
-		console.log('the current section is', this.state);
+		switch (target) {
+			case 'object':
 				this.setState({
-					activeType: null,
-					activeObject: null,
+					activeType: 'object',
+					activeObject: templateId,
 					activePage: null,
 					activeSection: null,
 					activeItem: null
 				});
-
-	switch (target) {
-			case 'object':
-				console.log('case is object');
-				this.setState({
-					activeType: 'object'
-				});
 				break;
 			case 'page':
-				console.log('case is page');
 				this.setState({
 					activeType: 'page',
 					activeObject: null,
-					activePage: '1',
+					activePage: templateId,
 					activeSection: null,
 					activeItem: null
 				});
 				break;
 			case 'section':
-				console.log('case is section');
 				this.setState({
 					activeType: 'section',
 					activeObject: null,
@@ -1130,7 +1099,6 @@ export default class DevContent extends Component {
 				});
 				break;
 			case 'item':
-				console.log('case is item');
 				this.setState({
 					activeType: 'item',
 					activeObject: null,
@@ -1141,10 +1109,35 @@ export default class DevContent extends Component {
 				break;
 			default:
 				this.setState({
-					activeType: null
+					activeType: null,
+					activeObject: null,
+					activePage: null,
+					activeSection: null,
+					activeItem: null
 				});
-				break;
+			break;
 		}
+	}
+
+	getTemplateInfo = (templateId, items) => {
+		items = Object.values(items);
+		console.log('getting template id... ', templateId);
+		console.log('getting items... ', items);
+		return (
+				items.map((item, index) => {
+					return (
+						<div
+							className={styles.templateItem + ' ' + styles[item.templateDepth]}
+							key={index}>
+							<TemplateLine item={item} templateId={templateId} />
+							{item.items ?
+								this.getTemplateInfo(item.templateId, item.items)
+								: null
+							}
+						</div>
+					);
+				})
+		);
 	}
 
 	switchType = (currentSection) => {
@@ -1152,85 +1145,8 @@ export default class DevContent extends Component {
 			this.setState({ activeType: currentSection });
 		};
 	}
-	switchObject = (currentObject) => {
-		if (currentObject === 'null') {
-			return () => {
-				console.log('setting activeObject = ', currentObject);
-				this.setState({ activeObject: null });
-			};
-		}
-		if (currentObject) {
-			return () => {
-				console.log('setting activeObject = ', currentObject);
-				this.setState({ activeObject: currentObject });
-			};
-		}
-	}
-	switchPage = (currentPage) => {
-		if (currentPage === 'null') {
-			return () => {
-				console.log('setting activePage = ', currentPage);
-				this.setState({ activePage: null });
-			};
-		}
-		if (currentPage) {
-			return () => {
-				console.log('setting activePage = ', currentPage);
-				this.setState({ activePage: currentPage });
-			};
-		}
-	}
-
-	switchSection = (currentSection) => {
-		if (currentSection === 'null') {
-			return () => {
-				console.log('setting activeSection = ', currentSection);
-				this.setState({ activeSection: null });
-			};
-		}
-		if (currentSection) {
-			return () => {
-				console.log('setting activeSection = ', currentSection);
-				this.setState({ activeSection: currentSection });
-			};
-		}
-	}
-
-	switchItem = (currentItem) => {
-		console.log(itemsJson[currentItem]);
-		console.log('currentItem is', currentItem);
-		console.log(this.state);
-			return () => {
-				this.setState({
-					activeType: 'item',
-					activeObject: null,
-					activePage: null,
-					activeSection: null,
-					activeItem: '13'
-				});
-			};
-			/*
-		if (currentItem === 'null') {
-			return () => {
-				console.log('setting activeSection = ', currentItem);
-				this.setState({ activeItem: null });
-			};
-		}
-		if (currentItem) {
-			return () => {
-				console.log('setting activeSection = ', currentItem);
-				this.setState({ activeItem: currentItem });
-			};
-		}
-*/
-	}
 
 	rehydrateJSON = (obj, props) => {
-		// const ComponentTypes = {InputText, InputSwitch, Info};
-		// let Type = ComponentTypes[obj.component];
-		console.log(props);
-		console.log(props.value);
-		console.log(obj);
 		switch (obj) {
 			case 'Info':
 				return (
@@ -1253,14 +1169,4 @@ export default class DevContent extends Component {
 			);
 		}
 	}
-
-/*
-	onNavigate = (link) => {
-		console.log(this);
-		console.log(link);
-		return () => {
-			browserHistory.push('/dev/content/' + link);
-		};
-	}
-*/
 }

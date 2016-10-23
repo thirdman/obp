@@ -1,7 +1,7 @@
 module.exports = {
-	objectData: [
-		{
-			id: 1234,
+	objectsJson: {
+		1001: {
+			id: 1001,
 			type: 'Agreement',
 			subType: 'Lease',
 			subSubType: '',
@@ -11,6 +11,7 @@ module.exports = {
 			createdByName: 'David Bromley',
 			createdDate: 1476759075104,
 			tags: ['Lease', 'New Zealand'],
+			description: 'Standard nomos one lease agreement', // eslint-disable-line max-len
 			pages: [
 				{
 					title: 'Parties',
@@ -34,10 +35,10 @@ module.exports = {
 					title: 'Access',
 					templateId: 2222
 				}
-			],
-			description: 'Standard nomos one lease agreement' // eslint-disable-line max-len
-		}, {
-			id: 1235,
+			]
+		},
+		1002: {
+			id: 1002,
 			type: 'Agreement',
 			subType: 'Lease',
 			subSubType: '',
@@ -49,6 +50,7 @@ module.exports = {
 			provider: 'PCNZ',
 			createdDate: 1476759075104,
 			tags: ['PCNX', 'Lease', 'New Zealand'],
+			description: 'Standard office lease as created by Propsrty Council New Zealand', // eslint-disable-line max-len
 			pages: [
 				{
 					title: 'Parties',
@@ -70,10 +72,10 @@ module.exports = {
 					templateName: 'Standard Events template',
 					templateId: 2222
 				}
-			],
-			description: 'Standard office lease as created by Propsrty Council New Zealand' // eslint-disable-line max-len
-		}, {
-			id: 1236,
+			]
+		},
+		1003: {
+			id: 1003,
 			type: 'Property',
 			subType: 'Space',
 			subSubType: 'Retail',
@@ -104,10 +106,140 @@ module.exports = {
 				}
 			]
 		}
-	],
-	thePageData: [
-		{
-			id: 2221,
+	},
+	pagesJson: {
+		2220: {
+			templateId: 2220,
+			type: 'template',
+			templateName: 'Test Page',
+			templateDepth: 'page',
+			sections: {
+						119: {
+							templateId: 119,
+							type: 'template',
+							templateDepth: 'section',
+							title: 'Test Section',
+							// eslint-disable-next-line
+							description: 'A section to test out loading ...',
+							createdByName: 'David Bromley',
+							createdDate: 1476739075104,
+							lastEditedName: 'David Bromley',
+							lastEditedDate: 1476749075104,
+							items: {
+								12: {
+									type: 'template',
+									templateDepth: 'item',
+									templateId: 12,
+									templateName: 'Event Summary',
+									title: 'Summary',
+									description: 'an test tummary',
+									items: {
+										19: {
+											templateId: 19,
+											type: 'text',
+											templateDepth: 'component',
+											title: 'Text Input',
+											description: 'Default text input',
+											createdByName: 'David Bromley',
+											createdDate: 1476759075104,
+											lastEditedName: 'David Bromley',
+											lastEditedDate: 1476759075104,
+											component: 'InputText',
+												props: {
+												label: 'Test Label',
+												value: 'existing text value',
+												placeholder: 'clean style',
+												classNameProps: [
+													'normal',
+													'space'
+													]
+												}
+											}
+										}
+								},
+								13: {
+									type: 'template',
+									templateDepth: 'item',
+									templateId: 13,
+									templateName: 'Text Input',
+									title: 'Input',
+									description: 'Standard text input',
+									items: {
+										14: {
+											templateId: 14,
+											type: 'text',
+											templateDepth: 'component',
+											title: 'Text Input',
+											description: 'Default text input',
+											createdByName: 'David Bromley',
+											createdDate: 1476759075104,
+											lastEditedName: 'David Bromley',
+											lastEditedDate: 1476759075104,
+											component: 'InputText',
+												props: {
+												label: 'Test Label',
+												value: 'existing text value',
+												placeholder: 'clean style',
+												classNameProps: [
+													'normal',
+													'space'
+													]
+												}
+											}
+										}
+								}
+							},
+						},
+						125: {
+							templateId: 125,
+							type: 'template',
+							templateDepth: 'section',
+							title: 'ANother example section',
+							// eslint-disable-next-line
+							description: 'A section to test out loading ...',
+							createdByName: 'David Bromley',
+							createdDate: 1476739075104,
+							lastEditedName: 'David Bromley',
+							lastEditedDate: 1476749075104,
+							items: {
+								12: {
+									type: 'template',
+									templateDepth: 'item',
+									templateId: 12,
+									templateName: 'Event Summary',
+									title: 'Summary',
+									description: 'Summary information for the process',
+									items: {
+										18: {
+											templateId: 18,
+											type: 'text',
+											templateDepth: 'component',
+											title: 'Text Input',
+											description: 'Default text input',
+											createdByName: 'David Bromley',
+											createdDate: 1476759075104,
+											lastEditedName: 'David Bromley',
+											lastEditedDate: 1476759075104,
+											component: 'InputText',
+												props: {
+												label: 'Test Label',
+												value: 'existing text value',
+												placeholder: 'clean style',
+												classNameProps: [
+													'normal',
+													'space'
+													]
+												}
+											}
+										}
+								}
+							},
+						}
+			}
+		},
+		2221: {
+			templateId: 2221,
+			templateDepth: 'page',
 			type: 'Page',
 			title: 'Parties',
 			description: 'Default parties selection screen', // eslint-disable-line max-len
@@ -117,18 +249,21 @@ module.exports = {
 			lastEditedName: 'David Bromley',
 			lastEditedDate: 1476759075104,
 			tags: ['Agreements', 'Parties', 'Component'],
-			sections: [
-				{
+			sections: {
+				119: {
 					templateName: 'Component Loader',
+					templateDepth: 'section',
 					title: 'Loader',
 					type: 'loader',
 					description: 'Section that loads the appropriate component',
 					component: 'PartiesSelect',
 					templateId: 119
 				}
-			]
-		}, {
-			id: 2222,
+			}
+		},
+		2222: {
+			templateId: 2222,
+			templateDepth: 'page',
 			type: 'Page',
 			title: 'Rent',
 			description: 'Default Agreement Rent selection screen', // eslint-disable-line max-len
@@ -138,19 +273,22 @@ module.exports = {
 			lastEditedName: 'David Bromley',
 			lastEditedDate: 1476459075104,
 			tags: ['Agreements', 'Rent', 'Component'],
-			sections: [
-				{
+			sections: {
+				120: {
 					templateName: 'Component Loader',
+					templateDepth: 'section',
 					title: 'Loader',
 					type: 'loader',
 					description: 'Section that loads the appropriate component',
 					component: 'RentSelect',
 					templateId: 120
 				}
-			]
-		}, {
-			id: 2223,
+			}
+		},
+		2223: {
+			templateId: 2223,
 			type: 'Page',
+			templateDepth: 'page',
 			title: 'Other Info',
 			description: 'Default page for miscellaneous Info', // eslint-disable-line max-len
 			version: '1.0',
@@ -162,6 +300,7 @@ module.exports = {
 			sections: [
 				{
 					templateName: 'Agreement Additional Information',
+					templateDepth: 'section',
 					title: 'Additional Information',
 					type: 'section',
 					description: 'this first section of addtional information',
@@ -169,6 +308,7 @@ module.exports = {
 				},
 				{
 					templateName: 'Agreement Financial Information',
+					templateDepth: 'section',
 					title: 'Financial Information',
 					type: 'section',
 					description: 'Allows users to enter financial information about their agreement (default)', // eslint-disable-line
@@ -176,6 +316,7 @@ module.exports = {
 				},
 				{
 					templateName: 'Agreement Author Information',
+					templateDepth: 'section',
 					title: 'Additional Authors',
 					type: 'section',
 					description: 'Allows users to enter information about who drafted the agreement',
@@ -183,11 +324,12 @@ module.exports = {
 				}
 			]
 		}
-	],
+	},
 	sectionsJson: {
-		119: {
-			id: 119,
+		118: {
+			id: 118,
 			type: 'section',
+			templateDepth: 'section',
 			page: 'all',
 			title: 'Default Section',
 			// eslint-disable-next-line
@@ -196,12 +338,58 @@ module.exports = {
 			createdDate: 1476739075104,
 			lastEditedName: 'David Bromley',
 			lastEditedDate: 1476749075104,
-			items: [
-			],
+			items: {
+				}
+		},
+		119: {
+			id: 119,
+			type: 'template',
+			templateDepth: 'section',
+			title: 'Test Section',
+			// eslint-disable-next-line
+			description: 'A section to test out loading ...',
+			createdByName: 'David Bromley',
+			createdDate: 1476739075104,
+			lastEditedName: 'David Bromley',
+			lastEditedDate: 1476749075104,
+			items: {
+				12: {
+					type: 'template',
+					templateId: 12,
+					templateName: 'Event Summary',
+					title: 'Summary',
+					description: 'Summary information for the process',
+					data: {
+						id: 12,
+						type: 'text',
+						title: 'Text Input',
+						description: 'Default text input',
+						createdByName: 'David Bromley',
+						createdDate: 1476759075104,
+						lastEditedName: 'David Bromley',
+						lastEditedDate: 1476759075104,
+						items: {
+							14: {
+								component: 'InputText',
+									props: {
+									label: 'Test Label',
+									value: 'existing text value',
+									placeholder: 'clean style',
+									classNameProps: [
+										'normal',
+										'space'
+										]
+									}
+								}
+							}
+					}
+				}
+			},
 		},
 		120: {
 			id: 120,
 			type: 'section',
+			templateDepth: 'section',
 			page: 'events',
 			title: 'Events Summary',
 			description: 'first section of the Event process',
@@ -228,6 +416,7 @@ module.exports = {
 		122: {
 			id: 122,
 			type: 'section',
+			templateDepth: 'section',
 			page: 'events',
 			title: 'Event Changes',
 			description: 'Shows what has changed in the event',
@@ -254,6 +443,7 @@ module.exports = {
 		123: {
 			id: 123,
 			type: 'section',
+			templateDepth: 'section',
 			page: 'events',
 			title: 'Event Documentation',
 			description: 'Shows the Event documentation interface',

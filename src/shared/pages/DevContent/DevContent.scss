@@ -10,7 +10,18 @@
 			}
 		}
 	}
-	.item{
+	.smallIconWrap{
+		text-align: center;
+		width: 24px;
+		height: 24px;
+		display: inline-block;
+		margin-right: 8px;
+		svg{
+			width: auto;
+			height: 100%;
+		}
+	}
+	.rowItem{
 		// background: #f9f9f9;
 		padding: 8px;
 		list-style-type: none;
@@ -64,6 +75,83 @@
 			// margin: '0px -8px -24px'}
 			margin: -8px -24px -16px;
 		}
+	}
+	.templateRow{
+		&.isOpen{
+			padding: 4px;
+			margin-bottom: 4px;
+			border: 1px solid #f3f3f3;
+			.childIndicator{
+				background: #f3f3f3;
+			}
+		}
+			&.isOpen > div > div > div{
+				&.childIndicator{
+					border: 1px solid transparent;
+					background: #fff;
+				}				
+			}
+		&.hasChildren .childIndicator{
+			cursor: pointer;
+			&:hover{
+				background: #f3f3f3;
+			}
+		}
+		&.object .childIndicator{
+			// padding-left: 0;
+		}
+		&.page .childIndicator{
+			// padding-left: 16px;
+		}
+		&.section .childIndicator{
+			// margin-left: 24px;
+		}
+		&.item .childIndicator{
+			// margin-left: 24px;
+		}
+		&.component .childIndicator{
+			// margin-left: 48px;
+		}
+		.templateRow{
+			// border-left: 32px solid #fff;
+			margin-left: 24px;
+			// border-top: 1px dotted #ddd;
+			padding-top: 4px;
+/*
+			&.isOpen > div > div > div{
+				&.childIndicator{
+					background: #fff;
+				}				
+			}
+*/
+		}
+	}
+	
+	.templateItem{
+		border-bottom: 1px dotted #eee;
+		width: 100%;
+		&:hover{
+			background: #f3f3f3;
+		}
+	}
+	.childTemplates{
+		padding-left: 0px;
+		width: 100%;
+		padding-bottom: 8px;
+		border-bottom: 1px dashed #ccc;
+	}
+	.childIndicator{
+		// padding-left: 16px;
+		background: #f9f9f9;
+		padding: 5px 6px;
+		display: block;
+		height: 24px;
+		width: 24px;
+		border: 1px solid #ddd;
+		border-radius: 3px;
+	}
+	.iconWrap{
+		display: inline-block;
 	}
 }
 
