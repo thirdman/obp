@@ -124,4 +124,8 @@ $sizeSmall: 32px;
 	&.hasBorder{
 		border: 1px solid $nomosLine;
 	}
+	&.isDisabled{
+		opacity: .5;
+		color: $nomosGrey;
+	}
 }
