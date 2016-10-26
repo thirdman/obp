@@ -6,13 +6,11 @@ import {
 	Icon,
 	Row,
 	} from 'components';
-import theData from './dataObjects.jsx';
+import theData from './templateData.jsx';
 
-// const objectsJson = theData.objectsJson;
 const templatesJson = theData.templateData;
-// const sectionsJson = theData.sectionsJson;
-// const itemsJson = theData.itemsJson;
-console.log(templatesJson);
+
+console.log('Template data is:', templatesJson);
 
 const styles = require('../DevContent.scss');
 const iconObject = require('../images/object.svg');
@@ -27,8 +25,12 @@ export default class TemplateLine extends Component {
 		showChildren: false,
 	}
 	componentWillMount() {
-			console.log('this.props.item.items items length: ', this.props.item);
-		if (this.props.item.items) {
+		// console.log('templatesJson[this.props.templateId]): ', templatesJson[this.props.templateId]);
+		if (
+			templatesJson[this.props.templateId] &&
+			templatesJson[this.props.templateId].templateType &&
+			templatesJson[this.props.templateId].templateType === 'user' &&
+			templatesJson[this.props.templateId].content) {
 			// this.toggleOpen();
 			this.setChildren();
 		}
@@ -36,7 +38,7 @@ export default class TemplateLine extends Component {
 	// componentDidMount{}
 	render() {
 		const {
-			item,
+			// item,
 			templateId
 			} = this.props;
 		const {
@@ -44,27 +46,35 @@ export default class TemplateLine extends Component {
 			hasChildren
 		} = this.state;
 
-		let childItems;
-		console.log(item);
-
-		if (item.items) {
-			childItems = Object.values(item.items);
+		let childTemplates;
+		// console.log(templateId);
+		// console.log(item);
+		// console.log('templateData[templateId]: ', templatesJson[templateId]);
+		let template = templatesJson[templateId];
+/*
+		if (item && !template) {
+			template = item;
+		}
+*/
+		if (template && template.content && template.content.templates) {
+			childTemplates = Object.values(template.content.templates);
 			// this.doState;
-			console.log('child items length: ', childItems.length);
+			// console.log('child items length: ', childTemplates.length);
 		}
 		return (
 			<div
 				className={
 					cx(
 						styles.templateRow,
-						styles[item.templateDepth],
+						styles[template.templateDepth],
 						(hasChildren ? styles.hasChildren : ''),
 						(isOpen ? styles.isOpen : '')
 						)
 					}
 				>
 				<Row>
-					<Column occupy={1}>
+					<Column occupy={6} onClick={() => this.toggleOpen(event)}>
+					<div>
 						{hasChildren ?
 							<div
 								className={styles.childIndicator}
@@ -73,45 +83,49 @@ export default class TemplateLine extends Component {
 								<Icon
 									icon={isOpen ? 'chevron-down' : 'chevron-right'}
 									size={10}
-									color={isOpen ? 'grey' : 'black'}
+									color={isOpen ? 'blue' : 'black'}
 									iconHoverColor="blue" />
 							</div>
 							: null
 						}
-					</Column>
-					<Column occupy={5} onClick={() => this.toggleOpen(event)}>
-					<div>
-								{	item.templateDepth === 'object' ?
+								{	template.templateDepth === 'object' ?
 									<span className={styles.smallIconWrap}>
 										<span dangerouslySetInnerHTML={{__html: iconObject}} />
 									</span>
 										: null
 								}
-								{	item.templateDepth === 'page' ?
+								{	template.templateDepth === 'page' ?
 									<span className={styles.smallIconWrap}>
 												<span dangerouslySetInnerHTML={{__html: iconPage}} />
 									</span>
 										: null
 								}
-								{	item.templateDepth === 'section' ?
+								{	template.templateDepth === 'section' ?
 									<span className={styles.smallIconWrap}>
 											<span dangerouslySetInnerHTML={{__html: iconSection}} />
 									</span>
 										: null
 								}
-								{	item.templateDepth === 'item' ?
+								{	template.templateDepth === 'item' ?
 									<span className={styles.smallIconWrap}>
 											<span dangerouslySetInnerHTML={{__html: iconItem}} />
 									</span>
 										: null
 								}
-							<span>{item.templateDepth ? item.templateDepth + ': ' : null }{item.title}</span>
+								<span>
+									{template.templateDepth ? template.templateDepth + ': ' : null }
+									{template.templateName}
+								</span>
 							</div>
 					</Column>
-					<Column occupy={3} onClick={() => this.toggleOpen(event)}>
-							{item.templateName || ''}
+					<Column occupy={2} onClick={() => this.toggleOpen(event)}>
+							{template.templateType}
+					</Column>
+					<Column occupy={1} onClick={() => this.toggleOpen(event)}>
+							{template.templateId}
 					</Column>
 					<Column occupy={3}>
+						<div className={styles.buttonWrap}>
 						{hasChildren ?
 							<Button
 								type="text"
@@ -121,23 +135,28 @@ export default class TemplateLine extends Component {
 								/>
 								: null
 							}
-						{item.templateId ?
+						{template.templateId ?
 								<Button
 									type="text"
 									content={'View'}
-									onClickProps={() => this.onViewDetail('section', item.templateId)}
+									onClickProps={() => this.onViewDetail('section', template.templateId)}
 								classNameProps={['inline']}
 								/>
 								: null
 							}
+							</div>
 					</Column>
 				</Row>
 				{hasChildren && isOpen ?
 					<span>
 					{
-						childItems.map((childItem, childIndex) => {
+						childTemplates.map((childTemplate, childIndex) => {
 							return (
-								<TemplateLine item={childItem} templateId={templateId} key={childIndex} />
+								<TemplateLine
+									item={childTemplate}
+									templateId={childTemplate.templateId}
+									key={childIndex}
+								/>
 							);
 						})
 					}

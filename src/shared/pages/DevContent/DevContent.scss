@@ -12,10 +12,12 @@
 	}
 	.smallIconWrap{
 		text-align: center;
-		width: 24px;
-		height: 24px;
+		width: 32px;
+		height: 32px;
 		display: inline-block;
 		margin-right: 8px;
+		line-height: 32px;
+		vertical-align: middle;
 		svg{
 			width: auto;
 			height: 100%;
@@ -66,6 +68,16 @@
 			.previewNav{
 				width: 20%;
 			}
+			.componentPlaceholder{
+				padding: 1em;
+				border: 1px dotted #ddd;
+				background: #fff;
+				text-align: center;
+				> div{
+					font-style: italic;
+					color: $nomosGrey;
+				}
+			}
 		}
 		.code{
 			background: $nomosBlack;
@@ -76,26 +88,29 @@
 			margin: -8px -24px -16px;
 		}
 	}
+	.filterTitle{
+		text-transform: capitalize;
+	}
 	.templateRow{
+		// background: rgba(218, 223, 228, 0.13);
+		margin-bottom: 4px;
 		&.isOpen{
-			padding: 4px;
-			margin-bottom: 4px;
-			border: 1px solid #f3f3f3;
+			// background: rgb(250, 251, 252);
+			// padding: 4px;
+			// border: 1px solid #f3f3f3;
+			border-bottom: 2px solid #fff;
 			.childIndicator{
-				background: #f3f3f3;
+				// background: #f3f3f3;
 			}
 		}
-			&.isOpen > div > div > div{
+			&.isOpen > div > div > div > div{
 				&.childIndicator{
 					border: 1px solid transparent;
-					background: #fff;
+					background: transparent;
 				}				
 			}
 		&.hasChildren .childIndicator{
 			cursor: pointer;
-			&:hover{
-				background: #f3f3f3;
-			}
 		}
 		&.object .childIndicator{
 			// padding-left: 0;
@@ -112,9 +127,11 @@
 		&.component .childIndicator{
 			// margin-left: 48px;
 		}
+		.buttonWrap{
+			text-align: right;
+		}
 		.templateRow{
-			// border-left: 32px solid #fff;
-			margin-left: 24px;
+			margin-left: 40px;
 			// border-top: 1px dotted #ddd;
 			padding-top: 4px;
 /*
@@ -142,17 +159,21 @@
 	}
 	.childIndicator{
 		// padding-left: 16px;
-		background: #f9f9f9;
-		padding: 5px 6px;
-		display: block;
-		height: 24px;
-		width: 24px;
-		border: 1px solid #ddd;
+		// background: #f9f9f9;
+		padding: 9px 11px;
+		display: inline-block;
+		height: 32px;
+		width: 32px;
+		// border: 1px solid #ddd;
 		border-radius: 3px;
+		&:hover{
+			background: #f3f3f3;
+		}
 	}
 	.iconWrap{
 		display: inline-block;
 	}
+	
 }
 
 @keyframes slideLeft {
