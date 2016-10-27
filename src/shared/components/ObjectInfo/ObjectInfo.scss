@@ -127,5 +127,6 @@ $sizeSmall: 32px;
 	&.isDisabled{
 		opacity: .5;
 		color: $nomosGrey;
+		cursor: pointer;
 	}
 }

@@ -55,6 +55,7 @@ classNameProps					|	`array`		| ['normal']|	array of classes to apply to the com
 `small`			| smaller size for manipulation (= display: 'small')
 `flat`			| removes the box-shadow (equiv. to: display: 'flat')
 `hasBorder`	| adds a single line border
+`isDisabled`| makes it grey.
 
 
 #### TODO
