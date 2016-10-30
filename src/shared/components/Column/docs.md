@@ -11,6 +11,10 @@ Utility layout Column Component. use in conjunction with row. By default it will
 columns					| `number`		| 12			| number of columns to take up (if inside a row)
 of							| `number`		| 12			| total number of rows (eg. use 2/5 to take up 2 columns out of five (ie.40%))
 isFlex					|	`bool`			|	true		|	usex flexbox. If false, will use floats (can cause unexpected layout issues, but better supported in browsers)
+hasPadding			|	`bool`			|	false		|	adds 8px padding
+collapseMargins	|	`bool`			|	false		|	removes margin
+isFlex					|	`bool`			|	true		|	usex flexbox. If false, will use floats (can cause unexpected layout issues, but better supported in browsers)
+backgroundColor	|	`string`		|	-				|	adds a background keyword (standard nomos colors);
 devMode					|	`bool`			|	false		|	shows up borders etc for development purposes
 classNameProps	|	`array`			| []			|	*unused* array of classes to apply to the component 
 

@@ -11,6 +11,9 @@ export default class Column extends Component {
 			of = 12,
 			devMode = false,
 			isFlex = true,
+			hasPadding = false,
+			collapseMargin,
+			backgroundColor,
 			classNameProps = [],
 			children
 		} = this.props;
@@ -19,10 +22,14 @@ export default class Column extends Component {
 
 		toggleClasses = classSet({
 			[styles.isFlex]: isFlex,
-			[styles.devMode]: devMode
+			[styles.devMode]: devMode,
+			[styles.hasPadding]: hasPadding,
+			[styles.collapseMargin]: collapseMargin,
 		});
 
-		classes = classNameProps
+		classes = classNameProps.slice();
+		classes = classes.concat(backgroundColor);
+		classes = classes
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 
@@ -43,6 +50,9 @@ export default class Column extends Component {
 		occupy: PropTypes.number,
 		of: PropTypes.number,
 		isFlex: PropTypes.bool,
+		hasPadding: PropTypes.bool,
+		collapseMargin: PropTypes.bool,
+		backgroundColor: PropTypes.string,
 		devMode: PropTypes.bool,
 		children: PropTypes.oneOfType([
 			PropTypes.arrayOf(PropTypes.node),

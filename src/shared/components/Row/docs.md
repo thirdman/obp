@@ -10,7 +10,10 @@ Utility layout Component. use in conjunction with column. By default it will fil
 :---------------------------|:----------|:--------------|:--------------------------------
 rows						| `number`		| -				| number of rows to take up (if in a column wrap, see below)
 maxRows					| `number`		| -				| total number of rows (eg. use 2/5 to take up 2 rows out of five)
+hasPadding			|	`bool`			|	false		|	adds 8px padding
+collapseMargins	|	`bool`			|	false		|	removes margin
 isFlex					|	`bool`			|	true		|	usex flexbox. If false, will use floats (can cause unexpected layout issues, but better supported in browsers)
+backgroundColor	|	`string`		|	-				|	adds a background keyword (standard nomos colors);
 devMode					|	`bool`			|	false		|	shows up borders etc for development purposes
 classNameProps	|	`array`			| []			|	*unused* array of classes to apply to the component 
 

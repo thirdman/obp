@@ -10,6 +10,9 @@
 	&.hasPadding{
 		padding: 8px;
 	}
+	&.collapseMargin{
+		margin: 0;
+	}
 	//lost-column: attr(data-occupy)/attr(data-of);
 	// lost-column: var(--nomos-occupyWidth)/var(--nomos-totalWidth);
 
@@ -25,5 +28,37 @@
 	&[data-occupy="10"] { lost-column: 10/12;}
 	&[data-occupy="11"] { lost-column: 11/12;}
 	&[data-occupy="12"] { lost-column: 12/12;}
+	
+	// COLORS
+	&.black{
+		background: $nomosBlack;
+	}
+	&.darkGrey{
+		background: $nomosDarkGrey;
+	}
+	&.grey{
+		background: $nomosGrey;
+	}
+	&.lightGrey{
+		background: $nomosLightGrey;
+	}
+	&.lightLightGrey{
+		background: $nomosLightLightGrey;
+	}
+	&.white{
+		background: #fff;
+	}
+	&.blue{
+		background: $nomosBlue;
+	}
+	&.red{
+		background: $nomosRed;
+	}
+	&.orange{
+		background: $nomosOrange;
+	}
+	&.green{
+		background: $nomosGreen;
+	}
 
 }

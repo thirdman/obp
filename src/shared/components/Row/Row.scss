@@ -13,4 +13,36 @@
 		padding: 8px;
 	}
 	lost-row: attr(data-rows)/attr(data-maxRows);
+	// COLORS
+	&.black{
+		background: $nomosBlack;
+	}
+	&.darkGrey{
+		background: $nomosDarkGrey;
+	}
+	&.grey{
+		background: $nomosGrey;
+	}
+	&.lightGrey{
+		background: $nomosLightGrey;
+	}
+	&.lightLightGrey{
+		background: $nomosLightLightGrey;
+	}
+	&.white{
+		background: #fff;
+	}
+	&.blue{
+		background: $nomosBlue;
+	}
+	&.red{
+		background: $nomosRed;
+	}
+	&.orange{
+		background: $nomosOrange;
+	}
+	&.green{
+		background: $nomosGreen;
+	}
+
 }

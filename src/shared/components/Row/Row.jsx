@@ -11,6 +11,9 @@ export default class Row extends Component {
 			of = 1,
 			devMode = false,
 			isFlex = true,
+			hasPadding = false,
+			collapseMargin,
+			backgroundColor,
 			classNameProps = [],
 			children
 		} = this.props;
@@ -19,9 +22,13 @@ export default class Row extends Component {
 
 		toggleClasses = classSet({
 			[styles.isFlex]: isFlex,
+			[styles.hasPadding]: hasPadding,
+			[styles.collapseMargin]: collapseMargin,
 			[styles.devMode]: devMode
 		});
 
+		classes = classNameProps.slice();
+		classes = classes.concat(backgroundColor);
 		classes = classNameProps
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
@@ -44,6 +51,9 @@ export default class Row extends Component {
 		of: PropTypes.number,
 		isFlex: PropTypes.bool,
 		devMode: PropTypes.bool,
+		hasPadding: PropTypes.bool,
+		collapseMargin: PropTypes.bool,
+		backgroundColor: PropTypes.string,
 		children: PropTypes.oneOfType([
 			PropTypes.arrayOf(PropTypes.node),
 			PropTypes.node
