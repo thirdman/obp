@@ -31,6 +31,7 @@ export default class InputText extends Component {
 		} else {
 			this.setState({hasContent: false});
 		}
+		this.props.onChangeProps();
 	}
 	validateInput = (textInput) => {
 		if (!textInput) {

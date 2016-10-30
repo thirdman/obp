@@ -6,6 +6,7 @@ export AgreementView from './AgreementView/AgreementView';
 export AgreementsSummary from './AgreementsSummary/AgreementsSummary';
 export ComponentDocs from './ComponentDocs/ComponentDocs';
 export DevContent from './DevContent/DevContent';
+export DevContentEdit from './DevContent/DevContentEdit';
 export DevHome from './DevHome/DevHome';
 export DevComponentDocs from './DevComponentDocs/DevComponentDocs';
 export DevIcons from './DevIcons/DevIcons';

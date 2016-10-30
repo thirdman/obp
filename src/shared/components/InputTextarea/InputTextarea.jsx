@@ -113,6 +113,7 @@ export default class InputTextarea extends Component {
 		} else {
 			this.setState({hasContent: false});
 		}
+		this.props.onChangeProps();
 	}
 
 	makeId() {

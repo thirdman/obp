@@ -10,7 +10,7 @@ import theData from './templateData.jsx';
 
 const templatesJson = theData.templateData;
 
-console.log('Template data is:', templatesJson);
+// console.log('Template data is:', templatesJson);
 
 const styles = require('../DevContent.scss');
 const iconObject = require('../images/object.svg');

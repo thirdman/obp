@@ -47,7 +47,7 @@ onResize				|	`func`		| -	|	function to call when it resizes itself
 {
 	"component": "InputTextarea",
 	"props": {
-		"textValue": "this is an example of child passed through with no rows set",
+		"value": "this is an example of child passed through with no rows set",
 		"placeholder": "enter your text here",
 		"classNameProps": ["normal", "space"]
 	}

@@ -22,21 +22,11 @@ import {
 import Tab from 'components/Tabs/components/Tab';
 import { Header } from 'containers';
 import TemplateLine from './containers/TemplateLine';
-// import theData from './containers/dataObjects.jsx';
 import templatesData from './containers/templateData.jsx';
 import dataButtons from './containers/dataButtons.jsx';
 
 const buttonGroupData = dataButtons.buttonGroupData2;
-// const objectData = theData.objectData;
-// const pagesData = theData.thePageData;
-// const sectionsData = theData.sectionsData;
-// const itemsData = theData.itemsData;
-// const objectsJson = theData.objectsJson;
 const allTemplates = templatesData.templateData;
-// const pagesJson = theData.pagesJson;
-// const sectionsJson = theData.sectionsJson;
-// const pagesJson = templatesData.templateData;
-// const itemsJson = theData.itemsJson;
 
 const styles = require('./DevContent.scss');
 const iconObject = require('./images/object.svg');
@@ -70,8 +60,6 @@ export default class DevContent extends Component {
 				/>
 				<div key={'layoutHero'} className={styles.Devggg}>
 					<Breadcrumbs
-						// params={routeParams}
-						// route={route}
 						breadcrumbData={[
 							{ text: 'Dev', link: 'dev' },
 							{ text: 'Content Creation', link: 'content' },
@@ -90,17 +78,6 @@ export default class DevContent extends Component {
 
 	getActiveContentSection() {
 		const { activeType } = this.state;
-		// let dataArray = Object.values(allTemplates);
-		// let objectsDataArray = dataArray.filter(this.isObject);
-		// let pagesDataArray = Object.values(pagesJson);
-		// let pagesDataArray = dataArray.filter(this.isPage);
-		// let sectionsDataArray = Object.values(sectionsJson);
-		// let pagesDataArray = Object.values(templatesData);
-		// let itemsDataArray = Object.values(itemsJson);
-		// let hasDetailPageOpen;
-		// let hasDetailSectionOpen;
-		// let hasDetailObjectOpen;
-		// let typeTitle = activeType + 's';
 		switch (activeType) {
 			case 'object':
 				return (
@@ -115,8 +92,6 @@ export default class DevContent extends Component {
 					this.getType('section')
 				);
 			case 'item':
-			// console.log(itemsData);
-			// console.log(itemsDataArray);
 				return (
 					this.getType('item')
 				);
@@ -564,12 +539,12 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text', 'actionItem']} />
+											<Button type="text" content="edit" classNameProps={['text']} />
 										</div>
 										<Button
 											type="text"
 											content="Copy to New..."
-											classNameProps={['text', 'actionItem']}
+											classNameProps={['text']}
 										/>
 								</div>
 							</Column>
@@ -743,7 +718,7 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text', 'actionItem']} />
+											<Button type="text" content="edit" classNameProps={['text']} />
 										</div>
 										<Button
 											type="text"

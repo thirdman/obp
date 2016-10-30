@@ -1,0 +1,96 @@
+@import "../../../../globals/styles/_global.scss";
+.CustomDataItem{
+	width: 100%;
+	.CustomDataWrapper{
+		border: 1px solid $nomosLine;
+		display: block;
+		box-shadow: 0 1px 10px -4px rgba(0,0,0,.2);
+	}
+	.PanelEdit{
+		padding: 16px;		
+		background: #f9f9f9;
+		margin-right: 0 !important;
+		position: relative;
+		section{
+			// border-top: 2px solid #222;
+			> h3{
+				background: $nomosLightLightGrey;
+				padding-left: 16px;
+				padding-right: 16px;
+				margin-left: -16px;
+				margin-right: -16px;
+				margin-bottom: 1em;
+			}
+		}
+	}
+	.PanelPreview{
+		padding: 16px;
+		background: #f3f3f3;
+		border-left: 1px solid $nomosLine;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		position: relative;
+
+	}
+	.previewWrapper{
+		position: relative;
+		transition: transform .3s ease;
+	}
+	.isScrolled{
+
+	}
+	.notScrolled{
+		transform: translateY(0);
+	}
+	.settingsButtonWrap{
+		text-align: right;
+	}
+	.jsonOutput{
+		background: $nomosBlack;
+		color: #fff;
+		font-family: monospace;
+		padding: 8px;
+		margin-top: 16px;
+		margin-left: -16px;
+    margin-right: -32px;
+    // transition: all .3s ease;
+		animation: foldIn .9s ease-out;
+	}
+	.validJsonCheck{
+		float: right;
+		padding: 2px;
+		border-radius: 2px;
+		font-family: $nomos-font-family;
+		&.valid{
+			color: $nomosGreen;
+		}
+		&.invalid{
+			color: $nomosRed;
+		}
+	}
+}
+
+
+@keyframes foldIn {
+  0% {
+	  	//background-color: rgba(255, 202, 66,1); 
+      opacity: 0;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+		  transform:scale(1) rotateX(-20deg) translateY(16px);
+  }
+  30% {
+	  	//background-color: rgba(255, 202, 66,1); 
+      opacity: 1;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+			transform: scale(1) rotateX(0deg)  translateY(0) ;
+ }
+  100% {
+	  	//background-color: rgba(244, 245, 245,1); 
+      opacity: 1;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0;
+			transform: scale(1) rotateX(0deg)  translateY(0) ;
+ }
+}
