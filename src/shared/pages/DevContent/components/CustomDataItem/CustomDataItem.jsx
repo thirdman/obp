@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import cx from 'classnames';
 
 import {
+	Accordion,
+	AccordionSection,
 	Button,
+	HorizontalRule,
 	InputSwitch,
 	Column,
 	ContentItem,
@@ -159,164 +162,182 @@ export default class CustomDataItem extends Component {
 										}
 									/>
 							</Section>
-							<Section title="ContentItem Settings" hasDivider hasBackground>
-								<ContentItem
-									type={'text'}
-									title="Item Title"
-									content={this.state.template.title}
-								>
-									<InputText
-										value={this.state.template.title}
-										onChangeProps={() => this.doTemplateState('title', 'editTitle')}
-										// onChangeProps={this.doTitle}
-										ref={(c) => { this.editTitle = c; }}
-										/>
-								</ContentItem>
-								<ContentItem
-									type={'text'}
-									title="Item Description"
-								>
-									<InputText
-										value={this.state.template.description}
-										onChangeProps={() => this.doTemplateState('description', 'editDescription')}
-										ref={(c) => { this.editDescription = c; }}
-										placeholder={'Set the item description'}
-										placeholderBelow
-										hasValidation
-										/>
-								</ContentItem>
-								<ContentItem
-									type={'text'}
-									title="Item Placeholder"
-								>
-									<InputText
-										value={this.state.template.placeholder ? this.state.template.placeholder : ''}
-										// onChangeProps={this.doPlaceholder}
-										onChangeProps={() => this.doTemplateState('placeholder', 'editPlaceholder')}
-										ref={(c) => { this.editPlaceholder = c; }}
-										placeholder={'Set the item placeholder'}
-										placeholderBelow
-										hasValidation
-										/>
-								</ContentItem>
-								<ContentItem type={'text'} title="Popup Help Content" >
-									<InputText
-										value={this.state.template.helpContent ? this.state.template.helpContent : ''}
-										// onChangeProps={this.doHelpContent}
-										onChangeProps={() => this.doTemplateState('helpContent', 'editHelpContent')}
-										ref={(c) => { this.editHelpContent = c; }}
-										placeholder="'eg. 'This content helps us decide what the rent should be"
-										placeholderBelow
-										/>
-								</ContentItem>
-							</Section>
-							<Row>
-								<ContentItem type={'text'} title="Units" columnSize={4} >
-									<InputText
-										value={this.state.template.units || ''}
-										// onChangeProps={this.doUnits}
-										onChangeProps={() => this.doTemplateState('units', 'editUnits')}
-										ref={(c) => { this.editUnits = c; }}
-										placeholder="eg. 'mm'"
-										placeholderBelow
-										/>
-								</ContentItem>
-								<ContentItem type={'text'} title="Pre-Text" columnSize={4} >
-										<InputText
-											value={this.state.template.preText ? this.state.template.preText : ''}
-											// onChangeProps={this.doPreText}
-											onChangeProps={() => this.doTemplateState('preText', 'editPreText')}
-											ref={(c) => { this.editPreText = c; }}
-											placeholder="Shown before the input"
-											placeholderBelow
+							<HorizontalRule />
+							<Accordion uniqueId={'testAccordion'}>
+								<AccordionSection title="General Item Settings">
+									<Section>
+										<ContentItem
+											type={'text'}
+											title="Item Title"
+											content={this.state.template.title}
+										>
+											<InputText
+												value={this.state.template.title}
+												onChangeProps={() => this.doTemplateState('title', 'editTitle')}
+												// onChangeProps={this.doTitle}
+												ref={(c) => { this.editTitle = c; }}
+												/>
+										</ContentItem>
+										<ContentItem
+											type={'text'}
+											title="Item Description"
+										>
+											<InputText
+												value={this.state.template.description}
+												onChangeProps={() => this.doTemplateState('description', 'editDescription')}
+												ref={(c) => { this.editDescription = c; }}
+												placeholder={'Set the item description'}
+												placeholderBelow
+												hasValidation
+												/>
+										</ContentItem>
+										<ContentItem
+											type={'text'}
+											title="Item Placeholder"
+										>
+											<InputText
+												value={this.state.template.placeholder ? this.state.template.placeholder : ''} // eslint-disable-line
+												// onChangeProps={this.doPlaceholder}
+												onChangeProps={() => this.doTemplateState('placeholder', 'editPlaceholder')}
+												ref={(c) => { this.editPlaceholder = c; }}
+												placeholder={'Set the item placeholder'}
+												placeholderBelow
+												hasValidation
+												/>
+										</ContentItem>
+										<ContentItem type={'text'} title="Popup Help Content" >
+											<InputText
+												value={this.state.template.helpContent ? this.state.template.helpContent : ''} // eslint-disable-line
+												// onChangeProps={this.doHelpContent}
+												onChangeProps={() => this.doTemplateState('helpContent', 'editHelpContent')}
+												ref={(c) => { this.editHelpContent = c; }}
+												placeholder="'eg. 'This content helps us decide what the rent should be"
+												placeholderBelow
+												/>
+										</ContentItem>
+									</Section>
+								</AccordionSection>
+								<AccordionSection title="Advanced Settings">
+									<Row>
+										<ContentItem type={'text'} title="Units" columnSize={4} >
+											<InputText
+												value={this.state.template.units || ''}
+												// onChangeProps={this.doUnits}
+												onChangeProps={() => this.doTemplateState('units', 'editUnits')}
+												ref={(c) => { this.editUnits = c; }}
+												placeholder="eg. 'mm'"
+												placeholderBelow
+												/>
+										</ContentItem>
+										<ContentItem type={'text'} title="Pre-Text" columnSize={4} >
+												<InputText
+													value={this.state.template.preText ? this.state.template.preText : ''}
+													// onChangeProps={this.doPreText}
+													onChangeProps={() => this.doTemplateState('preText', 'editPreText')}
+													ref={(c) => { this.editPreText = c; }}
+													placeholder="Shown before the input"
+													placeholderBelow
+													/>
+										</ContentItem>
+										<ContentItem type={'text'} title="Post-Text" columnSize={4} >
+											<InputText
+												value={this.state.template.postText ? this.state.template.postText : ''}
+												// onChangeProps={this.doPostText}
+												onChangeProps={() => this.doTemplateState('postText', 'editPostText')}
+												ref={(c) => { this.editPostText = c; }}
+												placeholder="Shown after the input"
+												placeholderBelow
+												/>
+										</ContentItem>
+									</Row>
+								</AccordionSection>
+								<AccordionSection title="Validation Settings">
+									<Section>
+										<InputCheckbox
+											value="this content is Required"
+											id="chkisRequired"
+											onChangeProps={this.toggleRequired}
+											isSelected={this.state.isRequired}
 											/>
-								</ContentItem>
-								<ContentItem type={'text'} title="Post-Text" columnSize={4} >
-									<InputText
-										value={this.state.template.postText ? this.state.template.postText : ''}
-										// onChangeProps={this.doPostText}
-										onChangeProps={() => this.doTemplateState('postText', 'editPostText')}
-										ref={(c) => { this.editPostText = c; }}
-										placeholder="Shown after the input"
-										placeholderBelow
-										/>
-								</ContentItem>
-							</Row>
-							<Section title="Validation">
-									<InputCheckbox
-										value="this content is Required"
-										id="chkisRequired"
-										onChangeProps={this.toggleRequired}
-										isSelected={this.state.isRequired}
-										/>
-									<ContentItem type={'text'} title="Error Message">
-										<InputText
-											value={this.state.validationMessageError ?
-												this.state.validationMessageError
-												: ''}
-											onChangeProps={this.doMessageError}
-											ref={(c) => { this.editMessageError = c; }}
-											placeholder={'Message when the content has an error'}
-											placeholderBelow
-											hasValidation
+										<ContentItem type={'text'} title="Error Message">
+											<InputText
+												value={this.state.validationMessageError ?
+													this.state.validationMessageError
+													: ''}
+												onChangeProps={this.doMessageError}
+												ref={(c) => { this.editMessageError = c; }}
+												placeholder={'Message when the content has an error'}
+												placeholderBelow
+												hasValidation
+												/>
+										</ContentItem>
+										<ContentItem
+											type={'text'}
+											title="Missing Message"
+										>
+											<InputText
+												value={this.state.validationMessageMissing ?
+													this.state.validationMessageMissing
+													: ''}
+												onChangeProps={this.doMessageMissing}
+												ref={(c) => { this.editMessageMissing = c; }}
+												placeholder={'Message when the content is missing'}
+												placeholderBelow
+												hasValidation
+												/>
+										</ContentItem>
+									</Section>
+								</AccordionSection>
+								<AccordionSection title="Item Display settings">
+									<Section>
+										<InputCheckbox
+											value="has Divider"
+											id="chkHasDivider"
+											// onClick={this.toggleDivider}
+											// onChangeProps={this.toggleDivider}
+											onChangeProps={() => this.doTemplateToggle('hasDivider', 'chkHasDivider')}
+											isSelected={this.state.template.hasDivider}
 											/>
-									</ContentItem>
-									<ContentItem
-										type={'text'}
-										title="Missing Message"
-									>
-										<InputText
-											value={this.state.validationMessageMissing ?
-												this.state.validationMessageMissing
-												: ''}
-											onChangeProps={this.doMessageMissing}
-											ref={(c) => { this.editMessageMissing = c; }}
-											placeholder={'Message when the content is missing'}
-											placeholderBelow
-											hasValidation
+										<InputCheckbox
+											value="has Border"
+											id="chkHasBorder"
+											onChangeProps={() => this.doTemplateToggle('hasBorder', 'chkHasBorder')}
+											// onChangeProps={this.toggleBorder}
+											isSelected={this.state.template.hasBorder}
 											/>
-									</ContentItem>
-							</Section>
-							<Section title="Display">
-								<InputCheckbox
-									value="has Divider"
-									id="chkHasDivider"
-									// onClick={this.toggleDivider}
-									// onChangeProps={this.toggleDivider}
-									onChangeProps={() => this.doTemplateToggle('hasDivider', 'chkHasDivider')}
-									isSelected={this.state.template.hasDivider}
-									/>
-								<InputCheckbox
-									value="has Border"
-									id="chkHasBorder"
-									onChangeProps={() => this.doTemplateToggle('hasBorder', 'chkHasBorder')}
-									// onChangeProps={this.toggleBorder}
-									isSelected={this.state.template.hasBorder}
-									/>
-								<InputCheckbox
-									value="has Background"
-									id="chkHasBackground"
-									// onChangeProps={this.toggleBackground}
-									onChangeProps={() => this.doTemplateToggle('hasBackground', 'chkHasBackground')}
-									isSelected={this.state.template.hasBackground}
-									/>
-								<InputCheckbox
-									value="has Padding"
-									id="chkHasPadding"
-									onChangeProps={() => this.doTemplateToggle('hasPadding', 'chkHasPadding')}
-									isSelected={this.state.template.hasPadding}
-									/>
-							</Section>
-							<Section title="InputSwitch">
-								<InputCheckbox
-									value="is selected by default"
-									id="chkSwitchSelected"
-									onChangeProps={this.toggleSwitchSelected}
-									isSelected={this.state.InputSwitch.isSelected}
-									/>
-							</Section>
+										<InputCheckbox
+											value="has Background"
+											id="chkHasBackground"
+											// onChangeProps={this.toggleBackground}
+											onChangeProps={() => this.doTemplateToggle('hasBackground', 'chkHasBackground')} //eslint-disable-line
+											isSelected={this.state.template.hasBackground}
+											/>
+										<InputCheckbox
+											value="has Padding"
+											id="chkHasPadding"
+											onChangeProps={() => this.doTemplateToggle('hasPadding', 'chkHasPadding')}
+											isSelected={this.state.template.hasPadding}
+											/>
+									</Section>
+								</AccordionSection>
+								<AccordionSection title="Component Specific Settings">
+								{this.state.component === 'InputSwitch' ?
+									<Section title="InputSwitch">
+										<InputCheckbox
+											value="is selected by default"
+											id="chkSwitchSelected"
+											onChangeProps={this.toggleSwitchSelected}
+											isSelected={this.state.InputSwitch.isSelected}
+											/>
+									</Section>
+									: null
+								}
+								</AccordionSection>
+
+							</Accordion>
 						</div>
 						</Column>
+
 						<Column occupy={6} isFlex noMargin>
 						<div
 							className={
