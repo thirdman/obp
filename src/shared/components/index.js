@@ -5,6 +5,8 @@
  *	Please keep alphabetical
  */
 
+export Accordion from './Accordion/Accordion';
+export AccordionSection from './Accordion/AccordionSection';
 export Avatar from './Avatar/Avatar';
 export Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 export Button from './Button/Button';
