@@ -613,10 +613,10 @@ module.exports = {
 			templateType: 'component',
 			templateDepth: 'item',
 			templateName: 'Default Switch Item',
-			component: 'InputText',
+			component: 'InputSwitch',
 			description: 'Default text input',
 			content: {
-				component: 'InputText',
+				component: 'InputSwitch',
 				props: {
 					value: 'Save my settings'
 				}

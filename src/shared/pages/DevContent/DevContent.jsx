@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router';
 // import { browserHistory } from 'react-router';
 import { Summary } from 'layouts';
 import {
@@ -26,7 +27,8 @@ import templatesData from './containers/templateData.jsx';
 import dataButtons from './containers/dataButtons.jsx';
 
 const buttonGroupData = dataButtons.buttonGroupData2;
-const allTemplates = templatesData.templateData;
+// let allTemplates = templatesData.templateData;
+let allTemplates = JSON.parse(localStorage.nomosPrototype);
 
 const styles = require('./DevContent.scss');
 const iconObject = require('./images/object.svg');
@@ -42,12 +44,38 @@ export default class DevContent extends Component {
 		activePage: null,
 		activeSection: null,
 		activeItem: null,
-		activeView: null
+		activeView: null,
+		templateData: null,
+	}
+	componentWillMount() {
+		const {routeParams} = this.props;
+		let activeTemplateId = routeParams.templateId;
+		console.log('mounting...');
+		console.log('getting active id...');
+		if (activeTemplateId) {
+			console.log('has an active id...');
+			console.log(activeTemplateId);
+			let item = allTemplates[activeTemplateId];
+			if (!item) {
+				console.log('no relevant template found...., bailing out');
+			} else {
+				console.log('so the relevant data is...');
+				console.info(item);
+				console.log('so the relevant depth is...');
+				let itemDepth = item.templateDepth;
+				console.log(itemDepth);
+				this.onViewDetail(itemDepth, activeTemplateId);
+			}
+		} else {
+			console.log('NO ID...');
+			console.log('we should do the default.');
+		}
 	}
 
 	render() {
 		// const { location } = this.props;
 		// const {routeParams, route} = this.props;
+		// let activeTemplateId = routeParams.templateId;
 		return (
 			<Summary>
 				<Header
@@ -70,7 +98,21 @@ export default class DevContent extends Component {
 					/>
 				</div>
 				<div key={'layoutMain'} className={styles.DevContent}>
-					{ this.getActiveContentSection() }
+					{ this.state.templateData ?
+						this.getActiveContentSection()
+						: this.getActiveContentSection()
+					}
+					<HorizontalRule />
+					<Button
+						content={'Load data'}
+						onClickProps={this.loadData}
+						classNameProps={['highlighted']}
+						/>
+						<div>
+							{this.state.templateData ?
+								Object.keys(this.state.templateData).length + ' templates loaded.'
+								: 'no data'}
+							</div>
 					</div>
 			</Summary>
 		);
@@ -159,7 +201,7 @@ export default class DevContent extends Component {
 								<Button
 									content="Close"
 									// onClickProps={this.switchObject('null')}
-									onClickProps={() => this.onViewDetail('null', null)}
+									onClickProps={() => this.onViewDetail('object', null)}
 									classNameProps={['hollow']}
 									icon="cross"
 									iconColor={'black'}
@@ -307,6 +349,7 @@ export default class DevContent extends Component {
 		let item = allTemplates[activePage];
 		if (item) {
 			// set up the array of child templates
+			console.log('item isL:', item);
 			let childTemplates;
 			if (item.content && item.content.templates) {
 				childTemplates = Object.values(item.content.templates);
@@ -344,7 +387,11 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text']} />
+												<Button
+													type="text"
+													content="edit"
+													classNameProps={['text', 'isDisabled']}
+													/>
 										</div>
 										<Button
 											type="text"
@@ -467,25 +514,25 @@ export default class DevContent extends Component {
 							<pre>{ JSON.stringify(item, null, 2) }</pre>
 						</div>
 					</Tab>
+					<Tab value="validation" label="Validation">
 					{item.validation ?
-						<Tab value="validation" label="Validation">
 							<div>
 								<p>Is required: No</p>
 							</div>
-						</Tab>
 						: null
 					}
+					</Tab>
+					<Tab value="permissions" label="Permissions">
 					{item.permissions ?
-						<Tab value="permissions" label="Permissions">
 							<div>
 								<p>View: read only | user | admin | manager</p>
 								<p>Edit: read only | user | admin | manager</p>
 								<p>Create: read only | user | admin | manager</p>
 								<p>Delete: read only | user | admin | manager</p>
 							</div>
-						</Tab>
 						: null
 					}
+					</Tab>
 				</Tabs>
 				</div>
 			);
@@ -517,7 +564,7 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 								<Button
 									content="Close"
-									onClickProps={() => this.onViewDetail('null', null)}
+									onClickProps={() => this.onViewDetail('section', null)}
 									classNameProps={['hollow']}
 									icon="cross"
 									iconColor={'black'}
@@ -539,7 +586,7 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text']} />
+											Edit. (disabled)
 										</div>
 										<Button
 											type="text"
@@ -694,7 +741,7 @@ export default class DevContent extends Component {
 							<Column occupy={3}>
 							<Button
 								content="Close"
-								onClickProps={() => this.onViewDetail('null', null)}
+								onClickProps={() => this.onViewDetail('item', null)}
 								classNameProps={['hollow']}
 								icon="cross"
 								iconColor={'black'}
@@ -718,7 +765,9 @@ export default class DevContent extends Component {
 							<Column occupy={2}>
 								<div>
 										<div>
-											<Button type="text" content="edit" classNameProps={['text']} />
+											<Link to={`/dev/content/edit/${item.templateId}`}>
+												<Button type="text" content="edit" classNameProps={['text']} />
+											</Link>
 										</div>
 										<Button
 											type="text"
@@ -844,13 +893,16 @@ export default class DevContent extends Component {
 			}
 		return (
 			<span>
-				<Button
-					content="Back"
-					onClickProps={this.switchType(null)}
-					classNameProps={['highlighted']}
-					icon="chevron-left"
-					iconSize={12}
-				/>
+				<Link to={'/dev/content'} onClick={() => this.noType('home')}>
+					<Button
+						content="Back"
+						// onClickProps={this.switchType}
+						// onClickProps={() => this.noType('home')}
+						classNameProps={['highlighted']}
+						icon="chevron-left"
+						iconSize={12}
+					/>
+				</Link>
 				<Section title={this.capitalizeFirstLetter(typeTitle)} className={styles.filterTitle}>
 					<Row>
 						<Column occupy={hasDetailOpen ? 3 : 12}>
@@ -916,6 +968,7 @@ export default class DevContent extends Component {
 					activeItem: null,
 					activeView: templateId || null
 				});
+				this.goTo('/dev/content/' + templateId);
 				break;
 			case 'page':
 				this.setState({
@@ -926,6 +979,7 @@ export default class DevContent extends Component {
 					activeItem: null,
 					activeView: templateId || null
 					});
+				this.goTo('/dev/content/' + templateId);
 				break;
 			case 'section':
 				this.setState({
@@ -936,6 +990,7 @@ export default class DevContent extends Component {
 					activeItem: null,
 					activeView: templateId || null
 				});
+				this.goTo('/dev/content/' + templateId);
 				break;
 			case 'item':
 				this.setState({
@@ -946,6 +1001,7 @@ export default class DevContent extends Component {
 					activeItem: templateId,
 					activeView: templateId || null
 				});
+				this.goTo('/dev/content/' + templateId);
 				break;
 			default:
 				this.setState({
@@ -956,6 +1012,7 @@ export default class DevContent extends Component {
 					activeItem: null,
 					activeView: null
 				});
+			this.goTo('/dev/content');
 			break;
 		}
 	}
@@ -983,8 +1040,31 @@ export default class DevContent extends Component {
 
 	switchType = (currentSection) => {
 		return () => {
-			this.setState({ activeType: currentSection });
+			this.setState({
+				activeType: currentSection,
+					activeObject: null,
+					activePage: null,
+					activeSection: null,
+					activeItem: null,
+					activeView: null
+				});
 		};
+	}
+	noType = () => {
+		console.log('notype triggered');
+			this.setState({
+				activeType: null,
+					activeObject: null,
+					activePage: null,
+					activeSection: null,
+					activeItem: null,
+					activeView: null
+				});
+			// this.goTo('/dev/content');\
+			console.log(this.state);
+			this.getType('section');
+		// return () => {
+		// };
 	}
 	isObject(value) {
 		return value.templateDepth === 'object';
@@ -1024,5 +1104,29 @@ export default class DevContent extends Component {
 				<span>xxx</span>
 			);
 		}
+	}
+
+	loadData = () => {
+		console.log('allTemplates: ', allTemplates);
+		console.log('allTemplates: ', templatesData.templateData);
+		console.log('load data triggered');
+		localStorage.nomosPrototype = JSON.stringify(templatesData.templateData);
+		console.log(localStorage.nomosPrototype);
+		console.log(JSON.parse(localStorage.nomosPrototype));
+		let newtemplatedata = [];
+		newtemplatedata.templateData = JSON.parse(localStorage.nomosPrototype);
+		console.log(newtemplatedata);
+
+		// this.setState({
+			// templateData: JSON.parse(localStorage.nomosPrototype)
+		// });
+		console.log(this.state);
+		allTemplates = JSON.parse(localStorage.nomosPrototype);
+		console.log(allTemplates);
+	}
+
+	goTo = (url) => {
+		// browserHistory.push(url);
+		this.props.history.push(url);
 	}
 }

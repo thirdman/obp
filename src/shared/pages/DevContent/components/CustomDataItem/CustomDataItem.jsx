@@ -9,10 +9,12 @@ import {
 	InputSwitch,
 	Column,
 	ContentItem,
+	Info,
 	IconButton,
 	InputCheckbox,
 	InputText,
 	InputTextarea,
+	Message,
 	Row,
 	Section
 	} from 'components';
@@ -22,12 +24,13 @@ import {
 
 export default class CustomDataItem extends Component {
 	state = {
-		component: 'InputTextarea',
+		// component: 'InputTextarea',
 		// description: 'this is the description',
 		// itemTitle: 'set a title',
 		// hasDivider: false,
 		// hasBorder: false,
 		// hasBackground: false,
+		hasData: false,
 		template: {
 			title: 'set a title',
 			description: 'this is the description',
@@ -39,11 +42,13 @@ export default class CustomDataItem extends Component {
 			postText: null,
 			units: null,
 			helpContent: null,
+			validation: {
+				isRequired: false,
+				validationMessageError: 'There is an error in the content',
+				validationMessageMissing: 'Missing content',
+			}
 		},
-		isRequired: false,
-		validationMessageError: 'There is an error in the content',
-		validationMessageMissing: 'Missing content',
-		placeholder: '',
+		// placeholder: '',
 		showJson: false,
 		InputSwitch: {
 			isSelected: false
@@ -57,13 +62,41 @@ export default class CustomDataItem extends Component {
 				isScrolled: false
 				}
 		});
+		// DATA
+		// this section sets up the data
+		//
+		const dataId = this.props.dataId;
+		let templateData;
+		let theLocalStorage = JSON.parse(localStorage.nomosPrototype);
+		if (dataId) {
+			console.log('this template has data to get: ');
+			console.info('localstorage:', theLocalStorage);
+			if (theLocalStorage[dataId]) {
+				console.log('has template in local storage: ', theLocalStorage[dataId]);
+				templateData = theLocalStorage[dataId];
+				console.info(templateData);
+				this.setState({
+					template: templateData,
+					hasData: true
+				});
+			// but if no template could be loaded from local storage...
+			} else {
+			this.setState({
+					hasData: false
+				});
+				console.log('no template available in loacal storage. Porbably you have to go and load them.'); // eslint-disable-line
+			}
+		// otherwise there was no data id so either it is broken or someone didn't load a template
+		} else {
+			console.log('no data id found so nothing could be loaded');
+		}
 	}
 	componentDidMount() {
-		console.log(this);
-		window.addEventListener('scroll', this.handleScroll.bind(this));
+		// console.log(this);
+		// window.addEventListener('scroll', this.handleScroll.bind(this));
 	}
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll.bind(this));
+		// window.removeEventListener('scroll', this.handleScroll.bind(this));
 	}
 
 	render() {
@@ -79,37 +112,50 @@ export default class CustomDataItem extends Component {
 			.filter((cName) => { return !!cName; })
 			.map((classV) => styles[classV]).join(' ');
 
+
 		// Sets up the different components...
 		// needs to be refactored
-		if (this.state.component === 'InputText') {
+		if (this.state.template.component === 'InputText') {
 			renderComponent = (
 					<InputText
 						value={''}
 						classNameProps={['clean']}
-						placeholder={this.state.template.placeholder || ''}
-						isRequired={this.state.isRequired}
+						placeholder={this.state.template && this.state.template.placeholder || ''}
+						isRequired={this.state.template.validation &&
+							this.state.template.validation.isRequired}
 						classNameProps={['inline']}
 						placeholderBelow
 					/>
 			);
 		}
-		if (this.state.component === 'InputTextarea') {
+		if (this.state.template.component === 'InputTextarea') {
 			renderComponent = (
 					<InputTextarea
 						value={''}
 						classNameProps={['normal']}
 						placeholder={this.state.template.placeholder || ''}
-						isRequired={this.state.isRequired}
-						rows={3}
+						isRequired={this.state.template.validation &&
+							this.state.template.validation.isRequired}
+						rows={this.state.InputTextarea && this.state.InputTextarea.rows ?
+							this.state.InputTextarea.rows
+							: 3}
 					/>
 			);
 		}
-		if (this.state.component === 'InputSwitch') {
+		if (this.state.template.component === 'InputSwitch') {
 			renderComponent = (
 					<InputSwitch
 						content={['yes', 'no']}
 						classNameProps={['normal']}
 						isSelected={this.state.InputSwitch.isSelected}
+					/>
+			);
+		}
+		if (this.state.template.component === 'Info') {
+			renderComponent = (
+					<Info
+						content={this.state.Info && this.state.Info.value}
+						classNameProps={['normal']}
 					/>
 			);
 		}
@@ -134,34 +180,61 @@ export default class CustomDataItem extends Component {
 
 		return (
 			<div className={cx(styles.CustomDataItem, classes)} >
+				{!this.state.hasData ?
+					<Message tuype="error" content={'no template data loaded'} />
+					: null
+					}
 				<div className={styles.CustomDataWrapper}>
 					<Row isFlex>
 						<Column occupy={6} isFlex>
 						<div className={styles.PanelEdit}>
-							<h3>Edit: [{this.state.template.title}]</h3>
-							<Section title="Component Type" >
-								<Button
-									content="text"
-									onClickProps={() => this.doComponentType('InputText')}
-									classNameProps={
-										[(this.state.component === 'InputText' ? 'highlighted' : 'normal')]
-									}
-									/>
-								<Button
-									content="textarea"
-									onClickProps={() => this.doComponentType('InputTextarea')}
-									classNameProps={
-										[(this.state.component === 'InputTextarea' ? 'highlighted' : 'normal')]
+							<Row>
+								<Column occupy={6}>
+									<h4>Template</h4>
+									<span>{this.state.template.templateName}</span>
+								</Column>
+								<Column occupy={6}>
+									<h4>Type</h4>
+									<span>{this.state.template.templateType}</span>
+								</Column>
+							</Row>
+							{/* SHOW EITHER A WARNNIG, OR A SELECTION OPTION... */}
+							{this.state.template.templateType !== 'component' ?
+								<Message type="info" content="Non editable component" />
+								: (
+								<Section>
+									<h4>Component to use</h4>
+									<Button
+										content="text"
+										onClickProps={() => this.doComponentType('InputText')}
+										classNameProps={
+											[(this.state.template.component === 'InputText' ? 'highlighted' : 'normal')]
 										}
-									/>
-								<Button
-									content="InputSwitch"
-									onClickProps={() => this.doComponentType('InputSwitch')}
-									classNameProps={
-										[(this.state.component === 'InputSwitch' ? 'highlighted' : 'normal')]
-										}
-									/>
-							</Section>
+										/>
+									<Button
+										content="textarea"
+										onClickProps={() => this.doComponentType('InputTextarea')}
+										classNameProps={
+											[(this.state.template.component === 'InputTextarea' ? 'highlighted' : 'normal')] // eslint-disable-line
+											}
+										/>
+									<Button
+										content="InputSwitch"
+										onClickProps={() => this.doComponentType('InputSwitch')}
+										classNameProps={
+											[(this.state.template.component === 'InputSwitch' ? 'highlighted' : 'normal')]
+											}
+										/>
+									<Button
+										content="Info"
+										onClickProps={() => this.doComponentType('Info')}
+										classNameProps={
+											[(this.state.template.component === 'Info' ? 'highlighted' : 'normal')]
+											}
+										/>
+								</Section>
+								)
+							}
 							<HorizontalRule />
 							<Accordion uniqueId={'testAccordion'}>
 								<AccordionSection title="General Item Settings">
@@ -257,12 +330,16 @@ export default class CustomDataItem extends Component {
 											value="this content is Required"
 											id="chkisRequired"
 											onChangeProps={this.toggleRequired}
-											isSelected={this.state.isRequired}
+											isSelected={
+												this.state.template.validation &&
+												this.state.template.validation.isRequired
+												}
 											/>
 										<ContentItem type={'text'} title="Error Message">
 											<InputText
-												value={this.state.validationMessageError ?
-													this.state.validationMessageError
+												value={this.state.template.validation &&
+													this.state.template.validation.validationMessageError ?
+													this.state.template.validation.validationMessageError
 													: ''}
 												onChangeProps={this.doMessageError}
 												ref={(c) => { this.editMessageError = c; }}
@@ -276,8 +353,9 @@ export default class CustomDataItem extends Component {
 											title="Missing Message"
 										>
 											<InputText
-												value={this.state.validationMessageMissing ?
-													this.state.validationMessageMissing
+												value={this.state.template.validation &&
+													this.state.template.validation.validationMessageMissing ?
+													this.state.template.validation.validationMessageMissing
 													: ''}
 												onChangeProps={this.doMessageMissing}
 												ref={(c) => { this.editMessageMissing = c; }}
@@ -321,17 +399,73 @@ export default class CustomDataItem extends Component {
 									</Section>
 								</AccordionSection>
 								<AccordionSection title="Component Specific Settings">
-								{this.state.component === 'InputSwitch' ?
-									<Section title="InputSwitch">
-										<InputCheckbox
-											value="is selected by default"
-											id="chkSwitchSelected"
-											onChangeProps={this.toggleSwitchSelected}
-											isSelected={this.state.InputSwitch.isSelected}
-											/>
-									</Section>
-									: null
-								}
+									{this.state.template.component === 'InputSwitch' ?
+										<Section title="InputSwitch">
+											<InputCheckbox
+												value="is selected by default"
+												id="chkSwitchSelected"
+												onChangeProps={this.toggleSwitchSelected}
+												isSelected={this.state.InputSwitch.isSelected}
+												/>
+										</Section>
+										: null
+									}
+									{this.state.template.component === 'Info' ?
+										<Section title="Info">
+										<ContentItem
+											type={'text'}
+											title="Value to show"
+										>
+											<InputText
+												value={this.state.Info && this.state.Info.value ? this.state.Info.value : ''} // eslint-disable-line
+												onChangeProps={() => this.doComponentInfo('value', 'Info', 'editInfoValue')}
+												ref={(c) => { this.editInfoValue = c; }}
+												placeholder={'Set the value to show'}
+												placeholderBelow
+												hasValidation
+												/>
+										</ContentItem>
+										</Section>
+										: null
+									}
+									{this.state.template.component === 'InputTextarea' ?
+										<Section title="Text Area">
+											<ContentItem
+												type={'text'}
+												title="Number of rows:"
+												// columnSize={4}
+												units={'rows'}
+											>
+												<InputText
+													value={(this.state.InputTextarea && this.state.InputTextarea.rows ? this.state.InputTextarea.rows : '3').toString()} // eslint-disable-line
+													onChangeProps={() => this.doComponentInfo('rows', 'InputTextarea', 'editInputTextareaRows')} // eslint-disable-line
+													ref={(c) => { this.editInputTextareaRows = c; }}
+													// placeholder={'Set the value to show'}
+													placeholderBelow
+													classNameProps={['normal']}
+													/>
+											</ContentItem>
+										</Section>
+										: null
+									}
+									{this.state.template.component === 'InputText' ?
+										<Section title="Text input">
+											<ContentItem
+												type={'text'}
+												title="Placeholder:"
+											>
+												<InputText
+													value={(this.state.InputText && this.state.template.placeholder ? this.state.template.placeholder : '')} // eslint-disable-line
+													onChangeProps={() => this.doComponentInfo('placeholder', 'InputText', 'editInputTextPlaceholder')} // eslint-disable-line
+													ref={(c) => { this.editInputTextPlaceholder = c; }}
+													placeholder={'Set the placeholder hint to show'}
+													placeholderBelow
+													classNameProps={['normal']}
+													/>
+											</ContentItem>
+										</Section>
+										: null
+									}
 								</AccordionSection>
 
 							</Accordion>
@@ -354,7 +488,7 @@ export default class CustomDataItem extends Component {
 									iconSize={24}
 									helpText="Show json output"
 									/>
-								{this.state.isRequired ?
+								{this.state.template.validation && this.state.template.validation.isRequired ?
 									<IconButton
 										icon="alert"
 										isActive={this.state.showErrorMode}
@@ -365,7 +499,7 @@ export default class CustomDataItem extends Component {
 										helpText="test error message" />
 									: null
 								}
-								{this.state.isRequired ?
+								{this.state.template.validation && this.state.template.validation.isRequired ?
 									<IconButton
 										icon="question"
 										isActive={this.state.showMissingMode}
@@ -376,7 +510,7 @@ export default class CustomDataItem extends Component {
 										helpText="test missing content message" />
 									: null
 								}
-								{this.state.isRequired ?
+								{this.state.template.validation && this.state.template.validation.isRequired ?
 									<IconButton
 										icon="tick-circle"
 										isActive={this.state.isValid}
@@ -389,35 +523,6 @@ export default class CustomDataItem extends Component {
 								}
 							</div>
 							<h3>Preview</h3>
-							<div className={styles.previewWrapper} style={tempScrollStyle}>
-								<ContentItem
-									title={this.state.template.title}
-									type={this.state.template.component}
-									description={this.state.template.description +
-										(this.state.isRequired ? ' (Required)' : '')
-										}
-									helpContent={this.state.template.helpContent}
-									hasDivider={this.state.template.hasDivider}
-									hasBorder={this.state.template.hasBorder}
-									hasBackground={this.state.template.hasBackground}
-									hasPadding={this.state.template.hasPadding}
-									preText={this.state.template.preText}
-									postText={this.state.template.postText}
-									units={this.state.template.units}
-									hasValidation={
-										this.state.hasValidation ||
-										this.state.showErrorMode ||
-										this.state.showMissingMode
-										}
-									validationError={this.state.showErrorMode}
-									validationMissing={this.state.showMissingMode}
-									validationMessageError={this.state.validationMessageError}
-									validationMessageMissing={this.state.validationMessageMissing}
-									isRequired={this.state.isRequired}
-									isValid={this.state.isValid}
-								>
-									{renderComponent}
-								</ContentItem>
 							{this.state.showJson ?
 								(
 								<div className={styles.jsonOutput}>
@@ -467,6 +572,39 @@ export default class CustomDataItem extends Component {
 								)
 								: null
 							}
+							<div className={styles.previewWrapper} style={tempScrollStyle}>
+								<ContentItem
+									title={this.state.template.title}
+									type={this.state.template.component}
+									description={this.state.template.description +
+										(this.state.template.validation &&
+										this.state.template.validation.isRequired ? ' (Required)' : '')
+										}
+									helpContent={this.state.template.helpContent}
+									hasDivider={this.state.template.hasDivider}
+									hasBorder={this.state.template.hasBorder}
+									hasBackground={this.state.template.hasBackground}
+									hasPadding={this.state.template.hasPadding}
+									preText={this.state.template.preText}
+									postText={this.state.template.postText}
+									units={this.state.template.units}
+									hasValidation={
+										this.state.hasValidation ||
+										this.state.showErrorMode ||
+										this.state.showMissingMode
+										}
+									validationError={this.state.showErrorMode}
+									validationMissing={this.state.showMissingMode}
+									validationMessageError={this.state.template.validation &&
+										this.state.template.validation.validationMessageError}
+									validationMessageMissing={this.state.template.validation &&
+										this.state.template.validation.validationMessageMissing}
+									isRequired={this.state.template.validation &&
+										this.state.template.validation.isRequired}
+									isValid={this.state.isValid}
+								>
+									{renderComponent}
+								</ContentItem>
 							</div>
 						</div>
 						</Column>
@@ -479,7 +617,14 @@ export default class CustomDataItem extends Component {
 	doComponentType = (type) => {
 		// console.log('setting component type to:', type);
 		return (
-			this.setState({ component: type})
+			// this.setState({ templateType: {component: type}});
+			// this.setState({ template: {content: {component: type}}})
+			// this.setState({
+			// template: {
+				// ...this.state.template, content: { ...this.state.template.content, component: type}
+				// }
+			// })
+			this.setState({ template: { ...this.state.template, component: type } }) // eslint-disable-line
 		);
 	};
 	doTemplateState = (parameter, value) => {
@@ -492,8 +637,24 @@ export default class CustomDataItem extends Component {
 		let theValue = !this.state.template[parameter];
 		this.setState({ template: { ...this.state.template, [parameter]: theValue } });
 	};
-
-
+	doComponentInfo = (parameter, component, ref) => {
+		let theValue;
+		if (component === 'Info') {
+			theValue = this[ref].textInput.value;
+		}
+		if (component === 'InputTextarea') {
+			// theValue = (this[ref].textInput.value).toString();
+			theValue = parseFloat(this[ref].textInput.value);
+		}
+		if (component === 'InputText') {
+			theValue = this[ref].textInput.value;
+		}
+		// if (component === 'InputSwitch') {
+		// theValue = !this.state.InputSwitch[parameter];
+		// }
+		this.setState({ [component]: { ...this.state[component], [parameter]: theValue } });
+		// console.log(this.state);
+	};
 /*
 	doTitle = () => {
 		let theTitleValue = this.editTitle.textInput.value;
@@ -534,12 +695,28 @@ export default class CustomDataItem extends Component {
 	doMessageError = () => {
 	// let theErrorValue = this.refs.editMessageError.refs.textInput.value;
 	let theErrorValue = this.editMessageError.textInput.value;
-	this.setState({ validationMessageError: theErrorValue});
+	// this.setState({ validationMessageError: theErrorValue});
+		this.setState({
+			template: {
+				...this.state.template,
+				validation: {
+					...this.state.template.validation, validationMessageError: theErrorValue
+				}
+			}
+		});
 	};
 	doMessageMissing = () => {
 	// let theMissingValue = this.refs.editMessageMissing.refs.textInput.value;
 	let theMissingValue = this.editMessageMissing.textInput.value;
-	this.setState({ validationMessageMissing: theMissingValue});
+	// this.setState({ validationMessageMissing: theMissingValue});
+		this.setState({
+			template: {
+				...this.state.template,
+				validation: {
+					...this.state.template.validation, validationMessageMissing: theMissingValue
+				}
+			}
+		});
 	};
 /*
 	toggleDivider = () => {
@@ -562,7 +739,20 @@ export default class CustomDataItem extends Component {
 	};
 */
 	toggleRequired = () => {
-		this.setState({ isRequired: !this.state.isRequired});
+	let newRequiredState = !(this.state.template.validation &&
+				this.state.template.validation.isRequired);
+
+		this.setState({
+			template: {
+				...this.state.template,
+				validation: {
+					...this.state.template.validation, isRequired: newRequiredState
+				}
+			}
+		});
+
+		// this.setState({ isRequired: !(this.state.template.validation &&
+			// this.state.template.validation.isRequired)});
 	};
 	toggleJson = () => {
 		this.setState({
@@ -580,9 +770,9 @@ export default class CustomDataItem extends Component {
 		});
 	};
 	saveEditJson = () => {
-		console.log('saving edit');
+		// console.log('saving edit');
 		if (this.editJsonTextarea) {
-			console.log(this.editJsonTextarea);
+			// console.log(this.editJsonTextarea);
 			let theJsonValue = this.editJsonTextarea.textInput.value;
 				if (this.isJson(theJsonValue)) {
 					let stateObjOutput = JSON.parse(theJsonValue);
@@ -594,9 +784,9 @@ export default class CustomDataItem extends Component {
 		}
 	};
 	checkEditJson = () => {
-		console.log('checking');
+		// console.log('checking');
 		if (this.editJsonTextarea) {
-			console.log(this.editJsonTextarea);
+			// console.log(this.editJsonTextarea);
 			let theJsonValue = this.editJsonTextarea.textInput.value;
 			if (this.isJson(theJsonValue)) {
 				console.log('json is valid');
@@ -663,6 +853,8 @@ export default class CustomDataItem extends Component {
 	}
 
 	static propTypes = {
+		// data: React.PropTypes.object,
+		// dataId: React.PropTypes.number,
 		children: React.PropTypes.oneOfType([
 			React.PropTypes.arrayOf(React.PropTypes.node),
 			React.PropTypes.node
@@ -670,3 +862,18 @@ export default class CustomDataItem extends Component {
 		classNameProps: React.PropTypes.array
 	}
 }
+/*
+			template: {
+			templateId: this.props.dataId,
+			title: 'set a title',
+			description: 'this is the description',
+			hasDivider: false,
+			hasBorder: false,
+			hasBackground: false,
+			hasPadding: false,
+			preText: null,
+			postText: null,
+			units: null,
+			helpContent: null,
+		},
+*/
