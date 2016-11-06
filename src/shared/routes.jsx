@@ -13,12 +13,6 @@ import {
 	Login,
 	NotFound,
 	Redirect,
-	SettingsIntegrations,
-	XeroDetail,
-	MyobDetail,
-	QuickbooksDetail,
-	FreshbooksDetail,
-	SageDetail,
 	TempApiManager
 } from 'pages';
 import {
@@ -68,7 +62,6 @@ export default (store) => {
 			{ /* Routes - do not require logged in*/ }
 			<Route path="login" onEnter={onLogin} component={Login} />
 			{ /* Routes - do require logged in*/ }
-			<Route onEnter={requireLogin}>
 				<IndexRoute component={TempApiManager} />
 				<Route path="docs" component={DevComponentDocs} />
 				<Route path="dev" component={DevHome} />
@@ -82,17 +75,11 @@ export default (store) => {
 				<Route path="summary" component={Summary} />
 				<Route path="view" component={View} />
 				<Route path="redirect" component={Redirect} />
-				<Route path=":orgId" component={SettingsIntegrations} />
+			<Route onEnter={requireLogin}>
 				<Route path=":orgId/agreements" component={AgreementsSummary} />
 				<Route path=":orgId/agreements/:agreementId" component={AgreementOverview} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName" component={AgreementView} />
 				<Route path=":orgId/agreements/:agreementId/:sectionName/edit" component={AgreementEdit} />
-				<Route path=":orgId/integrations" component={SettingsIntegrations} />
-				<Route path=":orgId/integrations/xero(/:section)" component={XeroDetail} />
-				<Route path=":orgId/integrations/myob(/:section)" component={MyobDetail} />
-				<Route path=":orgId/integrations/quickbooks(/:section)" component={QuickbooksDetail} />
-				<Route path=":orgId/integrations/freshbooks(/:section)" component={FreshbooksDetail} />
-				<Route path=":orgId/integrations/sage(/:section)" component={SageDetail} />
 			</Route>
 			{ /* Catch all route */ }
 			<Route path="*" component={NotFound} status={404} />
